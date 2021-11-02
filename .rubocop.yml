@@ -1,0 +1,19 @@
+inherit_from:
+  - .rubocop_todo.yml
+  - .rubocop-airbnb.yml
+
+AllCops:
+  TargetRubyVersion: 2.6
+  TargetRailsVersion: 5.2
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'tmp/**/*'
+    - 'node_modules/**/*'
+    - 'lib/tasks/auto_annotate_models.rake'
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 150
