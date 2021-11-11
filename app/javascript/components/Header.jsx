@@ -25,6 +25,7 @@ const SHeaders = styled.header`
 `;
 
 const SHeader = styled.div`
+  font-family: 'Montserrat', sans-serif;
   background-color: rgb(63, 63, 63);
   color: #ffffff;
   padding: 10px 60px;
@@ -44,10 +45,6 @@ const SHeader_title = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-size: 40px;
   padding: 10px;
-`;
-
-const SHeader_right = styled.div`
-
 `;
 
 const SHeader_background = styled.div`
