@@ -18,7 +18,7 @@ const Menu = () => {
         <ul>
           <li><a href="#">ログイン</a></li>
           <li><a href="#">新規登録</a></li>
-          <li><a href="#">駐車場登録</a></li>
+          <li><a href="#">駐車場情報投稿</a></li>
           <li><a href="#">dokotomeyoとは</a></li>
         </ul>
       </SGlobalMenuSp>
