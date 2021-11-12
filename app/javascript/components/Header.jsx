@@ -8,7 +8,7 @@ const Header = () => {
       <SHeaders>
         <SHeader>
           <SHeader_left>
-            <SHeader_title>dokotomeyo</SHeader_title>
+            <SHeader_title><a href="/dokotomeyo">dokotomeyo</a></SHeader_title>
           </SHeader_left>
           <Menu />
         </SHeader>
@@ -45,6 +45,12 @@ const SHeader_title = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-size: 40px;
   padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.6s;
+  &:hover {
+    background-color: rgb(189, 189, 189);
+  }
 `;
 
 const SHeader_background = styled.div`

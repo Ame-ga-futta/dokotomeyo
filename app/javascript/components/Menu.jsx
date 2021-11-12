@@ -23,9 +23,9 @@ const Menu = () => {
       </SHamburger>
       <SGlobalMenuSp openMenu={openMenu}>
         <ul>
-          <li><a href="#">ログイン</a></li>
-          <li><a href="#">新規登録</a></li>
-          <li><a href="#">駐車場情報投稿</a></li>
+          <li><a href="/dokotomeyo/login">ログイン</a></li>
+          <li><a href="/dokotomeyo/sign_up">新規登録</a></li>
+          <li><a href="/dokotomeyo/post">駐車場情報投稿</a></li>
           <li><p onClick={about}>dokotomeyoとは</p></li>
         </ul>
       </SGlobalMenuSp>
