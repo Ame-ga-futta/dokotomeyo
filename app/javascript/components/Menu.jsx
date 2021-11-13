@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import About from "./About"
 
 const Menu = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
     setOpenMenu(!openMenu);
+  };
+
+  const [openAbout, setOpenAbout] = useState(false);
+  const about = () => {
+    setOpenMenu(false);
+    setOpenAbout(true);
   };
 
   return (
@@ -16,12 +23,13 @@ const Menu = () => {
       </SHamburger>
       <SGlobalMenuSp openMenu={openMenu}>
         <ul>
-          <li><a href="#">ログイン</a></li>
-          <li><a href="#">新規登録</a></li>
-          <li><a href="#">駐車場登録</a></li>
-          <li><a href="#">dokotomeyoとは</a></li>
+          <li><a href="/dokotomeyo/post">駐車場情報投稿</a></li>
+          <li><a href="/dokotomeyo/login">ログイン</a></li>
+          <li><a href="/dokotomeyo/sign_up">新規登録</a></li>
+          <li><p onClick={about}>dokotomeyoとは</p></li>
         </ul>
       </SGlobalMenuSp>
+      <About openAbout={openAbout} setOpenAbout={setOpenAbout} />
     </>
   );
 };
@@ -99,6 +107,12 @@ const SGlobalMenuSp = styled.nav`
     transition: all 0.6s;
   }
   ul li a {
+    display: block;
+    color: #fff;
+    padding: 1em 0;
+    text-decoration :none;
+  }
+  ul li p {
     display: block;
     color: #fff;
     padding: 1em 0;
