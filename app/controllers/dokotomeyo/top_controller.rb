@@ -5,9 +5,6 @@ class Dokotomeyo::TopController < ApplicationController
   def sign_up_form
   end
 
-  def login_form
-  end
-
   def post_form
   end
 

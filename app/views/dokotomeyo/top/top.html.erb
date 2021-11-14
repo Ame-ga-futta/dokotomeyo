@@ -1,3 +1,6 @@
 <div class="main-wrapper">
+  <% if flash.notice %>
+    <%= react_component 'Flash', message: flash[:notice] %>
+  <% end %>
   <%= react_component 'SearchContainer' %>
 </div>

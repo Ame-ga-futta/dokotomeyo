@@ -1,0 +1,57 @@
+/* --- login_form --- */
+
+.form-wrapper {
+  background-color: rgb(255, 255, 255);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 25px;
+  padding: 30px;
+}
+
+.form-container {
+  background-color: rgb(235, 235, 235);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.form-container li {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-label {
+  width: 20%;
+  border-radius: 3px;
+}
+
+.text-field {
+  width: 60%;
+  border: solid 1px gray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.text-submit {
+  width: 20%;
+  background-color: rgba(75, 189, 255, 0.911);
+  color: white;
+  border-radius: 4px;
+  margin: 10px;
+  margin-left: auto;
+  padding: 11px 20px;
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  padding: 15px;
+}
