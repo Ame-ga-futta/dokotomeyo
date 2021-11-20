@@ -14,10 +14,10 @@ const Move = keyframes`
     transform: translate(-50%, -100%);
   }
   30% {
-    transform: translate(-50%, 60%);
+    transform: translate(-50%, 200%);
   }
   45% {
-    transform: translate(-50%, 60%);
+    transform: translate(-50%, 200%);
   }
   100% {
     transform: translate(-50%, -100%);

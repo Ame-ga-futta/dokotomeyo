@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  root to: redirect('/dokotomeyo')
+
   namespace :dokotomeyo do
     get   "/",                   to: "top#top"
-    get   :post,                 to: "top#post_form"
-    get   :sign_up,              to: "top#sign_up_form"
+    get   :post,                 to: "top#top"
+    get   :signup,              to: "top#top"
+    get   :login,                to: 'top#top'
 
-    get   :login,                to: 'sessions#login_form'
     post  :login,                to: 'sessions#login'
     get  :logout,               to: 'sessions#logout'
   end

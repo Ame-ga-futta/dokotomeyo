@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Menu from "./Menu"
 
 const Header = () => {
@@ -8,7 +9,7 @@ const Header = () => {
       <SHeaders>
         <SHeader>
           <SHeader_left>
-            <SHeader_title><a href="/dokotomeyo">dokotomeyo</a></SHeader_title>
+            <SHeader_title><Link to="/dokotomeyo">dokotomeyo</Link></SHeader_title>
           </SHeader_left>
           <Menu />
         </SHeader>

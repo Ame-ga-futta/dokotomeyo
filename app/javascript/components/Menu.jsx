@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import About from "./About"
 
 const Menu = () => {
@@ -23,11 +24,11 @@ const Menu = () => {
       </SHamburger>
       <SGlobalMenuSp openMenu={openMenu}>
         <ul>
-          <li><a href="/dokotomeyo/post">駐車場情報投稿</a></li>
-          <li><a href="/dokotomeyo/login">ログイン</a></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
           <li><a href="/dokotomeyo/logout">ログアウト</a></li>
-          <li><a href="/dokotomeyo/sign_up">新規登録</a></li>
-          <li><p onClick={about}>dokotomeyoとは</p></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/signup">新規登録</Link></li>
+          <li onClick={about}><p>dokotomeyoとは</p></li>
         </ul>
       </SGlobalMenuSp>
       <About openAbout={openAbout} setOpenAbout={setOpenAbout} />

@@ -11,14 +11,23 @@ class Dokotomeyo::SessionsController < ApplicationController
     ]
   }
 
-  def login_form
+  def signup
+    @user = User.new(signup_params)
+    if @user.save
+      session[:user_id] = @user.id
+      flash[:notice] = "登録完了しました"
+      redirect_to("/dokotomeyo")
+    else
+      flash[:notice] = "メールアドレス もしくはパスワードが不正です"
+      redirect_to("/dokotomeyo/signup")
+    end
   end
 
   def login
     @user = User.find_by(
-      email: params[:email]
+      email: login_params[:email]
     )
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
       redirect_to("/dokotomeyo")
@@ -34,4 +43,13 @@ class Dokotomeyo::SessionsController < ApplicationController
     flash[:notice] = "ログアウトしました"
     redirect_to("/dokotomeyo")
   end
+
+  private
+    def signup_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def login_params
+      params.require(:user).permit(:email, :password)
+    end
 end
