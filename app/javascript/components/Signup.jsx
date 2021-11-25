@@ -22,6 +22,9 @@ const Signup = () => {
           break;
         case 400:
           setError(response.data.message);
+          setEmail("");
+          setPassword("");
+          setPasswordConfirmation("");
           break;
       }
     })
