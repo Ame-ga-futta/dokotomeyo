@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    axios.post('http://localhost:3000/dokotomeyo/login', { user: { email: email, password: password } })
+    axios.post('/dokotomeyo/login', { user: { email: email, password: password } })
     .then((response) => {
       switch (response.data.status){
         case 200:

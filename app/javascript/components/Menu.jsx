@@ -21,7 +21,7 @@ const Menu = () => {
 
   const logout = () => {
     setOpenMenu(false);
-    axios.delete('http://localhost:3000/dokotomeyo/logout')
+    axios.delete('/dokotomeyo/logout')
     .then((response) => {
       console.log(response.data.message);
       navigate("/dokotomeyo");

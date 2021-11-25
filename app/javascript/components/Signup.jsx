@@ -13,7 +13,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    axios.post('http://localhost:3000/dokotomeyo/signup', { user: { name: name, email: email, password: password, password_confirmation: passwordConfirmation } })
+    axios.post('/dokotomeyo/signup', { user: { name: name, email: email, password: password, password_confirmation: passwordConfirmation } })
     .then((response) => {
       switch (response.data.status){
         case 200:
