@@ -1,19 +1,40 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState();
 
-  const handleSubmit = () => {
+  const navigate = useNavigate();
 
+  const handleSubmit = (event) => {
+    axios.post('http://localhost:3000/dokotomeyo/signup', { user: { name: name, email: email, password: password, password_confirmation: passwordConfirmation } })
+    .then((response) => {
+      switch (response.data.status){
+        case 200:
+          console.log(response.data.message);
+          navigate("/dokotomeyo");
+          break;
+        case 400:
+          setError(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
+    event.preventDefault();
   }
 
   return (
     <Sform_wrapper>
       <Sform_title>新規登録</Sform_title>
+      <SError error={error}>{error}</SError>
       <form onSubmit={handleSubmit}>
         <Sform_container>
           <li>
@@ -67,6 +88,17 @@ const Sform_title = styled.h1`
   text-align: center;
   font-size: 25px;
   padding: 30px;
+`;
+
+const SError = styled.p`
+  text-align: center;
+  font-size: 20px;
+  padding: 15px;
+  color: red;
+  ${props => props.error
+    ? "display: block;"
+    : "display: none;"
+  }
 `;
 
 const Sform_container = styled.ul`

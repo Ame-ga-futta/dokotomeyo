@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import About from "./About"
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Menu = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -15,6 +17,20 @@ const Menu = () => {
     setOpenAbout(true);
   };
 
+  const navigate = useNavigate();
+
+  const logout = () => {
+    setOpenMenu(false);
+    axios.delete('http://localhost:3000/dokotomeyo/logout')
+    .then((response) => {
+      console.log(response.data.message);
+      navigate("/dokotomeyo");
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
+  };
+
   return (
     <>
       <SHamburger onClick={hamburger}>
@@ -26,7 +42,7 @@ const Menu = () => {
         <ul>
           <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
           <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
-          <li><a href="/dokotomeyo/logout">ログアウト</a></li>
+          <li onClick={logout}><p>ログアウト</p></li>
           <li onClick={hamburger}><Link to="/dokotomeyo/signup">新規登録</Link></li>
           <li onClick={about}><p>dokotomeyoとは</p></li>
         </ul>

@@ -15,11 +15,9 @@ class Dokotomeyo::SessionsController < ApplicationController
     @user = User.new(signup_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "登録完了しました"
-      redirect_to("/dokotomeyo")
+      render json: { status: 200, message: "登録完了しました" }
     else
-      flash[:notice] = "メールアドレス もしくはパスワードが不正です"
-      redirect_to("/dokotomeyo/signup")
+      render json: { status: 400, message: "メールアドレス もしくはパスワードが不正です" }
     end
   end
 
@@ -29,19 +27,15 @@ class Dokotomeyo::SessionsController < ApplicationController
     )
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
-      flash[:notice] = "ログインしました"
-      redirect_to("/dokotomeyo")
+      render json: { status: 200, message: "ログインしました" }
     else
-      @input = params[:email]
-      flash[:notice] = "メールアドレス もしくはパスワードが不正です"
-      redirect_to("/dokotomeyo/login")
+      render json: { status: 400, message: "メールアドレス もしくはパスワードが不正です" }
     end
   end
 
   def logout
     session[:user_id] = nil
-    flash[:notice] = "ログアウトしました"
-    redirect_to("/dokotomeyo")
+    render json: { status: 200, message: "ログアウトしました" }
   end
 
   private
