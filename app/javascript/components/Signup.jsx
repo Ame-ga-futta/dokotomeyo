@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
+  const { setAndReturn } = props;
+
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState();
-
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -17,7 +18,7 @@ const Signup = () => {
     .then((response) => {
       switch (response.data.status){
         case 200:
-          console.log(response.data.message);
+          setAndReturn(response.data.message);
           navigate("/dokotomeyo");
           break;
         case 400:

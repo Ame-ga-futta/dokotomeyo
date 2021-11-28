@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Menu from "./Menu"
 
-const Header = () => {
+const Header = (props) => {
+  const { setAndReturn } = props;
+
   return (
     <>
       <SHeaders>
@@ -11,7 +13,7 @@ const Header = () => {
           <SHeader_left>
             <SHeader_title><Link to="/dokotomeyo">dokotomeyo</Link></SHeader_title>
           </SHeader_left>
-          <Menu />
+          <Menu setAndReturn={setAndReturn}/>
         </SHeader>
       </SHeaders>
       <SHeader_background></SHeader_background>
