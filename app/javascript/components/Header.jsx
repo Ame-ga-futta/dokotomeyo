@@ -43,7 +43,7 @@ const SHeader_left = styled.div`
 `;
 
 const SHeader_title = styled.div`
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Alternates', sans-serif;
   font-size: 40px;
   padding: 10px;
   border-radius: 10px;
