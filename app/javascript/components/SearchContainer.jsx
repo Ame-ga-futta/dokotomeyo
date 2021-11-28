@@ -1,9 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
+import Flash from './Flash';
 
 const SearchContainer = () => {
   return (
     <>
+      <Flash message={"ここにメッセージを渡す"}/>
       <SSearch_container>
         <SSearch_container_left>
           <p>入力フォームと検索結果</p>

@@ -1,7 +1,7 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./Header";
 import SearchContainer from "./SearchContainer";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Post from "./Post";
 import Login from "./Login";
 import Signup from "./Signup";

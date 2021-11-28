@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { keyframes } from 'styled-components';
 
 const Flash = (props) => {
@@ -28,7 +28,8 @@ const SFlash = styled.p`
   position: absolute;
   left: 50%;
   transform: translate(-50%, -100%);
-  background-color: rgb(235, 235, 235);
+  background-color: rgba(75, 189, 255, 0.9);
+  color: white;
   box-shadow: 13px 13px 44px -27px #777777;
   border-radius: 15px;
   padding: 20px;
