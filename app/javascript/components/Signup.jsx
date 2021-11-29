@@ -28,6 +28,10 @@ const Signup = (props) => {
           setPassword("");
           setPasswordConfirmation("");
           break;
+        case 401:
+          setAndReturn(response.data.message);
+          navigate("/dokotomeyo");
+          break;
       }
     })
     .catch(() => {

@@ -25,6 +25,10 @@ const Login = (props) => {
           setEmail("");
           setPassword("");
           break;
+        case 401:
+          setAndReturn(response.data.message);
+          navigate("/dokotomeyo");
+          break;
       }
     })
     .catch(() => {

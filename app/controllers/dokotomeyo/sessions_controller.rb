@@ -6,8 +6,8 @@ class Dokotomeyo::SessionsController < ApplicationController
   }
   before_action :forbid_login_user, {
     only: [
-      :login_form,
       :login,
+      :signup
     ]
   }
 
