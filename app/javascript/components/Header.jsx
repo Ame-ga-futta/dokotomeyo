@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom';
 import Menu from "./Menu"
 
 const Header = (props) => {
-  const { setAndReturn } = props;
+  const { userName, setUserName, setAndReturn } = props;
 
   return (
     <>
       <SHeaders>
         <SHeader>
-          <SHeader_left>
+          <div>
             <SHeader_title><Link to="/dokotomeyo">dokotomeyo</Link></SHeader_title>
-          </SHeader_left>
-          <Menu setAndReturn={setAndReturn}/>
+          </div>
+          <div>
+            <Sheader_username>{userName}</Sheader_username>
+            <Menu setUserName={setUserName} setAndReturn={setAndReturn}/>
+          </div>
         </SHeader>
       </SHeaders>
       <SHeader_background></SHeader_background>
@@ -39,11 +42,6 @@ const SHeader = styled.div`
   justify-content: space-between;
 `;
 
-const SHeader_left = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const SHeader_title = styled.div`
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 40px;
@@ -54,6 +52,11 @@ const SHeader_title = styled.div`
   &:hover {
     background-color: rgb(189, 189, 189);
   }
+`;
+
+const Sheader_username = styled.p`
+  font-size: 16px;
+  margin-right: 115px;
 `;
 
 const SHeader_background = styled.div`

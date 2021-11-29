@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = (props) => {
-  const { setAndReturn } = props;
+  const { setUserName, setAndReturn } = props;
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ const Signup = (props) => {
     .then((response) => {
       switch (response.data.status){
         case 200:
+          setUserName(response.data.name);
           setAndReturn(response.data.message);
           navigate("/dokotomeyo");
           break;

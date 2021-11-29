@@ -15,7 +15,7 @@ class Dokotomeyo::SessionsController < ApplicationController
     @user = User.new(signup_params)
     if @user.save
       session[:user_id] = @user.id
-      render json: { status: 200, message: "登録完了しました" }
+      render json: { status: 200, message: "登録完了しました", name: @user.name }
     else
       render json: { status: 400, message: "メールアドレス もしくはパスワードが不正です" }
     end
@@ -27,7 +27,7 @@ class Dokotomeyo::SessionsController < ApplicationController
     )
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
-      render json: { status: 200, message: "ログインしました" }
+      render json: { status: 200, message: "ログインしました", name: @user.name }
     else
       render json: { status: 400, message: "メールアドレス もしくはパスワードが不正です" }
     end
@@ -36,6 +36,14 @@ class Dokotomeyo::SessionsController < ApplicationController
   def logout
     session[:user_id] = nil
     render json: { status: 200, message: "ログアウトしました" }
+  end
+
+  def check_user_status
+    if @current_user
+      render json: {logged_in: true, name: @current_user.name}
+    else
+      render json: {logged_in: false}
+    end
   end
 
   private

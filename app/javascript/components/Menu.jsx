@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const Menu = (props) => {
-  const { setAndReturn } = props;
+  const { setUserName, setAndReturn } = props;
 
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
@@ -25,6 +25,7 @@ const Menu = (props) => {
     setOpenMenu(false);
     axios.delete('/dokotomeyo/logout')
     .then((response) => {
+      setUserName();
       setAndReturn(response.data.message);
       navigate("/dokotomeyo");
     })
