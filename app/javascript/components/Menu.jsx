@@ -43,6 +43,7 @@ const Menu = (props) => {
       </SHamburger>
       <SGlobalMenuSp openMenu={openMenu}>
         <ul>
+          <li onClick={hamburger}><Link to="/dokotomeyo/mypage">マイページ</Link></li>
           <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
           <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
           <li onClick={logout}><p>ログアウト</p></li>

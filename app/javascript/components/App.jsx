@@ -4,6 +4,7 @@ import axios from 'axios';
 import useFlash from '../hooks/useFlash';
 import Header from "./Header";
 import SearchContainer from "./SearchContainer";
+import Mypage from "./Mypage";
 import Post from "./Post";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -29,6 +30,7 @@ const App = () => {
       <Header userName={userName} setUserName={setUserName} setAndReturn={setAndReturn}/>
       <Routes>
         <Route path="/dokotomeyo" element={<SearchContainer flashMessage={flashMessage} />} />
+        <Route path="/dokotomeyo/mypage" element={<Mypage />} />
         <Route path="/dokotomeyo/post" element={<Post />} />
         <Route path="/dokotomeyo/login" element={<Login setUserName={setUserName} setAndReturn={setAndReturn} />} />
         <Route path="/dokotomeyo/signup" element={<Signup setUserName={setUserName} setAndReturn={setAndReturn} />} />
