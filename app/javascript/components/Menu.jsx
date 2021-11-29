@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const Menu = (props) => {
-  const { setUserName, setAndReturn } = props;
+  const { userName, setUserName, setAndReturn } = props;
 
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
@@ -42,14 +42,22 @@ const Menu = (props) => {
         <SHamburger_span openMenu={openMenu}></SHamburger_span>
       </SHamburger>
       <SGlobalMenuSp openMenu={openMenu}>
+        {userName
+        ?
         <ul>
-          <li onClick={hamburger}><Link to="/dokotomeyo/mypage">マイページ</Link></li>
           <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
-          <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/mypage">マイページ</Link></li>
           <li onClick={logout}><p>ログアウト</p></li>
-          <li onClick={hamburger}><Link to="/dokotomeyo/signup">新規登録</Link></li>
           <li onClick={about}><p>dokotomeyoとは</p></li>
         </ul>
+        :
+        <ul>
+          <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/signup">新規登録</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
+          <li onClick={about}><p>dokotomeyoとは</p></li>
+        </ul>
+        }
       </SGlobalMenuSp>
       <About openAbout={openAbout} setOpenAbout={setOpenAbout} />
     </>

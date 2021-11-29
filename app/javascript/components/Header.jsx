@@ -15,7 +15,7 @@ const Header = (props) => {
           </div>
           <div>
             <Sheader_username>{userName}</Sheader_username>
-            <Menu setUserName={setUserName} setAndReturn={setAndReturn}/>
+            <Menu userName={userName} setUserName={setUserName} setAndReturn={setAndReturn}/>
           </div>
         </SHeader>
       </SHeaders>
