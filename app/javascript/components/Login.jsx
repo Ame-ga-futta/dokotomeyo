@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
-  const { setUserName, setAndReturn } = props;
+  const { userName, setUserName, setAndReturn } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +35,14 @@ const Login = (props) => {
       console.log("通信に失敗しました");
     })
     event.preventDefault();
-  }
+  };
+
+  useEffect(() => {
+    if (userName) {
+      setAndReturn("すでにログインしています");
+      navigate("/dokotomeyo");
+    }
+  }, []);
 
   return (
     <Sform_wrapper>

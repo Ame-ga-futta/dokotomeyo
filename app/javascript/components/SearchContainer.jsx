@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Flash from './Flash';
 
 const SearchContainer = (props) => {
-  const {flashMessage} = props;
+  const { flashMessage } = props;
 
   return (
     <>

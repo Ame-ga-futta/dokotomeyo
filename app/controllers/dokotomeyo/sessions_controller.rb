@@ -38,14 +38,6 @@ class Dokotomeyo::SessionsController < ApplicationController
     render json: { status: 200, message: "ログアウトしました" }
   end
 
-  def check_user_status
-    if @current_user
-      render json: {logged_in: true, name: @current_user.name}
-    else
-      render json: {logged_in: false}
-    end
-  end
-
   private
     def signup_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
