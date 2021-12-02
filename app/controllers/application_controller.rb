@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    if @current_user == nil
+    if @current_user.nil?
       render json: { status: 401, message: "ログインしていません" }
     end
   end

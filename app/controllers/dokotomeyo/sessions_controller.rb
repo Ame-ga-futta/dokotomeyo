@@ -1,14 +1,14 @@
 class Dokotomeyo::SessionsController < ApplicationController
   before_action :authenticate_user, {
     only: [
-      :logout
-    ]
+      :logout,
+    ],
   }
   before_action :forbid_login_user, {
     only: [
       :login,
-      :signup
-    ]
+      :signup,
+    ],
   }
 
   def signup
@@ -39,11 +39,12 @@ class Dokotomeyo::SessionsController < ApplicationController
   end
 
   private
-    def signup_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
 
-    def login_params
-      params.require(:user).permit(:email, :password)
-    end
+  def signup_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def login_params
+    params.require(:user).permit(:email, :password)
+  end
 end
