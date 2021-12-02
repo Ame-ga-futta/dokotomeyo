@@ -8,7 +8,7 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState();
+  const [errors, setErrors] = useState();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -21,7 +21,7 @@ const Login = (props) => {
           navigate("/dokotomeyo");
           break;
         case 400:
-          setError(response.data.message);
+          setErrors(response.data.message);
           setEmail("");
           setPassword("");
           break;
@@ -46,8 +46,12 @@ const Login = (props) => {
 
   return (
     <Sform_wrapper>
-      <Sform_title>ログイン</Sform_title>
-      <SError error={error}>{error}</SError>
+      <Sform_title_container>
+        <Sform_title>ログイン</Sform_title>
+        <SError_container>
+          {errors && <SError>{errors}</SError>}
+        </SError_container>
+      </Sform_title_container>
       <form onSubmit={handleSubmit}>
         <Sform_container>
           <li>
@@ -79,21 +83,23 @@ const Sform_wrapper = styled.div`
   background-color: rgb(255, 255, 255);
 `;
 
-const Sform_title = styled.h1`
+const Sform_title_container = styled.div`
   text-align: center;
-  font-size: 25px;
   padding: 30px;
 `;
 
-const SError = styled.p`
-  text-align: center;
+const Sform_title = styled.h1`
+  font-size: 25px;
+  padding: 5px;
+`;
+
+const SError_container = styled.ul`
   font-size: 20px;
-  padding: 15px;
   color: red;
-  ${props => props.error
-    ? "display: block;"
-    : "display: none;"
-  }
+`;
+
+const SError = styled.p`
+  padding: 4px;
 `;
 
 const Sform_container = styled.ul`

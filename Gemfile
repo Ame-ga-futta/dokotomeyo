@@ -37,6 +37,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'react-rails'
   gem 'bcrypt', '~> 3.1.7'
+  gem 'rails-i18n'
 end
 
 group :development do

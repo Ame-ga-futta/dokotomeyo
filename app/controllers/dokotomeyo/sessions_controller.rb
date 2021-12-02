@@ -17,7 +17,7 @@ class Dokotomeyo::SessionsController < ApplicationController
       session[:user_id] = @user.id
       render json: { status: 200, message: "登録完了しました", name: @user.name }
     else
-      render json: { status: 400, message: "メールアドレス もしくはパスワードが不正です" }
+      render json: { status: 400, message: @user.errors.full_messages }
     end
   end
 
