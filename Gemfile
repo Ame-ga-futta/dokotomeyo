@@ -38,6 +38,7 @@ group :development, :test do
   gem 'react-rails'
   gem 'bcrypt', '~> 3.1.7'
   gem 'rails-i18n'
+  gem 'database_cleaner'
 end
 
 group :development do
