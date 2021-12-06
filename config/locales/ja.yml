@@ -2,12 +2,20 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      parking: 駐車場
     attributes:
       user:
         name: ユーザーネーム
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+      parking:
+        name: 駐車場名
+        address: 住所
+        latitude: 緯度
+        longitude: 経度
+        beginning_of_worktime: 営業開始時間
+        end_of_worktime: 営業終了時間
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
