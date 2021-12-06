@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import About from "./About"
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = (props) => {
+  const { userName, setUserName, bookFlashMessage } = props;
+
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
     setOpenMenu(!openMenu);
@@ -14,6 +19,21 @@ const Menu = () => {
     setOpenAbout(true);
   };
 
+  const navigate = useNavigate();
+
+  const logout = () => {
+    setOpenMenu(false);
+    axios.delete('/dokotomeyo/logout')
+    .then((response) => {
+      setUserName();
+      bookFlashMessage(response.data.message);
+      navigate("/dokotomeyo");
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
+  };
+
   return (
     <>
       <SHamburger onClick={hamburger}>
@@ -22,12 +42,22 @@ const Menu = () => {
         <SHamburger_span openMenu={openMenu}></SHamburger_span>
       </SHamburger>
       <SGlobalMenuSp openMenu={openMenu}>
+        {userName
+        ?
         <ul>
-          <li><a href="/dokotomeyo/post">駐車場情報投稿</a></li>
-          <li><a href="/dokotomeyo/login">ログイン</a></li>
-          <li><a href="/dokotomeyo/sign_up">新規登録</a></li>
-          <li><p onClick={about}>dokotomeyoとは</p></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/mypage">マイページ</Link></li>
+          <li onClick={logout}><p>ログアウト</p></li>
+          <li onClick={about}><p>dokotomeyoとは</p></li>
         </ul>
+        :
+        <ul>
+          <li onClick={hamburger}><Link to="/dokotomeyo/post">駐車場情報投稿</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/signup">新規登録</Link></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
+          <li onClick={about}><p>dokotomeyoとは</p></li>
+        </ul>
+        }
       </SGlobalMenuSp>
       <About openAbout={openAbout} setOpenAbout={setOpenAbout} />
     </>

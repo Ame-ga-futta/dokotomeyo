@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-const About = props => {
+const About = (props) => {
   const { openAbout, setOpenAbout } = props;
 
   const close = () => {
@@ -62,6 +62,7 @@ const SAbout_close = styled.div`
   height: 42px;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.6s;
   &:hover {
     background-color: rgb(189, 189, 189);
   }
