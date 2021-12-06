@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
-  const { userName, setUserName, setAndReturn } = props;
+  const { userName, setUserName, bookFlashMessage } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ const Login = (props) => {
       switch (response.data.status){
         case 200:
           setUserName(response.data.name);
-          setAndReturn(response.data.message);
+          bookFlashMessage(response.data.message);
           navigate("/dokotomeyo");
           break;
         case 400:
@@ -26,7 +26,7 @@ const Login = (props) => {
           setPassword("");
           break;
         case 401:
-          setAndReturn(response.data.message);
+          bookFlashMessage(response.data.message);
           navigate("/dokotomeyo");
           break;
       }
@@ -39,7 +39,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (userName) {
-      setAndReturn("すでにログインしています");
+      bookFlashMessage("すでにログインしています");
       navigate("/dokotomeyo");
     }
   }, []);

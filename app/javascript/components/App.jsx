@@ -9,18 +9,18 @@ import Login from "./Login";
 import Signup from "./Signup";
 
 const App = (props) => {
-  const { flashMessage, setAndReturn } = useFlash();
+  const { flashMessage, bookFlashMessage } = useFlash();
   const [userName, setUserName] = useState(props.username);
 
   return (
     <BrowserRouter>
-      <Header userName={userName} setUserName={setUserName} setAndReturn={setAndReturn}/>
+      <Header userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
       <Routes>
         <Route path="/dokotomeyo" element={<SearchContainer flashMessage={flashMessage} />} />
-        <Route path="/dokotomeyo/mypage" element={<Mypage userName={userName} setAndReturn={setAndReturn} />} />
+        <Route path="/dokotomeyo/mypage" element={<Mypage userName={userName} bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/post" element={<Post />} />
-        <Route path="/dokotomeyo/login" element={<Login userName={userName} setUserName={setUserName} setAndReturn={setAndReturn} />} />
-        <Route path="/dokotomeyo/signup" element={<Signup userName={userName} setUserName={setUserName} setAndReturn={setAndReturn} />} />
+        <Route path="/dokotomeyo/login" element={<Login userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
+        <Route path="/dokotomeyo/signup" element={<Signup userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
       </Routes>
     </BrowserRouter>
   );

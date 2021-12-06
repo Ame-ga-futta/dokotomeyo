@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const Mypage = (props) => {
-  const { userName, setAndReturn } = props;
+  const { userName, bookFlashMessage } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userName) {
-      setAndReturn("ログインしていません");
+      bookFlashMessage("ログインしていません");
       navigate("/dokotomeyo");
     }
   }, []);

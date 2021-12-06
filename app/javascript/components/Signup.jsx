@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = (props) => {
-  const { userName, setUserName, setAndReturn } = props;
+  const { userName, setUserName, bookFlashMessage } = props;
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const Signup = (props) => {
       switch (response.data.status){
         case 200:
           setUserName(response.data.name);
-          setAndReturn(response.data.message);
+          bookFlashMessage(response.data.message);
           navigate("/dokotomeyo");
           break;
         case 400:
@@ -29,7 +29,7 @@ const Signup = (props) => {
           setPasswordConfirmation("");
           break;
         case 401:
-          setAndReturn(response.data.message);
+          bookFlashMessage(response.data.message);
           navigate("/dokotomeyo");
           break;
       }
@@ -42,7 +42,7 @@ const Signup = (props) => {
 
   useEffect(() => {
     if (userName) {
-      setAndReturn("すでにログインしています");
+      bookFlashMessage("すでにログインしています");
       navigate("/dokotomeyo");
     }
   }, []);

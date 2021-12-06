@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Menu from "./Menu"
 
 const Header = (props) => {
-  const { userName, setUserName, setAndReturn } = props;
+  const { userName, setUserName, bookFlashMessage } = props;
 
   return (
     <>
@@ -15,7 +15,7 @@ const Header = (props) => {
           </div>
           <div>
             <Sheader_username>{userName}</Sheader_username>
-            <Menu userName={userName} setUserName={setUserName} setAndReturn={setAndReturn}/>
+            <Menu userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
           </div>
         </SHeader>
       </SHeaders>
