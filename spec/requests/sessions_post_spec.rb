@@ -1,4 +1,4 @@
-RSpec.describe "post", type: :request do
+RSpec.describe "sessions_post", type: :request do
   describe "POST" do
     describe "current_user is nil" do
       context "signup" do
