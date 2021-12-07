@@ -45,18 +45,18 @@ const Login = (props) => {
   }, []);
 
   return (
-    <Sform_wrapper>
-      <Sform_title_container>
-        <Sform_title>ログイン</Sform_title>
+    <SForm_wrapper>
+      <SForm_title_container>
+        <SForm_title>ログイン</SForm_title>
         <SError_container>
           {errors && <SError>{errors}</SError>}
         </SError_container>
-      </Sform_title_container>
+      </SForm_title_container>
       <form onSubmit={handleSubmit}>
-        <Sform_container>
+        <SForm_container>
           <li>
-            <Stext_label>メールアドレス</Stext_label>
-            <Stext_field
+            <SText_label>メールアドレス</SText_label>
+            <SText_field
               type="email"
               name="email"
               value={email}
@@ -64,31 +64,31 @@ const Login = (props) => {
             />
           </li>
           <li>
-            <Stext_label>パスワード</Stext_label>
-            <Stext_field
+            <SText_label>パスワード</SText_label>
+            <SText_field
               type="password"
               name="password"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
           </li>
-          <Stext_submit>ログイン</Stext_submit>
-        </Sform_container>
+          <SText_submit>ログイン</SText_submit>
+        </SForm_container>
       </form>
-    </Sform_wrapper>
+    </SForm_wrapper>
   );
 };
 
-const Sform_wrapper = styled.div`
+const SForm_wrapper = styled.div`
   background-color: rgb(255, 255, 255);
 `;
 
-const Sform_title_container = styled.div`
+const SForm_title_container = styled.div`
   text-align: center;
   padding: 30px;
 `;
 
-const Sform_title = styled.h1`
+const SForm_title = styled.h1`
   font-size: 25px;
   padding: 5px;
 `;
@@ -102,7 +102,7 @@ const SError = styled.p`
   padding: 4px;
 `;
 
-const Sform_container = styled.ul`
+const SForm_container = styled.ul`
   background-color: rgb(235, 235, 235);
   border-radius: 15px;
   display: flex;
@@ -118,19 +118,19 @@ const Sform_container = styled.ul`
   }
 `;
 
-const Stext_label = styled.label`
+const SText_label = styled.label`
   width: 30%;
   border-radius: 3px;
 `;
 
-const Stext_field = styled.input`
+const SText_field = styled.input`
   width: 60%;
   border: solid 1px gray;
   border-radius: 5px;
   padding: 10px;
 `;
 
-const Stext_submit = styled.button`
+const SText_submit = styled.button`
   width: 20%;
   background-color: rgba(75, 189, 255, 0.9);
   color: white;

@@ -14,7 +14,7 @@ const Header = (props) => {
             <SHeader_title><Link to="/dokotomeyo">dokotomeyo</Link></SHeader_title>
           </div>
           <div>
-            <Sheader_username>{userName}</Sheader_username>
+            <SHeader_username>{userName}</SHeader_username>
             <Menu userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
           </div>
         </SHeader>
@@ -54,7 +54,7 @@ const SHeader_title = styled.div`
   }
 `;
 
-const Sheader_username = styled.p`
+const SHeader_username = styled.p`
   font-size: 16px;
   margin-right: 115px;
 `;
