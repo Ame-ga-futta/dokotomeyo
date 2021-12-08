@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 
-const PostRight = () => {
+const TopRight = () => {
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
   const containerStyle = {
@@ -16,7 +16,7 @@ const PostRight = () => {
   };
 
   return (
-    <SPost_container_right>
+    <STop_right>
       <LoadScript googleMapsApiKey={API_KEY}>
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -24,13 +24,14 @@ const PostRight = () => {
           zoom={17}
         ></GoogleMap>
       </LoadScript>
-    </SPost_container_right>
+    </STop_right>
   );
 };
 
-const SPost_container_right = styled.div`
-  width: 40%;
+
+const STop_right = styled.div`
+  width: 60%;
   background-color: rgb(255, 250, 228);
 `;
 
-export default PostRight;
+export default TopRight;

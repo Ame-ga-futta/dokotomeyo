@@ -39,6 +39,7 @@ group :development, :test do
   gem 'bcrypt', '~> 3.1.7'
   gem 'rails-i18n'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
 end
 
 group :development do

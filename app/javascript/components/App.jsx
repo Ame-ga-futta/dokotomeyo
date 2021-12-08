@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useFlash from '../hooks/useFlash';
 import Header from "./Header";
-import SearchContainer from "./SearchContainer";
+import Top from "./Top";
 import Mypage from "./Mypage";
 import Post from "./Post";
 import Login from "./Login";
@@ -16,7 +16,7 @@ const App = (props) => {
     <BrowserRouter>
       <Header userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
       <Routes>
-        <Route path="/dokotomeyo" element={<SearchContainer flashMessage={flashMessage} />} />
+        <Route path="/dokotomeyo" element={<Top flashMessage={flashMessage} />} />
         <Route path="/dokotomeyo/mypage" element={<Mypage userName={userName} bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/post" element={<Post bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/login" element={<Login userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
