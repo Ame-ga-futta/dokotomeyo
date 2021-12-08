@@ -6,10 +6,8 @@ class Parking < ApplicationRecord
   validate :time_lag_check
 
   def time_lag_check
-    if beginning_of_worktime.blank?
-      errors.add(:beginning_of_worktime, "を入力してください")
-    elsif end_of_worktime.blank?
-      errors.add(:end_of_worktime, "を入力してください")
+    if beginning_of_worktime.blank? || end_of_worktime.blank?
+      errors[:base] << "営業時間を入力してください"
     elsif beginning_of_worktime > end_of_worktime
       errors[:base] << "終了時間は開始時間よりも後にしてください"
     end

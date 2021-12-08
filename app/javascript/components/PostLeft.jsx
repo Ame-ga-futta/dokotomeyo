@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const PostLeft = () => {
+const PostLeft = (props) => {
+  const { bookFlashMessage } = props;
+
   const [address, setAddress] = useState();
   const [name, setName] = useState();
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
   const [beginning_of_worktime, setBeginning_of_worktime] = useState();
   const [end_of_worktime, setEnd_of_worktime] = useState();
   const [errors, setErrors] = useState();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
+    axios.post('/dokotomeyo/post', { parking: { name: name, address: address, latitude: latitude, longitude: longitude, beginning_of_worktime: beginning_of_worktime, end_of_worktime: end_of_worktime} })
+    .then((response) => {
+      switch (response.data.status){
+        case 200:
+          bookFlashMessage(response.data.message);
+          navigate("/dokotomeyo");
+          break;
+        case 400:
+          setErrors(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
     event.preventDefault();
   };
 

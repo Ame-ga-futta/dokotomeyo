@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     post   :signup,               to: 'sessions#signup'
     post   :login,                to: 'sessions#login'
     delete :logout,               to: 'sessions#logout'
+
+    post   :post,                 to: 'parkings#create'
   end
 end
