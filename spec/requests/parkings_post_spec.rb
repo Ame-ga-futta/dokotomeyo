@@ -16,7 +16,6 @@ RSpec.describe "Parkings_post", type: :request do
     end
 
     it "parking responce is 400" do
-      new_parking = FactoryBot.build(:parking)
       post dokotomeyo_post_path, params: {
         parking: {
           name: "",
