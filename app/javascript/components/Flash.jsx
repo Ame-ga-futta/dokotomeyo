@@ -29,7 +29,7 @@ const SFlash = styled.p`
   z-index : 99994;
   left: 50%;
   transform: translate(-50%, -100%);
-  background-color: rgba(75, 189, 255, 0.9);
+  background-color: rgb(75, 189, 255);
   color: white;
   box-shadow: 13px 13px 44px -27px #777777;
   border-radius: 15px;

@@ -80,7 +80,7 @@ const SPostConfirm_wrapper = styled.div`
   left : -60%;
   width: 60%;
   height: calc(100vh - 80px );
-  background-color: rgba(24, 24, 24, 0.7);
+  background-color: rgb(24, 24, 24);
   transition : 0.3s ease-in-out;
   transform: translateX(${ props => props.openconfirm ? "100%" : "0%" });
   display: flex;
@@ -128,11 +128,11 @@ const SPostConfirm_button = styled.button`
   margin: 10px;
   &:first-child {
     color: black;
-    background-color: rgba(218, 218, 218, 0.9);
+    background-color: rgb(218, 218, 218);
   }
   &:last-child {
     color: white;
-    background-color: rgba(75, 189, 255, 0.9);
+    background-color: rgb(75, 189, 255);
   }
 `;
 

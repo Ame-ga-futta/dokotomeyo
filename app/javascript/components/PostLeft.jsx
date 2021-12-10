@@ -154,7 +154,7 @@ const STime_field = styled.input`
 
 const SText_submit = styled.button`
   width: 20%;
-  background-color: rgba(75, 189, 255, 0.9);
+  background-color: rgb(75, 189, 255);
   color: white;
   border-radius: 4px;
   margin: 10px;
