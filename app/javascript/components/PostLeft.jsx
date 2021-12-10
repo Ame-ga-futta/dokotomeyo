@@ -37,7 +37,11 @@ const PostLeft = (props) => {
       <SPost_title_container>
         <SPost_title>駐車場情報投稿</SPost_title>
         <SError_container>
-          {errors && <SError>{errors}</SError>}
+          {errors && errors.map((error, i) => {
+            return (
+              <li key={i}><SError>{error}</SError></li>
+            );
+          })}
         </SError_container>
       </SPost_title_container>
       <form onSubmit={Confilm}>
