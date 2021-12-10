@@ -80,7 +80,7 @@ const SPostConfirm_wrapper = styled.div`
   left : -60%;
   width: 60%;
   height: calc(100vh - 80px );
-  background-color: rgb(24, 24, 24);
+  background-color: rgba(24, 24, 24, 0.7);
   transition : 0.3s ease-in-out;
   transform: translateX(${ props => props.openconfirm ? "100%" : "0%" });
   display: flex;
