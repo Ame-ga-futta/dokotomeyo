@@ -26,6 +26,7 @@ const Move = keyframes`
 
 const SFlash = styled.p`
   position: absolute;
+  z-index : 99994;
   left: 50%;
   transform: translate(-50%, -100%);
   background-color: rgba(75, 189, 255, 0.9);

@@ -27,7 +27,7 @@ const Header = (props) => {
 const SHeaders = styled.header`
   position: fixed;
   width: 100%;
-  z-index: 2;
+  z-index: 99995;
 `;
 
 const SHeader = styled.div`

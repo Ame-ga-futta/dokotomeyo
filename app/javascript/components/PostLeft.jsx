@@ -1,38 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const PostLeft = (props) => {
-  const { bookFlashMessage } = props;
+  const {
+    address,
+    setAddress,
+    name,
+    setName,
+    setLatitude,
+    setLongitude,
+    beginning_of_worktime,
+    setBeginning_of_worktime,
+    end_of_worktime,
+    setEnd_of_worktime,
+    setOpenConfirm,
+    errors,
+    setMapCenter
+  } = props;
 
-  const [address, setAddress] = useState();
-  const [name, setName] = useState();
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
-  const [beginning_of_worktime, setBeginning_of_worktime] = useState();
-  const [end_of_worktime, setEnd_of_worktime] = useState();
-  const [errors, setErrors] = useState();
-  const navigate = useNavigate();
+  const geocoder = new window.google.maps.Geocoder();
 
-  const handleSubmit = (event) => {
-    axios.post('/dokotomeyo/post', { parking: { name: name, address: address, latitude: latitude, longitude: longitude, beginning_of_worktime: beginning_of_worktime, end_of_worktime: end_of_worktime} })
-    .then((response) => {
-      switch (response.data.status){
-        case 200:
-          bookFlashMessage(response.data.message);
-          navigate("/dokotomeyo");
-          break;
-        case 400:
-          setErrors(response.data.message);
-          break;
+  const Confilm = (event) => {
+    geocoder.geocode({ address: address }, ( results, status ) => {
+      if (status === 'OK') {
+        setLatitude(results[0].geometry.location.lat());
+        setLongitude(results[0].geometry.location.lng());
+        setMapCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
       }
-    })
-    .catch(() => {
-      console.log("通信に失敗しました");
-    })
+    });
+    setOpenConfirm(true);
     event.preventDefault();
-  };
+  }
 
   return (
     <SPost_container_left>
@@ -42,7 +40,7 @@ const PostLeft = (props) => {
           {errors && <SError>{errors}</SError>}
         </SError_container>
       </SPost_title_container>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={Confilm}>
         <SPost_form_container>
           <li>
             <SText_label>住所</SText_label>
