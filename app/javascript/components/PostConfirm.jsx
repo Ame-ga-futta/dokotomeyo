@@ -20,7 +20,7 @@ const PostConfirm = (props) => {
   const navigate = useNavigate();
 
   const fix = () => {
-    setOpenConfirm(false)
+    setOpenConfirm(false);
   };
 
   const register = () => {
@@ -37,7 +37,7 @@ const PostConfirm = (props) => {
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      setErrors("通信に失敗しました 最初からやり直してください");
     })
     setOpenConfirm(false);
   };
@@ -46,6 +46,7 @@ const PostConfirm = (props) => {
     <SPostConfirm_wrapper openconfirm={openconfirm}>
       <SPostConfirm_box>
         <SPostConfirm_title>以下の入力内容でよろしいですか？</SPostConfirm_title>
+        <SPostConfirm_subtitle>※地図クリックで詳細位置を修正できます</SPostConfirm_subtitle>
         <SPostConfirm_contents>
           <li>
             <p>住所</p>
@@ -100,7 +101,13 @@ const SPostConfirm_box = styled.div`
 
 const SPostConfirm_title = styled.p`
   font-size: 30px;
-  padding: 25px;
+  padding: 25px 0 5px 0;
+  text-align: center;
+`;
+
+const SPostConfirm_subtitle = styled.p`
+  font-size: 16px;
+  padding: 8px;
   text-align: center;
 `;
 

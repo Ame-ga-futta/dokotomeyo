@@ -25,21 +25,21 @@ const Post = memo((props) => {
       <LoadScript googleMapsApiKey={API_KEY}>
         <PostLeft
           address={address}
-          setAddress={setAddress}
           name={name}
           setName={setName}
-          setLatitude={setLatitude}
-          setLongitude={setLongitude}
           beginning_of_worktime={beginning_of_worktime}
           setBeginning_of_worktime={setBeginning_of_worktime}
           end_of_worktime={end_of_worktime}
           setEnd_of_worktime={setEnd_of_worktime}
           setOpenConfirm={setOpenConfirm}
           errors={errors}
-          setMapCenter={setMapCenter}
         />
         <PostRight
+          setAddress={setAddress}
+          setLatitude={setLatitude}
+          setLongitude={setLongitude}
           mapCenter={mapCenter}
+          setMapCenter={setMapCenter}
         />
         <PostConfirm
           address={address}

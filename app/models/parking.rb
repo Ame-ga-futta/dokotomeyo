@@ -15,7 +15,7 @@ class Parking < ApplicationRecord
   end
 
   def remove_error_messages
-    errors.messages.delete(:latitude)
-    errors.messages.delete(:longitude)
+    #errors.messages.delete(:latitude)
+    #errors.messages.delete(:longitude)
   end
 end
