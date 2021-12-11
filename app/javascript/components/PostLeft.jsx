@@ -6,16 +6,20 @@ const PostLeft = (props) => {
     address,
     name,
     setName,
+    latitude,
+    longitude,
     beginning_of_worktime,
     setBeginning_of_worktime,
     end_of_worktime,
     setEnd_of_worktime,
     setOpenConfirm,
     errors,
+    setMapCenter
   } = props;
 
   const Confilm = (event) => {
     setOpenConfirm(true);
+    setMapCenter({ lat: latitude, lng: longitude });
     event.preventDefault();
   }
 

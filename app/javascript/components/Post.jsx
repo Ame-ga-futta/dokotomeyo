@@ -27,12 +27,15 @@ const Post = memo((props) => {
           address={address}
           name={name}
           setName={setName}
+          latitude={latitude}
+          longitude={longitude}
           beginning_of_worktime={beginning_of_worktime}
           setBeginning_of_worktime={setBeginning_of_worktime}
           end_of_worktime={end_of_worktime}
           setEnd_of_worktime={setEnd_of_worktime}
           setOpenConfirm={setOpenConfirm}
           errors={errors}
+          setMapCenter={setMapCenter}
         />
         <PostRight
           setAddress={setAddress}
