@@ -34,6 +34,9 @@ const PostRight = (props) => {
   const search = (event) => {
     geocoder.geocode({ address: place }, ( results, status ) => {
       if (status === 'OK') {
+        setAddress(results[0].formatted_address);
+        setLatitude(results[0].geometry.location.lat());
+        setLongitude(results[0].geometry.location.lng());
         setMapCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
       }
     });
