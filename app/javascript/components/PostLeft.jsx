@@ -88,7 +88,9 @@ const PostLeft = (props) => {
 
 const SPost_container_left = styled.div`
   width: 60%;
+  height: calc(100vh - 80px );
   background-color: rgb(255,255,255);
+  overflow-y: scroll;
 `;
 
 const SPost_title_container = styled.div`

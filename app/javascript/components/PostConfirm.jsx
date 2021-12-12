@@ -91,12 +91,14 @@ const SPostConfirm_wrapper = styled.div`
 
 const SPostConfirm_box = styled.div`
   width: 80%;
+  max-height: 75%;
   padding: 20px 40px;
   background-color: rgb(235, 235, 235);
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 const SPostConfirm_title = styled.p`
