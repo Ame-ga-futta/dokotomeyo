@@ -35,11 +35,16 @@ const PostLeft = (props) => {
           })}
         </SError_container>
       </SPost_title_container>
-      <form onSubmit={Confilm}>
-        <SPost_form_container>
+      <SPost_form_container onSubmit={Confilm}>
+        <SPost_form_box>
           <li>
             <SText_label>住所</SText_label>
             <SText_address>{address}</SText_address>
+          </li>
+          <li>
+            <SPost_container_notice>
+              画面右の地図をクリックするか、地図上部の検索ボックスで<br />場所を入力すると、住所が入力されます。
+            </SPost_container_notice>
           </li>
           <li>
             <SText_label>駐車場名</SText_label>
@@ -69,8 +74,14 @@ const PostLeft = (props) => {
             </STime_field_container>
           </li>
           <SText_submit>登録</SText_submit>
-        </SPost_form_container>
-      </form>
+        </SPost_form_box>
+        <SPost_form_text>
+          なるべく正確な情報を入力してください。
+        </SPost_form_text>
+        <SPost_form_text>
+          dokotomeyoは、無料で使用できる駐車場の情報を共有・検索できるサービスです。登録する駐車場は無料で使える場所だけにしてください。
+        </SPost_form_text>
+      </SPost_form_container>
     </SPost_container_left>
   );
 };
@@ -99,15 +110,21 @@ const SError = styled.p`
   padding: 4px;
 `;
 
-const SPost_form_container = styled.ul`
+const SPost_form_container = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SPost_form_box = styled.ul`
   background-color: rgb(235, 235, 235);
   border-radius: 15px;
   font-size: 18px;
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: 0 auto;
   padding: 30px;
+  margin-bottom: 15px;
   li {
     margin: 10px;
     display: flex;
@@ -156,6 +173,21 @@ const SText_submit = styled.button`
   margin-left: auto;
   padding: 11px 20px;
   text-align: center;
+`;
+
+const SPost_container_notice = styled.p`
+  color: gray;
+  font-size: 14px;
+  text-align: left;
+  margin: 0 0 0 auto;
+`;
+
+const SPost_form_text = styled.p`
+  width: 80%;
+  color: gray;
+  font-size: 14px;
+  margin: 4px;
+  text-align: left;
 `;
 
 export default PostLeft;
