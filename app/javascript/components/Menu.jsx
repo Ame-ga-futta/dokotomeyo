@@ -67,7 +67,7 @@ const Menu = (props) => {
 const SHamburger = styled.div`
   display : block;
   position: fixed;
-  z-index : 3;
+  z-index : 99997;
   right : 73px;
   top   : 19px;
   width : 42px;
@@ -108,7 +108,7 @@ const SHamburger_span = styled.span`
 
 const SGlobalMenuSp = styled.nav`
   position: fixed;
-  z-index : 2;
+  z-index : 99996;
   top  : 0;
   left : 0;
   color: #fff;

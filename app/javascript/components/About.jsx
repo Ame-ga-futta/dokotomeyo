@@ -5,7 +5,7 @@ const About = (props) => {
   const { openAbout, setOpenAbout } = props;
 
   const close = () => {
-    setOpenAbout(false)
+    setOpenAbout(false);
   };
 
   return (
@@ -32,7 +32,7 @@ const About = (props) => {
 
 const SAbout = styled.div`
   position: fixed;
-  z-index : 4;
+  z-index : 99999;
   top  : 0;
   left : 0;
   width: 100%;
@@ -87,7 +87,7 @@ const SAbout_bar = styled.span`
 const SAbout_title = styled.p`
   font-size: 30px;
   padding: 10px;
-  margin-top: 10px 0;
+  margin: 10px;
 `;
 
 const SAbout_text = styled.p`

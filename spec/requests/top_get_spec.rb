@@ -1,4 +1,4 @@
-RSpec.describe "get", type: :request do
+RSpec.describe "top_get", type: :request do
   describe "GET" do
     context "root_path" do
       it "root response is 200" do
