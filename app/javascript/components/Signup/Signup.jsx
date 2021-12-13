@@ -89,7 +89,7 @@ const Signup = (props) => {
             />
           </li>
           <li>
-            <SText_label>パスワード ※最確認</SText_label>
+            <SText_label>パスワード ※再確認</SText_label>
             <SText_field
               type="password"
               name="password_confirmation"
