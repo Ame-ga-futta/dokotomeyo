@@ -1,0 +1,2 @@
+class RequirementFacility < ApplicationRecord
+end

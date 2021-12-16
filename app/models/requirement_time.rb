@@ -1,0 +1,2 @@
+class RequirementTime < ApplicationRecord
+end

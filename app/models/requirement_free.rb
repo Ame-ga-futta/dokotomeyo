@@ -1,0 +1,2 @@
+class RequirementFree < ApplicationRecord
+end

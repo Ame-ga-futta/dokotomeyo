@@ -1,0 +1,2 @@
+class RequirementBuy < ApplicationRecord
+end

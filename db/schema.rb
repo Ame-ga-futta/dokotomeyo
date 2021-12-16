@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_064507) do
+ActiveRecord::Schema.define(version: 2021_12_16_053758) do
 
   create_table "parkings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,40 @@ ActiveRecord::Schema.define(version: 2021_12_06_064507) do
     t.float "longitude"
     t.time "beginning_of_worktime"
     t.time "end_of_worktime"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requirement_buys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.integer "parking_id"
+    t.string "facility_name"
+    t.integer "purchase_price"
+    t.time "free_time"
+    t.boolean "only_weekdays"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requirement_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.integer "parking_id"
+    t.string "facility_name"
+    t.time "free_time"
+    t.boolean "only_weekdays"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requirement_frees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.integer "parking_id"
+    t.boolean "only_weekdays"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requirement_times", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.integer "parking_id"
+    t.time "free_time"
+    t.boolean "only_weekdays"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
