@@ -6,6 +6,11 @@ class Parking < ApplicationRecord
   validate :time_lag_check
   after_validation :remove_error_messages
 
+  has_many :requirement_buys, dependent: :destroy
+  has_many :requirement_facilities, dependent: :destroy
+  has_many :requirement_frees, dependent: :destroy
+  has_many :requirement_times, dependent: :destroy
+
   def time_lag_check
     if beginning_of_worktime.blank? || end_of_worktime.blank?
       errors[:base] << "営業時間を入力してください"
