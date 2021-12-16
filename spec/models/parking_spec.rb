@@ -72,4 +72,36 @@ RSpec.describe Parking, type: :model do
       end
     end
   end
+
+  describe "association Parking" do
+    context "when deleted Parking" do
+      it "delete requirement_buy" do
+        new_parking = FactoryBot.create(:parking)
+        new_requirement_buy = FactoryBot.create(:requirement_buy, parking_id: new_parking.id)
+
+        expect{ new_parking.destroy }.to change{ RequirementBuy.count }.from(1).to(0)
+      end
+
+      it "delete requirement_facility" do
+        new_parking = FactoryBot.create(:parking)
+        new_requirement_facility = FactoryBot.create(:requirement_facility, parking_id: new_parking.id)
+
+        expect{ new_parking.destroy }.to change{ RequirementFacility.count }.from(1).to(0)
+      end
+
+      it "delete requirement_free" do
+        new_parking = FactoryBot.create(:parking)
+        new_requirement_free = FactoryBot.create(:requirement_free, parking_id: new_parking.id)
+
+        expect{ new_parking.destroy }.to change{ RequirementFree.count }.from(1).to(0)
+      end
+
+      it "delete requirement_time" do
+        new_parking = FactoryBot.create(:parking)
+        new_requirement_time = FactoryBot.create(:requirement_time, parking_id: new_parking.id)
+
+        expect{ new_parking.destroy }.to change{ RequirementTime.count }.from(1).to(0)
+      end
+    end
+  end
 end
