@@ -5,12 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PostConfirm = (props) => {
   const {
-    address,
-    name,
-    latitude,
-    longitude,
-    beginning_of_worktime,
-    end_of_worktime,
+    parking,
     openconfirm,
     setOpenConfirm,
     setErrors,
@@ -24,7 +19,7 @@ const PostConfirm = (props) => {
   };
 
   const register = () => {
-    axios.post('/dokotomeyo/post', { parking: { name: name, address: address, latitude: latitude, longitude: longitude, beginning_of_worktime: beginning_of_worktime, end_of_worktime: end_of_worktime} })
+    axios.post('/dokotomeyo/post', parking)
     .then((response) => {
       switch (response.data.status){
         case 200:
@@ -50,15 +45,15 @@ const PostConfirm = (props) => {
         <SPostConfirm_contents>
           <li>
             <p>住所</p>
-            <p>{address}</p>
+            <p>{parking.address}</p>
           </li>
           <li>
             <p>駐車場名</p>
-            <p>{name}</p>
+            <p>{parking.name}</p>
           </li>
           <li>
             <p>営業時間</p>
-            <p>{beginning_of_worktime}〜{end_of_worktime}</p>
+            <p>{parking.beginning_of_worktime}〜{parking.end_of_worktime}</p>
           </li>
         </SPostConfirm_contents>
         <SPostConfirm_buttons>

@@ -4,15 +4,8 @@ import Requirements from "./Requirements";
 
 const PostLeft = (props) => {
   const {
-    address,
-    name,
-    setName,
-    latitude,
-    longitude,
-    beginning_of_worktime,
-    setBeginning_of_worktime,
-    end_of_worktime,
-    setEnd_of_worktime,
+    parking,
+    setParking,
     setOpenConfirm,
     errors,
     setMapCenter
@@ -20,7 +13,7 @@ const PostLeft = (props) => {
 
   const Confilm = (event) => {
     setOpenConfirm(true);
-    setMapCenter({ lat: latitude, lng: longitude });
+    setMapCenter({ lat: parking.latitude, lng: parking.longitude });
     event.preventDefault();
   }
 
@@ -42,7 +35,7 @@ const PostLeft = (props) => {
             <SPost_form_ul>
               <li>
                 <SText_label>住所</SText_label>
-                <SText_address>{address}</SText_address>
+                <SText_address>{parking.address}</SText_address>
               </li>
               <li>
                 <SPost_container_notice>
@@ -54,8 +47,8 @@ const PostLeft = (props) => {
                 <SText_field
                   type="text"
                   name="name"
-                  value={name}
-                  onChange={event => setName(event.target.value)}
+                  value={parking.name}
+                  onChange={event => setParking({...parking, name: event.target.value})}
                 />
               </li>
               <li>
@@ -64,15 +57,15 @@ const PostLeft = (props) => {
                   <STime_field
                     type="time"
                     name="beginning_of_worktime"
-                    value={beginning_of_worktime}
-                    onChange={event => setBeginning_of_worktime(event.target.value)}
+                    value={parking.beginning_of_worktime}
+                    onChange={event => setParking({...parking, beginning_of_worktime: event.target.value})}
                   />
                   <p>〜</p>
                   <STime_field
                     type="time"
                     name="end_of_worktime"
-                    value={end_of_worktime}
-                    onChange={event => setEnd_of_worktime(event.target.value)}
+                    value={parking.end_of_worktime}
+                    onChange={event => setParking({...parking, end_of_worktime: event.target.value})}
                   />
                 </STime_field_container>
               </li>
