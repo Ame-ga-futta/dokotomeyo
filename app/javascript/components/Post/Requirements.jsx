@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import RequirementForm from "./RequirementForm";
+import RequirementFreeForm from "./RequirementType/RequirementFreeForm";
+import RequirementTimeForm from "./RequirementType/RequirementTimeForm";
+import RequirementBuyForm from "./RequirementType/RequirementBuyForm";
+import RequirementFacilityForm from "./RequirementType/RequirementFacilityForm";
 
 const Requirements = () => {
+  const [type, setType] = useState("free");
+
+  const DisplayForm = () => {
+    switch (type){
+      case "free":
+        return <RequirementFreeForm />
+      case "time":
+        return <RequirementTimeForm />
+      case "buy":
+        return <RequirementBuyForm />
+      case "facility":
+        return <RequirementFacilityForm />
+    }
+  }
+
   return (
     <SPostRequirements_wrapper>
       <form>
         <SPostRequirements_form>
           <SText_label>無料の条件</SText_label>
           <SPostRequirements_checkboxes>
-            <RequirementForm />
+            <RequirementForm type={type} setType={setType} />
           </SPostRequirements_checkboxes>
         </SPostRequirements_form>
+        {DisplayForm()}
       </form>
     </SPostRequirements_wrapper>
   );
