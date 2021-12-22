@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 
-const RequirementFreeForm = () => {
-  const [only_weekdays, setOnly_weekdays] = useState(false);
+const RequirementFreeForm = (props) => {
+  const {
+    requirement,
+    setRequirement
+  } = props;
 
   return (
     <SPost_form_ul>
@@ -10,8 +13,8 @@ const RequirementFreeForm = () => {
         <SText_checkbox
           type="checkbox"
           id="only_weekdays"
-          value={only_weekdays}
-          onChange={() => setOnly_weekdays(!only_weekdays)}
+          value={requirement.only_weekdays}
+          onChange={() => setRequirement({...requirement, only_weekdays: !requirement.only_weekdays})}
         />
         <SText_checkbox_label htmlFor="only_weekdays">平日のみ</SText_checkbox_label>
       </SText_checkbox_row>

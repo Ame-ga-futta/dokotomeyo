@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 
-const RequirementTimeForm = () => {
-  const [free_time, setFree_time] = useState("");
-  const [only_weekdays, setOnly_weekdays] = useState(false);
+const RequirementTimeForm = (props) => {
+  const {
+    requirement,
+    setRequirement
+  } = props;
 
   return (
     <SPost_form_ul>
@@ -12,8 +14,8 @@ const RequirementTimeForm = () => {
         <SRequirement_Text_field
           type="time"
           name="free_time"
-          value={free_time}
-          onChange={event => setFree_time(event.target.value)}
+          value={requirement.free_time}
+          onChange={event => setRequirement({...requirement, free_time: event.target.value})}
         />
         <p>時間まで無料</p>
       </li>
@@ -21,8 +23,8 @@ const RequirementTimeForm = () => {
         <SText_checkbox
           type="checkbox"
           id="only_weekdays"
-          value={only_weekdays}
-          onChange={() => setOnly_weekdays(!only_weekdays)}
+          value={requirement.only_weekdays}
+          onChange={() => setRequirement({...requirement, only_weekdays: !requirement.only_weekdays})}
         />
         <SText_checkbox_label htmlFor="only_weekdays">平日のみ</SText_checkbox_label>
       </li>

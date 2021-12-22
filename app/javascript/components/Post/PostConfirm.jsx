@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const PostConfirm = (props) => {
   const {
     parking,
+    type,
+    requirement,
     openconfirm,
     setOpenConfirm,
     setErrors,
@@ -37,6 +39,47 @@ const PostConfirm = (props) => {
     setOpenConfirm(false);
   };
 
+  const FormatSentence = () => {
+    switch (type){
+      case "free":
+        return (
+          <li>
+            <p>無料の条件: 終日無料</p>
+          </li>
+        );
+      case "time":
+        return (
+          <li>
+            <p>無料の条件: 入庫後一定時間無料</p>
+            <p>
+              入庫後{Number(requirement.free_time.split(':')[0])}時間{Number(requirement.free_time.split(':')[1])}分無料
+            </p>
+          </li>
+        );
+      case "buy":
+        return (
+          <li>
+            <p>無料の条件: 提携施設での買い物金額一定以上で無料</p>
+            <p>
+              {requirement.facility_name}での購入金額が<br />
+              {requirement.purchase_price}円以上で<br />
+              {Number(requirement.free_time.split(':')[0])}時間{Number(requirement.free_time.split(':')[1])}分無料
+            </p>
+          </li>
+        );
+      case "facility":
+        return (
+          <li>
+            <p>無料の条件: 施設利用で無料</p>
+            <p>
+              {requirement.facility_name}の利用で<br />
+              {Number(requirement.free_time.split(':')[0])}時間{Number(requirement.free_time.split(':')[1])}分無料
+            </p>
+          </li>
+        );
+    }
+  }
+
   return (
     <SPostConfirm_wrapper openconfirm={openconfirm}>
       <SPostConfirm_box>
@@ -53,7 +96,11 @@ const PostConfirm = (props) => {
           </li>
           <li>
             <p>営業時間</p>
-            <p>{parking.beginning_of_worktime}〜{parking.end_of_worktime}</p>
+            <p>{parking.beginning_of_worktime.replace(/^0+/, '')}〜{parking.end_of_worktime.replace(/^0+/, '')}</p>
+          </li>
+          {FormatSentence()}
+          <li>
+            <p>{requirement.only_weekdays ? "平日のみ適用" : "土日祝も適用"}</p>
           </li>
         </SPostConfirm_contents>
         <SPostConfirm_buttons>

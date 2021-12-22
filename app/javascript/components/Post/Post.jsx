@@ -18,12 +18,8 @@ const Post = memo((props) => {
     beginning_of_worktime: "",
     end_of_worktime: ""
   });
-  const [requirement, setRequirement] = useState({
-    requirement: {
-
-    }
-  });
-
+  const [type, setType] = useState("free");
+  const [requirement, setRequirement] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
   const [errors, setErrors] = useState();
   const [mapCenter, setMapCenter] = useState({lat: 35.681454048919186, lng: 139.76707115336345});
@@ -37,6 +33,10 @@ const Post = memo((props) => {
           setOpenConfirm={setOpenConfirm}
           errors={errors}
           setMapCenter={setMapCenter}
+          type={type}
+          setType={setType}
+          requirement={requirement}
+          setRequirement={setRequirement}
         />
         <PostRight
           parking={parking}
@@ -46,6 +46,8 @@ const Post = memo((props) => {
         />
         <PostConfirm
           parking={parking}
+          type={type}
+          requirement={requirement}
           openconfirm={openconfirm}
           setOpenConfirm={setOpenConfirm}
           setErrors={setErrors}

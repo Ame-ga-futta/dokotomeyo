@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import RequirementForm from "./RequirementForm";
 import RequirementFreeForm from "./RequirementType/RequirementFreeForm";
@@ -6,19 +6,33 @@ import RequirementTimeForm from "./RequirementType/RequirementTimeForm";
 import RequirementBuyForm from "./RequirementType/RequirementBuyForm";
 import RequirementFacilityForm from "./RequirementType/RequirementFacilityForm";
 
-const Requirements = () => {
-  const [type, setType] = useState("free");
+const Requirements = (props) => {
+  const {
+    type,
+    setType,
+    requirement,
+    setRequirement
+  } = props;
+
+  useEffect(() => {
+    setRequirement({
+      facility_name: "",
+      purchase_price: "",
+      free_time: "",
+      only_weekdays: false
+    })
+  }, [type]);
 
   const DisplayForm = () => {
     switch (type){
       case "free":
-        return <RequirementFreeForm />
+        return <RequirementFreeForm requirement={requirement} setRequirement={setRequirement} />
       case "time":
-        return <RequirementTimeForm />
+        return <RequirementTimeForm requirement={requirement} setRequirement={setRequirement} />
       case "buy":
-        return <RequirementBuyForm />
+        return <RequirementBuyForm requirement={requirement} setRequirement={setRequirement} />
       case "facility":
-        return <RequirementFacilityForm />
+        return <RequirementFacilityForm requirement={requirement} setRequirement={setRequirement} />
     }
   }
 

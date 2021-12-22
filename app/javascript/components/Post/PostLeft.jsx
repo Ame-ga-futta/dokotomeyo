@@ -8,7 +8,11 @@ const PostLeft = (props) => {
     setParking,
     setOpenConfirm,
     errors,
-    setMapCenter
+    setMapCenter,
+    type,
+    setType,
+    requirement,
+    setRequirement
   } = props;
 
   const Confilm = (event) => {
@@ -72,7 +76,7 @@ const PostLeft = (props) => {
               <SText_submit>登録</SText_submit>
             </SPost_form_ul>
           </form>
-          <Requirements />
+          <Requirements type={type} setType={setType} requirement={requirement} setRequirement={setRequirement} />
         </SPost_form_box>
         <SPost_form_text>
           なるべく正確な情報を入力してください。
