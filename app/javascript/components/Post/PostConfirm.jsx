@@ -44,37 +44,38 @@ const PostConfirm = (props) => {
       case "free":
         return (
           <li>
-            <p>無料の条件: 終日無料</p>
+            <SPostConfirm_contents_title>無料の条件</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>終日無料</SPostConfirm_contents_text>
           </li>
         );
       case "time":
         return (
           <li>
-            <p>無料の条件: 入庫後一定時間無料</p>
-            <p>
+            <SPostConfirm_contents_title>無料の条件</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>
               入庫後{Number(requirement.free_time.split(':')[0])}時間{Number(requirement.free_time.split(':')[1])}分無料
-            </p>
+            </SPostConfirm_contents_text>
           </li>
         );
       case "buy":
         return (
           <li>
-            <p>無料の条件: 提携施設での買い物金額一定以上で無料</p>
-            <p>
+            <SPostConfirm_contents_title>無料の条件</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>
               {requirement.facility_name}での購入金額が<br />
               {requirement.purchase_price}円以上で<br />
               {Number(requirement.free_time.split(':')[0])}時間{Number(requirement.free_time.split(':')[1])}分無料
-            </p>
+            </SPostConfirm_contents_text>
           </li>
         );
       case "facility":
         return (
           <li>
-            <p>無料の条件: 施設利用で無料</p>
-            <p>
+            <SPostConfirm_contents_title>無料の条件</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>
               {requirement.facility_name}の利用で<br />
               {Number(requirement.free_time.split(':')[0])}時間{Number(requirement.free_time.split(':')[1])}分無料
-            </p>
+            </SPostConfirm_contents_text>
           </li>
         );
     }
@@ -85,24 +86,26 @@ const PostConfirm = (props) => {
       <SPostConfirm_box>
         <SPostConfirm_title>以下の入力内容でよろしいですか？</SPostConfirm_title>
         <SPostConfirm_subtitle>※地図クリックで詳細位置を修正できます</SPostConfirm_subtitle>
-        <SPostConfirm_contents>
+        <SPostConfirm_contents_list>
           <li>
-            <p>住所</p>
-            <p>{parking.address}</p>
+            <SPostConfirm_contents_title>住所</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>{parking.address}</SPostConfirm_contents_text>
           </li>
           <li>
-            <p>駐車場名</p>
-            <p>{parking.name}</p>
+            <SPostConfirm_contents_title>駐車場名</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>{parking.name}</SPostConfirm_contents_text>
           </li>
           <li>
-            <p>営業時間</p>
-            <p>{parking.beginning_of_worktime.replace(/^0+/, '')}〜{parking.end_of_worktime.replace(/^0+/, '')}</p>
+            <SPostConfirm_contents_title>営業時間</SPostConfirm_contents_title>
+            <SPostConfirm_contents_text>
+              {parking.beginning_of_worktime.replace(/^0+/, '')}〜{parking.end_of_worktime.replace(/^0+/, '')}
+            </SPostConfirm_contents_text>
           </li>
           {FormatSentence()}
           <li>
             <p>{requirement.only_weekdays ? "平日のみ適用" : "土日祝も適用"}</p>
           </li>
-        </SPostConfirm_contents>
+        </SPostConfirm_contents_list>
         <SPostConfirm_buttons>
           <SPostConfirm_button onClick={fix}>
             修正
@@ -155,11 +158,31 @@ const SPostConfirm_subtitle = styled.p`
   text-align: center;
 `;
 
-const SPostConfirm_contents = styled.ul`
+const SPostConfirm_contents_list = styled.ul`
   display: flex;
   align-items: start;
   justify-content: space-between;
   flex-direction: column;
+  margin: 20px;
+  li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  li:last-child {
+    margin-left: 20%;
+    font-size: 18px;
+  }
+`;
+
+const SPostConfirm_contents_title = styled.p`
+  width: 20%;
+`;
+
+const SPostConfirm_contents_text = styled.p`
+  width: 80%;
+  font-size: 18px;
 `;
 
 const SPostConfirm_buttons = styled.div`
