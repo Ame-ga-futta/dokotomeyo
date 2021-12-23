@@ -1,4 +1,13 @@
 class Dokotomeyo::ParkingsController < ApplicationController
+  def confirm
+    @parking = Parking.new(create_parking_params)
+    if @parking.valid?
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: @parking.errors.full_messages }
+    end
+  end
+
   def create
     @parking = Parking.new(create_parking_params)
     if @parking.save

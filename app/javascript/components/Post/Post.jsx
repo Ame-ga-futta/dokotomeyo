@@ -32,6 +32,7 @@ const Post = memo((props) => {
           setParking={setParking}
           setOpenConfirm={setOpenConfirm}
           errors={errors}
+          setErrors={setErrors}
           setMapCenter={setMapCenter}
           type={type}
           setType={setType}

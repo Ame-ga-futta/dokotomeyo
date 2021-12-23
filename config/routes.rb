@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post   :login,                to: 'sessions#login'
     delete :logout,               to: 'sessions#logout'
 
+    post   :confirm,              to: 'parkings#confirm'
     post   :post,                 to: 'parkings#create'
   end
 end

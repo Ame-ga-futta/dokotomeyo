@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import styled from 'styled-components';
 import Requirements from "./Requirements";
@@ -8,6 +9,7 @@ const PostLeft = (props) => {
     setParking,
     setOpenConfirm,
     errors,
+    setErrors,
     setMapCenter,
     type,
     setType,
@@ -16,8 +18,21 @@ const PostLeft = (props) => {
   } = props;
 
   const Confilm = (event) => {
-    setOpenConfirm(true);
     setMapCenter({ lat: parking.latitude, lng: parking.longitude });
+    axios.post('/dokotomeyo/confirm', parking)
+    .then((response) => {
+      switch (response.data.status){
+        case 200:
+          setOpenConfirm(true);
+          break;
+        case 400:
+          setErrors(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      setErrors("通信に失敗しました 最初からやり直してください");
+    })
     event.preventDefault();
   }
 
