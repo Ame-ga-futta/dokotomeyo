@@ -13,15 +13,15 @@ const Post = memo((props) => {
   const [parking, setParking] = useState({
     name: "",
     address: "",
-    latitude: "",
-    longitude: "",
+    latitude: 35.681454048919186,
+    longitude: 139.76707115336345,
     beginning_of_worktime: "",
     end_of_worktime: ""
   });
   const [type, setType] = useState("free");
   const [requirement, setRequirement] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState([]);
   const [mapCenter, setMapCenter] = useState({lat: 35.681454048919186, lng: 139.76707115336345});
 
   return (
