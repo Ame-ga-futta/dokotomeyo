@@ -23,7 +23,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_buy.free_time,
                 only_weekdays: new_requirement_buy.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -48,7 +48,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_buy.free_time,
                 only_weekdays: new_requirement_buy.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -73,7 +73,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -101,7 +101,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_facility.free_time,
                 only_weekdays: new_requirement_facility.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -126,7 +126,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_facility.free_time,
                 only_weekdays: new_requirement_facility.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -151,7 +151,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -179,7 +179,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: new_requirement_free.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -204,7 +204,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: new_requirement_free.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -229,7 +229,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -257,7 +257,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_time.free_time,
                 only_weekdays: new_requirement_time.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -282,7 +282,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_time.free_time,
                 only_weekdays: new_requirement_time.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -307,7 +307,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -337,7 +337,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_buy.free_time,
                 only_weekdays: new_requirement_buy.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -362,7 +362,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_buy.free_time,
                 only_weekdays: new_requirement_buy.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -387,7 +387,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -415,7 +415,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_facility.free_time,
                 only_weekdays: new_requirement_facility.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -440,7 +440,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_facility.free_time,
                 only_weekdays: new_requirement_facility.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -465,7 +465,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -493,7 +493,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: new_requirement_free.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -518,7 +518,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: new_requirement_free.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -543,7 +543,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -571,7 +571,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_time.free_time,
                 only_weekdays: new_requirement_time.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -596,7 +596,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: new_requirement_time.free_time,
                 only_weekdays: new_requirement_time.only_weekdays,
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -621,7 +621,7 @@ RSpec.describe "Parkings_post", type: :request do
                 free_time: "",
                 only_weekdays: "",
               },
-            }
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end

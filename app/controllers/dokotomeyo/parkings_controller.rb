@@ -4,13 +4,13 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
     case create_params[:requirement_type]
     when "free" then
-      @requirement = @parking.requirement_frees.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_frees.new(create_params[:requirement].reject { |k, v| v == "" })
     when "time" then
-      @requirement = @parking.requirement_times.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_times.new(create_params[:requirement].reject { |k, v| v == "" })
     when "buy" then
-      @requirement = @parking.requirement_buys.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_buys.new(create_params[:requirement].reject { |k, v| v == "" })
     when "facility" then
-      @requirement = @parking.requirement_facilities.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_facilities.new(create_params[:requirement].reject { |k, v| v == "" })
     end
 
     if @parking.valid? && @requirement.valid?
@@ -25,13 +25,13 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
     case create_params[:requirement_type]
     when "free" then
-      @requirement = @parking.requirement_frees.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_frees.new(create_params[:requirement].reject { |k, v| v == "" })
     when "time" then
-      @requirement = @parking.requirement_times.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_times.new(create_params[:requirement].reject { |k, v| v == "" })
     when "buy" then
-      @requirement = @parking.requirement_buys.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_buys.new(create_params[:requirement].reject { |k, v| v == "" })
     when "facility" then
-      @requirement = @parking.requirement_facilities.new(create_params[:requirement].reject{ |k, v| v == "" })
+      @requirement = @parking.requirement_facilities.new(create_params[:requirement].reject { |k, v| v == "" })
     end
 
     if @parking.save && @requirement.save
@@ -47,10 +47,10 @@ class Dokotomeyo::ParkingsController < ApplicationController
     params.require(:post_parking).permit(
       :requirement_type,
       parking: [
-        :name, :address, :latitude, :longitude, :beginning_of_worktime, :end_of_worktime
+        :name, :address, :latitude, :longitude, :beginning_of_worktime, :end_of_worktime,
       ],
       requirement: [
-        :facility_name, :purchase_price, :free_time, :only_weekdays
+        :facility_name, :purchase_price, :free_time, :only_weekdays,
       ]
     )
   end
