@@ -21,7 +21,13 @@ const PostConfirm = (props) => {
   };
 
   const register = () => {
-    axios.post('/dokotomeyo/post', parking)
+    axios.post('/dokotomeyo/post', {
+      post_parking: {
+        requirement_type: type,
+        parking: parking,
+        requirement: requirement
+      }
+    })
     .then((response) => {
       switch (response.data.status){
         case 200:

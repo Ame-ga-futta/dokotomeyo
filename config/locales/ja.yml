@@ -24,19 +24,19 @@ ja:
         parking_id: 駐車場ID
         facility_name: 施設名
         purchase_price: 購入金額
-        free_time: 上限時間
+        free_time: 無料時間
         only_weekdays: 平日のみ
       requirement_facility:
         parking_id: 駐車場ID
         facility_name: 施設名
-        free_time: 上限時間
+        free_time: 無料時間
         only_weekdays: 平日のみ
       requirement_free:
         parking_id: 駐車場ID
         only_weekdays: 平日のみ
       requirement_time:
         parking_id: 駐車場ID
-        free_time: 上限時間
+        free_time: 無料時間
         only_weekdays: 平日のみ
     errors:
       messages:

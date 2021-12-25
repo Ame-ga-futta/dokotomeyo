@@ -32,3 +32,5 @@ services:
       MYSQL_HOST: mysql
     depends_on:
       - mysql
+    tty: true
+    stdin_open: true
