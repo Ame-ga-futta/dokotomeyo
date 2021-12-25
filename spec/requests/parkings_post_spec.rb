@@ -1,10 +1,14 @@
 RSpec.describe "Parkings_post", type: :request do
   describe "POST" do
+    let(:new_parking) { build(:parking) }
+    let(:new_requirement_buy) { build(:requirement_buy) }
+    let(:new_requirement_facility) { build(:requirement_facility) }
+    let(:new_requirement_free) { build(:requirement_free) }
+    let(:new_requirement_time) { build(:requirement_time) }
+
     context "confirm" do
       context "with RequirementBuy" do
         it "confirm responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_buy = FactoryBot.build(:requirement_buy)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "buy",
@@ -29,7 +33,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without Parking data" do
-          new_requirement_buy = FactoryBot.build(:requirement_buy)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "buy",
@@ -54,7 +57,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without RequirementBuy data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "buy",
@@ -81,8 +83,6 @@ RSpec.describe "Parkings_post", type: :request do
 
       context "with RequirementFacility" do
         it "confirm responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_facility = FactoryBot.build(:requirement_facility)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "facility",
@@ -107,7 +107,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without Parking data" do
-          new_requirement_facility = FactoryBot.build(:requirement_facility)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "facility",
@@ -132,7 +131,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without RequirementFacility data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "facility",
@@ -159,8 +157,6 @@ RSpec.describe "Parkings_post", type: :request do
 
       context "with RequirementFree" do
         it "confirm responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_free = FactoryBot.build(:requirement_free)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "free",
@@ -185,7 +181,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without Parking data" do
-          new_requirement_free = FactoryBot.build(:requirement_free)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "free",
@@ -210,7 +205,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without RequirementFree data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "free",
@@ -237,8 +231,6 @@ RSpec.describe "Parkings_post", type: :request do
 
       context "with RequirementTime" do
         it "confirm responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_time = FactoryBot.build(:requirement_time)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "time",
@@ -263,7 +255,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without Parking data" do
-          new_requirement_time = FactoryBot.build(:requirement_time)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "time",
@@ -288,7 +279,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "confirm responce is 400 without RequirementTime data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "time",
@@ -317,8 +307,6 @@ RSpec.describe "Parkings_post", type: :request do
     context "create" do
       context "with RequirementBuy" do
         it "create responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_buy = FactoryBot.build(:requirement_buy)
           post dokotomeyo_post_path, params: {
             post_parking: {
               requirement_type: "buy",
@@ -343,7 +331,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          new_requirement_buy = FactoryBot.build(:requirement_buy)
           post dokotomeyo_post_path, params: {
             post_parking: {
               requirement_type: "buy",
@@ -368,7 +355,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without RequirementBuy data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_post_path, params: {
             post_parking: {
               requirement_type: "buy",
@@ -395,8 +381,6 @@ RSpec.describe "Parkings_post", type: :request do
 
       context "with RequirementFacility" do
         it "create responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_facility = FactoryBot.build(:requirement_facility)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "facility",
@@ -421,7 +405,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          new_requirement_facility = FactoryBot.build(:requirement_facility)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "facility",
@@ -446,7 +429,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without RequirementFacility data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "facility",
@@ -473,8 +455,6 @@ RSpec.describe "Parkings_post", type: :request do
 
       context "with RequirementFree" do
         it "create responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_free = FactoryBot.build(:requirement_free)
           post dokotomeyo_post_path, params: {
             post_parking: {
               requirement_type: "free",
@@ -499,7 +479,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          new_requirement_free = FactoryBot.build(:requirement_free)
           post dokotomeyo_post_path, params: {
             post_parking: {
               requirement_type: "free",
@@ -524,7 +503,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without RequirementFree data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_post_path, params: {
             post_parking: {
               requirement_type: "free",
@@ -551,8 +529,6 @@ RSpec.describe "Parkings_post", type: :request do
 
       context "with RequirementTime" do
         it "create responce is 200 with fulldata" do
-          new_parking = FactoryBot.build(:parking)
-          new_requirement_time = FactoryBot.build(:requirement_time)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "time",
@@ -577,7 +553,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          new_requirement_time = FactoryBot.build(:requirement_time)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "time",
@@ -602,7 +577,6 @@ RSpec.describe "Parkings_post", type: :request do
         end
 
         it "create responce is 400 without RequirementTime data" do
-          new_parking = FactoryBot.build(:parking)
           post dokotomeyo_confirm_path, params: {
             post_parking: {
               requirement_type: "time",
