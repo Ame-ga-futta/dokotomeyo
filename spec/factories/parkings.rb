@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :parking do
+    id                      { 1 }
     name                    { "parking" }
     address                 { "parking" }
     latitude                { 1.5 }

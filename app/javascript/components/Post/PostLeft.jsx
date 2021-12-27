@@ -1,25 +1,44 @@
+import axios from "axios";
 import React from "react";
 import styled from 'styled-components';
+import Requirements from "./Requirements";
 
 const PostLeft = (props) => {
   const {
-    address,
-    name,
-    setName,
-    latitude,
-    longitude,
-    beginning_of_worktime,
-    setBeginning_of_worktime,
-    end_of_worktime,
-    setEnd_of_worktime,
+    parking,
+    setParking,
     setOpenConfirm,
     errors,
-    setMapCenter
+    setErrors,
+    setMapCenter,
+    type,
+    setType,
+    requirement,
+    setRequirement
   } = props;
 
   const Confilm = (event) => {
-    setOpenConfirm(true);
-    setMapCenter({ lat: latitude, lng: longitude });
+    setMapCenter({ lat: parking.latitude, lng: parking.longitude });
+    axios.post('/dokotomeyo/confirm', {
+      post_parking: {
+        requirement_type: type,
+        parking: parking,
+        requirement: requirement
+      }
+    })
+    .then((response) => {
+      switch (response.data.status){
+        case 200:
+          setOpenConfirm(true);
+          break;
+        case 400:
+          setErrors(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      setErrors("通信に失敗しました 最初からやり直してください");
+    })
     event.preventDefault();
   }
 
@@ -35,45 +54,50 @@ const PostLeft = (props) => {
           })}
         </SError_container>
       </SPost_title_container>
-      <SPost_form_container onSubmit={Confilm}>
+      <SPost_form_container>
         <SPost_form_box>
-          <li>
-            <SText_label>住所</SText_label>
-            <SText_address>{address}</SText_address>
-          </li>
-          <li>
-            <SPost_container_notice>
-              画面右の地図をクリックするか、地図上部の検索ボックスで<br />場所を入力すると、住所が入力されます。
-            </SPost_container_notice>
-          </li>
-          <li>
-            <SText_label>駐車場名</SText_label>
-            <SText_field
-              type="text"
-              name="name"
-              value={name}
-              onChange={event => setName(event.target.value)}
-            />
-          </li>
-          <li>
-            <SText_label>営業時間</SText_label>
-            <STime_field_container>
-              <STime_field
-                type="time"
-                name="beginning_of_worktime"
-                value={beginning_of_worktime}
-                onChange={event => setBeginning_of_worktime(event.target.value)}
-              />
-              <p>〜</p>
-              <STime_field
-                type="time"
-                name="end_of_worktime"
-                value={end_of_worktime}
-                onChange={event => setEnd_of_worktime(event.target.value)}
-              />
-            </STime_field_container>
-          </li>
-          <SText_submit>登録</SText_submit>
+          <form onSubmit={Confilm}>
+            <SPost_form_ul>
+              <li>
+                <SText_label>住所</SText_label>
+                <SText_address>{parking.address}</SText_address>
+              </li>
+              <li>
+                <SPost_container_notice>
+                  画面右の地図をクリックするか、地図上部の検索ボックスで<br />場所を入力すると、住所が入力されます。
+                </SPost_container_notice>
+              </li>
+              <li>
+                <SText_label>駐車場名</SText_label>
+                <SText_field
+                  type="text"
+                  name="name"
+                  value={parking.name}
+                  onChange={event => setParking({...parking, name: event.target.value})}
+                />
+              </li>
+              <li>
+                <SText_label>営業時間</SText_label>
+                <STime_field_container>
+                  <STime_field
+                    type="time"
+                    name="beginning_of_worktime"
+                    value={parking.beginning_of_worktime}
+                    onChange={event => setParking({...parking, beginning_of_worktime: event.target.value})}
+                  />
+                  <p>〜</p>
+                  <STime_field
+                    type="time"
+                    name="end_of_worktime"
+                    value={parking.end_of_worktime}
+                    onChange={event => setParking({...parking, end_of_worktime: event.target.value})}
+                  />
+                </STime_field_container>
+              </li>
+              <SText_submit>登録</SText_submit>
+            </SPost_form_ul>
+          </form>
+          <Requirements type={type} setType={setType} requirement={requirement} setRequirement={setRequirement} />
         </SPost_form_box>
         <SPost_form_text>
           なるべく正確な情報を入力してください。
@@ -112,21 +136,25 @@ const SError = styled.p`
   padding: 4px;
 `;
 
-const SPost_form_container = styled.form`
+const SPost_form_container = styled.div`
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const SPost_form_box = styled.ul`
+const SPost_form_box = styled.div`
   background-color: rgb(235, 235, 235);
   border-radius: 15px;
   font-size: 18px;
-  display: flex;
-  flex-direction: column;
   width: 80%;
   padding: 30px;
   margin-bottom: 15px;
+`;
+
+const SPost_form_ul = styled.ul`
+  display: flex;
+  flex-direction: column;
   li {
     margin: 10px;
     display: flex;
@@ -137,7 +165,6 @@ const SPost_form_box = styled.ul`
 
 const SText_label = styled.label`
   width: 30%;
-  border-radius: 3px;
 `;
 
 const SText_address = styled.p`

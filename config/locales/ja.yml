@@ -3,6 +3,10 @@ ja:
     models:
       user: ユーザー
       parking: 駐車場
+      requirement_buy: "無料の条件: 買い物金額一定以上で無料"
+      requirement_facility: "無料の条件: 施設利用で無料"
+      requirement_free: "無料の条件: 終日無料"
+      requirement_time: "無料の条件: 入庫後一定時間無料"
     attributes:
       user:
         name: ユーザーネーム
@@ -16,6 +20,24 @@ ja:
         longitude: 経度
         beginning_of_worktime: 営業開始時間
         end_of_worktime: 営業終了時間
+      requirement_buy:
+        parking_id: 駐車場ID
+        facility_name: 施設名
+        purchase_price: 購入金額
+        free_time: 無料時間
+        only_weekdays: 平日のみ
+      requirement_facility:
+        parking_id: 駐車場ID
+        facility_name: 施設名
+        free_time: 無料時間
+        only_weekdays: 平日のみ
+      requirement_free:
+        parking_id: 駐車場ID
+        only_weekdays: 平日のみ
+      requirement_time:
+        parking_id: 駐車場ID
+        free_time: 無料時間
+        only_weekdays: 平日のみ
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

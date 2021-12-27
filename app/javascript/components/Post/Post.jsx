@@ -10,47 +10,45 @@ const Post = memo((props) => {
 
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
-  const [address, setAddress] = useState("");
-  const [name, setName] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [beginning_of_worktime, setBeginning_of_worktime] = useState("");
-  const [end_of_worktime, setEnd_of_worktime] = useState("");
+  const [parking, setParking] = useState({
+    name: "",
+    address: "",
+    latitude: 35.681454048919186,
+    longitude: 139.76707115336345,
+    beginning_of_worktime: "",
+    end_of_worktime: ""
+  });
+  const [type, setType] = useState("free");
+  const [requirement, setRequirement] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState([]);
   const [mapCenter, setMapCenter] = useState({lat: 35.681454048919186, lng: 139.76707115336345});
 
   return (
     <SPost_container>
       <LoadScript googleMapsApiKey={API_KEY}>
         <PostLeft
-          address={address}
-          name={name}
-          setName={setName}
-          latitude={latitude}
-          longitude={longitude}
-          beginning_of_worktime={beginning_of_worktime}
-          setBeginning_of_worktime={setBeginning_of_worktime}
-          end_of_worktime={end_of_worktime}
-          setEnd_of_worktime={setEnd_of_worktime}
+          parking={parking}
+          setParking={setParking}
           setOpenConfirm={setOpenConfirm}
           errors={errors}
+          setErrors={setErrors}
           setMapCenter={setMapCenter}
+          type={type}
+          setType={setType}
+          requirement={requirement}
+          setRequirement={setRequirement}
         />
         <PostRight
-          setAddress={setAddress}
-          setLatitude={setLatitude}
-          setLongitude={setLongitude}
+          parking={parking}
+          setParking={setParking}
           mapCenter={mapCenter}
           setMapCenter={setMapCenter}
         />
         <PostConfirm
-          address={address}
-          name={name}
-          latitude={latitude}
-          longitude={longitude}
-          beginning_of_worktime={beginning_of_worktime}
-          end_of_worktime={end_of_worktime}
+          parking={parking}
+          type={type}
+          requirement={requirement}
           openconfirm={openconfirm}
           setOpenConfirm={setOpenConfirm}
           setErrors={setErrors}
