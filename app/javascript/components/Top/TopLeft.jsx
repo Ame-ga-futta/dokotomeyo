@@ -1,12 +1,20 @@
 import React from "react";
 import styled from 'styled-components';
+import TopSearchForm from "./TopSearchForm";
+import TopSearchResults from "./TopSearchResults";
 
-const TopLeft = () => {
-
+const TopLeft = (props) => {
+  const {
+    narrowDown,
+    setNarrowDown,
+    mapCenter,
+    setMapCenter
+  } = props;
 
   return (
     <STop_left>
-      <p>入力フォームと検索結果</p>
+      <TopSearchForm narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} />
+      <TopSearchResults />
     </STop_left>
   );
 };
@@ -14,6 +22,9 @@ const TopLeft = () => {
 const STop_left = styled.div`
   width: 40%;
   background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default TopLeft;
