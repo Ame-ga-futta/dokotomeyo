@@ -8,12 +8,13 @@ const TopLeft = (props) => {
     narrowDown,
     setNarrowDown,
     mapCenter,
-    setMapCenter
+    setMapCenter,
+    bookFlashMessage
   } = props;
 
   return (
     <STop_left>
-      <TopSearchForm narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} />
+      <TopSearchForm narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} />
       <TopSearchResults />
     </STop_left>
   );

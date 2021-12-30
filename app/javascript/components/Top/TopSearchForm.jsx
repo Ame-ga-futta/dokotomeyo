@@ -7,7 +7,8 @@ const TopSearchForm = (props) => {
     narrowDown,
     setNarrowDown,
     mapCenter,
-    setMapCenter
+    setMapCenter,
+    bookFlashMessage
   } = props;
 
   const geocoder = new window.google.maps.Geocoder();
@@ -24,8 +25,19 @@ const TopSearchForm = (props) => {
         narrowDown: narrowDown
       }
     })
-    .then(() => {})
-    .catch(() => {})
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          console.log(response.data.parkings);
+          break;
+        case 400:
+          bookFlashMessage(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      bookFlashMessage("通信に失敗しました 最初からやり直してください");
+    })
     event.preventDefault();
   }
 

@@ -41,6 +41,25 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
+  def search
+    if validate_search then
+      time = Time.parse(search_params[:narrowDown][:start_time]) - Time.parse(search_params[:narrowDown][:end_time])
+      if time <= 0
+        render json: { status: 200, parkings: [
+          Time.parse(search_params[:narrowDown][:start_time]),
+          Time.parse(search_params[:narrowDown][:end_time]),
+          (Time.parse(search_params[:narrowDown][:end_time]) - Time.parse(search_params[:narrowDown][:start_time])) / 3600
+        ] }
+      else time >= 0
+        render json: { status: 200, parkings: [
+          Time.parse(search_params[:narrowDown][:start_time]),
+          Time.parse(search_params[:narrowDown][:end_time]).tomorrow,
+          (Time.parse(search_params[:narrowDown][:end_time]).tomorrow - Time.parse(search_params[:narrowDown][:start_time])) / 3600
+        ] }
+      end
+    end
+  end
+
   private
 
   def create_params
@@ -53,5 +72,28 @@ class Dokotomeyo::ParkingsController < ApplicationController
         :facility_name, :purchase_price, :free_time, :only_weekdays,
       ]
     )
+  end
+
+  def search_params
+    params.require(:search_parking).permit(
+      mapCenter: [
+        :lat, :lng,
+      ],
+      narrowDown: [
+        :place, :start_time, :end_time, :include_time, :include_buy, :include_facility,
+      ]
+    )
+  end
+
+  def validate_search
+    if search_params[:narrowDown][:place] == "" || search_params[:narrowDown][:start_time] == "" || search_params[:narrowDown][:end_time] == "" then
+      render json: { status: 400, message: "必要な情報を入力してください" }
+      return false
+    elsif search_params[:narrowDown][:start_time] == search_params[:narrowDown][:end_time] then
+      render json: { status: 400, message: "入庫時刻と出庫時刻は、同じ時間にできません" }
+      return false
+    else
+      return true
+    end
   end
 end

@@ -6,7 +6,10 @@ import TopLeft from "./TopLeft";
 import TopRight from "./TopRight";
 
 const Top = (props) => {
-  const { flashMessage } = props;
+  const {
+    flashMessage,
+    bookFlashMessage
+  } = props;
 
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
@@ -28,7 +31,7 @@ const Top = (props) => {
       {flashMessage && <Flash message={flashMessage}/>}
       <LoadScript googleMapsApiKey={API_KEY}>
         <SSearch_container>
-          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} />
+          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} />
           <TopRight mapCenter={mapCenter} />
         </SSearch_container>
       </LoadScript>
