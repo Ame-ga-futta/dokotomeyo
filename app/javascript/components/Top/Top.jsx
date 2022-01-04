@@ -19,8 +19,8 @@ const Top = (props) => {
   });
   const [narrowDown, setNarrowDown] = useState({
     place: "",
-    start_time: "",
-    end_time: "",
+    start_date: new Date(),
+    end_date: new Date() + 1000*60*60*3,
     include_time: true,
     include_buy: false,
     include_facility: false
