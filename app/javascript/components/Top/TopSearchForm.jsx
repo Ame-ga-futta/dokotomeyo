@@ -78,7 +78,7 @@ const TopSearchForm = (props) => {
               <li>
                 <STop_Search_time_container>
                   <STop_Search_label>入庫</STop_Search_label>
-                  <STop_Search_time
+                  <STop_Search_date
                     type="date"
                     name="start_date"
                     value={inputDate}
@@ -90,7 +90,11 @@ const TopSearchForm = (props) => {
                     value={inputStartTime}
                     onChange={event  => setInputStartTime(event.target.value)}
                   />
-                  <STop_Search_label>〜</STop_Search_label>
+                </STop_Search_time_container>
+              </li>
+
+              <li>
+                <STop_Search_time_container>
                   <STop_Search_label>出庫</STop_Search_label>
                   <STop_Search_time
                     type="time"
@@ -174,7 +178,7 @@ const STop_SearchForm_container_input_ul = styled.ul`
 const STop_Search_field = styled.input`
   width: 100%;
   border-bottom: solid 1px gray;
-  padding: 10px;
+  padding: 8px;
   margin: 5px 0;
 `;
 
@@ -190,10 +194,17 @@ const STop_Search_label = styled.label`
   margin: 0 10px;
 `;
 
+const STop_Search_date = styled.input`
+  width: 50%;
+  border-bottom: solid 1px gray;
+  padding: 6px;
+  text-align: center;
+`;
+
 const STop_Search_time = styled.input`
   width: 30%;
   border-bottom: solid 1px gray;
-  padding: 10px;
+  padding: 6px;
   text-align: center;
 `;
 

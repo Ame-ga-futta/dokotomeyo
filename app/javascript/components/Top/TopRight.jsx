@@ -17,7 +17,7 @@ const TopRight = (props) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={mapCenter}
-        zoom={17}
+        zoom={16}
       >
         <Marker position={mapCenter} />
       </GoogleMap>
