@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import moment from 'moment'
 import axios from 'axios';
 
 const TopSearchForm = (props) => {
@@ -12,20 +13,20 @@ const TopSearchForm = (props) => {
   } = props;
 
   const [inputDate, setInputDate] = useState(
-    narrowDown.start_date.getFullYear() + "-" + ("00" + narrowDown.start_date.getMonth() + 1).slice(-2) + "-" + ("00" + narrowDown.start_date.getDate()).slice(-2)
+    narrowDown.start_date.year() + "-" + narrowDown.start_date.month()+1 + "-" + ("00" + narrowDown.start_date.date()).slice(-2)
   );
   const [inputStartTime, setInputStartTime] = useState(
-    ("00" + narrowDown.start_date.getHours()).slice(-2) + ":" + ("00" + narrowDown.start_date.getMinutes()).slice(-2)
+    ("00" + narrowDown.start_date.hours()).slice(-2) + ":" + ("00" + narrowDown.start_date.minute()).slice(-2)
   );
   const [inputEndTime, setInputEndTime] = useState(
-    ("00" + (narrowDown.start_date.getHours() +3)).slice(-2) + ":" + ("00" + narrowDown.start_date.getMinutes()).slice(-2)
+    ("00" + narrowDown.end_date.hours()).slice(-2) + ":" + ("00" + narrowDown.end_date.minute()).slice(-2)
   );
 
   useEffect(() => {
     setNarrowDown({
       ...narrowDown,
-      start_date: new Date(`${inputDate} ${inputStartTime}`),
-      end_date: new Date(`${inputDate} ${inputEndTime}`)
+      start_date: moment(`${inputDate} ${inputStartTime}`),
+      end_date: moment(`${inputDate} ${inputEndTime}`)
     });
   }, [inputDate, inputStartTime, inputEndTime])
 
@@ -81,17 +82,13 @@ const TopSearchForm = (props) => {
                     type="date"
                     name="start_date"
                     value={inputDate}
-                    onChange={event => {
-                      setInputDate(event.target.value);
-                    }}
+                    onChange={event  => setInputDate(event.target.value)}
                   />
                   <STop_Search_time
                     type="time"
                     name="start_time"
                     value={inputStartTime}
-                    onChange={event => {
-                      setInputStartTime(event.target.value);
-                    }}
+                    onChange={event  => setInputStartTime(event.target.value)}
                   />
                   <STop_Search_label>〜</STop_Search_label>
                   <STop_Search_label>出庫</STop_Search_label>
@@ -99,9 +96,7 @@ const TopSearchForm = (props) => {
                     type="time"
                     name="end_time"
                     value={inputEndTime}
-                    onChange={event => {
-                      setInputEndTime(event.target.value);
-                    }}
+                    onChange={event  => setInputEndTime(event.target.value)}
                   />
                 </STop_Search_time_container>
               </li>

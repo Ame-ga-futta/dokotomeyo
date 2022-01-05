@@ -53,7 +53,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
       else time >= 0
         render json: { status: 200, parkings: [
           Time.parse(search_params[:narrowDown][:start_date]).in_time_zone('Tokyo'),
-          Time.parse(search_params[:narrowDown][:end_date]).in_time_zone('Tokyo'),
+          Time.parse(search_params[:narrowDown][:end_date]).tomorrow.in_time_zone('Tokyo'),
           (Time.parse(search_params[:narrowDown][:end_date]).tomorrow - Time.parse(search_params[:narrowDown][:start_date])) / 3600
         ] }
       end

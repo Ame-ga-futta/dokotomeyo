@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import moment from 'moment'
 import { LoadScript } from "@react-google-maps/api";
 import Flash from './Flash';
 import TopLeft from "./TopLeft";
@@ -19,8 +20,8 @@ const Top = (props) => {
   });
   const [narrowDown, setNarrowDown] = useState({
     place: "",
-    start_date: new Date(),
-    end_date: new Date() + 1000*60*60*3,
+    start_date: moment(),
+    end_date: moment().add(3, 'hours'),
     include_time: true,
     include_buy: false,
     include_facility: false
