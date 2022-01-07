@@ -12,8 +12,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "",
-                  start_time: "17:00:00",
-                  end_time: "20:00:00",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "2022-01-01 20:00:00",
                   include_time: true,
                   include_buy: true,
                   include_facility: true,
@@ -34,8 +34,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "",
-                  end_time: "20:00:00",
+                  start_date: "",
+                  end_date: "2022-01-01 20:00:00",
                   include_time: true,
                   include_buy: true,
                   include_facility: true,
@@ -56,8 +56,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "17:00:00",
-                  end_time: "",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "",
                   include_time: true,
                   include_buy: true,
                   include_facility: true,
@@ -78,8 +78,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "17:00:00",
-                  end_time: "17:00:00",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "2022-01-01 17:00:00",
                   include_time: true,
                   include_buy: true,
                   include_facility: true,
@@ -104,8 +104,8 @@ RSpec.describe "Parkings_post", type: :request do
               },
               narrowDown: {
                 place: "sample",
-                start_time: "17:00:00",
-                end_time: "20:00:00",
+                start_date: "2022-01-01 17:00:00",
+                end_date: "2022-01-01 20:00:00",
                 include_time: true,
                 include_buy: true,
                 include_facility: true,
@@ -143,8 +143,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "17:00:00",
-                  end_time: "20:00:00",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "2022-01-01 20:00:00",
                   include_time: true,
                   include_buy: true,
                   include_facility: true,
@@ -168,8 +168,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "17:00:00",
-                  end_time: "20:00:00",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "2022-01-01 20:00:00",
                   include_time: false,
                   include_buy: true,
                   include_facility: false,
@@ -199,8 +199,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "17:00:00",
-                  end_time: "20:00:00",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "2022-01-01 20:00:00",
                   include_time: false,
                   include_buy: false,
                   include_facility: true,
@@ -230,8 +230,8 @@ RSpec.describe "Parkings_post", type: :request do
                 },
                 narrowDown: {
                   place: "sample",
-                  start_time: "17:00:00",
-                  end_time: "20:00:00",
+                  start_date: "2022-01-01 17:00:00",
+                  end_date: "2022-01-01 20:00:00",
                   include_time: true,
                   include_buy: false,
                   include_facility: false,
@@ -246,8 +246,8 @@ RSpec.describe "Parkings_post", type: :request do
           end
 
           it "Parking not including RequirementTime is hidden" do
-            expect(JSON.parse(response.body)["parkings"]).to include parking_requirementBuy
-            expect(JSON.parse(response.body)["parkings"]).to include parking_requirementFacility
+            expect(JSON.parse(response.body)["parkings"]).not_to include parking_requirementBuy
+            expect(JSON.parse(response.body)["parkings"]).not_to include parking_requirementFacility
           end
         end
       end
