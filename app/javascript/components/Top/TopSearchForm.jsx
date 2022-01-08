@@ -7,7 +7,6 @@ const TopSearchForm = (props) => {
   const {
     narrowDown,
     setNarrowDown,
-    mapCenter,
     setMapCenter,
     bookFlashMessage
   } = props;
@@ -35,28 +34,29 @@ const TopSearchForm = (props) => {
   const ParkingSearch = (event) => {
     geocoder.geocode({ address: narrowDown.place }, ( results, status ) => {
       if (status === 'OK') {
-        setMapCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
+        const new_mapCenter = { lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() };
+        setMapCenter(new_mapCenter);
+        axios.post('/dokotomeyo/search', {
+          search_parking: {
+            mapCenter: new_mapCenter,
+            narrowDown: narrowDown
+          }
+        })
+        .then((response) => {
+          switch (response.data.status) {
+            case 200:
+              console.log(response.data.parkings);
+              break;
+            case 400:
+              bookFlashMessage(response.data.message);
+              break;
+          }
+        })
+        .catch(() => {
+          bookFlashMessage("通信に失敗しました 最初からやり直してください");
+        })
       }
     });
-    axios.post('/dokotomeyo/search', {
-      search_parking: {
-        mapCenter: mapCenter,
-        narrowDown: narrowDown
-      }
-    })
-    .then((response) => {
-      switch (response.data.status) {
-        case 200:
-          console.log(response.data.parkings);
-          break;
-        case 400:
-          bookFlashMessage(response.data.message);
-          break;
-      }
-    })
-    .catch(() => {
-      bookFlashMessage("通信に失敗しました 最初からやり直してください");
-    })
     event.preventDefault();
   }
 
