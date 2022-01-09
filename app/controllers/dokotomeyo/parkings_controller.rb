@@ -48,35 +48,13 @@ class Dokotomeyo::ParkingsController < ApplicationController
       north_end = search_params[:mapCenter][:lat] + 0.009
       west_end = search_params[:mapCenter][:lng] - 0.011
       east_end = search_params[:mapCenter][:lng] + 0.011
-      if time_limit <= 0
-        @parkings = Parking.where(
-          "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
-          south_end, north_end, west_end, east_end,
-        )
-        @parkings_no = Parking.where.not(
-          "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
-          south_end, north_end, west_end, east_end,
-        )
-        render json: { status: 200, parkings: [
-          @parkings,
-          @parkings_no,
-          (Time.parse(search_params[:narrowDown][:end_date]) - Time.parse(search_params[:narrowDown][:start_date])) / 3600
-        ] }
-      else time_limit >= 0
-        @parkings = Parking.where(
-          "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
-          south_end, north_end, west_end, east_end,
-        )
-        @parkings_no = Parking.where.not(
-          "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
-          south_end, north_end, west_end, east_end,
-        )
-        render json: { status: 200, parkings: [
-          @parkings,
-          @parkings_no,
-          (Time.parse(search_params[:narrowDown][:end_date]).tomorrow - Time.parse(search_params[:narrowDown][:start_date])) / 3600
-        ] }
-      end
+
+      @parkings = Parking.search_in_bounds(south_end, north_end, west_end, east_end)
+      @parkings_no = Parking.search_out_bounds(south_end, north_end, west_end, east_end)
+      render json: { status: 200, parkings: [
+        @parkings,
+        @parkings_no,
+      ] }
     end
   end
 

@@ -11,6 +11,20 @@ class Parking < ApplicationRecord
   has_many :requirement_frees, dependent: :destroy
   has_many :requirement_times, dependent: :destroy
 
+  scope :search_in_bounds, -> (south_end, north_end, west_end, east_end) do
+    where(
+      "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
+      south_end, north_end, west_end, east_end
+    )
+  end
+
+  scope :search_out_bounds, -> (south_end, north_end, west_end, east_end) do
+    where.not(
+      "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
+      south_end, north_end, west_end, east_end
+    )
+  end
+
   def time_lag_check
     if beginning_of_worktime.blank? || end_of_worktime.blank?
       errors[:base] << "営業時間を入力してください"
