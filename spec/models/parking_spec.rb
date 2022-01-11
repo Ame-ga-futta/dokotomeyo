@@ -50,7 +50,7 @@ RSpec.describe Parking, type: :model do
 
     context "end_of_worktime is after beginning_of_worktime" do
       it "is valid after beginning_of_worktime" do
-        expect(build(:parking, beginning_of_worktime: "08:00:00", end_of_worktime: "03:00:00")).not_to be_valid
+        expect(build(:parking, beginning_of_worktime: "08:00:00", end_of_worktime: "03:00:00")).to be_valid
       end
     end
   end

@@ -94,6 +94,11 @@ const PostLeft = (props) => {
                   />
                 </STime_field_container>
               </li>
+              <li>
+                <SPost_container_notice>
+                  営業終了時間が日付を跨ぐ場合は、翌日の時間で入力してください。<br />24時間営業の場合は 0:00 ~ 23:59 で入力してください。
+                </SPost_container_notice>
+              </li>
               <SText_submit>登録</SText_submit>
             </SPost_form_ul>
           </form>
