@@ -11,20 +11,6 @@ class Parking < ApplicationRecord
   has_many :requirement_frees, dependent: :destroy
   has_many :requirement_times, dependent: :destroy
 
-  scope :search_in_bounds, -> (south_end, north_end, west_end, east_end) do
-    where(
-      "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
-      south_end, north_end, west_end, east_end
-    )
-  end
-
-  scope :search_out_bounds, -> (south_end, north_end, west_end, east_end) do
-    where.not(
-      "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
-      south_end, north_end, west_end, east_end
-    )
-  end
-
   def time_lag_check
     if beginning_of_worktime.blank? || end_of_worktime.blank?
       errors[:base] << "営業時間を入力してください"
@@ -40,5 +26,29 @@ class Parking < ApplicationRecord
     errors.messages.delete(:requirement_facilities)
     errors.messages.delete(:requirement_frees)
     errors.messages.delete(:requirement_times)
+  end
+
+  scope :search_in_bounds, -> (south_end, north_end, west_end, east_end) do
+    where(
+      "latitude > ? and latitude < ? and longitude > ? and longitude < ?",
+      south_end, north_end, west_end, east_end
+    )
+  end
+
+  scope :search_in_worktime, -> (start_time, end_time) do
+    if start_time < end_time
+      where(
+        "beginning_of_worktime <= ? and end_of_worktime > ?",
+        start_time, end_time
+      )
+    else
+      where(
+        "beginning_of_worktime <= ? and end_of_worktime >= ?",
+        start_time, end_time
+      ).where(
+        "beginning_of_worktime > end_of_worktime or (beginning_of_worktime = ? and  end_of_worktime = ?)",
+        "00:00", "23:59"
+      )
+    end
   end
 end
