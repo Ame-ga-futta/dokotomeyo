@@ -49,4 +49,26 @@ class Parking < ApplicationRecord
       )
     end
   end
+
+  scope :only_weekdays, -> (start_time, end_time) do
+    unless start_time || end_time then
+      includes(
+        :requirement_buys,
+        :requirement_facilities,
+        :requirement_frees,
+        :requirement_times
+      ).where(
+        "requirement_buys.only_weekdays = false or
+        requirement_facilities.only_weekdays = false or
+        requirement_frees.only_weekdays = false or
+        requirement_times.only_weekdays = false
+        "
+      ).references(
+        :requirement_buys,
+        :requirement_facilities,
+        :requirement_frees,
+        :requirement_times
+      )
+    end
+  end
 end

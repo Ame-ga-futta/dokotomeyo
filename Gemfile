@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rails-i18n'
   gem 'database_cleaner'
   gem 'dotenv-rails'
+  gem 'holiday_japan'
 end
 
 group :development do

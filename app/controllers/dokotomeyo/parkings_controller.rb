@@ -50,14 +50,14 @@ class Dokotomeyo::ParkingsController < ApplicationController
       east_end = search_params[:mapCenter][:lng] + 0.011
 
       if time_limit < 0
-        start_date = Time.parse(search_params[:narrowDown][:start_date]).in_time_zone('Tokyo')
-        end_date = (Time.parse(search_params[:narrowDown][:start_date]) - time_limit).in_time_zone('Tokyo')
+        start_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo')
+        end_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo') - time_limit
       else
-        start_date = Time.parse(search_params[:narrowDown][:start_date]).in_time_zone('Tokyo')
-        end_date = (Time.parse(search_params[:narrowDown][:start_date]) - time_limit).tomorrow.in_time_zone('Tokyo')
+        start_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo')
+        end_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo').tomorrow - time_limit
       end
 
-      @parkings = Parking.search_in_worktime(start_date.strftime("%T"), end_date.strftime("%T"))
+      @parkings = Parking.only_weekdays(weekday_check(start_time), weekday_check(end_time))
 
       render json: { status: 200, parkings: [
         @parkings,
@@ -100,5 +100,10 @@ class Dokotomeyo::ParkingsController < ApplicationController
     else
       return true
     end
+  end
+
+  def weekday_check(time)
+    return false if HolidayJapan.check(time.to_date) || time.saturday? || time.sunday?
+    true
   end
 end
