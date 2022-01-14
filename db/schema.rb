@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_08_074401) do
+ActiveRecord::Schema.define(version: 2022_01_14_032105) do
 
   create_table "parkings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2022_01_08_074401) do
     t.integer "parking_id"
     t.string "facility_name"
     t.integer "purchase_price"
-    t.time "free_time"
+    t.string "free_time"
     t.boolean "only_weekdays"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2022_01_08_074401) do
   create_table "requirement_facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "parking_id"
     t.string "facility_name"
-    t.time "free_time"
+    t.string "free_time"
     t.boolean "only_weekdays"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2022_01_08_074401) do
 
   create_table "requirement_times", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "parking_id"
-    t.time "free_time"
+    t.string "free_time"
     t.boolean "only_weekdays"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
