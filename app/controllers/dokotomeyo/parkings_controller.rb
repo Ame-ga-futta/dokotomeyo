@@ -57,7 +57,29 @@ class Dokotomeyo::ParkingsController < ApplicationController
         end_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo').tomorrow - time_limit
       end
 
-      @parkings = Parking.only_weekdays(weekday_check(start_time), weekday_check(end_time))
+      requirements = [:requirement_frees]
+      requirements.push(:requirement_buys) if search_params[:narrowDown][:include_buy]
+      requirements.push(:requirement_facilities) if search_params[:narrowDown][:include_facility]
+      requirements.push(:requirement_times) if search_params[:narrowDown][:include_time]
+
+      @parkings = Parking.includes_requirement(requirements).search_requirement_frees(weekday_check(start_time, end_time))
+      if search_params[:narrowDown][:include_buy] then
+        @parkings = @parkings.or(
+          Parking.includes_requirement(requirements).search_requirement_buys(weekday_check(start_time, end_time), time_limit)
+        )
+      end
+
+      if search_params[:narrowDown][:include_facility] then
+        @parkings = @parkings.or(
+          Parking.includes_requirement(requirements).search_requirement_facilities(weekday_check(start_time, end_time), time_limit)
+        )
+      end
+
+      if search_params[:narrowDown][:include_time] then
+        @parkings = @parkings.or(
+          Parking.includes_requirement(requirements).search_requirement_times(weekday_check(start_time, end_time), time_limit)
+        )
+      end
 
       render json: { status: 200, parkings: [
         @parkings,
@@ -102,8 +124,9 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
-  def weekday_check(time)
-    return false if HolidayJapan.check(time.to_date) || time.saturday? || time.sunday?
+  def weekday_check(start_time, end_time)
+    return false if HolidayJapan.check(start_time.to_date) || start_time.saturday? || start_time.sunday?
+    return false if HolidayJapan.check(end_time.to_date) || end_time.saturday? || end_time.sunday?
     true
   end
 end

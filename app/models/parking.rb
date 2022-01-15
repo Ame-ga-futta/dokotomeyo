@@ -50,32 +50,28 @@ class Parking < ApplicationRecord
     end
   end
 
+  scope :includes_requirement, -> (requirements) { includes(requirements) }
+
   scope :search_requirement_buys, -> (weekday, time_limit) do
-    includes(
-      :requirement_buys
-    ).where(
+    where(
       "requirement_buys.#{weekday ? "id IS NOT NULL" : "only_weekdays = false"} and
-      requirement_buys.free_time >= ?", Time.at(time_limit.abs).utc.strftime('%X')
+      requirement_buys.free_time >= ?", Time.at(time_limit.abs).utc.strftime('%H:%M')
     ).references(
       :requirement_buys
     )
   end
 
   scope :search_requirement_facilities, -> (weekday, time_limit) do
-    includes(
-      :requirement_facilities
-    ).where(
+    where(
       "requirement_facilities.#{weekday ? "id IS NOT NULL" : "only_weekdays = false"} and
-      requirement_facilities.free_time >= ?", Time.at(time_limit.abs).utc.strftime('%X')
+      requirement_facilities.free_time >= ?", Time.at(time_limit.abs).utc.strftime('%H:%M')
     ).references(
       :requirement_facilities
     )
   end
 
   scope :search_requirement_frees, -> (weekday) do
-    includes(
-      :requirement_frees
-    ).where(
+    where(
       "requirement_frees.#{weekday ? "id IS NOT NULL" : "only_weekdays = false"}"
     ).references(
       :requirement_frees
@@ -83,11 +79,9 @@ class Parking < ApplicationRecord
   end
 
   scope :search_requirement_times, -> (weekday, time_limit) do
-    includes(
-      :requirement_times
-    ).where(
+    where(
       "requirement_times.#{weekday ? "id IS NOT NULL" : "only_weekdays = false"} and
-      requirement_times.free_time >= ?", Time.at(time_limit.abs).utc.strftime('%X')
+      requirement_times.free_time >= ?", Time.at(time_limit.abs).utc.strftime('%H:%M')
     ).references(
       :requirement_times
     )
