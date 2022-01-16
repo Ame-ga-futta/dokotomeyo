@@ -104,7 +104,7 @@ const PostConfirm = (props) => {
           <li>
             <SPostConfirm_contents_title>営業時間</SPostConfirm_contents_title>
             <SPostConfirm_contents_text>
-              {parking.beginning_of_worktime.replace(/^0+/, '')}〜{parking.end_of_worktime.replace(/^0+/, '')}
+              {parking.beginning_of_worktime}〜{parking.end_of_worktime}
             </SPostConfirm_contents_text>
           </li>
           {FormatSentence()}
