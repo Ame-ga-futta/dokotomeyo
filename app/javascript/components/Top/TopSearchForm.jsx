@@ -56,6 +56,8 @@ const TopSearchForm = (props) => {
           bookFlashMessage("通信に失敗しました 最初からやり直してください");
         })
       }
+      else
+        bookFlashMessage("必要な情報を入力してください")
     });
     event.preventDefault();
   }
