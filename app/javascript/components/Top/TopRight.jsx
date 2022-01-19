@@ -4,7 +4,9 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 
 const TopRight = (props) => {
   const {
-    mapCenter
+    mapCenter,
+    parkings,
+    Highlight
   } = props;
 
   const containerStyle = {
@@ -17,9 +19,20 @@ const TopRight = (props) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={mapCenter}
-        zoom={16}
+        zoom={15}
       >
-        <Marker position={mapCenter} />
+        <ul>
+          {parkings[0] && parkings[0].map((parking, i) => {
+            return (
+              <li key={i}>
+                <Marker
+                  position={{ lat: parking.latitude, lng: parking.longitude }}
+                  animation={Highlight === i && google.maps.Animation.BOUNCE}
+                />
+              </li>
+            )
+          })}
+        </ul>
       </GoogleMap>
     </STop_right>
   );

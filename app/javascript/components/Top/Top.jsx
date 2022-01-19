@@ -26,14 +26,16 @@ const Top = (props) => {
     include_buy: false,
     include_facility: false
   });
+  const [parkings, setParkings] = useState({})
+  const [Highlight, setHighlight] = useState("");
 
   return (
     <>
       {flashMessage && <Flash message={flashMessage}/>}
       <LoadScript googleMapsApiKey={API_KEY}>
         <SSearch_container>
-          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} />
-          <TopRight mapCenter={mapCenter} />
+          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} />
+          <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
         </SSearch_container>
       </LoadScript>
     </>

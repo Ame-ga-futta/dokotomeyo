@@ -8,7 +8,8 @@ const TopSearchForm = (props) => {
     narrowDown,
     setNarrowDown,
     setMapCenter,
-    bookFlashMessage
+    bookFlashMessage,
+    setParkings
   } = props;
 
   const [inputDate, setInputDate] = useState(
@@ -45,7 +46,7 @@ const TopSearchForm = (props) => {
         .then((response) => {
           switch (response.data.status) {
             case 200:
-              console.log(response.data.parkings);
+              setParkings(response.data.parkings);
               break;
             case 400:
               bookFlashMessage(response.data.message);
@@ -147,6 +148,7 @@ const TopSearchForm = (props) => {
 
 const STop_SearchFormWrapper = styled.div`
   width: 90%;
+  max-height: 40%;
 `;
 
 const STop_SearchForm_container = styled.div`
