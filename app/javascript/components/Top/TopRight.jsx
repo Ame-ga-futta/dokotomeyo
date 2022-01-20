@@ -14,6 +14,18 @@ const TopRight = (props) => {
     height: "calc(100vh - 80px )",
   };
 
+  const centerMarkerOptions = {
+    position: mapCenter,
+    icon: {
+      fillColor: "#009be8",
+      fillOpacity: 1,
+      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+      scale: 10,
+      strokeColor: "#ffffff",
+      strokeWeight: 1.4
+    }
+  }
+
   return (
     <STop_right>
       <GoogleMap
@@ -21,6 +33,7 @@ const TopRight = (props) => {
         center={mapCenter}
         zoom={15}
       >
+        <Marker options={centerMarkerOptions} />
         <ul>
           {parkings[0] && parkings[0].map((parking, i) => {
             return (
