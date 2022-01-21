@@ -89,8 +89,12 @@ class Dokotomeyo::ParkingsController < ApplicationController
         )
       end
 
+      sorted = @parkings.sort_by do |parking|
+        (parking[:latitude] - search_params[:mapCenter][:lat]).abs + (parking[:longitude] - search_params[:mapCenter][:lng]).abs
+      end
+
       render json: { status: 200, parkings: [
-        @parkings,
+        sorted,
       ] }
     end
   end
