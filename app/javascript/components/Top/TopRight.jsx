@@ -1,29 +1,52 @@
 import React from "react";
 import styled from 'styled-components';
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 
-const TopRight = () => {
-  const API_KEY = process.env.GOOGLE_MAP_API_KEY;
+const TopRight = (props) => {
+  const {
+    mapCenter,
+    parkings,
+    Highlight
+  } = props;
 
   const containerStyle = {
     width: "100%",
     height: "calc(100vh - 80px )",
   };
 
-  const center = {
-    lat: 35.68137561624836,
-    lng: 139.76711406870342,
-  };
+  const centerMarkerOptions = {
+    position: mapCenter,
+    icon: {
+      fillColor: "#009be8",
+      fillOpacity: 1,
+      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+      scale: 10,
+      strokeColor: "#ffffff",
+      strokeWeight: 1.4
+    }
+  }
 
   return (
     <STop_right>
-      <LoadScript googleMapsApiKey={API_KEY}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={17}
-        ></GoogleMap>
-      </LoadScript>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={mapCenter}
+        zoom={15}
+      >
+        <Marker options={centerMarkerOptions} />
+        <ul>
+          {parkings[0] && parkings[0].map((parking, i) => {
+            return (
+              <li key={i}>
+                <Marker
+                  position={{ lat: parking.latitude, lng: parking.longitude }}
+                  animation={Highlight === i && google.maps.Animation.BOUNCE}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      </GoogleMap>
     </STop_right>
   );
 };

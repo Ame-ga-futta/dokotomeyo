@@ -22,7 +22,7 @@ const Post = memo((props) => {
   const [requirement, setRequirement] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
   const [errors, setErrors] = useState([]);
-  const [mapCenter, setMapCenter] = useState({lat: 35.681454048919186, lng: 139.76707115336345});
+  const [mapCenter, setMapCenter] = useState({ lat: 35.681454048919186, lng: 139.76707115336345 });
 
   return (
     <SPost_container>
