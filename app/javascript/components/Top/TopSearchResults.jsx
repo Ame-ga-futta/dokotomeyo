@@ -6,7 +6,9 @@ const TopSearchResults = (props) => {
   const {
     mapCenter,
     parkings,
-    setHighlight
+    setHighlight,
+    setParking,
+    openHandle,
   } = props
 
   return (
@@ -16,7 +18,7 @@ const TopSearchResults = (props) => {
         {parkings[0] && parkings[0].map((parking, i) => {
           return (
             <li key={i}>
-              <TopSearchResult parking={parking} i={i} mapCenter={mapCenter} setHighlight={setHighlight} />
+              <TopSearchResult parking={parking} i={i} mapCenter={mapCenter} setHighlight={setHighlight} setParking={setParking} openHandle={openHandle} />
             </li>
           )
         })}

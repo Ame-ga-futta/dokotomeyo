@@ -12,13 +12,15 @@ const TopLeft = (props) => {
     bookFlashMessage,
     parkings,
     setParkings,
-    setHighlight
+    setHighlight,
+    setParking,
+    openHandle
   } = props;
 
   return (
     <STop_left>
       <TopSearchForm narrowDown={narrowDown} setNarrowDown={setNarrowDown} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} setParkings={setParkings} />
-      <TopSearchResults mapCenter={mapCenter} parkings={parkings} setHighlight={setHighlight} />
+      <TopSearchResults mapCenter={mapCenter} parkings={parkings} setHighlight={setHighlight} setParking={setParking} openHandle={openHandle} />
     </STop_left>
   );
 };
