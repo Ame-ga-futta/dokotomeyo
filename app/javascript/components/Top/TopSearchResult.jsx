@@ -7,8 +7,8 @@ const TopSearchResult = (props) => {
     i,
     mapCenter,
     setHighlight,
-    setParking,
-    openHandle
+    detail,
+    setDetail
   } = props;
 
   const [distance, setDistance] = useState("");
@@ -30,8 +30,7 @@ const TopSearchResult = (props) => {
   }, []);
 
   const selectParking = () => {
-    setParking(parking);
-    openHandle();
+    detail == parking.id ? setDetail("") : setDetail(parking.id);
   };
 
   return (

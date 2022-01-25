@@ -29,21 +29,18 @@ const Top = (props) => {
   });
   const [parkings, setParkings] = useState({})
   const [Highlight, setHighlight] = useState("");
-  const [parking, setParking] = useState("");
-  const [openDetail, setOpenDetail] = useState(false);
-
-  const openHandle = () => {
-    setOpenDetail(!openDetail);
-  };
+  const [detail, setDetail] = useState("");
 
   return (
     <>
       {flashMessage && <Flash message={flashMessage}/>}
       <LoadScript googleMapsApiKey={API_KEY}>
         <SSearch_container>
-          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} setParking={setParking} openHandle={openHandle} />
+          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
           <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
-          <ParkingDetail openDetail={openDetail} parking={parking} />
+          <TopDetail_container detail={detail}>
+            {detail == "" || <ParkingDetail detail={detail} />}
+          </TopDetail_container>
         </SSearch_container>
       </LoadScript>
     </>
@@ -53,6 +50,17 @@ const Top = (props) => {
 const SSearch_container = styled.div`
   display: flex;
   height: calc(100vh - 80px );
+`;
+
+const TopDetail_container = styled.div`
+  position: fixed;
+  z-index : 99993;
+  top  : 80px;
+  right : 0;
+  height: calc(100vh - 80px );
+  width: ${ props => props.detail == "" ? "0%" : "61%" };
+  transition : 0.3s ease-in-out;
+  background-color: #ffffff;
 `;
 
 export default Top;
