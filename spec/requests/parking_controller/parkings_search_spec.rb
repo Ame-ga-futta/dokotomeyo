@@ -1,4 +1,4 @@
-RSpec.describe "Parkings_post", type: :request do
+RSpec.describe "Parkings", type: :request do
   describe "POST" do
     context "search" do
       context "validate" do
@@ -252,7 +252,5 @@ RSpec.describe "Parkings_post", type: :request do
         end
       end
     end
-
-
   end
 end
