@@ -99,6 +99,27 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
+  def details
+    @parking = Parking.find(details_params[:parkingID])
+
+    render json: {
+      status: 200,
+      parking: @parking,
+      requirements_weekdays: {
+        requirement_buys: @parking.requirement_buys.where(only_weekdays: true),
+        requirement_facilities: @parking.requirement_facilities.where(only_weekdays: true),
+        requirement_frees: @parking.requirement_frees.where(only_weekdays: true),
+        requirement_times: @parking.requirement_times.where(only_weekdays: true)
+      },
+      requirements_holiday: {
+        requirement_buys: @parking.requirement_buys.where(only_weekdays: false),
+        requirement_facilities: @parking.requirement_facilities.where(only_weekdays: false),
+        requirement_frees: @parking.requirement_frees.where(only_weekdays: false),
+        requirement_times: @parking.requirement_times.where(only_weekdays: false)
+      }
+    }
+  end
+
   private
 
   def create_params
@@ -122,6 +143,10 @@ class Dokotomeyo::ParkingsController < ApplicationController
         :place, :start_date, :end_date, :include_time, :include_buy, :include_facility,
       ]
     )
+  end
+
+  def details_params
+    params.permit(:parkingID)
   end
 
   def validate_search
