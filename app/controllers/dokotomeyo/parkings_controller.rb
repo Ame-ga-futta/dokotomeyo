@@ -47,10 +47,10 @@ class Dokotomeyo::ParkingsController < ApplicationController
   def search
     if validate_search then
       time_limit = Time.parse(search_params[:narrowDown][:start_date]) - Time.parse(search_params[:narrowDown][:end_date])
-      south_end = search_params[:mapCenter][:lat] - LAT_PER_KIROMETER
-      north_end = search_params[:mapCenter][:lat] + LAT_PER_KIROMETER
-      west_end = search_params[:mapCenter][:lng] - LNG_PER_KIROMETER
-      east_end = search_params[:mapCenter][:lng] + LNG_PER_KIROMETER
+      south_end = BigDecimal("#{search_params[:mapCenter][:lat]}") - LAT_PER_KIROMETER
+      north_end = BigDecimal("#{search_params[:mapCenter][:lat]}") + LAT_PER_KIROMETER
+      west_end = BigDecimal("#{search_params[:mapCenter][:lng]}") - LNG_PER_KIROMETER
+      east_end = BigDecimal("#{search_params[:mapCenter][:lng]}") + LNG_PER_KIROMETER
 
       if time_limit < 0
         start_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo')
@@ -90,7 +90,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
       end
 
       sorted = @parkings.sort_by do |parking|
-        (parking[:latitude] - search_params[:mapCenter][:lat]).abs + (parking[:longitude] - search_params[:mapCenter][:lng]).abs
+        (parking[:latitude] - BigDecimal("#{search_params[:mapCenter][:lat]}")).abs +
+        (parking[:longitude] - BigDecimal("#{search_params[:mapCenter][:lng]}")).abs
       end
 
       render json: { status: 200, parkings: [
