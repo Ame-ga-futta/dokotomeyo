@@ -253,6 +253,106 @@ RSpec.describe "Parkings", type: :request do
           end
         end
       end
+
+      context "filtering bounds" do
+        let!(:parking_in_bounds) { create(:parking, id: 1, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_out_bounds) { create(:parking, id: 2, latitude: 2.0, longitude: 2.0, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:requirement_1) { create(:requirement_free, parking_id: parking_in_bounds.id) }
+        let!(:requirement_2) { create(:requirement_free, parking_id: parking_out_bounds.id) }
+
+        before do
+          post dokotomeyo_search_path, params: {
+            search_parking: {
+              mapCenter: {
+                lat: 1.5,
+                lng: 1.5,
+              },
+              narrowDown: {
+                place: "sample",
+                start_date: "2022-01-01 17:00:00",
+                end_date: "2022-01-01 20:00:00",
+                include_time: true,
+                include_buy: true,
+                include_facility: true,
+              },
+            },
+          }.to_json, headers: { "Content-Type" => "application/json" }
+        end
+
+        it "parking_in_bounds is displayed" do
+          expect(JSON.parse(response.body)["parkings"][0]).to include parking_in_bounds.attributes
+        end
+
+        it "parking_out_bounds is hidden" do
+          expect(JSON.parse(response.body)["parkings"][0]).not_to include parking_out_bounds.attributes
+        end
+      end
+
+      context "filtering weekday_check" do
+        let!(:parking_allday) { create(:parking, id: 1, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_weekday) { create(:parking, id: 2, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:requirement_1) { create(:requirement_free, parking_id: parking_allday.id, only_weekdays: false) }
+        let!(:requirement_2) { create(:requirement_free, parking_id: parking_weekday.id, only_weekdays: true) }
+
+        before do
+          post dokotomeyo_search_path, params: {
+            search_parking: {
+              mapCenter: {
+                lat: 1.5,
+                lng: 1.5,
+              },
+              narrowDown: {
+                place: "sample",
+                start_date: "2022-01-01 17:00:00",
+                end_date: "2022-01-01 20:00:00",
+                include_time: true,
+                include_buy: true,
+                include_facility: true,
+              },
+            },
+          }.to_json, headers: { "Content-Type" => "application/json" }
+        end
+
+        it "parking_allday is displayed" do
+          expect(JSON.parse(response.body)["parkings"][0]).to include parking_allday.attributes
+        end
+
+        it "parking_weekday is hidden" do
+          expect(JSON.parse(response.body)["parkings"][0]).not_to include parking_weekday.attributes
+        end
+      end
+
+      context "filtering sort" do
+        let!(:parking_long) { create(:parking, id: 1, latitude: 1.503, longitude: 1.497, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_mid) { create(:parking, id: 2, latitude: 1.502, longitude: 1.498, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_short) { create(:parking, id: 3, latitude: 1.501, longitude: 1.499, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:requirement_1) { create(:requirement_free, parking_id: parking_long.id) }
+        let!(:requirement_2) { create(:requirement_free, parking_id: parking_mid.id) }
+        let!(:requirement_3) { create(:requirement_free, parking_id: parking_short.id) }
+
+        before do
+          post dokotomeyo_search_path, params: {
+            search_parking: {
+              mapCenter: {
+                lat: 1.5,
+                lng: 1.5,
+              },
+              narrowDown: {
+                place: "sample",
+                start_date: "2022-01-01 17:00:00",
+                end_date: "2022-01-01 20:00:00",
+                include_time: true,
+                include_buy: true,
+                include_facility: true,
+              },
+            },
+          }.to_json, headers: { "Content-Type" => "application/json" }
+        end
+
+        it "parkings is sorted by distance" do
+          expect(JSON.parse(response.body)["parkings"][0]).to match [parking_short.attributes, parking_mid.attributes, parking_long.attributes]
+        end
+      end
     end
   end
 end
