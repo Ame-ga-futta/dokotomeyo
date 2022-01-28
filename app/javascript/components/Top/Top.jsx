@@ -5,6 +5,7 @@ import { LoadScript } from "@react-google-maps/api";
 import Flash from './Flash';
 import TopLeft from "./TopLeft";
 import TopRight from "./TopRight";
+import ParkingDetail from "./ParkingDetail";
 
 const Top = (props) => {
   const {
@@ -28,14 +29,18 @@ const Top = (props) => {
   });
   const [parkings, setParkings] = useState({})
   const [Highlight, setHighlight] = useState("");
+  const [detail, setDetail] = useState("");
 
   return (
     <>
       {flashMessage && <Flash message={flashMessage}/>}
       <LoadScript googleMapsApiKey={API_KEY}>
         <SSearch_container>
-          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} />
+          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
           <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
+          <TopDetail_container detail={detail}>
+            {detail == "" || <ParkingDetail detail={detail} />}
+          </TopDetail_container>
         </SSearch_container>
       </LoadScript>
     </>
@@ -47,5 +52,15 @@ const SSearch_container = styled.div`
   height: calc(100vh - 80px );
 `;
 
+const TopDetail_container = styled.div`
+  position: fixed;
+  z-index : 99993;
+  top  : 80px;
+  right : 0;
+  height: calc(100vh - 80px );
+  width: ${ props => props.detail == "" ? "0%" : "61%" };
+  transition : 0.3s ease-in-out;
+  background-color: #ffffff;
+`;
 
 export default Top;

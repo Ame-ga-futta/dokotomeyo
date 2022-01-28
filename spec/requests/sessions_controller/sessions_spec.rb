@@ -1,4 +1,4 @@
-RSpec.describe "sessions_post", type: :request do
+RSpec.describe "sessions", type: :request do
   describe "POST" do
     let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
 

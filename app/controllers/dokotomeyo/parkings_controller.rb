@@ -47,10 +47,10 @@ class Dokotomeyo::ParkingsController < ApplicationController
   def search
     if validate_search then
       time_limit = Time.parse(search_params[:narrowDown][:start_date]) - Time.parse(search_params[:narrowDown][:end_date])
-      south_end = search_params[:mapCenter][:lat] - LAT_PER_KIROMETER
-      north_end = search_params[:mapCenter][:lat] + LAT_PER_KIROMETER
-      west_end = search_params[:mapCenter][:lng] - LNG_PER_KIROMETER
-      east_end = search_params[:mapCenter][:lng] + LNG_PER_KIROMETER
+      south_end = BigDecimal("#{search_params[:mapCenter][:lat]}") - LAT_PER_KIROMETER
+      north_end = BigDecimal("#{search_params[:mapCenter][:lat]}") + LAT_PER_KIROMETER
+      west_end = BigDecimal("#{search_params[:mapCenter][:lng]}") - LNG_PER_KIROMETER
+      east_end = BigDecimal("#{search_params[:mapCenter][:lng]}") + LNG_PER_KIROMETER
 
       if time_limit < 0
         start_time = search_params[:narrowDown][:start_date].in_time_zone('Tokyo')
@@ -90,13 +90,35 @@ class Dokotomeyo::ParkingsController < ApplicationController
       end
 
       sorted = @parkings.sort_by do |parking|
-        (parking[:latitude] - search_params[:mapCenter][:lat]).abs + (parking[:longitude] - search_params[:mapCenter][:lng]).abs
+        (parking[:latitude] - BigDecimal("#{search_params[:mapCenter][:lat]}")).abs +
+        (parking[:longitude] - BigDecimal("#{search_params[:mapCenter][:lng]}")).abs
       end
 
       render json: { status: 200, parkings: [
         sorted,
       ] }
     end
+  end
+
+  def details
+    @parking = Parking.find(details_params[:parkingID])
+
+    render json: {
+      status: 200,
+      parking: @parking,
+      requirements_weekdays: {
+        requirement_buys: @parking.requirement_buys.where(only_weekdays: true),
+        requirement_facilities: @parking.requirement_facilities.where(only_weekdays: true),
+        requirement_frees: @parking.requirement_frees.where(only_weekdays: true),
+        requirement_times: @parking.requirement_times.where(only_weekdays: true)
+      },
+      requirements_holiday: {
+        requirement_buys: @parking.requirement_buys.where(only_weekdays: false),
+        requirement_facilities: @parking.requirement_facilities.where(only_weekdays: false),
+        requirement_frees: @parking.requirement_frees.where(only_weekdays: false),
+        requirement_times: @parking.requirement_times.where(only_weekdays: false)
+      }
+    }
   end
 
   private
@@ -122,6 +144,10 @@ class Dokotomeyo::ParkingsController < ApplicationController
         :place, :start_date, :end_date, :include_time, :include_buy, :include_facility,
       ]
     )
+  end
+
+  def details_params
+    params.permit(:parkingID)
   end
 
   def validate_search

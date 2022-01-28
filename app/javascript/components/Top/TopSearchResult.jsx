@@ -6,14 +6,16 @@ const TopSearchResult = (props) => {
     parking,
     i,
     mapCenter,
-    setHighlight
+    setHighlight,
+    detail,
+    setDetail
   } = props;
 
   const [distance, setDistance] = useState("");
 
   const options = {
     origins: [mapCenter],
-    destinations: [{lat: parking.latitude, lng: parking.longitude}],
+    destinations: [{ lat: parking.latitude, lng: parking.longitude }],
     travelMode: 'WALKING'
   }
 
@@ -27,8 +29,12 @@ const TopSearchResult = (props) => {
     });
   }, []);
 
+  const selectParking = () => {
+    detail == parking.id ? setDetail("") : setDetail(parking.id);
+  };
+
   return (
-    <STop_SearchResults_result onMouseOver={() => {setHighlight(i)}} onMouseOut={() => {setHighlight("")}}>
+    <STop_SearchResults_result onMouseOver={() => {setHighlight(i)}} onMouseOut={() => {setHighlight("")}} onClick={selectParking}>
       <STop_SearchResults_result_name>
         {parking.name}
       </STop_SearchResults_result_name>
