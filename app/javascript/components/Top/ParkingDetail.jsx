@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import axios from 'axios';
 import ParkingRequirementsWeekday from "./ParkingRequirementsWeekday";
@@ -65,6 +66,11 @@ const ParkingDetail = (props) => {
             <ParkingRequirementsHoliday requirementsHolidayData={requirementsHolidayData} />
           </STop_ParkingDetail_requirements>
         </STop_ParkingDetail_list_item>
+        <STop_ParkingDetail_list_item_edit>
+          <STop_ParkingDetail_edit>
+            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の追加</Link>
+          </STop_ParkingDetail_edit>
+        </STop_ParkingDetail_list_item_edit>
       </ul>
     </STop_ParkingDetail>
   )
@@ -104,6 +110,20 @@ const STop_ParkingDetail_data = styled.p`
 
 const STop_ParkingDetail_requirements = styled.div`
   width: 80%;
+`;
+
+const STop_ParkingDetail_list_item_edit = styled.li`
+  padding: 5px 20px;
+`;
+
+const STop_ParkingDetail_edit = styled.div`
+  font-size: 14px;
+  color: gray;
+  width: 10%;
+  border-bottom: solid 1px gray;
+  padding: 3px;
+  margin-left: 20%;
+  text-align: center;
 `;
 
 export default ParkingDetail;

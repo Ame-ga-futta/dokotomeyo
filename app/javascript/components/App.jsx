@@ -7,6 +7,7 @@ import Mypage from "./Mypage/Mypage";
 import Post from "./Post/Post";
 import Login from "./Login/Login";
 import Signup from "./Signup/Signup";
+import EditParking from "./Edit/EditParking";
 
 const App = (props) => {
   const { flashMessage, bookFlashMessage } = useFlash();
@@ -21,6 +22,7 @@ const App = (props) => {
         <Route path="/dokotomeyo/post" element={<Post bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/login" element={<Login userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/signup" element={<Signup userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
+        <Route path="/dokotomeyo/parking/:id" element={<EditParking />} />
       </Routes>
     </BrowserRouter>
   );
