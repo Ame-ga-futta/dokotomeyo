@@ -5,6 +5,8 @@ import axios from 'axios';
 import { LoadScript, GoogleMap, Marker } from "@react-google-maps/api";
 import ParkingRequirementsWeekday from "../Top/ParkingRequirementsWeekday";
 import ParkingRequirementsHoliday from "../Top/ParkingRequirementsHoliday";
+import EditParkingDetail from "./EditParkingDetail/EditParkingDetail";
+import AddRequirement from "./AddRequirement/AddRequirement";
 
 const EditParking = () => {
   const { id } = useParams();
@@ -72,7 +74,10 @@ const EditParking = () => {
               条件を追加する
             </SEdit_Detail_selector_add>
           </SEdit_Detail_selector>
-          {selectTab ? <p>修正</p> : <p>追加</p>}
+          {selectTab
+            ? <EditParkingDetail parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} />
+            : <AddRequirement />
+          }
         </SEdit_Detail_Edit>
       </SEdit_Detail_container>
       <SEdit_Map_container>
@@ -130,7 +135,7 @@ const SEdit_Detail_requirements = styled.div`
 const SEdit_Detail_Edit = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 20%;
+  margin: 5% 0 0 20%;
 `;
 
 const SEdit_Detail_selector = styled.div`

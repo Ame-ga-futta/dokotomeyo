@@ -7,7 +7,7 @@ const ParkingRequirementsHoliday = (props) => {
   } = props;
 
   return (
-    <STop_ParkingRequirementsWeekday_container>
+    <STop_ParkingRequirementsHoliday_container>
       <STop_ParkingDetail_requirements_heading>全日</STop_ParkingDetail_requirements_heading>
       <STop_ParkingDetail_requirements_list>
         {requirementsHolidayData.requirement_frees && requirementsHolidayData.requirement_frees.map((requirement, i) => {
@@ -39,11 +39,11 @@ const ParkingRequirementsHoliday = (props) => {
           )
         })}
       </STop_ParkingDetail_requirements_list>
-    </STop_ParkingRequirementsWeekday_container>
+    </STop_ParkingRequirementsHoliday_container>
   );
 };
 
-const STop_ParkingRequirementsWeekday_container = styled.div`
+const STop_ParkingRequirementsHoliday_container = styled.div`
   display: flex;
   flex-direction: row;
 `;
