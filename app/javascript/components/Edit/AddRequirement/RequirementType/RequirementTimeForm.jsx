@@ -13,6 +13,8 @@ const RequirementTimeForm = (props) => {
         <li>
           <p>入庫後</p>
           <SRequirement_Text_field
+            type="time"
+            name="free_time"
             value={addRequirement.free_time}
             onChange={(event) => setAddRequirement({...addRequirement, free_time: event.target.value})}
           />

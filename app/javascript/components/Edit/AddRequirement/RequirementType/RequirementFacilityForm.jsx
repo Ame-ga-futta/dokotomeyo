@@ -22,7 +22,7 @@ const RequirementFacilityForm = (props) => {
         </li>
         <li>
           <SRequirement_Text_field
-            type="text"
+            type="time"
             name="free_time"
             value={addRequirement.free_time}
             onChange={(event) => setAddRequirement({...addRequirement, free_time: event.target.value})}
