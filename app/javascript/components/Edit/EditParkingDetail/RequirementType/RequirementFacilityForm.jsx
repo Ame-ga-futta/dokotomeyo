@@ -13,9 +13,6 @@ const RequirementFacilityForm = (props) => {
     only_weekdays: requirement.only_weekdays
   });
 
-  console.log("propsReq", requirement)
-  console.log("stateReq", updateRequirements)
-
   return (
     <SFormRequirement_item>
       <ul>
