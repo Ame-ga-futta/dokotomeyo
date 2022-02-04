@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
+import RequirementBuyForm from "./RequirementType/RequirementBuyForm";
+import RequirementFacilityForm from "./RequirementType/RequirementFacilityForm";
+import RequirementFreeForm from "./RequirementType/RequirementFreeForm";
+import RequirementTimeForm from "./RequirementType/RequirementTimeForm";
 
 const FormRequirement = (props) => {
   const {
@@ -7,102 +11,21 @@ const FormRequirement = (props) => {
     label
   } = props;
 
-  const [updateRequirements, setUpdateRequirements] = useState({
-    facility_name: "sample",
-    purchase_price: "9999",
-    free_time: "",
-    only_weekdays: false
-  });
-
   return (
     <SFormRequirement_container>
       <SformRequirement_Label>{label}</SformRequirement_Label>
       <SFormRequirement_list>
         {requirementsData.requirement_frees && requirementsData.requirement_frees.map((requirement, i) => {
-          return (
-            <SFormRequirement_item key={i}>
-              <p>終日無料</p>
-            </SFormRequirement_item>
-          )
+          return <RequirementFreeForm requirement={requirement} key={i}/>
         })}
         {requirementsData.requirement_buys && requirementsData.requirement_buys.map((requirement, i) => {
-          return (
-            <SFormRequirement_item key={i}>
-              <ul>
-                <SFormRequirement_item_item>
-                  <SRequirement_Text_field
-                    type="text"
-                    name="facility_name"
-                    value={updateRequirements.facility_name}
-                    onChange={(event) => setUpdateRequirements({...updateRequirements, facility_name: event.target.value})}
-                  />
-                  <p>での購入金額が</p>
-                </SFormRequirement_item_item>
-                <SFormRequirement_item_item>
-                  <SRequirement_Text_field
-                    type="number"
-                    name="purchase_price"
-                    value={updateRequirements.purchase_price}
-                    onChange={(event) => setUpdateRequirements({...updateRequirements, purchase_price: event.target.value})}
-                  />
-                  <p>円以上で</p>
-                </SFormRequirement_item_item>
-                <SFormRequirement_item_item>
-                  <SRequirement_Text_field
-                    type="time"
-                    name="free_time"
-                    value={updateRequirements.free_time}
-                    onChange={(event) => setUpdateRequirements({...updateRequirements, free_time: event.target.value})}
-                  />
-                  <p>時間無料</p>
-                </SFormRequirement_item_item>
-              </ul>
-            </SFormRequirement_item>
-          )
+          return <RequirementBuyForm requirement={requirement} key={i}/>
         })}
         {requirementsData.requirement_facilities && requirementsData.requirement_facilities.map((requirement, i) => {
-          return (
-            <SFormRequirement_item key={i}>
-              <ul>
-                <SFormRequirement_item_item>
-                  <SRequirement_Text_field
-                    type="text"
-                    name="facility_name"
-                    value={updateRequirements.facility_name}
-                    onChange={(event) => setUpdateRequirements({...updateRequirements, facility_name: event.target.value})}
-                  />
-                  <p>の利用で</p>
-                </SFormRequirement_item_item>
-                <SFormRequirement_item_item>
-                  <SRequirement_Text_field
-                    type="time"
-                    name="free_time"
-                    value={updateRequirements.free_time}
-                    onChange={(event) => setUpdateRequirements({...updateRequirements, free_time: event.target.value})}
-                  />
-                  <p>時間無料</p>
-                </SFormRequirement_item_item>
-              </ul>
-            </SFormRequirement_item>
-          )
+          return <RequirementFacilityForm requirement={requirement} key={i}/>
         })}
         {requirementsData.requirement_times && requirementsData.requirement_times.map((requirement, i) => {
-          return (
-            <SFormRequirement_item key={i}>
-              <ul>
-                <SFormRequirement_item_item>
-                  <p>入庫後</p>
-                  <SRequirement_Text_field
-                    type="time"
-                    name="free_time"
-                    value={updateRequirements.free_time}
-                    onChange={(event) => setUpdateRequirements({...updateRequirements, free_time: event.target.value})}
-                  />
-                  <p>時間まで無料</p>
-                </SFormRequirement_item_item>
-              </ul>
-            </SFormRequirement_item>
-          )
+          return <RequirementTimeForm requirement={requirement} key={i}/>
         })}
       </SFormRequirement_list>
     </SFormRequirement_container>
