@@ -9,7 +9,7 @@ RSpec.describe "Parkings", type: :request do
     context "create" do
       context "with RequirementBuy" do
         it "create responce is 200 with fulldata" do
-          post dokotomeyo_post_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "buy",
               parking: {
@@ -33,7 +33,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          post dokotomeyo_post_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "buy",
               parking: {
@@ -57,7 +57,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without RequirementBuy data" do
-          post dokotomeyo_post_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "buy",
               parking: {
@@ -83,7 +83,7 @@ RSpec.describe "Parkings", type: :request do
 
       context "with RequirementFacility" do
         it "create responce is 200 with fulldata" do
-          post dokotomeyo_confirm_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "facility",
               parking: {
@@ -107,7 +107,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          post dokotomeyo_confirm_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "facility",
               parking: {
@@ -131,7 +131,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without RequirementFacility data" do
-          post dokotomeyo_confirm_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "facility",
               parking: {
@@ -157,7 +157,7 @@ RSpec.describe "Parkings", type: :request do
 
       context "with RequirementFree" do
         it "create responce is 200 with fulldata" do
-          post dokotomeyo_post_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "free",
               parking: {
@@ -181,7 +181,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          post dokotomeyo_post_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "free",
               parking: {
@@ -205,7 +205,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without RequirementFree data" do
-          post dokotomeyo_post_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "free",
               parking: {
@@ -231,7 +231,7 @@ RSpec.describe "Parkings", type: :request do
 
       context "with RequirementTime" do
         it "create responce is 200 with fulldata" do
-          post dokotomeyo_confirm_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "time",
               parking: {
@@ -255,7 +255,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without Parking data" do
-          post dokotomeyo_confirm_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "time",
               parking: {
@@ -279,7 +279,7 @@ RSpec.describe "Parkings", type: :request do
         end
 
         it "create responce is 400 without RequirementTime data" do
-          post dokotomeyo_confirm_path, params: {
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "time",
               parking: {

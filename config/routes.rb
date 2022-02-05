@@ -7,17 +7,17 @@ Rails.application.routes.draw do
     get    :post,                 to: "top#top"
     get    :signup,               to: "top#top"
     get    :login,                to: "top#top"
-    get    "/parking/:id",         to: "top#top"
+    get    "/parking/:id",        to: "top#top"
 
     post   :signup,               to: 'sessions#signup'
     post   :login,                to: 'sessions#login'
     delete :logout,               to: 'sessions#logout'
 
-    post   :confirm,              to: 'parkings#confirm'
-    post   :post,                 to: 'parkings#create'
-    post   :search,               to: 'parkings#search'
-    post   :details,              to: 'parkings#details'
+    post   :new_confirm,          to: 'parkings#new_confirm'
+    post   :new_create,           to: 'parkings#new_create'
     post   :add_confirm,          to: 'parkings#add_confirm'
     post   :add_create,           to: 'parkings#add_create'
+    post   :search,               to: 'parkings#search'
+    post   :details,              to: 'parkings#details'
   end
 end

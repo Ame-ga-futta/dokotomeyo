@@ -2,7 +2,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
   LAT_PER_KIROMETER = 0.009
   LNG_PER_KIROMETER = 0.011
 
-  def confirm
+  def new_confirm
     @parking = Parking.new(create_params[:parking])
 
     case create_params[:requirement_type]
@@ -23,7 +23,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
-  def create
+  def new_create
     @parking = Parking.new(create_params[:parking])
 
     case create_params[:requirement_type]

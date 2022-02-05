@@ -21,7 +21,7 @@ const PostConfirm = (props) => {
   };
 
   const register = () => {
-    axios.post('/dokotomeyo/post', {
+    axios.post('/dokotomeyo/new_create', {
       post_parking: {
         requirement_type: type,
         parking: parking,
