@@ -17,5 +17,7 @@ Rails.application.routes.draw do
     post   :post,                 to: 'parkings#create'
     post   :search,               to: 'parkings#search'
     post   :details,              to: 'parkings#details'
+    post   :add_confirm,          to: 'parkings#add_confirm'
+    post   :add_create,           to: 'parkings#add_create'
   end
 end

@@ -76,7 +76,7 @@ const EditParking = () => {
           </SEdit_Detail_selector>
           {selectTab
             ? <EditParkingDetail parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} />
-            : <AddRequirement />
+            : <AddRequirement parkingID={id} />
           }
         </SEdit_Detail_Edit>
       </SEdit_Detail_container>

@@ -34,7 +34,7 @@ const RequirementFacilityForm = (props) => {
             type="checkbox"
             id="only_weekdays"
             value={addRequirement.only_weekdays}
-            onChange={() => setAddRequirement({...addRequirement, only_weekdays: !requirement.only_weekdays})}
+            onChange={() => setAddRequirement({...addRequirement, only_weekdays: !addRequirement.only_weekdays})}
           />
           <SText_checkbox_label htmlFor="only_weekdays">平日のみ</SText_checkbox_label>
         </li>

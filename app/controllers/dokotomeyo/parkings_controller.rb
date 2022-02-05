@@ -44,6 +44,48 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
+  def add_confirm
+    @parking = Parking.find(add_params[:parkingID])
+
+    case add_params[:requirement_type]
+    when "free" then
+      @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
+    when "time" then
+      @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
+    when "buy" then
+      @requirement = @parking.requirement_buys.new(add_params[:requirement].reject { |k, v| v == "" })
+    when "facility" then
+      @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
+    end
+
+    if @requirement.valid?
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: @requirement.errors.full_messages.flatten }
+    end
+  end
+
+  def add_create
+    @parking = Parking.find(add_params[:parkingID])
+
+    case add_params[:requirement_type]
+    when "free" then
+      @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
+    when "time" then
+      @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
+    when "buy" then
+      @requirement = @parking.requirement_buys.new(add_params[:requirement].reject { |k, v| v == "" })
+    when "facility" then
+      @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
+    end
+
+    if @requirement.save
+      render json: { status: 200, message: "追加完了しました" }
+    else
+      render json: { status: 400, message: @requirement.errors.full_messages.flatten }
+    end
+  end
+
   def search
     if validate_search then
       time_limit = Time.parse(search_params[:narrowDown][:start_date]) - Time.parse(search_params[:narrowDown][:end_date])
@@ -129,6 +171,16 @@ class Dokotomeyo::ParkingsController < ApplicationController
       parking: [
         :name, :address, :latitude, :longitude, :beginning_of_worktime, :end_of_worktime,
       ],
+      requirement: [
+        :facility_name, :purchase_price, :free_time, :only_weekdays,
+      ]
+    )
+  end
+
+  def add_params
+    params.require(:add_requirement).permit(
+      :requirement_type,
+      :parkingID,
       requirement: [
         :facility_name, :purchase_price, :free_time, :only_weekdays,
       ]
