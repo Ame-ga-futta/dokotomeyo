@@ -45,7 +45,7 @@ const EditParking = () => {
   return (
     <SEdit_parking_wrapper>
       <SEdit_Detail_container>
-        <ul>
+        <SEdit_Detail_table>
           <SEdit_Detail_list_name>
             <SEdit_Detail_name>{parkingData.name}</SEdit_Detail_name>
           </SEdit_Detail_list_name>
@@ -64,7 +64,7 @@ const EditParking = () => {
               <ParkingRequirementsHoliday requirementsHolidayData={requirementsHolidayData} />
             </SEdit_Detail_requirements>
           </SEdit_Detail_list_item>
-        </ul>
+        </SEdit_Detail_table>
         <SEdit_Detail_Edit>
           <SEdit_Detail_selector>
             <SEdit_Detail_selector_edit onClick={() => {setSelectTab(true)}} selectTab={selectTab} >
@@ -97,6 +97,7 @@ const SEdit_parking_wrapper = styled.div`
 
 const SEdit_Detail_container = styled.div`
   width: 50%;
+  height: calc(100vh - 80px);
 `;
 
 const SEdit_Map_container = styled.div`
@@ -132,13 +133,20 @@ const SEdit_Detail_requirements = styled.div`
   width: 80%;
 `;
 
+const SEdit_Detail_table = styled.ul`
+  max-height: 50%;
+  overflow-y: scroll;
+`;
+
 const SEdit_Detail_Edit = styled.div`
+  max-height: 50%;
   display: flex;
   flex-direction: column;
-  margin: 5% 0 0 20%;
+  padding: 3% 0 0 20%;
 `;
 
 const SEdit_Detail_selector = styled.div`
+  height: 35px;
   font-size: 14px;
   display: flex;
   flex-direction: row;
@@ -149,7 +157,7 @@ const SEdit_Detail_selector_edit = styled.div`
   border-bottom: solid 2px ${ props => props.selectTab ? "gray" : "white" };
   transition: all 0.6s;
   &:hover {
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(205, 205, 205);
   }
 `;
 
@@ -158,7 +166,7 @@ const SEdit_Detail_selector_add = styled.div`
   border-bottom: solid 2px ${ props => props.selectTab ? "white" : "gray" };
   transition: all 0.6s;
   &:hover {
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(205, 205, 205);
   }
 `;
 

@@ -65,7 +65,7 @@ const AddRequirement = (props) => {
   }
 
   return (
-    <div>
+    <AddRequirement_container>
       <form onSubmit={Confilm}>
         <SError_container>
           {errors && errors.map((error, i) => {
@@ -81,9 +81,14 @@ const AddRequirement = (props) => {
         <SText_submit>追加</SText_submit>
       </form>
       <AddRequirementConfirm openconfirm={openconfirm} setOpenConfirm={setOpenConfirm} type={type} parkingID={parkingID} addRequirement={addRequirement} setErrors={setErrors} />
-    </div>
+    </AddRequirement_container>
   );
 };
+
+const AddRequirement_container = styled.div`
+  height: calc(100% - 35px);
+  overflow-y: scroll;
+`;
 
 const SError_container = styled.ul`
   font-size: 15px;

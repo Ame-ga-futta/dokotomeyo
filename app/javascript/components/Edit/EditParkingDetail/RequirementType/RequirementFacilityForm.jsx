@@ -40,16 +40,13 @@ const RequirementFacilityForm = (props) => {
 };
 
 const SFormRequirement_item = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  padding-bottom: 10px;
 `;
 
 const SFormRequirement_item_item = styled.li`
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  margin: 4px 0;
 `;
 
 const SRequirement_Text_field = styled.input`

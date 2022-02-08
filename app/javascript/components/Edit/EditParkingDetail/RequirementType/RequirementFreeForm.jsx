@@ -15,30 +15,36 @@ const RequirementFreeForm = (props) => {
 
   return (
     <SFormRequirement_item>
-      <p>終日無料</p>
+      <SFormRequirement_frees>
+        <SText_checkbox
+          type="checkbox"
+          id="only_weekdays"
+          value={updateRequirements.only_weekdays}
+          onChange={() => setUpdateRequirements({...updateRequirements, only_weekdays: !updateRequirements.only_weekdays})}
+        />
+        <SText_checkbox_label htmlFor="only_weekdays">平日のみ</SText_checkbox_label>
+      </SFormRequirement_frees>
     </SFormRequirement_item>
   );
 };
 
 const SFormRequirement_item = styled.li`
+  padding-bottom: 10px;
+`;
+
+const SFormRequirement_frees = styled.div`
+  padding: 10px 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 `;
 
-const SFormRequirement_item_item = styled.li`
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
+const SText_checkbox = styled.input`
+  margin: 3px 8px 3px 3px;
 `;
 
-const SRequirement_Text_field = styled.input`
-  border: solid 1px gray;
-  border-radius: 5px;
-  padding: 6px;
-  margin: 0 5px;
-  font-size: 16px;
+const SText_checkbox_label = styled.label`
+  margin: 3px;
 `;
 
 export default RequirementFreeForm;

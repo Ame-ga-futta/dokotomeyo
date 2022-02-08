@@ -15,9 +15,6 @@ const FormRequirement = (props) => {
     <SFormRequirement_container>
       <SformRequirement_Label>{label}</SformRequirement_Label>
       <SFormRequirement_list>
-        {requirementsData.requirement_frees && requirementsData.requirement_frees.map((requirement, i) => {
-          return <RequirementFreeForm requirement={requirement} key={i}/>
-        })}
         {requirementsData.requirement_buys && requirementsData.requirement_buys.map((requirement, i) => {
           return <RequirementBuyForm requirement={requirement} key={i}/>
         })}
@@ -33,42 +30,20 @@ const FormRequirement = (props) => {
 };
 
 const SFormRequirement_container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
+  padding: 10px 0;
 `;
 
 const SformRequirement_Label = styled.p`
-  width: 15%;
+  line-height: initial;
+  border-bottom: solid 1px gray;
+  padding: 0 0 4px 4px;
+  margin-bottom: 2px;
 `;
 
 const SFormRequirement_list = styled.ul`
-  width: 85%;
   display: flex;
   align-items: start;
   flex-direction: column;
-`;
-
-const SFormRequirement_item = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SFormRequirement_item_item = styled.li`
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
-`;
-
-const SRequirement_Text_field = styled.input`
-  border: solid 1px gray;
-  border-radius: 5px;
-  padding: 6px;
-  margin: 0 5px;
-  font-size: 16px;
 `;
 
 export default FormRequirement;

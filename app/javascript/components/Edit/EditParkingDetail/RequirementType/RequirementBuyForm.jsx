@@ -26,15 +26,13 @@ const RequirementBuyForm = (props) => {
           <p>での購入金額が</p>
         </SFormRequirement_item_item>
         <SFormRequirement_item_item>
-          <SRequirement_Text_field
+          <SRequirement_Number_field
             type="number"
             name="purchase_price"
             value={updateRequirements.purchase_price}
             onChange={(event) => setUpdateRequirements({...updateRequirements, purchase_price: event.target.value})}
           />
           <p>円以上で</p>
-        </SFormRequirement_item_item>
-        <SFormRequirement_item_item>
           <SRequirement_Text_field
             type="time"
             name="free_time"
@@ -49,19 +47,25 @@ const RequirementBuyForm = (props) => {
 };
 
 const SFormRequirement_item = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  padding-bottom: 10px;
 `;
 
 const SFormRequirement_item_item = styled.li`
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  margin: 4px 0;
 `;
 
 const SRequirement_Text_field = styled.input`
+  border: solid 1px gray;
+  border-radius: 5px;
+  padding: 6px;
+  margin: 0 5px;
+  font-size: 16px;
+`;
+
+const SRequirement_Number_field = styled.input`
+  width: 20%;
   border: solid 1px gray;
   border-radius: 5px;
   padding: 6px;

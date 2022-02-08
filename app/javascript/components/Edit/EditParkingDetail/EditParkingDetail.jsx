@@ -19,7 +19,7 @@ const EditParkingDetail = (props) => {
   })
 
   return (
-    <div>
+    <EditParkingDetail_container>
       <form>
         <SFormParkingDetail_list>
           <SFormParkingDetail_item>
@@ -72,9 +72,14 @@ const EditParkingDetail = (props) => {
           </SFormParkingDetail_item>
         </SFormParkingDetail_list>
       </form>
-    </div>
+    </EditParkingDetail_container>
   );
 };
+
+const EditParkingDetail_container = styled.div`
+  height: calc(100% - 35px);
+  overflow-y: scroll;
+`;
 
 const SFormParkingDetail_list = styled.ul`
   display: flex;
@@ -85,11 +90,12 @@ const SFormParkingDetail_item = styled.li`
   margin: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 `;
 
 const SText_label = styled.label`
   width: 20%;
+  padding: 10px 0;
+  line-height: initial;
 `;
 
 const SText_address = styled.p`

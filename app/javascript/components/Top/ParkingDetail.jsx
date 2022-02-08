@@ -41,11 +41,11 @@ const ParkingDetail = (props) => {
   }
 
   return (
-    <STop_ParkingDetail>
+    <STop_ParkingDetail_container>
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={18} >
         <Marker position={center} />
       </GoogleMap>
-      <ul>
+      <STop_ParkingDetail>
         <STop_ParkingDetail_list_name>
           <STop_ParkingDetail_name>{parkingData.name}</STop_ParkingDetail_name>
         </STop_ParkingDetail_list_name>
@@ -68,19 +68,24 @@ const ParkingDetail = (props) => {
         </STop_ParkingDetail_list_item>
         <STop_ParkingDetail_list_item_edit>
           <STop_ParkingDetail_edit>
-            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の追加</Link>
+            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
-      </ul>
-    </STop_ParkingDetail>
+      </STop_ParkingDetail>
+    </STop_ParkingDetail_container>
   )
 };
 
-const STop_ParkingDetail = styled.div`
+const STop_ParkingDetail_container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const STop_ParkingDetail = styled.ul`
+  height: 50%;
+  overflow-y: scroll;
 `;
 
 const STop_ParkingDetail_list_name = styled.li`
@@ -119,7 +124,7 @@ const STop_ParkingDetail_list_item_edit = styled.li`
 const STop_ParkingDetail_edit = styled.div`
   font-size: 14px;
   color: gray;
-  width: 10%;
+  width: 17%;
   border-bottom: solid 1px gray;
   padding: 3px;
   margin-left: 20%;
