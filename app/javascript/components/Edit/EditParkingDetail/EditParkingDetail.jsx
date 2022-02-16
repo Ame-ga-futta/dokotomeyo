@@ -1,26 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import FormRequirement from "./FormRequirement";
 
 const EditParkingDetail = (props) => {
   const {
-    parkingData,
-    requirementsWeekdayData,
-    requirementsHolidayData
+    updateParking,
+    setUpdateParking,
+    setCenter
   } = props;
+  const { id } = useParams();
 
-  const [updateParking, setUpdateParking] = useState({
-    name: "",
-    address: "",
-    latitude: 35.681454048919186,
-    longitude: 139.76707115336345,
-    beginning_of_worktime: "",
-    end_of_worktime: ""
-  })
+  const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
+  const [requirementsHolidayData, setRequirementsHolidayData] = useState({});
+  const [updatesBuy] = useState({});
+  const [updatesFacility] = useState({});
+  const [updatesTime] = useState({});
+  const [updatesFree] = useState({});
+  const [openconfirm, setOpenConfirm] = useState(false);
+
+  useEffect(() => {
+    axios.post('/dokotomeyo/details', { parkingID: id })
+    .then((response) => {
+      setUpdateParking(response.data.parking);
+      setRequirementsWeekdayData(response.data.requirements_weekdays);
+      setRequirementsHolidayData(response.data.requirements_holiday);
+      setCenter({
+        lat: response.data.parking.latitude,
+        lng: response.data.parking.longitude
+      })
+    })
+    .catch(() => {
+      console.log("通信に失敗");
+    })
+  }, []);
+
+  const Confilm = (event) => {
+    setOpenConfirm(true)
+    const updatesData = {
+      parking: updateParking,
+      requirement_buy: updatesBuy,
+      requirement_facility: updatesFacility,
+      requirement_time: updatesTime,
+      requirement_free: updatesFree
+    }
+    console.log(updatesData)
+    event.preventDefault();
+  };
 
   return (
     <EditParkingDetail_container>
-      <form>
+      <form onSubmit={Confilm}>
         <SFormParkingDetail_list>
           <SFormParkingDetail_item>
             <SText_label>住所</SText_label>
@@ -66,10 +97,11 @@ const EditParkingDetail = (props) => {
           <SFormParkingDetail_item>
             <SText_label>無料の条件</SText_label>
             <SRequirements>
-              <FormRequirement requirementsData={requirementsWeekdayData} label={"平日"} />
-              <FormRequirement requirementsData={requirementsHolidayData} label={"全日"} />
+              <FormRequirement requirementsData={requirementsWeekdayData} label={"平日"} updatesBuy={updatesBuy} updatesFacility={updatesFacility} updatesTime={updatesTime} updatesFree={updatesFree} />
+              <FormRequirement requirementsData={requirementsHolidayData} label={"全日"} updatesBuy={updatesBuy} updatesFacility={updatesFacility} updatesTime={updatesTime} updatesFree={updatesFree} />
             </SRequirements>
           </SFormParkingDetail_item>
+          <SText_submit>編集</SText_submit>
         </SFormParkingDetail_list>
       </form>
     </EditParkingDetail_container>
@@ -89,29 +121,29 @@ const SFormParkingDetail_list = styled.ul`
 const SFormParkingDetail_item = styled.li`
   margin: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 `;
 
 const SText_label = styled.label`
-  width: 20%;
+  width: 15%;
   padding: 10px 0;
   line-height: initial;
 `;
 
 const SText_address = styled.p`
-  width: 80%;
+  width: 85%;
   padding: 10px;
 `;
 
 const SText_field = styled.input`
-  width: 80%;
+  width: 85%;
   border: solid 1px gray;
   border-radius: 5px;
   padding: 10px;
 `;
 
 const STime_field_container = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,7 +164,18 @@ const Stext_notice = styled.p`
 `;
 
 const SRequirements = styled.div`
-  width: 80%;
+  width: 85%;
+`;
+
+const SText_submit = styled.button`
+  width: 20%;
+  background-color: rgb(75, 189, 255);
+  color: white;
+  border-radius: 4px;
+  margin: 10px;
+  margin-left: 80%;
+  padding: 11px 20px;
+  text-align: center;
 `;
 
 export default EditParkingDetail;

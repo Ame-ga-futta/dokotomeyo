@@ -114,7 +114,7 @@ const SText_submit = styled.button`
   color: white;
   border-radius: 4px;
   margin: 10px;
-  margin-left: 70%;
+  margin-left: 80%;
   padding: 11px 20px;
   text-align: center;
 `;

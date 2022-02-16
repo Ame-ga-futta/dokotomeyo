@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
-const PostRight = (props) => {
+const EditParkingMap = (props) => {
   const {
-    parking,
-    setParking,
-    mapCenter,
-    setMapCenter
+    updateParking,
+    setUpdateParking,
+    center,
+    setCenter
   } = props;
 
   const [place, setPlace] = useState("");
@@ -20,33 +20,32 @@ const PostRight = (props) => {
   const geocoder = new window.google.maps.Geocoder();
 
   const click = (latLng) => {
-    geocoder.geocode({location: latLng}, ( results, status ) => {
+    geocoder.geocode({ location: latLng }, ( results, status ) => {
       if (status === 'OK') {
-        setParking({ ...parking, address: results[0].formatted_address, latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() });
-        setMapCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
+        setUpdateParking({ ...updateParking, address: results[0].formatted_address, latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() })
+        setCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
       }
     });
-  }
+  };
 
   const search = (event) => {
-    geocoder.geocode({ address: place }, ( results, status ) => {
+    geocoder.geocode({ address: place}, ( results, status ) => {
       if (status === 'OK') {
-        setParking({ ...parking, address: results[0].formatted_address, latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() });
-        setMapCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
+        setUpdateParking({ ...updateParking, address: results[0].formatted_address, latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() })
+        setCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
       }
     });
     event.preventDefault();
-  }
+  };
 
   return (
-    <SPost_container_right>
+    <SEdit_Map_container>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={mapCenter}
+        center={center}
         zoom={17}
-        onClick={event => click(event.latLng)}
-      >
-        <Marker position={mapCenter} />
+        onClick={event => click(event.latLng)} >
+        <Marker position={center} />
       </GoogleMap>
       <SGoogleMap_search>
         <form onSubmit={search}>
@@ -59,14 +58,13 @@ const PostRight = (props) => {
           <SSearch_submit>検索</SSearch_submit>
         </form>
       </SGoogleMap_search>
-    </SPost_container_right>
+    </SEdit_Map_container>
   );
 };
 
-const SPost_container_right = styled.div`
-  position: relative;
+const SEdit_Map_container = styled.div`
   width: 40%;
-  background-color: rgb(255, 250, 228);
+  position: relative;
 `;
 
 const SGoogleMap_search = styled.div`
@@ -96,4 +94,4 @@ const SSearch_submit = styled.button`
   text-align: center;
 `;
 
-export default PostRight;
+export default EditParkingMap;
