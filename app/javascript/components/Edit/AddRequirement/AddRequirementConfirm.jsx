@@ -109,8 +109,8 @@ const SAddConfirm_wrapper = styled.div`
   position: fixed;
   z-index : 99998;
   top  : 80px;
-  left : -60%;
-  width: 60%;
+  right : 100%;
+  width: 100%;
   height: calc(100vh - 80px );
   background-color: rgba(24, 24, 24, 0.7);
   transition : 0.3s ease-in-out;

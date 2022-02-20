@@ -34,7 +34,7 @@ const EditParking = () => {
     axios.post('/dokotomeyo/details', { parkingID: id })
     .then((response) => {
       setParkingData(response.data.parking);
-      setRequirementsWeekdayData(response.data.requirements_weekdays);
+      setRequirementsWeekdayData(response.data.requirements_weekday);
       setRequirementsHolidayData(response.data.requirements_holiday);
       setCenter({
         lat: response.data.parking.latitude,
@@ -138,7 +138,7 @@ const SEdit_Detail_Edit = styled.div`
   max-height: 50%;
   display: flex;
   flex-direction: column;
-  padding: 3% 0 0 20%;
+  padding: 3%;
 `;
 
 const SEdit_Detail_selector = styled.div`

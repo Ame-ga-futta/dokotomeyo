@@ -23,7 +23,7 @@ const ParkingDetail = (props) => {
     axios.post('/dokotomeyo/details', { parkingID: detail })
     .then((response) => {
       setParkingData(response.data.parking);
-      setRequirementsWeekdayData(response.data.requirements_weekdays);
+      setRequirementsWeekdayData(response.data.requirements_weekday);
       setRequirementsHolidayData(response.data.requirements_holiday);
       setCenter({
         lat: response.data.parking.latitude,

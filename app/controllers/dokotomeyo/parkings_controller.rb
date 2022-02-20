@@ -148,7 +148,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     render json: {
       status: 200,
       parking: @parking,
-      requirements_weekdays: {
+      requirements_weekday: {
         requirement_buys: @parking.requirement_buys.where(only_weekdays: true),
         requirement_facilities: @parking.requirement_facilities.where(only_weekdays: true),
         requirement_frees: @parking.requirement_frees.where(only_weekdays: true),
