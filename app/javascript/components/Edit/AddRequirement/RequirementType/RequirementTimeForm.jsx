@@ -38,6 +38,7 @@ const SEdit_form_ul = styled.ul`
   display: flex;
   flex-direction: column;
   margin: 10px;
+  padding: 0 1% 3px 1%;
   li {
     margin: 10px 0;
     display: flex;
