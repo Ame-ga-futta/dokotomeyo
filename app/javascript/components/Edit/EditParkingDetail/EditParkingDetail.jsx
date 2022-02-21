@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import FormRequirement from "./FormRequirement";
+import EditParkingDetailConfilm from "./EditParkingDetailConfilm";
 
 const EditParkingDetail = (props) => {
   const {
@@ -14,6 +15,13 @@ const EditParkingDetail = (props) => {
 
   const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
   const [requirementsHolidayData, setRequirementsHolidayData] = useState({});
+  const [updatesData, setUpdatesData] = useState({
+    parking: {},
+    requirement_buy: {},
+    requirement_facility: {},
+    requirement_time: {},
+    requirement_free: {}
+  });
   const [updatesBuy] = useState({});
   const [updatesFacility] = useState({});
   const [updatesTime] = useState({});
@@ -24,7 +32,7 @@ const EditParkingDetail = (props) => {
     axios.post('/dokotomeyo/details', { parkingID: id })
     .then((response) => {
       setUpdateParking(response.data.parking);
-      setRequirementsWeekdayData(response.data.requirements_weekdays);
+      setRequirementsWeekdayData(response.data.requirements_weekday);
       setRequirementsHolidayData(response.data.requirements_holiday);
       setCenter({
         lat: response.data.parking.latitude,
@@ -38,14 +46,13 @@ const EditParkingDetail = (props) => {
 
   const Confilm = (event) => {
     setOpenConfirm(true)
-    const updatesData = {
+    setUpdatesData({
       parking: updateParking,
       requirement_buy: updatesBuy,
       requirement_facility: updatesFacility,
       requirement_time: updatesTime,
       requirement_free: updatesFree
-    }
-    console.log(updatesData)
+    })
     event.preventDefault();
   };
 
@@ -104,6 +111,7 @@ const EditParkingDetail = (props) => {
           <SText_submit>編集</SText_submit>
         </SFormParkingDetail_list>
       </form>
+      <EditParkingDetailConfilm openconfirm={openconfirm} setOpenConfirm={setOpenConfirm} updatesData={updatesData} />
     </EditParkingDetail_container>
   );
 };
