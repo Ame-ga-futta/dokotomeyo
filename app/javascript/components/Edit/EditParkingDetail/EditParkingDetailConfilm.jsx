@@ -83,16 +83,18 @@ const SEditConfirm_box = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  overflow-y: scroll;
 `;
 
 const SEditConfirm_title = styled.p`
+  max-height: 10%;
   font-size: 30px;
   padding: 25px 0 5px 0;
   text-align: center;
 `;
 
 const SEditConfilm_data = styled.div`
+  max-height: 80%;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -100,6 +102,7 @@ const SEditConfilm_data = styled.div`
 `;
 
 const SEditConfirm_buttons = styled.div`
+  max-height: 10%;
   display: flex;
   align-items: center;
   justify-content: end;

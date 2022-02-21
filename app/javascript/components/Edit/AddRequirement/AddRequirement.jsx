@@ -6,11 +6,15 @@ import RequirementFreeForm from "./RequirementType/RequirementFreeForm";
 import RequirementTimeForm from "./RequirementType/RequirementTimeForm";
 import RequirementBuyForm from "./RequirementType/RequirementBuyForm";
 import RequirementFacilityForm from "./RequirementType/RequirementFacilityForm";
+import AddRequirementDetail from "./AddRequirementDetail";
 import AddRequirementConfirm from "./AddRequirementConfirm";
 
 const AddRequirement = (props) => {
   const {
-    parkingID
+    parkingID,
+    parkingData,
+    requirementsWeekdayData,
+    requirementsHolidayData
   } = props;
 
   const [errors, setErrors] = useState([]);
@@ -66,7 +70,11 @@ const AddRequirement = (props) => {
 
   return (
     <AddRequirement_container>
+      <AddRequirementDetail parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} />
       <form onSubmit={Confilm}>
+        <AddRequirement_form>
+          <RequirementForm type={type} setType={setType} />
+        </AddRequirement_form>
         <SError_container>
           {errors && errors.map((error, i) => {
             return (
@@ -74,9 +82,6 @@ const AddRequirement = (props) => {
             )
           })}
         </SError_container>
-        <AddRequirement_form>
-          <RequirementForm type={type} setType={setType} />
-        </AddRequirement_form>
         {DisplayForm()}
         <SText_submit>追加</SText_submit>
       </form>
@@ -86,7 +91,7 @@ const AddRequirement = (props) => {
 };
 
 const AddRequirement_container = styled.div`
-  height: calc(100% - 35px);
+  height: calc(100% - 43px);
   overflow-y: scroll;
 `;
 
@@ -104,7 +109,7 @@ const AddRequirement_form = styled.div`
   flex-direction: row;
   align-items: center;
   margin: 10px;
-  padding-bottom: 3px;
+  padding: 0 1% 3px 1%;
   border-bottom: solid 1px gray;
 `;
 
@@ -113,8 +118,7 @@ const SText_submit = styled.button`
   background-color: rgb(75, 189, 255);
   color: white;
   border-radius: 4px;
-  margin: 10px;
-  margin-left: 80%;
+  margin: 10px 1% 10px 79%;
   padding: 11px 20px;
   text-align: center;
 `;

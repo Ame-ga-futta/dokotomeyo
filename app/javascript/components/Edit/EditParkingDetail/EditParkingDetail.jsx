@@ -61,15 +61,6 @@ const EditParkingDetail = (props) => {
       <form onSubmit={Confilm}>
         <SFormParkingDetail_list>
           <SFormParkingDetail_item>
-            <SText_label>住所</SText_label>
-            <SText_address>{updateParking.address}</SText_address>
-          </SFormParkingDetail_item>
-          <SFormParkingDetail_item>
-            <Stext_notice>
-              画面右の地図をクリックするか、地図上部の検索ボックスで<br />場所を入力すると、住所が入力されます。
-            </Stext_notice>
-          </SFormParkingDetail_item>
-          <SFormParkingDetail_item>
             <SText_label>駐車場名</SText_label>
             <SText_field
               type="text"
@@ -77,6 +68,15 @@ const EditParkingDetail = (props) => {
               value={updateParking.name}
               onChange={event => setUpdateParking({...updateParking, name: event.target.value})}
             />
+          </SFormParkingDetail_item>
+          <SFormParkingDetail_item>
+            <SText_label>住所</SText_label>
+            <SText_address>{updateParking.address}</SText_address>
+          </SFormParkingDetail_item>
+          <SFormParkingDetail_item>
+            <Stext_notice>
+              画面右の地図をクリックするか、地図上部の検索ボックスで<br />場所を入力すると、住所が入力されます。
+            </Stext_notice>
           </SFormParkingDetail_item>
           <SFormParkingDetail_item>
             <SText_label>営業時間</SText_label>
@@ -117,13 +117,14 @@ const EditParkingDetail = (props) => {
 };
 
 const EditParkingDetail_container = styled.div`
-  height: calc(100% - 35px);
+  height: calc(100% - 43px);
   overflow-y: scroll;
 `;
 
 const SFormParkingDetail_list = styled.ul`
   display: flex;
   flex-direction: column;
+  padding: 0 1%;
 `;
 
 const SFormParkingDetail_item = styled.li`
@@ -180,8 +181,7 @@ const SText_submit = styled.button`
   background-color: rgb(75, 189, 255);
   color: white;
   border-radius: 4px;
-  margin: 10px;
-  margin-left: 80%;
+  margin: 10px 1% 10px 79%;
   padding: 11px 20px;
   text-align: center;
 `;

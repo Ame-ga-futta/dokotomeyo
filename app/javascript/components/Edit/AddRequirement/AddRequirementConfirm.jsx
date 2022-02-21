@@ -129,16 +129,18 @@ const SAddConfirm_box = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  overflow-y: scroll;
 `;
 
 const SAddConfirm_title = styled.p`
+  max-height: 10%;
   font-size: 30px;
   padding: 25px 0 5px 0;
   text-align: center;
 `;
 
 const SAddConfirm_contents_list = styled.ul`
+  max-height: 80%;
+  overflow-y: scroll;
   display: flex;
   align-items: start;
   justify-content: space-between;
@@ -166,6 +168,7 @@ const SAddRequirement_contents_text = styled.p`
 `;
 
 const SAddConfirm_buttons = styled.div`
+  max-height: 10%;
   display: flex;
   align-items: center;
   justify-content: end;
