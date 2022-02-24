@@ -86,6 +86,82 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
+  def edit_confirm
+    @update_parking = Parking.new(edit_params[:parking])
+    error_message = []
+    requirement_count = @update_parking.requirement_frees.count +
+                        @update_parking.requirement_times.count +
+                        @update_parking.requirement_buys.count +
+                        @update_parking.requirement_facilities.count
+    delete_count = 0
+
+    unless @update_parking.valid?
+      error_message.push(@update_parking.errors.full_messages)
+    end
+
+    edit_params[:requirement_free].each do |key, requirement|
+      requirement_free = @update_parking.requirement_frees.new(requirement[:requirements])
+
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_free.valid?
+          error_message.push(requirement_free.errors.full_messages)
+        end
+      end
+    end
+
+    edit_params[:requirement_time].each do |key, requirement|
+      requirement_time = @update_parking.requirement_times.new(requirement[:requirements])
+
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_time.valid?
+          error_message.push(requirement_time.errors.full_messages)
+        end
+      end
+    end
+
+    edit_params[:requirement_buy].each do |key, requirement|
+      requirement_buy = @update_parking.requirement_buys.new(requirement[:requirements])
+
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_buy.valid?
+          error_message.push(requirement_buy.errors.full_messages)
+        end
+      end
+    end
+
+    edit_params[:requirement_facility].each do |key, requirement|
+      requirement_facility = @update_parking.requirement_facilities.new(requirement[:requirements])
+
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_facility.valid?
+          error_message.push(requirement_facility.errors.full_messages)
+        end
+      end
+    end
+
+    if requirement_count <= delete_count
+      error_message.push("無料の条件は一つ以上必要です")
+    end
+
+    if error_message.flatten.uniq.empty?
+      render json: { status: 200, message: "成功" }
+    else
+      render json: { status: 400, message: error_message.flatten.uniq }
+    end
+  end
+
+  def edit_create
+    render json: { status: 200 }
+  end
+
   def search
     if validate_search then
       time_limit = Time.parse(search_params[:narrowDown][:start_date]) - Time.parse(search_params[:narrowDown][:end_date])
@@ -184,6 +260,16 @@ class Dokotomeyo::ParkingsController < ApplicationController
       requirement: [
         :facility_name, :purchase_price, :free_time, :only_weekdays,
       ]
+    )
+  end
+
+  def edit_params
+    params.require(:edit_parking_detail).permit(
+      parking: {},
+      requirement_buy: {},
+      requirement_facility: {},
+      requirement_free: {},
+      requirement_time: {}
     )
   end
 

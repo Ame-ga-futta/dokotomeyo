@@ -63,7 +63,7 @@ const AddRequirement = (props) => {
       }
     })
     .catch(() => {
-      setErrors("通信に失敗しました 最初からやり直してください");
+      setErrors(["通信に失敗しました 最初からやり直してください"]);
     })
     event.preventDefault();
   }

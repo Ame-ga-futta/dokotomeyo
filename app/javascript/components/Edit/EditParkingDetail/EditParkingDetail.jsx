@@ -13,6 +13,7 @@ const EditParkingDetail = (props) => {
   } = props;
   const { id } = useParams();
 
+  const [errors, setErrors] = useState([]);
   const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
   const [requirementsHolidayData, setRequirementsHolidayData] = useState({});
   const [updatesData, setUpdatesData] = useState({
@@ -45,7 +46,6 @@ const EditParkingDetail = (props) => {
   }, []);
 
   const Confilm = (event) => {
-    setOpenConfirm(true)
     setUpdatesData({
       parking: updateParking,
       requirement_buy: updatesBuy,
@@ -53,12 +53,41 @@ const EditParkingDetail = (props) => {
       requirement_time: updatesTime,
       requirement_free: updatesFree
     })
+    axios.post('/dokotomeyo/edit_confirm', {
+      edit_parking_detail: {
+        parking: updateParking,
+        requirement_buy: updatesBuy,
+        requirement_facility: updatesFacility,
+        requirement_time: updatesTime,
+        requirement_free: updatesFree
+      }
+    })
+    .then((response) => {
+      switch (response.data.status){
+        case 200:
+          setOpenConfirm(true);
+          break;
+        case 400:
+          setErrors(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      setErrors(["通信に失敗しました 最初からやり直してください"]);
+    })
     event.preventDefault();
   };
 
   return (
     <EditParkingDetail_container>
       <form onSubmit={Confilm}>
+        <SError_container>
+          {errors && errors.map((error, i) => {
+            return (
+              <li key={i}><SError>{error}</SError></li>
+            )
+          })}
+        </SError_container>
         <SFormParkingDetail_list>
           <SFormParkingDetail_item>
             <SText_label>駐車場名</SText_label>
@@ -125,6 +154,15 @@ const SFormParkingDetail_list = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0 1%;
+`;
+
+const SError_container = styled.ul`
+  font-size: 15px;
+  color: red;
+`;
+
+const SError = styled.p`
+  padding: 4px 3%;
 `;
 
 const SFormParkingDetail_item = styled.li`
