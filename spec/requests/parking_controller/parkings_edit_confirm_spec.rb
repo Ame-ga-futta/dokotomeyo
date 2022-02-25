@@ -134,6 +134,67 @@ RSpec.describe "Parkings", type: :request do
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
+
+        it "edit_confilm responce is 200 when delete all requirement" do
+          post dokotomeyo_edit_confirm_path, params: {
+            edit_parking_detail: {
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
+              requirement_buy: {
+                1 => {
+                  delete: true,
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
+                }
+              },
+              requirement_facility: {
+                1 => {
+                  delete: true,
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
+                }
+              },
+              requirement_free: {
+                1 => {
+                  delete: true,
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
+                }
+              },
+              requirement_time: {
+                1 => {
+                  delete: true,
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
+                }
+              }
+            }
+          }.to_json, headers: { "Content-Type" => "application/json" }
+          expect(JSON.parse(response.body)["status"]).to eq 400
+        end
       end
 
       context "edit Requirement_buy" do
