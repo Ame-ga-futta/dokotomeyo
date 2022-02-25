@@ -16,66 +16,122 @@ RSpec.describe "Parkings", type: :request do
         it "edit_create responce is 200 with parking data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: edit_parking,
+              parking: {
+                id: existing_parking.id,
+                name: edit_parking.name,
+                address: edit_parking.address,
+                latitude: edit_parking.latitude,
+                longitude: edit_parking.longitude,
+                beginning_of_worktime: edit_parking.beginning_of_worktime,
+                end_of_worktime: edit_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
         it "edit_create responce is 400 without parking data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: {},
+              parking: {
+                id: existing_parking.id,
+                name: "",
+                address: "",
+                latitude: "",
+                longitude: "",
+                beginning_of_worktime: "",
+                end_of_worktime: ""
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
       end
@@ -84,7 +140,15 @@ RSpec.describe "Parkings", type: :request do
         it "edit_create responce is 200 with Requirement_buy data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
@@ -94,30 +158,53 @@ RSpec.describe "Parkings", type: :request do
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
         it "edit_create responce is 400 without Requirement_buy data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
@@ -127,56 +214,99 @@ RSpec.describe "Parkings", type: :request do
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
         it "edit_confilm responce is 200 when delete Requirement_buy" do
           post dokotomeyo_edit_confirm_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: true,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
       end
@@ -185,11 +315,24 @@ RSpec.describe "Parkings", type: :request do
         it "edit_create responce is 200 with requirement_facility data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
@@ -201,28 +344,51 @@ RSpec.describe "Parkings", type: :request do
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
         it "edit_create responce is 400 without requirement_facility data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
@@ -234,50 +400,88 @@ RSpec.describe "Parkings", type: :request do
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
         it "edit_confilm responce is 200 when delete requirement_facility" do
           post dokotomeyo_edit_confirm_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: true,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
       end
@@ -286,17 +490,35 @@ RSpec.describe "Parkings", type: :request do
         it "edit_create responce is 200 with requirement_free data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
@@ -308,28 +530,51 @@ RSpec.describe "Parkings", type: :request do
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
         it "edit_create responce is 400 without requirement_free data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
@@ -341,44 +586,77 @@ RSpec.describe "Parkings", type: :request do
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
         it "edit_confilm responce is 200 when delete requirement_free" do
           post dokotomeyo_edit_confirm_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: true,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
       end
@@ -387,23 +665,46 @@ RSpec.describe "Parkings", type: :request do
         it "edit_create responce is 200 with requirement_time data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
@@ -413,30 +714,53 @@ RSpec.describe "Parkings", type: :request do
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
         it "edit_create responce is 400 without requirement_time data" do
           post dokotomeyo_edit_create_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
@@ -446,40 +770,68 @@ RSpec.describe "Parkings", type: :request do
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
         it "edit_confilm responce is 200 when delete requirement_time" do
           post dokotomeyo_edit_confirm_path, params: {
             edit_parking_detail: {
-              parking: existing_parking,
+              parking: {
+                id: existing_parking.id,
+                name: existing_parking.name,
+                address: existing_parking.address,
+                latitude: existing_parking.latitude,
+                longitude: existing_parking.longitude,
+                beginning_of_worktime: existing_parking.beginning_of_worktime,
+                end_of_worktime: existing_parking.end_of_worktime
+              },
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_buy
+                  requirements: {
+                    facility_name: existing_requirement_buy.facility_name,
+                    purchase_price: existing_requirement_buy.purchase_price,
+                    free_time: existing_requirement_buy.free_time,
+                    only_weekdays: existing_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_facility
+                  requirements: {
+                    facility_name: existing_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: existing_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_time: {
                 1 => {
                   delete: true,
-                  requirements: existing_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: existing_requirement_facility.free_time,
+                    only_weekdays: existing_requirement_facility.only_weekdays
+                  }
                 }
               }
             }
-          }
+          }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
       end

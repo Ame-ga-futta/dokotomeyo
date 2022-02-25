@@ -87,12 +87,13 @@ class Dokotomeyo::ParkingsController < ApplicationController
   end
 
   def edit_confirm
+    @exist_parking = Parking.find(edit_params[:parking][:id])
     @update_parking = Parking.new(edit_params[:parking])
     error_message = []
-    requirement_count = @update_parking.requirement_frees.count +
-                        @update_parking.requirement_times.count +
-                        @update_parking.requirement_buys.count +
-                        @update_parking.requirement_facilities.count
+    requirement_count = @exist_parking.requirement_frees.size +
+                        @exist_parking.requirement_times.size +
+                        @exist_parking.requirement_buys.size +
+                        @exist_parking.requirement_facilities.size
     delete_count = 0
 
     unless @update_parking.valid?
@@ -100,8 +101,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     edit_params[:requirement_free].each do |key, requirement|
-      requirement_free = @update_parking.requirement_frees.new(requirement[:requirements])
-
+      requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
       else
@@ -112,8 +112,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     edit_params[:requirement_time].each do |key, requirement|
-      requirement_time = @update_parking.requirement_times.new(requirement[:requirements])
-
+      requirement_time = @update_parking.requirement_times.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
       else
@@ -124,8 +123,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     edit_params[:requirement_buy].each do |key, requirement|
-      requirement_buy = @update_parking.requirement_buys.new(requirement[:requirements])
-
+      requirement_buy = @update_parking.requirement_buys.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
       else
@@ -136,8 +134,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     edit_params[:requirement_facility].each do |key, requirement|
-      requirement_facility = @update_parking.requirement_facilities.new(requirement[:requirements])
-
+      requirement_facility = @update_parking.requirement_facilities.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
       else

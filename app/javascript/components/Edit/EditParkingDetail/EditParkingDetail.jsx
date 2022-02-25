@@ -17,6 +17,7 @@ const EditParkingDetail = (props) => {
   const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
   const [requirementsHolidayData, setRequirementsHolidayData] = useState({});
   const [updatesData, setUpdatesData] = useState({
+    id: "",
     parking: {},
     requirement_buy: {},
     requirement_facility: {},
@@ -47,6 +48,7 @@ const EditParkingDetail = (props) => {
 
   const Confilm = (event) => {
     setUpdatesData({
+      id: id,
       parking: updateParking,
       requirement_buy: updatesBuy,
       requirement_facility: updatesFacility,
