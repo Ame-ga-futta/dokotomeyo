@@ -9,7 +9,8 @@ const EditParkingDetailConfilm = (props) => {
   const {
     openconfirm,
     setOpenConfirm,
-    updatesData
+    updatesData,
+    setErrors
   } = props;
   const { id } = useParams();
 
@@ -34,8 +35,22 @@ const EditParkingDetailConfilm = (props) => {
   };
 
   const register = () => {
-    console.log(updatesData)
-    setOpenConfirm(false);
+    axios.post('/dokotomeyo/edit_create', {
+      edit_parking_detail: updatesData
+    })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          setOpenConfirm(false);
+          break;
+        case 400:
+          setErrors(response.data.message)
+          break;
+      }
+    })
+    .catch(() => {
+      setErrors(["通信に失敗しました 最初からやり直してください"]);
+    })
   }
 
   return (

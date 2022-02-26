@@ -140,7 +140,7 @@ const EditParkingDetail = (props) => {
           <SText_submit>編集</SText_submit>
         </SFormParkingDetail_list>
       </form>
-      <EditParkingDetailConfilm openconfirm={openconfirm} setOpenConfirm={setOpenConfirm} updatesData={updatesData} />
+      <EditParkingDetailConfilm openconfirm={openconfirm} setOpenConfirm={setOpenConfirm} updatesData={updatesData} setErrors={setErrors} />
     </EditParkingDetail_container>
   );
 };
