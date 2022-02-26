@@ -213,7 +213,12 @@ RSpec.describe "Parkings", type: :request do
               requirement_buy: {
                 1 => {
                   delete: false,
-                  requirements: edit_requirement_buy
+                  requirements: {
+                    facility_name: edit_requirement_buy.facility_name,
+                    purchase_price: edit_requirement_buy.purchase_price,
+                    free_time: edit_requirement_buy.free_time,
+                    only_weekdays: edit_requirement_buy.only_weekdays
+                  }
                 }
               },
               requirement_facility: {
@@ -399,7 +404,12 @@ RSpec.describe "Parkings", type: :request do
               requirement_facility: {
                 1 => {
                   delete: false,
-                  requirements: edit_requirement_facility
+                  requirements: {
+                    facility_name: edit_requirement_facility.facility_name,
+                    purchase_price: "",
+                    free_time: edit_requirement_facility.free_time,
+                    only_weekdays: edit_requirement_facility.only_weekdays
+                  }
                 }
               },
               requirement_free: {
@@ -585,7 +595,12 @@ RSpec.describe "Parkings", type: :request do
               requirement_free: {
                 1 => {
                   delete: false,
-                  requirements: edit_requirement_free
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: "",
+                    only_weekdays: edit_requirement_free.only_weekdays
+                  }
                 }
               },
               requirement_time: {
@@ -771,7 +786,12 @@ RSpec.describe "Parkings", type: :request do
               requirement_time: {
                 1 => {
                   delete: false,
-                  requirements: edit_requirement_time
+                  requirements: {
+                    facility_name: "",
+                    purchase_price: "",
+                    free_time: edit_requirement_time.free_time,
+                    only_weekdays: edit_requirement_time.only_weekdays
+                  }
                 }
               }
             }
