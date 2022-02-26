@@ -27,7 +27,7 @@ const AddRequirementConfirm = (props) => {
     .then((response) => {
       switch (response.data.status){
         case 200:
-          console.log(response.data.message);
+          window.location.reload();
           break;
         case 400:
           setErrors(response.data.message)

@@ -38,7 +38,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     if @parking.save && @requirement.save
-      render json: { status: 200, message: "投稿完了しました" }
+      render json: { status: 200, message: "投稿完了しました", ID: @parking.id }
     else
       render json: { status: 400, message: @parking.errors.full_messages.push(@requirement.errors.full_messages).flatten }
     end

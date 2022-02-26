@@ -41,7 +41,7 @@ const EditParkingDetailConfilm = (props) => {
     .then((response) => {
       switch (response.data.status) {
         case 200:
-          setOpenConfirm(false);
+          window.location.reload();
           break;
         case 400:
           setErrors(response.data.message)
@@ -51,6 +51,7 @@ const EditParkingDetailConfilm = (props) => {
     .catch(() => {
       setErrors(["通信に失敗しました 最初からやり直してください"]);
     })
+    setOpenConfirm(false);
   }
 
   return (

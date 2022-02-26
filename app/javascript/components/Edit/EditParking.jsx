@@ -3,14 +3,20 @@ import styled from 'styled-components';
 import { LoadScript } from "@react-google-maps/api";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import EditParkingMap from "./EditParkingMap";
 import EditParkingDetail from "./EditParkingDetail/EditParkingDetail";
 import AddRequirement from "./AddRequirement/AddRequirement";
 
-const EditParking = () => {
+const EditParking = (props) => {
+  const {
+    bookFlashMessage
+  } = props;
+
   const { id } = useParams();
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
+  const navigate = useNavigate();
   const [parkingData, setParkingData] = useState({});
   const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
   const [requirementsHolidayData, setRequirementsHolidayData] = useState({});
@@ -40,7 +46,8 @@ const EditParking = () => {
       })
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("駐車場が見つかりませんでした");
+      navigate("/dokotomeyo");
     })
   }, [id]);
 

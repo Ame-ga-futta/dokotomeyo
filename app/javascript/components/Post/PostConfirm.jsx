@@ -32,7 +32,7 @@ const PostConfirm = (props) => {
       switch (response.data.status){
         case 200:
           bookFlashMessage(response.data.message);
-          navigate("/dokotomeyo");
+          navigate(`/dokotomeyo/parking/${response.data.ID}`);
           break;
         case 400:
           setErrors(response.data.message);
