@@ -6,10 +6,10 @@ RSpec.describe "Parkings", type: :request do
     let(:new_requirement_free) { build(:requirement_free) }
     let(:new_requirement_time) { build(:requirement_time) }
 
-    context "confirm" do
+    context "new_create" do
       context "with RequirementBuy" do
-        it "confirm responce is 200 with fulldata" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 200 with fulldata" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "buy",
               parking: {
@@ -32,8 +32,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
-        it "confirm responce is 400 without Parking data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without Parking data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "buy",
               parking: {
@@ -56,8 +56,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
-        it "confirm responce is 400 without RequirementBuy data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without RequirementBuy data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "buy",
               parking: {
@@ -82,8 +82,8 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "with RequirementFacility" do
-        it "confirm responce is 200 with fulldata" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 200 with fulldata" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "facility",
               parking: {
@@ -106,8 +106,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
-        it "confirm responce is 400 without Parking data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without Parking data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "facility",
               parking: {
@@ -130,8 +130,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
-        it "confirm responce is 400 without RequirementFacility data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without RequirementFacility data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "facility",
               parking: {
@@ -156,8 +156,8 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "with RequirementFree" do
-        it "confirm responce is 200 with fulldata" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 200 with fulldata" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "free",
               parking: {
@@ -180,8 +180,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
-        it "confirm responce is 400 without Parking data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without Parking data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "free",
               parking: {
@@ -204,8 +204,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
-        it "confirm responce is 400 without RequirementFree data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without RequirementFree data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "free",
               parking: {
@@ -230,8 +230,8 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "with RequirementTime" do
-        it "confirm responce is 200 with fulldata" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 200 with fulldata" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "time",
               parking: {
@@ -254,8 +254,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
 
-        it "confirm responce is 400 without Parking data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without Parking data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "time",
               parking: {
@@ -278,8 +278,8 @@ RSpec.describe "Parkings", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
 
-        it "confirm responce is 400 without RequirementTime data" do
-          post dokotomeyo_confirm_path, params: {
+        it "new_create responce is 400 without RequirementTime data" do
+          post dokotomeyo_new_create_path, params: {
             post_parking: {
               requirement_type: "time",
               parking: {

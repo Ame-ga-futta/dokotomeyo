@@ -21,7 +21,7 @@ const PostConfirm = (props) => {
   };
 
   const register = () => {
-    axios.post('/dokotomeyo/post', {
+    axios.post('/dokotomeyo/new_create', {
       post_parking: {
         requirement_type: type,
         parking: parking,
@@ -32,7 +32,7 @@ const PostConfirm = (props) => {
       switch (response.data.status){
         case 200:
           bookFlashMessage(response.data.message);
-          navigate("/dokotomeyo");
+          navigate(`/dokotomeyo/parking/${response.data.ID}`);
           break;
         case 400:
           setErrors(response.data.message);

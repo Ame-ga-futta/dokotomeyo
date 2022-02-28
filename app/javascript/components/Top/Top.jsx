@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import moment from 'moment'
 import { LoadScript } from "@react-google-maps/api";
-import Flash from './Flash';
 import TopLeft from "./TopLeft";
 import TopRight from "./TopRight";
 import ParkingDetail from "./ParkingDetail";
 
 const Top = (props) => {
   const {
-    flashMessage,
     bookFlashMessage
   } = props;
 
@@ -33,7 +31,6 @@ const Top = (props) => {
 
   return (
     <>
-      {flashMessage && <Flash message={flashMessage}/>}
       <LoadScript googleMapsApiKey={API_KEY}>
         <SSearch_container>
           <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />

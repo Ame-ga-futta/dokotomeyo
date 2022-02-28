@@ -19,7 +19,7 @@ const PostLeft = (props) => {
 
   const Confilm = (event) => {
     setMapCenter({ lat: parking.latitude, lng: parking.longitude });
-    axios.post('/dokotomeyo/confirm', {
+    axios.post('/dokotomeyo/new_confirm', {
       post_parking: {
         requirement_type: type,
         parking: parking,
