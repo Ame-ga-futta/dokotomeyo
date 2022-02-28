@@ -50,6 +50,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     case add_params[:requirement_type]
     when "free" then
       @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
+      @requirement.additional_limit
     when "time" then
       @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
     when "buy" then
@@ -58,7 +59,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
       @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
     end
 
-    if @requirement.valid?
+    if @requirement.errors.full_messages.flatten.empty? && @requirement.valid?
       render json: { status: 200 }
     else
       render json: { status: 400, message: @requirement.errors.full_messages.flatten }
@@ -71,6 +72,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     case add_params[:requirement_type]
     when "free" then
       @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
+      @requirement.additional_limit
     when "time" then
       @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
     when "buy" then
@@ -79,7 +81,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
       @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
     end
 
-    if @requirement.save
+    if @requirement.errors.full_messages.flatten.empty? && @requirement.save
       render json: { status: 200, message: "追加完了しました" }
     else
       render json: { status: 400, message: @requirement.errors.full_messages.flatten }
