@@ -19,8 +19,8 @@ const Top = (props) => {
   });
   const [narrowDown, setNarrowDown] = useState({
     place: "",
-    start_date: moment(),
-    end_date: moment().add(3, 'hours'),
+    start_date: moment().add(1, "months"),
+    end_date: moment().add(1, "months").add(3, 'hours'),
     include_time: true,
     include_buy: false,
     include_facility: false
