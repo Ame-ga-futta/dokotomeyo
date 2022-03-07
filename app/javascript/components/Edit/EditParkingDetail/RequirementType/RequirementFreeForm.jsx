@@ -8,6 +8,7 @@ const RequirementFreeForm = (props) => {
   } = props;
 
   const [deleteRequirement, setDeleteRequirement] = useState(false);
+  const [changeRequirement, setChangeRequirement] = useState(false);
   const updateRequirements = {
     facility_name: requirement.facility_name,
     purchase_price: requirement.purchase_price,
@@ -18,14 +19,21 @@ const RequirementFreeForm = (props) => {
   useEffect(() => {
     updatesFree[requirement.id] = {
       delete: deleteRequirement,
+      change: changeRequirement,
       requirements: updateRequirements
     };
-  }, [deleteRequirement, updateRequirements])
+  }, [deleteRequirement, changeRequirement, updateRequirements])
 
   return (
     <SFormRequirement_item>
       <SFormRequirement_text>終日無料</SFormRequirement_text>
       <SFormRequirement_checkboxes>
+        <SFormRequirement_checkbox
+          type="checkbox"
+          checked={changeRequirement}
+          onChange={() => setChangeRequirement(!changeRequirement)}
+        />
+        <SFormRequirement_checkbox_label>{requirement.only_weekdays ? "全日" : "平日"}に変更</SFormRequirement_checkbox_label>
         <SFormRequirement_checkbox
           type="checkbox"
           checked={deleteRequirement}
@@ -57,7 +65,7 @@ const SFormRequirement_checkboxes = styled.div`
 `;
 
 const SFormRequirement_checkbox = styled.input`
-  margin: 3px 8px 3px 3px;
+  margin: 3px 8px;
 `;
 
 const SFormRequirement_checkbox_label = styled.p`

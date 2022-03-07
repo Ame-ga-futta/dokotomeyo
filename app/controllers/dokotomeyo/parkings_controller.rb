@@ -106,6 +106,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
       requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
+      elsif requirement[:change]
+        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
       else
         unless requirement_free.valid?
           error_message.push(requirement_free.errors.full_messages)
@@ -151,7 +153,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     if error_message.flatten.uniq.empty?
-      render json: { status: 200, message: "成功" }
+      render json: { status: 200 }
     else
       render json: { status: 400, message: error_message.flatten.uniq }
     end
@@ -175,6 +177,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
       requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
+      elsif requirement[:change]
+        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
       else
         unless requirement_free.valid?
           error_message.push(requirement_free.errors.full_messages)
@@ -227,6 +231,9 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
         if requirement[:delete]
           exist_requirement.destroy
+        elsif requirement[:change]
+          requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
+          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
         else
           exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
         end
@@ -262,7 +269,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
         end
       end
 
-      render json: { status: 200, message: "成功" }
+      render json: { status: 200 }
     else
       render json: { status: 400, message: error_message.flatten.uniq }
     end

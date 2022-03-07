@@ -105,7 +105,15 @@ const EditParkingDetailConfirmRequirements = (props) => {
                 {updatesData.requirement_free && Object.keys(updatesData.requirement_free).map((data, i) => {
                   const requirement = updatesData.requirement_free[data].requirements
                   const delete_requirement = updatesData.requirement_free[data].delete
-                  return requirement.only_weekdays && returnFree(requirement, i, delete_requirement)
+                  const change_requirement = updatesData.requirement_free[data].change
+                  const display = requirement.only_weekdays
+                  if (delete_requirement) {
+                    return requirement.only_weekdays && returnFree(requirement, i, delete_requirement)
+                  } else if (change_requirement) {
+                    return returnFree(requirement, i, display)
+                  } else {
+                    return requirement.only_weekdays && returnFree(requirement, i)
+                  }
                 })}
                 {updatesData.requirement_buy && Object.keys(updatesData.requirement_buy).map((data, i) => {
                   const requirement = updatesData.requirement_buy[data].requirements
@@ -130,7 +138,15 @@ const EditParkingDetailConfirmRequirements = (props) => {
                 {updatesData.requirement_free && Object.keys(updatesData.requirement_free).map((data, i) => {
                   const requirement = updatesData.requirement_free[data].requirements
                   const delete_requirement = updatesData.requirement_free[data].delete
-                  return requirement.only_weekdays || returnFree(requirement, i, delete_requirement)
+                  const change_requirement = updatesData.requirement_free[data].change
+                  const display = !requirement.only_weekdays
+                  if (delete_requirement) {
+                    return requirement.only_weekdays || returnFree(requirement, i, delete_requirement)
+                  } else if (change_requirement) {
+                    return returnFree(requirement, i, display)
+                  } else {
+                    return requirement.only_weekdays || returnFree(requirement, i)
+                  }
                 })}
                 {updatesData.requirement_buy && Object.keys(updatesData.requirement_buy).map((data, i) => {
                   const requirement = updatesData.requirement_buy[data].requirements
