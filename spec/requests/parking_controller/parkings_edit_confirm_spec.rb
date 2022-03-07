@@ -3,12 +3,12 @@ RSpec.describe "Parkings", type: :request do
     let!(:existing_parking) { create(:parking) }
     let!(:existing_requirement_buy) { create(:requirement_buy, parking_id: existing_parking.id) }
     let!(:existing_requirement_facility) { create(:requirement_facility, parking_id: existing_parking.id) }
-    let!(:existing_requirement_free) { create(:requirement_free, parking_id: existing_parking.id) }
+    let!(:existing_requirement_free) { create(:requirement_free, parking_id: existing_parking.id, only_weekdays: true) }
     let!(:existing_requirement_time) { create(:requirement_time, parking_id: existing_parking.id) }
     let(:edit_parking) { build(:parking, name: "edited") }
     let(:edit_requirement_buy) { build(:requirement_buy, facility_name: "edited") }
     let(:edit_requirement_facility) { build(:requirement_facility, facility_name: "edited") }
-    let(:edit_requirement_free) { build(:requirement_free, only_weekdays: true) }
+    let(:edit_requirement_free) { build(:requirement_free, only_weekdays: false) }
     let(:edit_requirement_time) { build(:requirement_time, free_time: "01:00") }
 
     context "edit_confilm" do
