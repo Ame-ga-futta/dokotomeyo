@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const RequirementBuyForm = (props) => {
   const {
     requirement,
-    updatesBuy
+    updatesBuy,
+    changeRequirement
   } = props;
 
   const [deleteRequirement, setDeleteRequirement] = useState(false);
@@ -21,6 +22,14 @@ const RequirementBuyForm = (props) => {
       requirements: updateRequirements
     };
   }, [deleteRequirement, updateRequirements])
+
+  useEffect(() => {
+    if (changeRequirement) {
+      setDeleteRequirement(true)
+    } else {
+      setDeleteRequirement(false)
+    }
+  }, [changeRequirement])
 
   return (
     <SFormRequirement_item>
@@ -55,7 +64,7 @@ const RequirementBuyForm = (props) => {
         <SFormRequirement_checkbox
           type="checkbox"
           checked={deleteRequirement}
-          onChange={() => setDeleteRequirement(!deleteRequirement)}
+          onChange={() => {changeRequirement || setDeleteRequirement(!deleteRequirement)}}
         />
         <SFormRequirement_checkbox_label>削除</SFormRequirement_checkbox_label>
       </SFormRequirement_checkboxes>

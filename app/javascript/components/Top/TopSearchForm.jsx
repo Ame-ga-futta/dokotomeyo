@@ -14,7 +14,7 @@ const TopSearchForm = (props) => {
   } = props;
 
   const [inputDate, setInputDate] = useState(
-    narrowDown.start_date.year() + "-" + narrowDown.start_date.month()+1 + "-" + ("00" + narrowDown.start_date.date()).slice(-2)
+    narrowDown.start_date.year() + "-" + ("00" + narrowDown.start_date.month()).slice(-2) + "-" + ("00" + narrowDown.start_date.date()).slice(-2)
   );
   const [inputStartTime, setInputStartTime] = useState(
     ("00" + narrowDown.start_date.hours()).slice(-2) + ":" + ("00" + narrowDown.start_date.minute()).slice(-2)

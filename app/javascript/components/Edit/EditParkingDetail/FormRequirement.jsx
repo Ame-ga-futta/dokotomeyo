@@ -13,6 +13,8 @@ const FormRequirement = (props) => {
     updatesFacility,
     updatesTime,
     updatesFree,
+    changeRequirement,
+    setChangeRequirement
   } = props;
 
   return (
@@ -20,16 +22,16 @@ const FormRequirement = (props) => {
       <SformRequirement_Label>{label}</SformRequirement_Label>
       <SFormRequirement_list>
         {requirementsData.requirement_frees && requirementsData.requirement_frees.map((requirement, i) => {
-          return <RequirementFreeForm requirement={requirement} key={i} updatesFree={updatesFree} />
+          return <RequirementFreeForm requirement={requirement} key={i} updatesFree={updatesFree} changeRequirement={changeRequirement} setChangeRequirement={setChangeRequirement} />
         })}
         {requirementsData.requirement_buys && requirementsData.requirement_buys.map((requirement, i) => {
-          return <RequirementBuyForm requirement={requirement} key={i} updatesBuy={updatesBuy} />
+          return <RequirementBuyForm requirement={requirement} key={i} updatesBuy={updatesBuy} changeRequirement={changeRequirement} />
         })}
         {requirementsData.requirement_facilities && requirementsData.requirement_facilities.map((requirement, i) => {
-          return <RequirementFacilityForm requirement={requirement} key={i} updatesFacility={updatesFacility} />
+          return <RequirementFacilityForm requirement={requirement} key={i} updatesFacility={updatesFacility} changeRequirement={changeRequirement} />
         })}
         {requirementsData.requirement_times && requirementsData.requirement_times.map((requirement, i) => {
-          return <RequirementTimeForm requirement={requirement} key={i} updatesTime={updatesTime} />
+          return <RequirementTimeForm requirement={requirement} key={i} updatesTime={updatesTime} changeRequirement={changeRequirement} />
         })}
       </SFormRequirement_list>
     </SFormRequirement_container>

@@ -59,7 +59,7 @@ RSpec.describe Parking, type: :model do
     let!(:new_parking) { create(:parking) }
     let!(:new_requirement_buy) { create(:requirement_buy, parking_id: new_parking.id) }
     let!(:new_requirement_facility) { create(:requirement_facility, parking_id: new_parking.id) }
-    let!(:new_requirement_free) { create(:requirement_free, parking_id: new_parking.id) }
+    let!(:new_requirement_free) { create(:requirement_free, parking_id: new_parking.id, only_weekdays: true) }
     let!(:new_requirement_time) { create(:requirement_time, parking_id: new_parking.id) }
 
     context "when deleted Parking" do

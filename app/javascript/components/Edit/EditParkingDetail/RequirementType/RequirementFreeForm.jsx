@@ -4,7 +4,9 @@ import styled from 'styled-components';
 const RequirementFreeForm = (props) => {
   const {
     requirement,
-    updatesFree
+    updatesFree,
+    changeRequirement,
+    setChangeRequirement
   } = props;
 
   const [deleteRequirement, setDeleteRequirement] = useState(false);
@@ -18,14 +20,21 @@ const RequirementFreeForm = (props) => {
   useEffect(() => {
     updatesFree[requirement.id] = {
       delete: deleteRequirement,
+      change: changeRequirement,
       requirements: updateRequirements
     };
-  }, [deleteRequirement, updateRequirements])
+  }, [deleteRequirement, changeRequirement, updateRequirements])
 
   return (
     <SFormRequirement_item>
       <SFormRequirement_text>終日無料</SFormRequirement_text>
       <SFormRequirement_checkboxes>
+        <SFormRequirement_checkbox
+          type="checkbox"
+          checked={changeRequirement}
+          onChange={() => setChangeRequirement(!changeRequirement)}
+        />
+        <SFormRequirement_checkbox_label>{requirement.only_weekdays ? "全日" : "平日"}に変更</SFormRequirement_checkbox_label>
         <SFormRequirement_checkbox
           type="checkbox"
           checked={deleteRequirement}
@@ -57,7 +66,7 @@ const SFormRequirement_checkboxes = styled.div`
 `;
 
 const SFormRequirement_checkbox = styled.input`
-  margin: 3px 8px 3px 3px;
+  margin: 3px 8px;
 `;
 
 const SFormRequirement_checkbox_label = styled.p`

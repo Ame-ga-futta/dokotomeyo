@@ -50,6 +50,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     case add_params[:requirement_type]
     when "free" then
       @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
+      @requirement.additional_limit
     when "time" then
       @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
     when "buy" then
@@ -58,7 +59,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
       @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
     end
 
-    if @requirement.valid?
+    if @requirement.errors.full_messages.flatten.empty? && @requirement.valid?
       render json: { status: 200 }
     else
       render json: { status: 400, message: @requirement.errors.full_messages.flatten }
@@ -71,6 +72,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     case add_params[:requirement_type]
     when "free" then
       @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
+      @requirement.additional_limit
     when "time" then
       @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
     when "buy" then
@@ -79,7 +81,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
       @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
     end
 
-    if @requirement.save
+    if @requirement.errors.full_messages.flatten.empty? && @requirement.save
       render json: { status: 200, message: "追加完了しました" }
     else
       render json: { status: 400, message: @requirement.errors.full_messages.flatten }
@@ -104,6 +106,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
       requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
+      elsif requirement[:change]
+        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
       else
         unless requirement_free.valid?
           error_message.push(requirement_free.errors.full_messages)
@@ -149,7 +153,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
 
     if error_message.flatten.uniq.empty?
-      render json: { status: 200, message: "成功" }
+      render json: { status: 200 }
     else
       render json: { status: 400, message: error_message.flatten.uniq }
     end
@@ -173,6 +177,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
       requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
       if requirement[:delete]
         delete_count += 1
+      elsif requirement[:change]
+        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
       else
         unless requirement_free.valid?
           error_message.push(requirement_free.errors.full_messages)
@@ -220,16 +226,6 @@ class Dokotomeyo::ParkingsController < ApplicationController
     if error_message.flatten.uniq.empty?
       @exist_parking.update(edit_params[:parking])
 
-      edit_params[:requirement_free].each do |key, requirement|
-        exist_requirement = @exist_parking.requirement_frees.find(key)
-
-        if requirement[:delete]
-          exist_requirement.destroy
-        else
-          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
-        end
-      end
-
       edit_params[:requirement_time].each do |key, requirement|
         exist_requirement = @exist_parking.requirement_times.find(key)
 
@@ -260,7 +256,23 @@ class Dokotomeyo::ParkingsController < ApplicationController
         end
       end
 
-      render json: { status: 200, message: "成功" }
+      edit_params[:requirement_free].each do |key, requirement|
+        exist_requirement = @exist_parking.requirement_frees.find(key)
+
+        if requirement[:delete]
+          exist_requirement.destroy
+        elsif requirement[:change]
+          requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
+          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
+          @exist_parking.requirement_times.destroy_by(only_weekdays: requirement[:requirements][:only_weekdays])
+          @exist_parking.requirement_buys.destroy_by(only_weekdays: requirement[:requirements][:only_weekdays])
+          @exist_parking.requirement_facilities.destroy_by(only_weekdays: requirement[:requirements][:only_weekdays])
+        else
+          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
+        end
+      end
+
+      render json: { status: 200 }
     else
       render json: { status: 400, message: error_message.flatten.uniq }
     end

@@ -1,11 +1,11 @@
 RSpec.describe "Parkings", type: :request do
   describe "POST" do
     let!(:parking) { create(:parking) }
-    let!(:existing_requirement) { create(:requirement_free, parking_id: parking.id) }
-    let(:add_requirement_buy) { create(:requirement_buy, parking_id: parking.id) }
-    let(:add_requirement_facility) { create(:requirement_facility, parking_id: parking.id) }
-    let(:add_requirement_free) { create(:requirement_free, parking_id: parking.id) }
-    let(:add_requirement_time) { create(:requirement_time, parking_id: parking.id) }
+    let!(:existing_requirement) { create(:requirement_buy, parking_id: parking.id) }
+    let(:add_requirement_buy) { build(:requirement_buy, parking_id: parking.id) }
+    let(:add_requirement_facility) { build(:requirement_facility, parking_id: parking.id) }
+    let(:add_requirement_free) { build(:requirement_free, parking_id: parking.id) }
+    let(:add_requirement_time) { build(:requirement_time, parking_id: parking.id) }
 
     context "add_confirm" do
       context "add RequirementBuy" do
@@ -39,6 +39,26 @@ RSpec.describe "Parkings", type: :request do
             }
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
+        end
+
+        context "higher_requirement_check" do
+          let!(:existing_requirement_free) { create(:requirement_free, parking_id: parking.id, only_weekdays: true) }
+
+          it "add_confirm responce is 400 when there is higher requirement" do
+            post dokotomeyo_add_confirm_path, params: {
+              add_requirement: {
+                requirement_type: "buy",
+                parkingID: parking.id,
+                requirement: {
+                  facility_name: add_requirement_buy.facility_name,
+                  purchase_price: add_requirement_buy.purchase_price,
+                  free_time: add_requirement_buy.free_time,
+                  only_weekdays: true,
+                }
+              }
+            }
+            expect(JSON.parse(response.body)["status"]).to eq 400
+          end
         end
       end
 
@@ -74,6 +94,26 @@ RSpec.describe "Parkings", type: :request do
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
+
+        context "higher_requirement_check" do
+          let!(:existing_requirement_free) { create(:requirement_free, parking_id: parking.id, only_weekdays: true) }
+
+          it "add_confirm responce is 400 when there is higher requirement" do
+            post dokotomeyo_add_confirm_path, params: {
+              add_requirement: {
+                requirement_type: "facility",
+                parkingID: parking.id,
+                requirement: {
+                  facility_name: add_requirement_facility.facility_name,
+                  purchase_price: "",
+                  free_time: add_requirement_facility.free_time,
+                  only_weekdays: true,
+                }
+              }
+            }
+            expect(JSON.parse(response.body)["status"]).to eq 400
+          end
+        end
       end
 
       context "add RequirementFree" do
@@ -108,6 +148,26 @@ RSpec.describe "Parkings", type: :request do
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
+
+        context "additional_limit" do
+          let!(:existing_requirement_first) { create(:requirement_free, parking_id: parking.id) }
+
+          it "add_confirm responce is 400 when add second RequirementFree data" do
+            post dokotomeyo_add_confirm_path, params: {
+              add_requirement: {
+                requirement_type: "free",
+                parkingID: parking.id,
+                requirement: {
+                  facility_name: "",
+                  purchase_price: "",
+                  free_time: "",
+                  only_weekdays: add_requirement_free.only_weekdays,
+                }
+              }
+            }
+            expect(JSON.parse(response.body)["status"]).to eq 400
+          end
+        end
       end
 
       context "add RequirementTime" do
@@ -141,6 +201,26 @@ RSpec.describe "Parkings", type: :request do
             }
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
+        end
+
+        context "higher_requirement_check" do
+          let!(:existing_requirement_free) { create(:requirement_free, parking_id: parking.id, only_weekdays: true) }
+
+          it "add_confirm responce is 400 when there is higher requirement" do
+            post dokotomeyo_add_confirm_path, params: {
+              add_requirement: {
+                requirement_type: "time",
+                parkingID: parking.id,
+                requirement: {
+                  facility_name: "",
+                  purchase_price: "",
+                  free_time: add_requirement_time.free_time,
+                  only_weekdays: true,
+                }
+              }
+            }
+            expect(JSON.parse(response.body)["status"]).to eq 400
+          end
         end
       end
     end
