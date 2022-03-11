@@ -22,7 +22,7 @@ const EditParkingMap = (props) => {
   const click = (latLng) => {
     geocoder.geocode({ location: latLng }, ( results, status ) => {
       if (status === 'OK') {
-        setUpdateParking({ ...updateParking, address: results[0].formatted_address, latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() })
+        setUpdateParking({ ...updateParking, address: results[0].formatted_address.split('、')[1], latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() })
         setCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
       }
     });
@@ -31,7 +31,7 @@ const EditParkingMap = (props) => {
   const search = (event) => {
     geocoder.geocode({ address: place}, ( results, status ) => {
       if (status === 'OK') {
-        setUpdateParking({ ...updateParking, address: results[0].formatted_address, latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() })
+        setUpdateParking({ ...updateParking, address: results[0].formatted_address.split('、')[1], latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() })
         setCenter({ lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng() })
       }
     });
