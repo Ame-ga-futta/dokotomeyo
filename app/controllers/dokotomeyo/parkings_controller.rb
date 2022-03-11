@@ -226,19 +226,6 @@ class Dokotomeyo::ParkingsController < ApplicationController
     if error_message.flatten.uniq.empty?
       @exist_parking.update(edit_params[:parking])
 
-      edit_params[:requirement_free].each do |key, requirement|
-        exist_requirement = @exist_parking.requirement_frees.find(key)
-
-        if requirement[:delete]
-          exist_requirement.destroy
-        elsif requirement[:change]
-          requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
-          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
-        else
-          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
-        end
-      end
-
       edit_params[:requirement_time].each do |key, requirement|
         exist_requirement = @exist_parking.requirement_times.find(key)
 
@@ -264,6 +251,22 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
         if requirement[:delete]
           exist_requirement.destroy
+        else
+          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
+        end
+      end
+
+      edit_params[:requirement_free].each do |key, requirement|
+        exist_requirement = @exist_parking.requirement_frees.find(key)
+
+        if requirement[:delete]
+          exist_requirement.destroy
+        elsif requirement[:change]
+          requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
+          exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
+          @exist_parking.requirement_times.destroy_by(only_weekdays: requirement[:requirements][:only_weekdays])
+          @exist_parking.requirement_buys.destroy_by(only_weekdays: requirement[:requirements][:only_weekdays])
+          @exist_parking.requirement_facilities.destroy_by(only_weekdays: requirement[:requirements][:only_weekdays])
         else
           exist_requirement.update(requirement[:requirements].reject { |k, v| v == "" })
         end

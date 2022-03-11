@@ -28,6 +28,7 @@ const EditParkingDetail = (props) => {
   const [updatesTime] = useState({});
   const [updatesFree] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
+  const [changeRequirement, setChangeRequirement] = useState(false);
 
   useEffect(() => {
     axios.post('/dokotomeyo/details', { parkingID: id })
@@ -133,8 +134,8 @@ const EditParkingDetail = (props) => {
           <SFormParkingDetail_item>
             <SText_label>無料の条件</SText_label>
             <SRequirements>
-              <FormRequirement requirementsData={requirementsWeekdayData} label={"平日"} updatesBuy={updatesBuy} updatesFacility={updatesFacility} updatesTime={updatesTime} updatesFree={updatesFree} />
-              <FormRequirement requirementsData={requirementsHolidayData} label={"全日"} updatesBuy={updatesBuy} updatesFacility={updatesFacility} updatesTime={updatesTime} updatesFree={updatesFree} />
+              <FormRequirement requirementsData={requirementsWeekdayData} label={"平日"} updatesBuy={updatesBuy} updatesFacility={updatesFacility} updatesTime={updatesTime} updatesFree={updatesFree} changeRequirement={changeRequirement} setChangeRequirement={setChangeRequirement} />
+              <FormRequirement requirementsData={requirementsHolidayData} label={"全日"} updatesBuy={updatesBuy} updatesFacility={updatesFacility} updatesTime={updatesTime} updatesFree={updatesFree} changeRequirement={changeRequirement} setChangeRequirement={setChangeRequirement} />
             </SRequirements>
           </SFormParkingDetail_item>
           <SText_submit>編集</SText_submit>

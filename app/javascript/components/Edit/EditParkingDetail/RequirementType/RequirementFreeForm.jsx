@@ -4,11 +4,12 @@ import styled from 'styled-components';
 const RequirementFreeForm = (props) => {
   const {
     requirement,
-    updatesFree
+    updatesFree,
+    changeRequirement,
+    setChangeRequirement
   } = props;
 
   const [deleteRequirement, setDeleteRequirement] = useState(false);
-  const [changeRequirement, setChangeRequirement] = useState(false);
   const updateRequirements = {
     facility_name: requirement.facility_name,
     purchase_price: requirement.purchase_price,
