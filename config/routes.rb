@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     post   :login,                to: 'sessions#login'
     delete :logout,               to: 'sessions#logout'
 
+    get    :profile,              to: 'users#get_profile'
+    get    :favorite,             to: 'users#get_favorite'
+    get    :comment,              to: 'users#get_comment'
+
     post   :new_confirm,          to: 'parkings#new_confirm'
     post   :new_create,           to: 'parkings#new_create'
     post   :add_confirm,          to: 'parkings#add_confirm'
