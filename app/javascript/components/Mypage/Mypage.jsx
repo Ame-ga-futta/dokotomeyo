@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import Profile from "./Profile";
-import Favorite from "./Favorite";
-import Comment from "./Comment"
+import Profile from "./Profile/Profile";
+import Favorite from "./Favorite/Favorite";
+import Comment from "./Comment/Comment"
 
 const Mypage = (props) => {
   const { userName, bookFlashMessage } = props;
