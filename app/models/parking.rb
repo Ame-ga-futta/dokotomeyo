@@ -10,6 +10,8 @@ class Parking < ApplicationRecord
   has_many :requirement_facilities, dependent: :destroy
   has_many :requirement_frees, dependent: :destroy
   has_many :requirement_times, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def time_lag_check
     errors[:base] << "営業時間を入力してください" if beginning_of_worktime.blank? || end_of_worktime.blank?
