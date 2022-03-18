@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 
 const Comment = () => {
-
+  const [comments, setComment] = useState({});
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment')
     .then((response) => {
-      console.log(response.data.message)
+      setComment(response.data.comments)
+      console.log(comments)
     })
     .catch(() => {
       console.log("通信に失敗しました")

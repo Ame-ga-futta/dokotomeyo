@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 
 const Favorite = () => {
-
+  const [favorites, setFavorites] = useState({});
 
   useEffect(() => {
     axios.get('/dokotomeyo/favorite')
     .then((response) => {
-      console.log(response.data.message)
+      setFavorites(response.data.favorites)
+      console.log(favorites)
     })
     .catch(() => {
       console.log("通信に失敗しました")

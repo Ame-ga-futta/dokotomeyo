@@ -5,6 +5,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import axios from 'axios';
 import ParkingRequirementsWeekday from "./ParkingRequirementsWeekday";
 import ParkingRequirementsHoliday from "./ParkingRequirementsHoliday";
+import Comments from "./Comments";
 
 const ParkingDetail = (props) => {
   const {
@@ -71,6 +72,7 @@ const ParkingDetail = (props) => {
             <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
+        <Comments ID={parkingData.id} />
       </STop_ParkingDetail>
     </STop_ParkingDetail_container>
   )
@@ -127,7 +129,7 @@ const STop_ParkingDetail_edit = styled.div`
   width: 17%;
   border-bottom: solid 1px gray;
   padding: 3px;
-  margin-left: 20%;
+  margin-left: 83%;
   text-align: center;
 `;
 
