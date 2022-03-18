@@ -1,4 +1,4 @@
-RSpec.describe "top", type: :request do
+RSpec.describe "Comments", type: :request do
   describe "GET" do
     let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
 
@@ -8,9 +8,9 @@ RSpec.describe "top", type: :request do
       }
     end
 
-    context "profile" do
-      it "get_profile responce is 200" do
-        get dokotomeyo_profile_path
+    context "comment" do
+      it "get_comment responce is 200" do
+        get dokotomeyo_comment_path
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
     end

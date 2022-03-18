@@ -14,8 +14,10 @@ Rails.application.routes.draw do
     delete :logout,               to: 'sessions#logout'
 
     get    :profile,              to: 'users#get_profile'
-    get    :favorite,             to: 'users#get_favorite'
-    get    :comment,              to: 'users#get_comment'
+
+    get    :favorite,             to: 'favorite#get_favorite'
+
+    get    :comment,              to: 'comment#get_comment'
 
     post   :new_confirm,          to: 'parkings#new_confirm'
     post   :new_create,           to: 'parkings#new_create'
