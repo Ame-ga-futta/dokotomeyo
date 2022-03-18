@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Comments = (props) => {
   const {
     ID
   } = props;
 
+  const [comments, setComments] = useState({});
+
+  useEffect(() => {
+    axios.post('/dokotomeyo/comment_from_parking', { parkingID: ID })
+    .then((response) => {
+      setComments(response.data.comments)
+      console.log(comments)
+    })
+    .catch(() => {
+      console.log("通信に失敗しました")
+    })
+  }, [])
+
   return (
     <SComments_container>
-      <SComments_title>コメント {}件</SComments_title>
+      <SComments_title>コメント {Object.keys(comments).length}件</SComments_title>
     </SComments_container>
   );
 };

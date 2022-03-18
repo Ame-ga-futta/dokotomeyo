@@ -6,7 +6,7 @@ const Favorite = () => {
   const [favorites, setFavorites] = useState({});
 
   useEffect(() => {
-    axios.get('/dokotomeyo/favorite')
+    axios.get('/dokotomeyo/favorite_from_user')
     .then((response) => {
       setFavorites(response.data.favorites)
       console.log(favorites)

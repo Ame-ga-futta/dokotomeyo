@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const Comment = () => {
-  const [comments, setComment] = useState({});
+  const [comments, setComments] = useState({});
 
   useEffect(() => {
-    axios.get('/dokotomeyo/comment')
+    axios.get('/dokotomeyo/comment_from_user')
     .then((response) => {
-      setComment(response.data.comments)
+      setComments(response.data.comments)
       console.log(comments)
     })
     .catch(() => {
