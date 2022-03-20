@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     get    :profile,                 to: 'users#get_profile'
 
     get    :favorite_from_user,      to: 'favorite#get_favorite_from_user'
-    post   :favorite_from_parking,   to: 'favorite#get_favorite_from_parking'
+    get    :favorite_from_parking,   to: 'favorite#get_favorite_from_parking'
 
     get    :comment_from_user,       to: 'comment#get_comment_from_user'
-    post   :comment_from_parking,    to: 'comment#get_comment_from_parking'
+    get    :comment_from_parking,    to: 'comment#get_comment_from_parking'
 
     post   :new_confirm,             to: 'parkings#new_confirm'
     post   :new_create,              to: 'parkings#new_create'
@@ -28,6 +28,6 @@ Rails.application.routes.draw do
     post   :edit_confirm,            to: 'parkings#edit_confirm'
     post   :edit_create,             to: 'parkings#edit_create'
     post   :search,                  to: 'parkings#search'
-    post   :details,                 to: 'parkings#details'
+    get    :details,                 to: 'parkings#details'
   end
 end

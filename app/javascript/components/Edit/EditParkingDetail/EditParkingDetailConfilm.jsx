@@ -19,7 +19,7 @@ const EditParkingDetailConfilm = (props) => {
   const [existRequirementsHolidayData, setExistRequirementsHolidayData] = useState({});
 
   useEffect(() => {
-    axios.post('/dokotomeyo/details', { parkingID: id })
+    axios.get('/dokotomeyo/details', { params: { parkingID: id } })
     .then((response) => {
       setExistParkingData(response.data.parking);
       setExistRequirementsWeekdayData(response.data.requirements_weekday);

@@ -22,7 +22,7 @@ const ParkingDetail = (props) => {
   });
 
   useEffect(() => {
-    axios.post('/dokotomeyo/details', { parkingID: detail })
+    axios.get('/dokotomeyo/details', { params: { parkingID: detail } })
     .then((response) => {
       setParkingData(response.data.parking);
       setRequirementsWeekdayData(response.data.requirements_weekday);

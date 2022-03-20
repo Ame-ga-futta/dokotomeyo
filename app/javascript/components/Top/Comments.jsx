@@ -14,7 +14,7 @@ const Comments = (props) => {
   const [comments, setComments] = useState({});
 
   useEffect(() => {
-    axios.post('/dokotomeyo/comment_from_parking', { parkingID: parkingID })
+    axios.get('/dokotomeyo/comment_from_parking', { params: { parkingID: parkingID } })
     .then((response) => {
       setComments(response.data.comments)
     })

@@ -31,7 +31,7 @@ const EditParkingDetail = (props) => {
   const [changeRequirement, setChangeRequirement] = useState(false);
 
   useEffect(() => {
-    axios.post('/dokotomeyo/details', { parkingID: id })
+    axios.get('/dokotomeyo/details', { params: { parkingID: id } })
     .then((response) => {
       setUpdateParking(response.data.parking);
       setRequirementsWeekdayData(response.data.requirements_weekday);
