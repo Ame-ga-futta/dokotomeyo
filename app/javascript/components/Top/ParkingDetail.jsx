@@ -9,6 +9,7 @@ import Comments from "./Comments";
 
 const ParkingDetail = (props) => {
   const {
+    userName,
     detail
   } = props;
 
@@ -72,7 +73,7 @@ const ParkingDetail = (props) => {
             <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
-        <Comments ID={parkingData.id} />
+        <Comments userName={userName} parkingID={parkingData.id} />
       </STop_ParkingDetail>
     </STop_ParkingDetail_container>
   )
