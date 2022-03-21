@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     delete :logout,                  to: 'sessions#logout'
 
     get    :profile,                 to: 'users#get_profile'
+    get    :username,                to: 'users#get_username'
 
     get    :favorite_from_user,      to: 'favorite#get_favorite_from_user'
     get    :favorite_from_parking,   to: 'favorite#get_favorite_from_parking'

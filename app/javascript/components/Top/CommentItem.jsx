@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
 import moment from 'moment'
 
 const CommentItem = (props) => {
@@ -10,7 +11,20 @@ const CommentItem = (props) => {
   const [contributor, setContributor] = useState("")
 
   useEffect(() => {
-    setContributor("サンプルユーザー");
+    axios.get('/dokotomeyo/username', { params: { userID: commentData.user_id } })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          setContributor(response.data.name);
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗しました")
+    })
   }, [])
 
   return (
