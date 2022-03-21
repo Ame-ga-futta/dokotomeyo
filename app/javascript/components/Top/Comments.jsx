@@ -36,7 +36,7 @@ const Comments = (props) => {
           )
         })}
       </SComment_list>
-      {userName ? <ReturnForm /> : <ReturnMessage />}
+      {userName ? <ReturnForm parkingID={parkingID} /> : <ReturnMessage />}
     </SComments_container>
   );
 };

@@ -1,11 +1,34 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
 
-const ReturnForm = () => {
+const ReturnForm = (props) => {
+  const {
+    parkingID
+  } = props;
+
   const [postComment, setPostComments] = useState("")
 
   const PostNewComment = (event) => {
-    console.log(postComment)
+    axios.post('/dokotomeyo/post_comment', {
+      post_comment: {
+        parking_id: parkingID,
+        comment: postComment
+      }
+    })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          console.log(response.data.message);
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗");
+    })
     event.preventDefault();
   }
 

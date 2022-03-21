@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     get    :comment_from_user,       to: 'comment#get_comment_from_user'
     get    :comment_from_parking,    to: 'comment#get_comment_from_parking'
+    post   :post_comment,            to: 'comment#post_comment'
 
     post   :new_confirm,             to: 'parkings#new_confirm'
     post   :new_create,              to: 'parkings#new_create'

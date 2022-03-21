@@ -26,4 +26,38 @@ RSpec.describe "Comments", type: :request do
       end
     end
   end
+
+  describe "POST" do
+    let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
+    let!(:existing_parking) { create:parking }
+    let!(:existing_requirement) { create(:requirement_buy, parking_id: existing_parking.id) }
+
+    before do
+      post dokotomeyo_login_path, params: {
+        user: { email: existing_user.email, password: "password" },
+      }
+    end
+
+    context "post_comment" do
+      it "post_comment responce is 200 with comment" do
+        post dokotomeyo_post_comment_path, params: {
+          post_comment: {
+            parking_id: existing_parking.id,
+            comment: "comment"
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 200
+      end
+
+      it "post_comment responce is 400 without comment" do
+        post dokotomeyo_post_comment_path, params: {
+          post_comment: {
+            parking_id: existing_parking.id,
+            comment: ""
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 400
+      end
+    end
+  end
 end
