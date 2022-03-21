@@ -17,6 +17,14 @@ const Comments = (props) => {
     axios.get('/dokotomeyo/comment_from_parking', { params: { parkingID: parkingID } })
     .then((response) => {
       setComments(response.data.comments)
+      switch (response.data.status) {
+        case 200:
+          setComments(response.data.comments);
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
     })
     .catch(() => {
       console.log("通信に失敗しました")

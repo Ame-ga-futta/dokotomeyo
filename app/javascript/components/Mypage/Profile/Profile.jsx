@@ -29,8 +29,15 @@ const Profile = () => {
   useEffect(() => {
     axios.get('/dokotomeyo/profile')
     .then((response) => {
-      setName(response.data.name)
-      setEmail(response.data.email)
+      switch (response.data.status) {
+        case 200:
+          setName(response.data.name)
+          setEmail(response.data.email)
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
     })
     .catch(() => {
       console.log("通信に失敗しました")
