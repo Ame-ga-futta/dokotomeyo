@@ -25,7 +25,7 @@ const CommentItem = (props) => {
     .catch(() => {
       console.log("通信に失敗しました")
     })
-  }, [])
+  }, [commentData])
 
   return (
     <SCommentItem_container>
