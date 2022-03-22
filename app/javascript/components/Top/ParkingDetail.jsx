@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import axios from 'axios';
+import FavoriteIcon from "./FavoriteIcon";
 import ParkingRequirementsWeekday from "./ParkingRequirementsWeekday";
 import ParkingRequirementsHoliday from "./ParkingRequirementsHoliday";
 import Comments from "./Comments";
@@ -50,6 +51,7 @@ const ParkingDetail = (props) => {
       <STop_ParkingDetail>
         <STop_ParkingDetail_list_name>
           <STop_ParkingDetail_name>{parkingData.name}</STop_ParkingDetail_name>
+          {userName && <FavoriteIcon parkingID={parkingData.id} />}
         </STop_ParkingDetail_list_name>
         <STop_ParkingDetail_list_item>
           <STop_ParkingDetail_header>住所</STop_ParkingDetail_header>
@@ -95,6 +97,8 @@ const STop_ParkingDetail_list_name = styled.li`
   padding: 10px 20px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: #eeeeee;
 `;
 

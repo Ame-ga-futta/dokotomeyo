@@ -17,6 +17,25 @@ class Dokotomeyo::FavoriteController < ApplicationController
     end
   end
 
+  def get_favorite_match
+    if Favorite.where(user_id: session[:user_id], parking_id: parking_params[:parkingID]).exists?
+      render json: { favorite: true }
+    else
+      render json: { favorite: false }
+    end
+  end
+
+  def post_favorite
+    @favorite = Favorite.find_or_initialize_by(user_id: session[:user_id], parking_id: parking_params[:parkingID])
+    if Favorite.where(user_id: session[:user_id], parking_id: parking_params[:parkingID]).exists?
+      @favorite.destroy
+      render json: { favorite: false }
+    else
+      @favorite.save
+      render json: { favorite: true }
+    end
+  end
+
   private
 
   def parking_params

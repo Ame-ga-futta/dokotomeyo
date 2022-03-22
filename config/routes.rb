@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
     get    :favorite_from_user,      to: 'favorite#get_favorite_from_user'
     get    :favorite_from_parking,   to: 'favorite#get_favorite_from_parking'
+    get    :favorite_match,          to: 'favorite#get_favorite_match'
+    post   :post_favorite,           to: 'favorite#post_favorite'
 
     get    :comment_from_user,       to: 'comment#get_comment_from_user'
     get    :comment_from_parking,    to: 'comment#get_comment_from_parking'
