@@ -55,6 +55,7 @@ const SReturnForm_container = styled.div`
 
 const SText_field = styled.input`
   width: 75%;
+  height: 3em;
   border: solid 1px gray;
   border-radius: 4px;
   padding: 4px;
