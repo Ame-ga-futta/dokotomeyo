@@ -8,6 +8,7 @@ const ReturnForm = (props) => {
   } = props;
 
   const [postComment, setPostComments] = useState("")
+  const [errors, setErrors] = useState([]);
 
   const PostNewComment = (event) => {
     axios.post('/dokotomeyo/post_comment', {
@@ -22,7 +23,7 @@ const ReturnForm = (props) => {
           console.log(response.data.message);
           break;
         case 400:
-          console.log(response.data.message);
+          setErrors(response.data.message);
           break;
       }
     })
@@ -35,13 +36,27 @@ const ReturnForm = (props) => {
   return (
     <form onSubmit={PostNewComment}>
       <SReturnForm_container>
-        <SText_field
-          type="text"
-          value={postComment}
-          placeholder="コメントを投稿"
-          onChange={event => setPostComments(event.target.value)}
-        />
-        <SText_submit>投稿</SText_submit>
+        <SReturnForm_header>
+          <SReturnForm_title>コメントを投稿</SReturnForm_title>
+          <SReturnForm_limit>
+            残り <SReturnForm_count length={postComment.length}>{140 - postComment.length}</SReturnForm_count>文字
+          </SReturnForm_limit>
+        </SReturnForm_header>
+        <SReturnForm_error>
+          {errors && errors.map((error, i) => {
+            return (
+              <li key={i}><SError>{error}</SError></li>
+            )
+          })}
+        </SReturnForm_error>
+        <SReturnForm_forms>
+          <SText_field
+            type="text"
+            value={postComment}
+            onChange={event => setPostComments(event.target.value)}
+          />
+          <SText_submit>投稿</SText_submit>
+        </SReturnForm_forms>
       </SReturnForm_container>
     </form>
   );
@@ -49,13 +64,49 @@ const ReturnForm = (props) => {
 
 const SReturnForm_container = styled.div`
   display: flex;
-  flex-direction: row;
-  margin: 8px 0;
+  flex-direction: column;
+  margin-top: 10px;
 `;
 
-const SText_field = styled.input`
+const SReturnForm_header = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+`;
+
+const SReturnForm_title = styled.p`
+  margin-right: 15px;
+`;
+
+const SReturnForm_limit = styled.p`
+  font-size: 14px;
+  color: gray;
+`;
+
+const SReturnForm_count = styled.span`
+  color: ${ props => props.length > 140 ? "red" : "gray"};
+`;
+
+const SReturnForm_error = styled.ul`
+  color: red;
+`;
+
+const SError = styled.p`
+  padding: 4px 0;
+`;
+
+const SReturnForm_forms = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  margin: 4px 0 8px 0;
+`;
+
+const SText_field = styled.textarea`
+  resize: none;
   width: 75%;
-  height: 3em;
+  height: calc( 1.2em * 3 );
+  line-height: 1.2;
   border: solid 1px gray;
   border-radius: 4px;
   padding: 4px;
@@ -63,6 +114,7 @@ const SText_field = styled.input`
 
 const SText_submit = styled.button`
   width: 20%;
+  height: 33%;
   background-color: rgb(75, 189, 255);
   color: white;
   border-radius: 4px;
