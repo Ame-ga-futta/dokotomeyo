@@ -12,6 +12,7 @@ const Comments = (props) => {
   } = props;
 
   const [comments, setComments] = useState({});
+  const [rerendering, setRerendering] = useState(false);
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment_from_parking', { params: { parkingID: parkingID } })
@@ -29,7 +30,7 @@ const Comments = (props) => {
     .catch(() => {
       console.log("通信に失敗しました")
     })
-  }, [parkingID])
+  }, [parkingID, rerendering])
 
   return (
     <SComments_container>
@@ -44,7 +45,7 @@ const Comments = (props) => {
           )
         })}
       </SComment_list>
-      {userName ? <ReturnForm parkingID={parkingID} /> : <ReturnMessage />}
+      {userName ? <ReturnForm parkingID={parkingID} rerendering={rerendering} setRerendering={setRerendering} /> : <ReturnMessage />}
     </SComments_container>
   );
 };

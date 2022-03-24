@@ -4,7 +4,9 @@ import axios from 'axios';
 
 const ReturnForm = (props) => {
   const {
-    parkingID
+    parkingID,
+    rerendering,
+    setRerendering
   } = props;
 
   const [postComment, setPostComments] = useState("")
@@ -21,6 +23,7 @@ const ReturnForm = (props) => {
       switch (response.data.status) {
         case 200:
           console.log(response.data.message);
+          setRerendering(!rerendering)
           break;
         case 400:
           setErrors(response.data.message);
