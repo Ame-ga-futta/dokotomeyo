@@ -5,6 +5,7 @@ import CommentItem from "./CommentItem";
 
 const Comment = () => {
   const [comments, setComments] = useState({});
+  const [rerendering, setRerendering] = useState(false);
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment_from_user')
@@ -14,7 +15,7 @@ const Comment = () => {
     .catch(() => {
       console.log("通信に失敗しました")
     })
-  }, [])
+  }, [rerendering])
 
   return (
     <SComment_container>
@@ -24,7 +25,7 @@ const Comment = () => {
           const commentData = comments[data]
           return (
             <SComment_item key={i}>
-              <CommentItem commentData={commentData} />
+              <CommentItem commentData={commentData} rerendering={rerendering} setRerendering={setRerendering} />
             </SComment_item>
           )
         })}
@@ -34,17 +35,20 @@ const Comment = () => {
 };
 
 const SComment_container = styled.div`
-
+  height: 100%;
 `;
 
 const SComment_title = styled.h1`
-  padding: 15px 20px 10px 20px;
+  height: 50px;
+  padding: 15px 20px;
   font-weight: bold;
   background-color: #eeeeee;
 `;
 
 const SComment_table = styled.ul`
+  height: calc(100% - 50px);
   padding: 0 20px;
+  overflow-y: scroll;
 `;
 
 const SComment_item = styled.li`

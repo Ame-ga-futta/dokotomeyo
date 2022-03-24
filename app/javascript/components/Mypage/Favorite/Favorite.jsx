@@ -5,6 +5,7 @@ import FavoriteItem from "./FavoriteItem";
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState({});
+  const [rerendering, setRerendering] = useState(false);
 
   useEffect(() => {
     axios.get('/dokotomeyo/favorite_from_user')
@@ -14,7 +15,7 @@ const Favorite = () => {
     .catch(() => {
       console.log("通信に失敗しました")
     })
-  }, [])
+  }, [rerendering])
 
   return (
     <SFavorite_container>
@@ -24,7 +25,7 @@ const Favorite = () => {
           const favoriteData = favorites[data]
           return (
             <SFavorite_item key={i}>
-              <FavoriteItem favoriteData={favoriteData} />
+              <FavoriteItem favoriteData={favoriteData} rerendering={rerendering} setRerendering={setRerendering} />
             </SFavorite_item>
           )
         })}
@@ -34,17 +35,20 @@ const Favorite = () => {
 };
 
 const SFavorite_container = styled.div`
-
+  height: 100%;
 `;
 
 const SFavorite_title = styled.h1`
-  padding: 15px 20px 10px 20px;
+  height: 50px;
+  padding: 15px 20px;
   font-weight: bold;
   background-color: #eeeeee;
 `;
 
 const SFavorite_table = styled.ul`
+  height: calc(100% - 50px);
   padding: 0 20px;
+  overflow-y: scroll;
 `;
 
 const SFavorite_item = styled.li`

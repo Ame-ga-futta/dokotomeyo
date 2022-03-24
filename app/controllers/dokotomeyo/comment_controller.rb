@@ -30,10 +30,20 @@ class Dokotomeyo::CommentController < ApplicationController
     end
   end
 
+  def delete_comment
+    @delete_comment = Comment.find(comment_params[:commentID])
+    @delete_comment.destroy
+    render json: { status: 200 }
+  end
+
   private
 
   def parking_params
     params.permit(:parkingID)
+  end
+
+  def comment_params
+    params.permit(:commentID)
   end
 
   def post_params

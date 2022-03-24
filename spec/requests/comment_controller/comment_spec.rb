@@ -1,7 +1,7 @@
 RSpec.describe "Comments", type: :request do
   describe "GET" do
     let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
-    let!(:existing_parking) { create:parking }
+    let!(:existing_parking) { create(:parking) }
     let!(:existing_requirement) { create(:requirement_buy, parking_id: existing_parking.id) }
 
     before do
@@ -29,7 +29,7 @@ RSpec.describe "Comments", type: :request do
 
   describe "POST" do
     let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
-    let!(:existing_parking) { create:parking }
+    let!(:existing_parking) { create(:parking) }
     let!(:existing_requirement) { create(:requirement_buy, parking_id: existing_parking.id) }
 
     before do
@@ -57,6 +57,28 @@ RSpec.describe "Comments", type: :request do
           }
         }
         expect(JSON.parse(response.body)["status"]).to eq 400
+      end
+    end
+  end
+
+  describe "DELETE" do
+    let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
+    let!(:existing_parking) { create(:parking) }
+    let!(:existing_requirement) { create(:requirement_buy, parking_id: existing_parking.id) }
+    let!(:existing_comment) { create(:comment, parking_id: existing_parking.id, user_id: existing_user.id) }
+
+    before do
+      post dokotomeyo_login_path, params: {
+        user: { email: existing_user.email, password: "password" },
+      }
+    end
+
+    context "delete_comment" do
+      it "delete_comment responce is 200" do
+        delete dokotomeyo_delete_comment_path, params: {
+          commentID: existing_comment.id
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 200
       end
     end
   end

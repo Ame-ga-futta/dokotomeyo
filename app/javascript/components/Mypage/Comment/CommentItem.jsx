@@ -5,10 +5,29 @@ import moment from 'moment'
 
 const CommentItem = (props) => {
   const {
-    commentData
+    commentData,
+    rerendering,
+    setRerendering
   } = props;
 
   const [parkingData, setParkingData] = useState({});
+
+  const sendDetail = () => {
+    console.log("sendDetail")
+  };
+
+  const deleteComment = () => {
+    axios.delete('/dokotomeyo/delete_comment', {
+      params: { commentID: commentData.id }
+    })
+    .then(() => {
+      console.log("削除しました");
+      setRerendering(!rerendering);
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
+  };
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: commentData.parking_id } })
@@ -22,12 +41,12 @@ const CommentItem = (props) => {
 
   return (
     <SCommentItem_container>
-      <SCommentItem_contents>
+      <SCommentItem_contents onClick={sendDetail}>
         <SCommentItem_name>{parkingData.name}</SCommentItem_name>
         <SCommentItem_comment>{commentData.comment}</SCommentItem_comment>
         <SCommentItem_updated_at>{moment(commentData.updated_at).format('YYYY-MM-DD HH:mm')}</SCommentItem_updated_at>
       </SCommentItem_contents>
-      <SCommentItem_edit>
+      <SCommentItem_edit onClick={deleteComment}>
         <p>削除</p>
       </SCommentItem_edit>
     </SCommentItem_container>
@@ -58,6 +77,7 @@ const SCommentItem_edit = styled.div`
   width: 5%;
   font-size: 14px;
   color: gray;
+  cursor: pointer;
 `;
 
 const SCommentItem_name = styled.p`

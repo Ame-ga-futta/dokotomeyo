@@ -4,10 +4,29 @@ import axios from 'axios';
 
 const FavoriteItem = (props) => {
   const {
-    favoriteData
+    favoriteData,
+    rerendering,
+    setRerendering
   } = props;
 
   const [parkingData, setParkingData] = useState({});
+
+  const sendDetail = () => {
+    console.log("sendDetail")
+  };
+
+  const deleteFavorite = () => {
+    axios.delete('/dokotomeyo/delete_favorite', {
+      params: { favoriteID: favoriteData.id }
+    })
+    .then(() => {
+      console.log("削除しました");
+      setRerendering(!rerendering);
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
+  };
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: favoriteData.parking_id } })
@@ -21,11 +40,11 @@ const FavoriteItem = (props) => {
 
   return (
     <SFavoriteItem_container>
-      <SFavoriteItem_contents>
+      <SFavoriteItem_contents onClick={sendDetail}>
         <SCommentItem_name>{parkingData.name}</SCommentItem_name>
         <SCommentItem_address>{parkingData.address}</SCommentItem_address>
       </SFavoriteItem_contents>
-      <SFavoriteItem_edit>
+      <SFavoriteItem_edit onClick={deleteFavorite}>
         <p>削除</p>
       </SFavoriteItem_edit>
     </SFavoriteItem_container>
@@ -56,6 +75,7 @@ const SFavoriteItem_edit = styled.div`
   width: 5%;
   font-size: 14px;
   color: gray;
+  cursor: pointer;
 `;
 
 const SCommentItem_name = styled.p`

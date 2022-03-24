@@ -20,10 +20,12 @@ Rails.application.routes.draw do
     get    :favorite_from_parking,   to: 'favorite#get_favorite_from_parking'
     get    :favorite_match,          to: 'favorite#get_favorite_match'
     post   :post_favorite,           to: 'favorite#post_favorite'
+    delete :delete_favorite,         to: 'favorite#delete_favorite'
 
     get    :comment_from_user,       to: 'comment#get_comment_from_user'
     get    :comment_from_parking,    to: 'comment#get_comment_from_parking'
     post   :post_comment,            to: 'comment#post_comment'
+    delete :delete_comment,          to: 'comment#delete_comment'
 
     post   :new_confirm,             to: 'parkings#new_confirm'
     post   :new_create,              to: 'parkings#new_create'

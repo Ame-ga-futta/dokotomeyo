@@ -56,7 +56,8 @@ const SMypage_sidebar = styled.div`
 `;
 
 const SMypage_sidebar_title = styled.p`
-  padding: 15px 20px 10px 20px;
+  height: 50px;
+  padding: 15px 20px;
   font-weight: bold;
 `;
 

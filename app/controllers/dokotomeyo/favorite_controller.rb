@@ -36,9 +36,19 @@ class Dokotomeyo::FavoriteController < ApplicationController
     end
   end
 
+  def delete_favorite
+    @delete_favorite = Favorite.find(favorite_params[:favoriteID])
+    @delete_favorite.destroy
+    render json: { status: 200 }
+  end
+
   private
 
   def parking_params
     params.permit(:parkingID)
+  end
+
+  def favorite_params
+    params.permit(:favoriteID)
   end
 end

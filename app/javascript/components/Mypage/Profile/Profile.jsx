@@ -72,17 +72,20 @@ const Profile = () => {
 };
 
 const SProfile_container = styled.div`
-
+  height: 100%;
 `;
 
 const SProfile_title = styled.h1`
-  padding: 15px 20px 10px 20px;
+  height: 50px;
+  padding: 15px 20px;
   font-weight: bold;
   background-color: #eeeeee;
 `;
 
 const SProfile_table = styled.ul`
+  height: calc(100% - 50px);
   padding: 0 20px;
+  overflow-y: scroll;
 `;
 
 const SProfile_text_item = styled.li`
