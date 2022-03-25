@@ -41,5 +41,19 @@ RSpec.describe "top", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
+    context "dokotomeyo/parking/:id path" do
+      it "parking response is 200" do
+        get "/dokotomeyo/parking/1"
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "dokotomeyo/detail/:id path" do
+      it "detail response is 200" do
+        get "/dokotomeyo/detail/1"
+        expect(response).to have_http_status(200)
+      end
+    end
   end
 end
