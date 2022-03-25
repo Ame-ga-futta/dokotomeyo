@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import moment from 'moment'
+import { useParams } from 'react-router-dom';
 import { LoadScript } from "@react-google-maps/api";
 import TopLeft from "./TopLeft";
 import TopRight from "./TopRight";
@@ -12,6 +13,7 @@ const Top = (props) => {
     bookFlashMessage
   } = props;
 
+  const { id } = useParams();
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
   const [mapCenter, setMapCenter] = useState({
@@ -29,6 +31,12 @@ const Top = (props) => {
   const [parkings, setParkings] = useState({})
   const [Highlight, setHighlight] = useState("");
   const [detail, setDetail] = useState("");
+
+  useEffect(() => {
+    if (id != null) {
+      setDetail(id)
+    }
+  }, [])
 
   return (
     <>

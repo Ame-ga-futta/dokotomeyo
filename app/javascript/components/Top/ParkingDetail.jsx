@@ -72,7 +72,7 @@ const ParkingDetail = (props) => {
         </STop_ParkingDetail_list_item>
         <STop_ParkingDetail_list_item_edit>
           <STop_ParkingDetail_edit>
-            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
+            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
         <Comments userName={userName} parkingID={parkingData.id} />

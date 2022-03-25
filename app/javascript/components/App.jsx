@@ -20,6 +20,7 @@ const App = (props) => {
       <Header userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
       <Routes>
         <Route path="/dokotomeyo" element={<Top userName={userName} bookFlashMessage={bookFlashMessage} />} />
+        <Route path="/dokotomeyo/detail/:id" element={<Top userName={userName} bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/mypage" element={<Mypage userName={userName} bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/post" element={<Post bookFlashMessage={bookFlashMessage} />} />
         <Route path="/dokotomeyo/login" element={<Login userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />

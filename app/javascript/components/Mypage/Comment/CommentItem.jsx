@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom';
 
 const CommentItem = (props) => {
   const {
@@ -10,10 +11,12 @@ const CommentItem = (props) => {
     setRerendering
   } = props;
 
+  const navigate = useNavigate();
+
   const [parkingData, setParkingData] = useState({});
 
   const sendDetail = () => {
-    console.log("sendDetail")
+    navigate(`/dokotomeyo/detail/${parkingData.id}`)
   };
 
   const deleteComment = () => {
