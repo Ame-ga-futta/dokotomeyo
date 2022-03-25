@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import moment from 'moment'
 import { useParams } from 'react-router-dom';
 import { LoadScript } from "@react-google-maps/api";
-import TopLeft from "./TopLeft";
-import TopRight from "./TopRight";
-import ParkingDetail from "./ParkingDetail";
+import TopLeft from "./TopLeft/TopLeft";
+import TopRight from "./TopRight/TopRight";
+import ParkingDetail from "./ParkingDetail/ParkingDetail";
 
 const Top = (props) => {
   const {

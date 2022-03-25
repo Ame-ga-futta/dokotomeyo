@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import TopSearchForm from "./TopSearchForm";
-import TopSearchResults from "../TopSearchResults";
+import TopSearchResults from "./TopSearchResults";
 
 const TopLeft = (props) => {
   const {
