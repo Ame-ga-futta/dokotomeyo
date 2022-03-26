@@ -31,4 +31,78 @@ RSpec.describe "top", type: :request do
       end
     end
   end
+
+  describe "POST" do
+    let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
+
+    before do
+      post dokotomeyo_login_path, params: {
+        user: { email: existing_user.email, password: "password" },
+      }
+    end
+
+    context "update_name" do
+      it "update_name responce is 200 with name" do
+        post dokotomeyo_update_name_path, params: {
+          user: {
+            name: "new_name"
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 200
+      end
+
+      it "update_name responce is 400 without name" do
+        post dokotomeyo_update_name_path, params: {
+          user: {
+            name: ""
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 400
+      end
+    end
+
+    context "update_email" do
+      it "update_email responce is 200 with email" do
+        post dokotomeyo_update_email_path, params: {
+          user: {
+            email: "new_mail@gmail.com"
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 200
+      end
+
+      it "update_email responce is 400 without email" do
+        post dokotomeyo_update_email_path, params: {
+          user: {
+            email: ""
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 400
+      end
+    end
+
+    context "update_password" do
+      it "update_password responce is 200" do
+        post dokotomeyo_update_password_path, params: {
+          user: {
+            currentPassword: existing_user.password,
+            password: "new_password",
+            password_confirmation: "new_password"
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 200
+      end
+
+      it "update_password is 400" do
+        post dokotomeyo_update_password_path, params: {
+          user: {
+            currentPassword: existing_user.password,
+            password: "new_password",
+            password_confirmation: "new_passwordddd"
+          }
+        }
+        expect(JSON.parse(response.body)["status"]).to eq 400
+      end
+    end
+  end
 end

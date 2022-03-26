@@ -7,18 +7,37 @@ const ReturnPasswordForm = (props) => {
     open
   } = props;
 
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("")
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const PostNewPassword = (event) => {
-    console.log(password, newPassword, passwordConfirmation)
+    axios.post('/dokotomeyo/update_password', {
+      user: {
+        currentPassword: currentPassword,
+        password: password,
+        password_confirmation: passwordConfirmation
+      }
+    })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          window.location.reload();
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗しました")
+    })
     event.preventDefault();
   }
 
   useEffect(() => {
     setPassword("")
-    setNewPassword("")
+    setCurrentPassword("")
     setPasswordConfirmation("")
   }, [open])
 
@@ -29,14 +48,14 @@ const ReturnPasswordForm = (props) => {
           <SText_label>現在のパスワード</SText_label>
           <SText_field
             type="password"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
+            value={currentPassword}
+            onChange={event => setCurrentPassword(event.target.value)}
           />
           <SText_label>新しいパスワード</SText_label>
           <SText_field
             type="password"
-            value={newPassword}
-            onChange={event => setNewPassword(event.target.value)}
+            value={password}
+            onChange={event => setPassword(event.target.value)}
           />
           <SText_label>新しいパスワード ※再確認</SText_label>
           <SText_field

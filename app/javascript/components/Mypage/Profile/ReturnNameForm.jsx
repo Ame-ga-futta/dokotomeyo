@@ -10,7 +10,24 @@ const ReturnNameForm = (props) => {
   const [newName, setNewName] = useState("");
 
   const PostNewName = (event) => {
-    console.log(newName)
+    axios.post('/dokotomeyo/update_name', {
+      user: {
+        name: newName
+      }
+    })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          window.location.reload();
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗しました")
+    })
     event.preventDefault();
   };
 

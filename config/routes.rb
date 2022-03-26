@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
     get    :profile,                 to: 'users#get_profile'
     get    :username,                to: 'users#get_username'
+    post   :update_name,             to: 'users#update_name'
+    post   :update_email,            to: 'users#update_email'
+    post   :update_password,         to: 'users#update_password'
 
     get    :favorite_from_user,      to: 'favorite#get_favorite_from_user'
     get    :favorite_from_parking,   to: 'favorite#get_favorite_from_parking'

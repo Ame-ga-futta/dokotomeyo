@@ -109,6 +109,7 @@ const SProfile_edit = styled.p`
   border-bottom: solid 1px gray;
   padding: 1px 3px;
   text-align: center;
+  cursor: pointer;
 `;
 
 export default Profile;

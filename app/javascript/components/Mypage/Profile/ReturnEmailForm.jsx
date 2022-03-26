@@ -10,7 +10,24 @@ const ReturnEmailForm = (props) => {
   const [newEmail, setNewEmail] = useState("");
 
   const PostNewEmail = (event) => {
-    console.log(newEmail)
+    axios.post('/dokotomeyo/update_email', {
+      user: {
+        email: newEmail
+      }
+    })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          window.location.reload();
+          break;
+        case 400:
+          console.log(response.data.message);
+          break;
+      }
+    })
+    .catch(() => {
+      console.log("通信に失敗しました")
+    })
     event.preventDefault();
   };
 
