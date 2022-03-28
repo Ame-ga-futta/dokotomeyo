@@ -1,4 +1,12 @@
 class Dokotomeyo::CommentController < ApplicationController
+  before_action :authenticate_user, {
+    only: [
+      :get_comment_from_user,
+      :post_comment,
+      :delete_comment
+    ],
+  }
+
   def get_comment_from_user
     @comment = Comment.where(user_id: session[:user_id])
     if @comment

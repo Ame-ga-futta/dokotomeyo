@@ -1,4 +1,13 @@
 class Dokotomeyo::FavoriteController < ApplicationController
+  before_action :authenticate_user, {
+    only: [
+      :get_favorite_from_user,
+      :get_favorite_match,
+      :post_favorite,
+      :delete_favorite,
+    ],
+  }
+
   def get_favorite_from_user
     @favorite = Favorite.where(user_id: session[:user_id])
     if @favorite

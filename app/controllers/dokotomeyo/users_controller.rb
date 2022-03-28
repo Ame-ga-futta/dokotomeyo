@@ -1,4 +1,14 @@
 class Dokotomeyo::UsersController < ApplicationController
+  before_action :authenticate_user, {
+    only: [
+      :get_profile,
+      :get_username,
+      :update_name,
+      :update_email,
+      :update_password,
+    ],
+  }
+
   def get_profile
     @user = User.find_by_id(session[:user_id])
     if @user
