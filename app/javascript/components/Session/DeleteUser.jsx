@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const DeleteUser = (props) => {
   const {
     userName,
+    setUserName,
     bookFlashMessage
   } = props;
 
@@ -14,7 +15,15 @@ const DeleteUser = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    console.log("退会")
+    axios.delete('/dokotomeyo/delete')
+    .then((response) => {
+      setUserName();
+      bookFlashMessage(response.data.message);
+      navigate("/dokotomeyo");
+    })
+    .catch(() => {
+      console.log("通信に失敗しました");
+    })
   }
 
   useEffect(() => {
