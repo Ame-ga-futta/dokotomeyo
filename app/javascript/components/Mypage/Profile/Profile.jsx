@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReturnNameForm from "./ReturnNameForm";
 import ReturnEmailForm from "./ReturnEmailForm";
 import ReturnPasswordForm from "./ReturnPasswordForm";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [openEdit, setOpenEdit] = useState(false)
   const [selectEdit, setSelectEdit] = useState("");
   const [name, setName] = useState("");
@@ -66,6 +69,7 @@ const Profile = () => {
           <SProfile_edit onClick={() => OpenForm("password")}>{selectEdit == "password" ? "閉じる" : "編集"}</SProfile_edit>
         </SProfile_text_item>
         <ReturnPasswordForm open={selectEdit == "password"} />
+        <SProfile_delete onClick={() => {navigate("/dokotomeyo/delete")}}>退会</SProfile_delete>
       </SProfile_table>
     </SProfile_container>
   );
@@ -108,6 +112,17 @@ const SProfile_edit = styled.p`
   color: gray;
   border-bottom: solid 1px gray;
   padding: 1px 3px;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const SProfile_delete = styled.li`
+  width: 5%;
+  font-size: 14px;
+  color: gray;
+  border-bottom: solid 1px gray;
+  padding: 1px 3px;
+  margin: 30px 0 0 50%;
   text-align: center;
   cursor: pointer;
 `;

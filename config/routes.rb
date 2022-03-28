@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get    :post,                    to: "top#top"
     get    :signup,                  to: "top#top"
     get    :login,                   to: "top#top"
+    get    :delete,                  to: "top#top"
     get    "/parking/:id",           to: "top#top"
     get    "/detail/:id",            to: "top#top"
 
