@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import moment from 'moment'
+import { useParams } from 'react-router-dom';
 import { LoadScript } from "@react-google-maps/api";
-import TopLeft from "./TopLeft";
-import TopRight from "./TopRight";
-import ParkingDetail from "./ParkingDetail";
+import TopLeft from "./TopLeft/TopLeft";
+import TopRight from "./TopRight/TopRight";
+import ParkingDetail from "./ParkingDetail/ParkingDetail";
 
 const Top = (props) => {
   const {
+    userName,
     bookFlashMessage
   } = props;
 
+  const { id } = useParams();
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
   const [mapCenter, setMapCenter] = useState({
@@ -29,6 +32,12 @@ const Top = (props) => {
   const [Highlight, setHighlight] = useState("");
   const [detail, setDetail] = useState("");
 
+  useEffect(() => {
+    if (id != null) {
+      setDetail(id)
+    }
+  }, [])
+
   return (
     <>
       <LoadScript googleMapsApiKey={API_KEY}>
@@ -36,7 +45,7 @@ const Top = (props) => {
           <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
           <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
           <TopDetail_container detail={detail}>
-            {detail == "" || <ParkingDetail detail={detail} />}
+            {detail == "" || <ParkingDetail userName={userName} detail={detail} />}
           </TopDetail_container>
         </SSearch_container>
       </LoadScript>

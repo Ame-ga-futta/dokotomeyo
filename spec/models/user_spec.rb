@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
 
     context "the length of name is over 20" do
       context "the length of name is 20" do
-        it "is invalid when the length of name is 20" do
+        it "is valid when the length of name is 20" do
           expect(build(:user, name: "new_userrrrrrrrrrrrr")).to be_valid
         end
       end
@@ -56,6 +56,24 @@ RSpec.describe User, type: :model do
       it "is invalid if email is duplicated" do
         expect(create(:user, name: "existing_user", email: "existing_user@gmail.com")).to be_valid
         expect(build(:user, name: "new_user", email: "existing_user@gmail.com")).not_to be_valid
+      end
+    end
+  end
+
+  describe "association User" do
+    let!(:new_parking) { create(:parking) }
+    let!(:new_user) { create(:user) }
+    let!(:new_requirement_buy) { create(:requirement_buy, parking_id: new_parking.id) }
+    let!(:new_favorite) { create(:favorite, parking_id: new_parking.id, user_id: new_user.id) }
+    let!(:new_comment) { create(:comment, parking_id: new_parking.id, user_id: new_user.id) }
+
+    context "when User is deleted" do
+      it "favorites is also deleted" do
+        expect { new_user.destroy }.to change { Favorite.count }.from(1).to(0)
+      end
+
+      it "comments is also deleted" do
+        expect { new_user.destroy }.to change { Comment.count }.from(1).to(0)
       end
     end
   end

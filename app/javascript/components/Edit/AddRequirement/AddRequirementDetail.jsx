@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-import ParkingRequirementsWeekday from "../../Top/ParkingRequirementsWeekday";
-import ParkingRequirementsHoliday from "../../Top/ParkingRequirementsHoliday";
+import ParkingRequirementsWeekday from "../../Top/ParkingDetail/ParkingRequirementsWeekday";
+import ParkingRequirementsHoliday from "../../Top/ParkingDetail/ParkingRequirementsHoliday";
 
 const AddRequirementDetail = (props) => {
   const {

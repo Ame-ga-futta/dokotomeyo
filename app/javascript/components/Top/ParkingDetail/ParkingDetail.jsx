@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import axios from 'axios';
+import FavoriteIcon from "./FavoriteIcon";
 import ParkingRequirementsWeekday from "./ParkingRequirementsWeekday";
 import ParkingRequirementsHoliday from "./ParkingRequirementsHoliday";
+import Comments from "./Comments";
 
 const ParkingDetail = (props) => {
   const {
+    userName,
     detail
   } = props;
 
@@ -20,7 +23,7 @@ const ParkingDetail = (props) => {
   });
 
   useEffect(() => {
-    axios.post('/dokotomeyo/details', { parkingID: detail })
+    axios.get('/dokotomeyo/details', { params: { parkingID: detail } })
     .then((response) => {
       setParkingData(response.data.parking);
       setRequirementsWeekdayData(response.data.requirements_weekday);
@@ -48,6 +51,7 @@ const ParkingDetail = (props) => {
       <STop_ParkingDetail>
         <STop_ParkingDetail_list_name>
           <STop_ParkingDetail_name>{parkingData.name}</STop_ParkingDetail_name>
+          {userName && <FavoriteIcon parkingID={parkingData.id} />}
         </STop_ParkingDetail_list_name>
         <STop_ParkingDetail_list_item>
           <STop_ParkingDetail_header>住所</STop_ParkingDetail_header>
@@ -68,9 +72,10 @@ const ParkingDetail = (props) => {
         </STop_ParkingDetail_list_item>
         <STop_ParkingDetail_list_item_edit>
           <STop_ParkingDetail_edit>
-            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
+            <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
+        <Comments userName={userName} parkingID={parkingData.id} />
       </STop_ParkingDetail>
     </STop_ParkingDetail_container>
   )
@@ -92,6 +97,8 @@ const STop_ParkingDetail_list_name = styled.li`
   padding: 10px 20px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: #eeeeee;
 `;
 
@@ -127,7 +134,7 @@ const STop_ParkingDetail_edit = styled.div`
   width: 17%;
   border-bottom: solid 1px gray;
   padding: 3px;
-  margin-left: 20%;
+  margin-left: 83%;
   text-align: center;
 `;
 

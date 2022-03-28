@@ -2,6 +2,7 @@ class Dokotomeyo::SessionsController < ApplicationController
   before_action :authenticate_user, {
     only: [
       :logout,
+      :delete,
     ],
   }
   before_action :forbid_login_user, {
@@ -36,6 +37,13 @@ class Dokotomeyo::SessionsController < ApplicationController
   def logout
     session[:user_id] = nil
     render json: { status: 200, message: "ログアウトしました" }
+  end
+
+  def delete
+    @user = User.find(session[:user_id])
+    @user.destroy
+    session[:user_id] = nil
+    render json: { status: 200, message: "退会しました" }
   end
 
   private

@@ -7,6 +7,8 @@ ja:
       requirement_facility: "無料の条件: 施設利用で無料"
       requirement_free: "無料の条件: 終日無料"
       requirement_time: "無料の条件: 入庫後一定時間無料"
+      comment: "コメント"
+      favorite: "お気に入り"
     attributes:
       user:
         name: ユーザーネーム
@@ -38,6 +40,13 @@ ja:
         parking_id: 駐車場ID
         free_time: 無料時間
         only_weekdays: 平日のみ
+      comment:
+        parking_id: "駐車場ID"
+        user_id: "ユーザーID"
+        comment: "コメント"
+      favorite:
+        parking_id: "駐車場ID"
+        user_id: "ユーザーID"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

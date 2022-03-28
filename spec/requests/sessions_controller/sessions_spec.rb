@@ -45,6 +45,13 @@ RSpec.describe "sessions", type: :request do
           expect(JSON.parse(response.body)["status"]).to eq 401
         end
       end
+
+      context "delete" do
+        it "delete response is 401" do
+          delete dokotomeyo_delete_path
+          expect(JSON.parse(response.body)["status"]).to eq 401
+        end
+      end
     end
 
     describe "current_user exists" do
@@ -77,6 +84,14 @@ RSpec.describe "sessions", type: :request do
       context "logout" do
         it "logout response is 200" do
           delete dokotomeyo_logout_path
+          expect(JSON.parse(response.body)["status"]).to eq 200
+          expect(session[:user_id]).to be nil
+        end
+      end
+
+      context "delete" do
+        it "delete response is 200" do
+          delete dokotomeyo_delete_path
           expect(JSON.parse(response.body)["status"]).to eq 200
           expect(session[:user_id]).to be nil
         end
