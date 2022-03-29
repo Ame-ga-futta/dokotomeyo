@@ -20,7 +20,7 @@ RSpec.describe "Favorites", type: :request do
     context "favorite_from_parking" do
       it "get_favorite_from_parking responce is 200" do
         get dokotomeyo_favorite_from_parking_path, params: {
-          parkingID: existing_parking.id
+          parkingID: existing_parking.id,
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
@@ -28,11 +28,11 @@ RSpec.describe "Favorites", type: :request do
 
     context "get_favorite_match" do
       context "existing_user has favorite" do
-        let!(:favorite) { create(:favorite, user_id: existing_user.id, parking_id: existing_parking.id ) }
+        let!(:favorite) { create(:favorite, user_id: existing_user.id, parking_id: existing_parking.id) }
 
         it "get_favorite_match responce is true" do
           get dokotomeyo_favorite_match_path, params: {
-            parkingID: existing_parking.id
+            parkingID: existing_parking.id,
           }
           expect(JSON.parse(response.body)["favorite"]).to eq true
         end
@@ -41,7 +41,7 @@ RSpec.describe "Favorites", type: :request do
       context "existing_user do not have favorite" do
         it "get_favorite_match responce is false" do
           get dokotomeyo_favorite_match_path, params: {
-            parkingID: existing_parking.id
+            parkingID: existing_parking.id,
           }
           expect(JSON.parse(response.body)["favorite"]).to eq false
         end
@@ -50,11 +50,11 @@ RSpec.describe "Favorites", type: :request do
 
     context "post_favorite" do
       context "existing_user has favorite" do
-        let!(:favorite) { create(:favorite, user_id: existing_user.id, parking_id: existing_parking.id ) }
+        let!(:favorite) { create(:favorite, user_id: existing_user.id, parking_id: existing_parking.id) }
 
         it "post_favorite responce is false" do
           post dokotomeyo_post_favorite_path, params: {
-            parkingID: existing_parking.id
+            parkingID: existing_parking.id,
           }
           expect(JSON.parse(response.body)["favorite"]).to eq false
         end
@@ -63,7 +63,7 @@ RSpec.describe "Favorites", type: :request do
       context "existing_user do not have favorite" do
         it "post_favorite responce is true" do
           post dokotomeyo_post_favorite_path, params: {
-            parkingID: existing_parking.id
+            parkingID: existing_parking.id,
           }
           expect(JSON.parse(response.body)["favorite"]).to eq true
         end
@@ -86,7 +86,7 @@ RSpec.describe "Favorites", type: :request do
     context "delete_favorite" do
       it "delete_favorite responce is 200" do
         delete dokotomeyo_delete_favorite_path, params: {
-          favoriteID: existing_favorite.id
+          favoriteID: existing_favorite.id,
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end

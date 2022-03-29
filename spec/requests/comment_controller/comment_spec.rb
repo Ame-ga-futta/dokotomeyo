@@ -20,7 +20,7 @@ RSpec.describe "Comments", type: :request do
     context "comment_from_parking" do
       it "get_comment_from_parking responce is 200" do
         get dokotomeyo_comment_from_parking_path, params: {
-          parkingID: existing_parking.id
+          parkingID: existing_parking.id,
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
@@ -43,8 +43,8 @@ RSpec.describe "Comments", type: :request do
         post dokotomeyo_post_comment_path, params: {
           post_comment: {
             parking_id: existing_parking.id,
-            comment: "comment"
-          }
+            comment: "comment",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
@@ -53,8 +53,8 @@ RSpec.describe "Comments", type: :request do
         post dokotomeyo_post_comment_path, params: {
           post_comment: {
             parking_id: existing_parking.id,
-            comment: ""
-          }
+            comment: "",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 400
       end
@@ -76,7 +76,7 @@ RSpec.describe "Comments", type: :request do
     context "delete_comment" do
       it "delete_comment responce is 200" do
         delete dokotomeyo_delete_comment_path, params: {
-          commentID: existing_comment.id
+          commentID: existing_comment.id,
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end

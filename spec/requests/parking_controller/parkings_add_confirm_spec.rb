@@ -19,8 +19,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: add_requirement_buy.purchase_price,
                 free_time: add_requirement_buy.free_time,
                 only_weekdays: add_requirement_buy.only_weekdays,
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -35,8 +35,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: "",
                 only_weekdays: "",
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -54,8 +54,8 @@ RSpec.describe "Parkings", type: :request do
                   purchase_price: add_requirement_buy.purchase_price,
                   free_time: add_requirement_buy.free_time,
                   only_weekdays: true,
-                }
-              }
+                },
+              },
             }
             expect(JSON.parse(response.body)["status"]).to eq 400
           end
@@ -73,8 +73,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: add_requirement_facility.free_time,
                 only_weekdays: add_requirement_facility.only_weekdays,
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -89,8 +89,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: "",
                 only_weekdays: "",
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -108,8 +108,8 @@ RSpec.describe "Parkings", type: :request do
                   purchase_price: "",
                   free_time: add_requirement_facility.free_time,
                   only_weekdays: true,
-                }
-              }
+                },
+              },
             }
             expect(JSON.parse(response.body)["status"]).to eq 400
           end
@@ -127,8 +127,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: "",
                 only_weekdays: add_requirement_free.only_weekdays,
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -143,8 +143,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: "",
                 only_weekdays: "",
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -162,8 +162,8 @@ RSpec.describe "Parkings", type: :request do
                   purchase_price: "",
                   free_time: "",
                   only_weekdays: add_requirement_free.only_weekdays,
-                }
-              }
+                },
+              },
             }
             expect(JSON.parse(response.body)["status"]).to eq 400
           end
@@ -181,8 +181,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: add_requirement_time.free_time,
                 only_weekdays: add_requirement_time.only_weekdays,
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -197,8 +197,8 @@ RSpec.describe "Parkings", type: :request do
                 purchase_price: "",
                 free_time: "",
                 only_weekdays: "",
-              }
-            }
+              },
+            },
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -216,8 +216,8 @@ RSpec.describe "Parkings", type: :request do
                   purchase_price: "",
                   free_time: add_requirement_time.free_time,
                   only_weekdays: true,
-                }
-              }
+                },
+              },
             }
             expect(JSON.parse(response.body)["status"]).to eq 400
           end

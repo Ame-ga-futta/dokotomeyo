@@ -23,7 +23,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: edit_parking.latitude,
                 longitude: edit_parking.longitude,
                 beginning_of_worktime: edit_parking.beginning_of_worktime,
-                end_of_worktime: edit_parking.end_of_worktime
+                end_of_worktime: edit_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -33,9 +33,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -45,9 +45,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -57,9 +57,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -69,11 +69,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -88,7 +88,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: "",
                 longitude: "",
                 beginning_of_worktime: "",
-                end_of_worktime: ""
+                end_of_worktime: "",
               },
               requirement_buy: {
                 1 => {
@@ -98,9 +98,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -110,9 +110,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -122,9 +122,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -134,11 +134,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -153,7 +153,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -163,9 +163,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -175,9 +175,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -187,9 +187,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -199,11 +199,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -220,7 +220,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -230,9 +230,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: edit_requirement_buy.facility_name,
                     purchase_price: edit_requirement_buy.purchase_price,
                     free_time: edit_requirement_buy.free_time,
-                    only_weekdays: edit_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: edit_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -242,9 +242,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -254,9 +254,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -266,11 +266,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -285,14 +285,14 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
                   delete: false,
                   change: false,
-                  requirements: {}
-                }
+                  requirements: {},
+                },
               },
               requirement_facility: {
                 1 => {
@@ -302,9 +302,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -314,9 +314,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -326,11 +326,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -345,7 +345,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -355,9 +355,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -367,9 +367,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -379,9 +379,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -391,11 +391,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -412,7 +412,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -422,9 +422,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -434,9 +434,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: edit_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: edit_requirement_facility.free_time,
-                    only_weekdays: edit_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: edit_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -446,9 +446,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -458,11 +458,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -477,7 +477,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -487,16 +487,16 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
                   delete: false,
                   change: false,
-                  requirements: {}
-                }
+                  requirements: {},
+                },
               },
               requirement_free: {
                 1 => {
@@ -506,9 +506,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -518,11 +518,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -537,7 +537,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -547,9 +547,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -559,9 +559,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -571,9 +571,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -583,11 +583,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -604,7 +604,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -614,9 +614,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -626,9 +626,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -638,9 +638,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: edit_requirement_free.only_weekdays
-                  }
-                }
+                    only_weekdays: edit_requirement_free.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -650,11 +650,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -669,7 +669,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -679,9 +679,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -691,16 +691,16 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
                   delete: false,
                   change: false,
-                  requirements: {}
-                }
+                  requirements: {},
+                },
               },
               requirement_time: {
                 1 => {
@@ -710,11 +710,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -729,7 +729,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -739,9 +739,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -751,9 +751,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -763,9 +763,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -775,11 +775,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -794,7 +794,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -804,9 +804,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -816,9 +816,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -828,9 +828,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -840,11 +840,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -861,7 +861,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -871,9 +871,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -883,9 +883,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -895,9 +895,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -907,11 +907,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: edit_requirement_time.free_time,
-                    only_weekdays: edit_requirement_time.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: edit_requirement_time.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -926,7 +926,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -936,9 +936,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -948,9 +948,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -960,18 +960,18 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
                   delete: false,
                   change: false,
-                  requirements: {}
-                }
-              }
-            }
+                  requirements: {},
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -986,7 +986,7 @@ RSpec.describe "Parkings", type: :request do
                 latitude: existing_parking.latitude,
                 longitude: existing_parking.longitude,
                 beginning_of_worktime: existing_parking.beginning_of_worktime,
-                end_of_worktime: existing_parking.end_of_worktime
+                end_of_worktime: existing_parking.end_of_worktime,
               },
               requirement_buy: {
                 1 => {
@@ -996,9 +996,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_buy.facility_name,
                     purchase_price: existing_requirement_buy.purchase_price,
                     free_time: existing_requirement_buy.free_time,
-                    only_weekdays: existing_requirement_buy.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_buy.only_weekdays,
+                  },
+                },
               },
               requirement_facility: {
                 1 => {
@@ -1008,9 +1008,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: existing_requirement_facility.facility_name,
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_free: {
                 1 => {
@@ -1020,9 +1020,9 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: "",
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
               },
               requirement_time: {
                 1 => {
@@ -1032,11 +1032,11 @@ RSpec.describe "Parkings", type: :request do
                     facility_name: "",
                     purchase_price: "",
                     free_time: existing_requirement_facility.free_time,
-                    only_weekdays: existing_requirement_facility.only_weekdays
-                  }
-                }
-              }
-            }
+                    only_weekdays: existing_requirement_facility.only_weekdays,
+                  },
+                },
+              },
+            },
           }.to_json, headers: { "Content-Type" => "application/json" }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end

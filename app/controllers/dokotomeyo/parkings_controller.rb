@@ -279,7 +279,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
   end
 
   def search
-    if validate_search then
+    if validate_search
       time_limit = Time.parse(search_params[:narrowDown][:start_date]) - Time.parse(search_params[:narrowDown][:end_date])
       south_end = BigDecimal("#{search_params[:mapCenter][:lat]}") - LAT_PER_KIROMETER
       north_end = BigDecimal("#{search_params[:mapCenter][:lat]}") + LAT_PER_KIROMETER
@@ -299,27 +299,27 @@ class Dokotomeyo::ParkingsController < ApplicationController
       requirements.push(:requirement_facilities) if search_params[:narrowDown][:include_facility]
       requirements.push(:requirement_times) if search_params[:narrowDown][:include_time]
 
-      @parkings = assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time)
-      .search_requirement_frees(weekday_check(start_time, end_time))
+      @parkings = assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time).
+        search_requirement_frees(weekday_check(start_time, end_time))
 
-      if search_params[:narrowDown][:include_buy] then
+      if search_params[:narrowDown][:include_buy]
         @parkings = @parkings.or(
-          assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time)
-          .search_requirement_buys(weekday_check(start_time, end_time), time_limit)
+          assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time).
+            search_requirement_buys(weekday_check(start_time, end_time), time_limit)
         )
       end
 
-      if search_params[:narrowDown][:include_facility] then
+      if search_params[:narrowDown][:include_facility]
         @parkings = @parkings.or(
-          assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time)
-          .search_requirement_facilities(weekday_check(start_time, end_time), time_limit)
+          assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time).
+            search_requirement_facilities(weekday_check(start_time, end_time), time_limit)
         )
       end
 
-      if search_params[:narrowDown][:include_time] then
+      if search_params[:narrowDown][:include_time]
         @parkings = @parkings.or(
-          assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time)
-          .search_requirement_times(weekday_check(start_time, end_time), time_limit)
+          assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time).
+            search_requirement_times(weekday_check(start_time, end_time), time_limit)
         )
       end
 
@@ -328,9 +328,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
         (parking[:longitude] - BigDecimal("#{search_params[:mapCenter][:lng]}")).abs
       end
 
-      render json: { status: 200, parkings: [
-        sorted,
-      ] }
+      render json: { status: 200, parkings: [sorted] }
     end
   end
 
@@ -344,14 +342,14 @@ class Dokotomeyo::ParkingsController < ApplicationController
         requirement_buys: @parking.requirement_buys.where(only_weekdays: true),
         requirement_facilities: @parking.requirement_facilities.where(only_weekdays: true),
         requirement_frees: @parking.requirement_frees.where(only_weekdays: true),
-        requirement_times: @parking.requirement_times.where(only_weekdays: true)
+        requirement_times: @parking.requirement_times.where(only_weekdays: true),
       },
       requirements_holiday: {
         requirement_buys: @parking.requirement_buys.where(only_weekdays: false),
         requirement_facilities: @parking.requirement_facilities.where(only_weekdays: false),
         requirement_frees: @parking.requirement_frees.where(only_weekdays: false),
-        requirement_times: @parking.requirement_times.where(only_weekdays: false)
-      }
+        requirement_times: @parking.requirement_times.where(only_weekdays: false),
+      },
     }
   end
 
@@ -405,26 +403,30 @@ class Dokotomeyo::ParkingsController < ApplicationController
   end
 
   def validate_search
-    if search_params[:narrowDown][:place] == "" || search_params[:narrowDown][:start_date] == "" || search_params[:narrowDown][:end_date] == "" then
+    if search_params[:narrowDown][:place] == "" || search_params[:narrowDown][:start_date] == "" || search_params[:narrowDown][:end_date] == ""
       render json: { status: 400, message: "必要な情報を入力してください" }
-      return false
-    elsif search_params[:narrowDown][:start_date] == search_params[:narrowDown][:end_date] then
+      false
+    elsif search_params[:narrowDown][:start_date] == search_params[:narrowDown][:end_date]
       render json: { status: 400, message: "入庫時刻と出庫時刻は、同じ時間にできません" }
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
   def weekday_check(start_time, end_time)
-    return false if HolidayJapan.check(start_time.to_date) || start_time.saturday? || start_time.sunday?
-    return false if HolidayJapan.check(end_time.to_date) || end_time.saturday? || end_time.sunday?
-    true
+    if HolidayJapan.check(start_time.to_date) || start_time.saturday? || start_time.sunday?
+      false
+    elsif HolidayJapan.check(end_time.to_date) || end_time.saturday? || end_time.sunday?
+      false
+    else
+      true
+    end
   end
 
   def assemble_chain(requirements, south_end, north_end, west_end, east_end, start_time, end_time)
-    Parking.includes_requirement(requirements)
-    .search_in_bounds(south_end, north_end, west_end, east_end)
-    .search_in_worktime(start_time.strftime("%T"), end_time.strftime("%T"))
+    Parking.includes_requirement(requirements).
+      search_in_bounds(south_end, north_end, west_end, east_end).
+      search_in_worktime(start_time.strftime("%T"), end_time.strftime("%T"))
   end
 end

@@ -3,7 +3,7 @@ class Dokotomeyo::CommentController < ApplicationController
     only: [
       :get_comment_from_user,
       :post_comment,
-      :delete_comment
+      :delete_comment,
     ],
   }
 
@@ -12,7 +12,7 @@ class Dokotomeyo::CommentController < ApplicationController
     if @comment
       render json: { status: 200, comments: @comment }
     else
-      render json: { status: 400, message: "コメントの取得に失敗しました"}
+      render json: { status: 400, message: "コメントの取得に失敗しました" }
     end
   end
 
@@ -21,7 +21,7 @@ class Dokotomeyo::CommentController < ApplicationController
     if @comment
       render json: { status: 200, comments: @comment }
     else
-      render json: { status: 400, message: "コメントの取得に失敗しました"}
+      render json: { status: 400, message: "コメントの取得に失敗しました" }
     end
   end
 

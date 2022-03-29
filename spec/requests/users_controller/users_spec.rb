@@ -18,14 +18,14 @@ RSpec.describe "top", type: :request do
     context "get_username" do
       it "get_username responce is 200 with userID" do
         get dokotomeyo_username_path, params: {
-          userID: existing_user.id
+          userID: existing_user.id,
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
 
       it "get_username responce is 400 without userID" do
         get dokotomeyo_username_path, params: {
-          userID: ""
+          userID: "",
         }
         expect(JSON.parse(response.body)["status"]).to eq 400
       end
@@ -45,8 +45,8 @@ RSpec.describe "top", type: :request do
       it "update_name responce is 200 with name" do
         post dokotomeyo_update_name_path, params: {
           user: {
-            name: "new_name"
-          }
+            name: "new_name",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
@@ -54,8 +54,8 @@ RSpec.describe "top", type: :request do
       it "update_name responce is 400 without name" do
         post dokotomeyo_update_name_path, params: {
           user: {
-            name: ""
-          }
+            name: "",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 400
       end
@@ -65,8 +65,8 @@ RSpec.describe "top", type: :request do
       it "update_email responce is 200 with email" do
         post dokotomeyo_update_email_path, params: {
           user: {
-            email: "new_mail@gmail.com"
-          }
+            email: "new_mail@gmail.com",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
@@ -74,8 +74,8 @@ RSpec.describe "top", type: :request do
       it "update_email responce is 400 without email" do
         post dokotomeyo_update_email_path, params: {
           user: {
-            email: ""
-          }
+            email: "",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 400
       end
@@ -87,8 +87,8 @@ RSpec.describe "top", type: :request do
           user: {
             currentPassword: existing_user.password,
             password: "new_password",
-            password_confirmation: "new_password"
-          }
+            password_confirmation: "new_password",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 200
       end
@@ -98,8 +98,8 @@ RSpec.describe "top", type: :request do
           user: {
             currentPassword: existing_user.password,
             password: "new_password",
-            password_confirmation: "new_passwordddd"
-          }
+            password_confirmation: "new_passwordddd",
+          },
         }
         expect(JSON.parse(response.body)["status"]).to eq 400
       end

@@ -92,8 +92,26 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "filtering time" do
-        let!(:parking_1) { create(:parking, id: 1, beginning_of_worktime: "08:00:00", end_of_worktime: "22:00:00", created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
-        let!(:parking_2) { create(:parking, id: 2, beginning_of_worktime: "08:00:00", end_of_worktime: "18:00:00", created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_1) do
+          create(
+            :parking,
+            id: 1,
+            beginning_of_worktime: "08:00:00",
+            end_of_worktime: "22:00:00",
+            created_at: "2022-01-01T12:00:00.000+09:00",
+            updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
+        let!(:parking_2) do
+          create(
+            :parking,
+            id: 2,
+            beginning_of_worktime: "08:00:00",
+            end_of_worktime: "18:00:00",
+            created_at: "2022-01-01T12:00:00.000+09:00",
+            updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_1) { create(:requirement_free, parking_id: parking_1.id) }
         let!(:requirement_2) { create(:requirement_free, parking_id: parking_2.id) }
 
@@ -126,13 +144,29 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "filtering requirement" do
-        let!(:parking_requirementFree) { create(:parking, id: 1, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_requirementFree) do
+          create(
+            :parking, id: 1, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_free) { create(:requirement_free, parking_id: parking_requirementFree.id) }
-        let!(:parking_requirementBuy) { create(:parking, id: 2, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_requirementBuy) do
+          create(
+            :parking, id: 2, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_buy) { create(:requirement_buy, parking_id: parking_requirementBuy.id) }
-        let!(:parking_requirementFacility) { create(:parking, id: 3, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_requirementFacility) do
+          create(
+            :parking, id: 3, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_facility) { create(:requirement_facility, parking_id: parking_requirementFacility.id) }
-        let!(:parking_requirementTime) { create(:parking, id: 4, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_requirementTime) do
+          create(
+            :parking, id: 4, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_time) { create(:requirement_time, parking_id: parking_requirementTime.id) }
 
         context "include all Requirement" do
@@ -255,8 +289,16 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "filtering bounds" do
-        let!(:parking_in_bounds) { create(:parking, id: 1, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
-        let!(:parking_out_bounds) { create(:parking, id: 2, latitude: 2.0, longitude: 2.0, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_in_bounds) do
+          create(
+            :parking, id: 1, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
+        let!(:parking_out_bounds) do
+          create(
+            :parking, id: 2, latitude: 2.0, longitude: 2.0, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_1) { create(:requirement_free, parking_id: parking_in_bounds.id) }
         let!(:requirement_2) { create(:requirement_free, parking_id: parking_out_bounds.id) }
 
@@ -323,9 +365,36 @@ RSpec.describe "Parkings", type: :request do
       end
 
       context "filtering sort" do
-        let!(:parking_long) { create(:parking, id: 1, latitude: 1.503, longitude: 1.497, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
-        let!(:parking_mid) { create(:parking, id: 2, latitude: 1.502, longitude: 1.498, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
-        let!(:parking_short) { create(:parking, id: 3, latitude: 1.501, longitude: 1.499, created_at: "2022-01-01T12:00:00.000+09:00", updated_at: "2022-01-01T12:00:00.000+09:00") }
+        let!(:parking_long) do
+          create(
+            :parking,
+            id: 1,
+            latitude: 1.503,
+            longitude: 1.497,
+            created_at: "2022-01-01T12:00:00.000+09:00",
+            updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
+        let!(:parking_mid) do
+          create(
+            :parking,
+            id: 2,
+            latitude: 1.502,
+            longitude: 1.498,
+            created_at: "2022-01-01T12:00:00.000+09:00",
+            updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
+        let!(:parking_short) do
+          create(
+            :parking,
+            id: 3,
+            latitude: 1.501,
+            longitude: 1.499,
+            created_at: "2022-01-01T12:00:00.000+09:00",
+            updated_at: "2022-01-01T12:00:00.000+09:00"
+          )
+        end
         let!(:requirement_1) { create(:requirement_free, parking_id: parking_long.id) }
         let!(:requirement_2) { create(:requirement_free, parking_id: parking_mid.id) }
         let!(:requirement_3) { create(:requirement_free, parking_id: parking_short.id) }
