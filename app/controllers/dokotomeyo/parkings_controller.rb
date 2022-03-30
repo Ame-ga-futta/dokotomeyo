@@ -4,17 +4,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
   def new_confirm
     @parking = Parking.new(create_params[:parking])
-
-    case create_params[:requirement_type]
-    when "free" then
-      @requirement = @parking.requirement_frees.new(create_params[:requirement].reject { |k, v| v == "" })
-    when "time" then
-      @requirement = @parking.requirement_times.new(create_params[:requirement].reject { |k, v| v == "" })
-    when "buy" then
-      @requirement = @parking.requirement_buys.new(create_params[:requirement].reject { |k, v| v == "" })
-    when "facility" then
-      @requirement = @parking.requirement_facilities.new(create_params[:requirement].reject { |k, v| v == "" })
-    end
+    @requirement = @parking.return_requirement(create_params[:requirement_type], create_params[:requirement])
 
     if @parking.valid? && @requirement.valid?
       render json: { status: 200 }
@@ -25,17 +15,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
   def new_create
     @parking = Parking.new(create_params[:parking])
-
-    case create_params[:requirement_type]
-    when "free" then
-      @requirement = @parking.requirement_frees.new(create_params[:requirement].reject { |k, v| v == "" })
-    when "time" then
-      @requirement = @parking.requirement_times.new(create_params[:requirement].reject { |k, v| v == "" })
-    when "buy" then
-      @requirement = @parking.requirement_buys.new(create_params[:requirement].reject { |k, v| v == "" })
-    when "facility" then
-      @requirement = @parking.requirement_facilities.new(create_params[:requirement].reject { |k, v| v == "" })
-    end
+    @requirement = @parking.return_requirement(create_params[:requirement_type], create_params[:requirement])
 
     if @parking.save && @requirement.save
       render json: { status: 200, message: "投稿完了しました", ID: @parking.id }
@@ -46,18 +26,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
   def add_confirm
     @parking = Parking.find(add_params[:parkingID])
-
-    case add_params[:requirement_type]
-    when "free" then
-      @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
-      @requirement.additional_limit
-    when "time" then
-      @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
-    when "buy" then
-      @requirement = @parking.requirement_buys.new(add_params[:requirement].reject { |k, v| v == "" })
-    when "facility" then
-      @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
-    end
+    @requirement = @parking.return_requirement(add_params[:requirement_type], add_params[:requirement])
+    @requirement.additional_limit if add_params[:requirement_type] == "free"
 
     if @requirement.errors.full_messages.flatten.empty? && @requirement.valid?
       render json: { status: 200 }
@@ -68,18 +38,8 @@ class Dokotomeyo::ParkingsController < ApplicationController
 
   def add_create
     @parking = Parking.find(add_params[:parkingID])
-
-    case add_params[:requirement_type]
-    when "free" then
-      @requirement = @parking.requirement_frees.new(add_params[:requirement].reject { |k, v| v == "" })
-      @requirement.additional_limit
-    when "time" then
-      @requirement = @parking.requirement_times.new(add_params[:requirement].reject { |k, v| v == "" })
-    when "buy" then
-      @requirement = @parking.requirement_buys.new(add_params[:requirement].reject { |k, v| v == "" })
-    when "facility" then
-      @requirement = @parking.requirement_facilities.new(add_params[:requirement].reject { |k, v| v == "" })
-    end
+    @requirement = @parking.return_requirement(add_params[:requirement_type], add_params[:requirement])
+    @requirement.additional_limit if add_params[:requirement_type] == "free"
 
     if @requirement.errors.full_messages.flatten.empty? && @requirement.save
       render json: { status: 200, message: "追加完了しました" }
@@ -91,66 +51,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
   def edit_confirm
     @exist_parking = Parking.find(edit_params[:parking][:id])
     @update_parking = Parking.new(edit_params[:parking])
-    error_message = []
-    requirement_count = @exist_parking.requirement_frees.size +
-                        @exist_parking.requirement_times.size +
-                        @exist_parking.requirement_buys.size +
-                        @exist_parking.requirement_facilities.size
-    delete_count = 0
-
-    unless @update_parking.valid?
-      error_message.push(@update_parking.errors.full_messages)
-    end
-
-    edit_params[:requirement_free].each do |key, requirement|
-      requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      elsif requirement[:change]
-        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
-      else
-        unless requirement_free.valid?
-          error_message.push(requirement_free.errors.full_messages)
-        end
-      end
-    end
-
-    edit_params[:requirement_time].each do |key, requirement|
-      requirement_time = @update_parking.requirement_times.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      else
-        unless requirement_time.valid?
-          error_message.push(requirement_time.errors.full_messages)
-        end
-      end
-    end
-
-    edit_params[:requirement_buy].each do |key, requirement|
-      requirement_buy = @update_parking.requirement_buys.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      else
-        unless requirement_buy.valid?
-          error_message.push(requirement_buy.errors.full_messages)
-        end
-      end
-    end
-
-    edit_params[:requirement_facility].each do |key, requirement|
-      requirement_facility = @update_parking.requirement_facilities.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      else
-        unless requirement_facility.valid?
-          error_message.push(requirement_facility.errors.full_messages)
-        end
-      end
-    end
-
-    if requirement_count <= delete_count
-      error_message.push("無料の条件は一つ以上必要です")
-    end
+    error_message = @update_parking.return_error_message(edit_params, @exist_parking.requirement_count)
 
     if error_message.flatten.uniq.empty?
       render json: { status: 200 }
@@ -162,66 +63,7 @@ class Dokotomeyo::ParkingsController < ApplicationController
   def edit_create
     @exist_parking = Parking.find(edit_params[:parking][:id])
     @update_parking = Parking.new(edit_params[:parking])
-    error_message = []
-    requirement_count = @exist_parking.requirement_frees.size +
-                        @exist_parking.requirement_times.size +
-                        @exist_parking.requirement_buys.size +
-                        @exist_parking.requirement_facilities.size
-    delete_count = 0
-
-    unless @update_parking.valid?
-      error_message.push(@update_parking.errors.full_messages)
-    end
-
-    edit_params[:requirement_free].each do |key, requirement|
-      requirement_free = @update_parking.requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      elsif requirement[:change]
-        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
-      else
-        unless requirement_free.valid?
-          error_message.push(requirement_free.errors.full_messages)
-        end
-      end
-    end
-
-    edit_params[:requirement_time].each do |key, requirement|
-      requirement_time = @update_parking.requirement_times.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      else
-        unless requirement_time.valid?
-          error_message.push(requirement_time.errors.full_messages)
-        end
-      end
-    end
-
-    edit_params[:requirement_buy].each do |key, requirement|
-      requirement_buy = @update_parking.requirement_buys.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      else
-        unless requirement_buy.valid?
-          error_message.push(requirement_buy.errors.full_messages)
-        end
-      end
-    end
-
-    edit_params[:requirement_facility].each do |key, requirement|
-      requirement_facility = @update_parking.requirement_facilities.new(requirement[:requirements].reject { |k, v| v == "" })
-      if requirement[:delete]
-        delete_count += 1
-      else
-        unless requirement_facility.valid?
-          error_message.push(requirement_facility.errors.full_messages)
-        end
-      end
-    end
-
-    if requirement_count <= delete_count
-      error_message.push("無料の条件は一つ以上必要です")
-    end
+    error_message = @update_parking.return_error_message(edit_params, @exist_parking.requirement_count)
 
     if error_message.flatten.uniq.empty?
       @exist_parking.update(edit_params[:parking])

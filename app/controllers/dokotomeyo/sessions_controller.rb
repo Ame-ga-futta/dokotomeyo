@@ -23,9 +23,7 @@ class Dokotomeyo::SessionsController < ApplicationController
   end
 
   def login
-    @user = User.find_by(
-      email: login_params[:email]
-    )
+    @user = User.find_by(email: login_params[:email])
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
       render json: { status: 200, message: "ログインしました", name: @user.name }
