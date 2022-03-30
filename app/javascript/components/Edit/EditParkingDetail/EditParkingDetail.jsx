@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FormRequirement from "./FormRequirement";
 import EditParkingDetailConfilm from "./EditParkingDetailConfilm";
@@ -9,9 +9,11 @@ const EditParkingDetail = (props) => {
   const {
     updateParking,
     setUpdateParking,
-    setCenter
+    setCenter,
+    bookFlashMessage
   } = props;
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState([]);
   const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
@@ -42,7 +44,8 @@ const EditParkingDetail = (props) => {
       })
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("駐車場が見つかりませんでした");
+      navigate("/dokotomeyo");
     })
   }, []);
 

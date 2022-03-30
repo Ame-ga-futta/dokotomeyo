@@ -7,7 +7,8 @@ const FavoriteItem = (props) => {
   const {
     favoriteData,
     rerendering,
-    setRerendering
+    setRerendering,
+    bookFlashMessage
   } = props;
 
   const navigate = useNavigate();
@@ -23,11 +24,11 @@ const FavoriteItem = (props) => {
       params: { favoriteID: favoriteData.id }
     })
     .then(() => {
-      console.log("削除しました");
+      bookFlashMessage("削除しました");
       setRerendering(!rerendering);
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("削除に失敗しました");
     })
   };
 
@@ -37,7 +38,8 @@ const FavoriteItem = (props) => {
       setParkingData(response.data.parking);
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   }, [favoriteData])
 

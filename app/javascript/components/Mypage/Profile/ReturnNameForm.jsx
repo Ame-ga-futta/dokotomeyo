@@ -8,6 +8,7 @@ const ReturnNameForm = (props) => {
   } = props;
 
   const [newName, setNewName] = useState("");
+  const [errors, setErrors] = useState("");
 
   const PostNewName = (event) => {
     axios.post('/dokotomeyo/update_name', {
@@ -21,12 +22,12 @@ const ReturnNameForm = (props) => {
           window.location.reload();
           break;
         case 400:
-          console.log(response.data.message);
+          setErrors(response.data.message);
           break;
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      setErrors("通信に失敗しました")
     })
     event.preventDefault();
   };
@@ -39,6 +40,7 @@ const ReturnNameForm = (props) => {
     <SProfile_text_item open={open}>
       <form onSubmit={PostNewName}>
         <SProfile_forms>
+          {errors && <SError>{errors}</SError>}
           <SText_label>新しいユーザーネーム</SText_label>
           <SText_field
             type="text"
@@ -85,6 +87,11 @@ const SText_submit = styled.button`
   margin: 10px 0 10px auto;
   padding: 5px;
   text-align: center;
+`;
+
+const SError = styled.p`
+  padding: 4px 0;
+  color: red;
 `;
 
 export default ReturnNameForm;

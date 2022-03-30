@@ -30,7 +30,8 @@ const Menu = (props) => {
       navigate("/dokotomeyo");
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   };
 

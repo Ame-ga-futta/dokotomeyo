@@ -8,7 +8,8 @@ const CommentItem = (props) => {
   const {
     commentData,
     rerendering,
-    setRerendering
+    setRerendering,
+    bookFlashMessage
   } = props;
 
   const navigate = useNavigate();
@@ -24,11 +25,11 @@ const CommentItem = (props) => {
       params: { commentID: commentData.id }
     })
     .then(() => {
-      console.log("削除しました");
+      bookFlashMessage("削除しました");
       setRerendering(!rerendering);
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("削除に失敗しました");
     })
   };
 
@@ -38,7 +39,8 @@ const CommentItem = (props) => {
       setParkingData(response.data.parking);
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   }, [commentData])
 

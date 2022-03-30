@@ -6,7 +6,8 @@ const ReturnForm = (props) => {
   const {
     parkingID,
     rerendering,
-    setRerendering
+    setRerendering,
+    bookFlashMessage
   } = props;
 
   const [postComment, setPostComments] = useState("")
@@ -22,7 +23,7 @@ const ReturnForm = (props) => {
     .then((response) => {
       switch (response.data.status) {
         case 200:
-          console.log(response.data.message);
+          bookFlashMessage(response.data.message);
           setRerendering(!rerendering)
           break;
         case 400:
@@ -31,7 +32,7 @@ const ReturnForm = (props) => {
       }
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("通信に失敗しました");
     })
     event.preventDefault();
   }

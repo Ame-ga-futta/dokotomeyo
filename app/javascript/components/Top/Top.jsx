@@ -45,7 +45,7 @@ const Top = (props) => {
           <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
           <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
           <TopDetail_container detail={detail}>
-            {detail == "" || <ParkingDetail userName={userName} detail={detail} />}
+            {detail == "" || <ParkingDetail userName={userName} detail={detail} setDetail={setDetail} bookFlashMessage={bookFlashMessage} />}
           </TopDetail_container>
         </SSearch_container>
       </LoadScript>

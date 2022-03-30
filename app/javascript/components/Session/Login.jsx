@@ -32,7 +32,7 @@ const Login = (props) => {
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      setErrors(["通信に失敗しました"]);
     })
     event.preventDefault();
   };

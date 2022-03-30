@@ -64,8 +64,8 @@ const EditParking = (props) => {
             </SEdit_Detail_selector_edit>
           </SEdit_Detail_selector>
           {selectTab
-            ? <EditParkingDetail updateParking={updateParking} setUpdateParking={setUpdateParking} setCenter={setCenter} />
-            : <AddRequirement parkingID={id} parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} />
+            ? <EditParkingDetail updateParking={updateParking} setUpdateParking={setUpdateParking} setCenter={setCenter} bookFlashMessage={bookFlashMessage} />
+            : <AddRequirement parkingID={id} parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} bookFlashMessage={bookFlashMessage} />
           }
         </SEdit_Detail_Edit>
       </SEdit_Detail_container>

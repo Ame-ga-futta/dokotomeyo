@@ -8,7 +8,8 @@ import CommentItem from "./CommentItem";
 const Comments = (props) => {
   const {
     userName,
-    parkingID
+    parkingID,
+    bookFlashMessage
   } = props;
 
   const [comments, setComments] = useState({});
@@ -23,12 +24,12 @@ const Comments = (props) => {
           setComments(response.data.comments);
           break;
         case 400:
-          console.log(response.data.message);
+          bookFlashMessage(response.data.message);
           break;
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      bookFlashMessage("通信に失敗しました")
     })
   }, [parkingID, rerendering])
 
@@ -45,7 +46,7 @@ const Comments = (props) => {
           )
         })}
       </SComment_list>
-      {userName ? <ReturnForm parkingID={parkingID} rerendering={rerendering} setRerendering={setRerendering} /> : <ReturnMessage />}
+      {userName ? <ReturnForm parkingID={parkingID} rerendering={rerendering} setRerendering={setRerendering} bookFlashMessage={bookFlashMessage} /> : <ReturnMessage />}
     </SComments_container>
   );
 };

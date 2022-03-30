@@ -22,7 +22,8 @@ const DeleteUser = (props) => {
       navigate("/dokotomeyo");
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   }
 
@@ -36,12 +37,14 @@ const DeleteUser = (props) => {
             setEmail(response.data.email)
             break;
           case 400:
-            console.log(response.data.message);
+            bookFlashMessage("ユーザー情報が取得できません");
+            navigate("/dokotomeyo");
             break;
         }
       })
       .catch(() => {
-        console.log("通信に失敗しました")
+        bookFlashMessage("ユーザー情報が取得できません");
+        navigate("/dokotomeyo");
       })
     } else {
       bookFlashMessage("ログインしていません");

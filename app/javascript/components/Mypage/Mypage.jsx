@@ -16,9 +16,9 @@ const Mypage = (props) => {
       case "profile":
         return <Profile />
       case "favorite":
-        return <Favorite />
+        return <Favorite bookFlashMessage={bookFlashMessage} />
       case "comment":
-        return <Comment />
+        return <Comment bookFlashMessage={bookFlashMessage} />
     }
   }
 

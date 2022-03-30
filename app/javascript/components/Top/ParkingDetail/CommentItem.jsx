@@ -18,12 +18,12 @@ const CommentItem = (props) => {
           setContributor(response.data.name);
           break;
         case 400:
-          console.log(response.data.message);
+          setContributor(response.data.message);
           break;
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      setContributor("ユーザー情報の取得に失敗しました")
     })
   }, [commentData])
 

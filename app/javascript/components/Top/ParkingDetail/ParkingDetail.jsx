@@ -11,7 +11,9 @@ import Comments from "./Comments";
 const ParkingDetail = (props) => {
   const {
     userName,
-    detail
+    detail,
+    setDetail,
+    bookFlashMessage
   } = props;
 
   const [parkingData, setParkingData] = useState({});
@@ -34,7 +36,8 @@ const ParkingDetail = (props) => {
       })
     })
     .catch(() => {
-      console.log("通信に失敗");
+      setDetail("")
+      bookFlashMessage("通信に失敗しました");
     })
   }, [detail]);
 
@@ -75,7 +78,7 @@ const ParkingDetail = (props) => {
             <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
-        <Comments userName={userName} parkingID={parkingData.id} />
+        <Comments userName={userName} parkingID={parkingData.id} bookFlashMessage={bookFlashMessage} />
       </STop_ParkingDetail>
     </STop_ParkingDetail_container>
   )

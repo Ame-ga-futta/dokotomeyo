@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import EditParkingDetailConfirmParking from "./EditParkingDetailConfirmParking";
 import EditParkingDetailConfirmRequirements from "./EditParkingDetailConfirmRequirements";
@@ -10,9 +10,11 @@ const EditParkingDetailConfilm = (props) => {
     openconfirm,
     setOpenConfirm,
     updatesData,
-    setErrors
+    setErrors,
+    bookFlashMessage
   } = props;
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [existParkingData, setExistParkingData] = useState({});
   const [existRequirementsWeekdayData, setExistRequirementsWeekdayData] = useState({});
@@ -26,7 +28,8 @@ const EditParkingDetailConfilm = (props) => {
       setExistRequirementsHolidayData(response.data.requirements_holiday);
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("駐車場が見つかりませんでした");
+      navigate("/dokotomeyo");
     })
   }, []);
 
