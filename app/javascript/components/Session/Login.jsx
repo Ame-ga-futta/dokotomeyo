@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import FlashMessage from "../providers/FlashMessageProvider";
 
 const Login = (props) => {
-  const { userName, setUserName, bookFlashMessage } = props;
+  const { userName, setUserName } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessage);
 
   const handleSubmit = (event) => {
     axios.post('/dokotomeyo/login', { user: { email: email, password: password } })

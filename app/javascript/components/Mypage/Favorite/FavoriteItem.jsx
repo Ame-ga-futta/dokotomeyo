@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import FlashMessage from "../../providers/FlashMessageProvider";
 
 const FavoriteItem = (props) => {
   const {
     favoriteData,
     rerendering,
-    setRerendering,
-    bookFlashMessage
+    setRerendering
   } = props;
 
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessage);
 
   const [parkingData, setParkingData] = useState({});
 

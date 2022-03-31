@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
+import FlashMessage from "../../providers/FlashMessageProvider";
 
 const ReturnForm = (props) => {
   const {
     parkingID,
     rerendering,
-    setRerendering,
-    bookFlashMessage
+    setRerendering
   } = props;
 
   const [postComment, setPostComments] = useState("")
   const [errors, setErrors] = useState([]);
+  const bookFlashMessage = useContext(FlashMessage);
 
   const PostNewComment = (event) => {
     axios.post('/dokotomeyo/post_comment', {

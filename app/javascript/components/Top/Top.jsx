@@ -9,8 +9,7 @@ import ParkingDetail from "./ParkingDetail/ParkingDetail";
 
 const Top = (props) => {
   const {
-    userName,
-    bookFlashMessage
+    userName
   } = props;
 
   const { id } = useParams();
@@ -42,10 +41,10 @@ const Top = (props) => {
     <>
       <LoadScript googleMapsApiKey={API_KEY}>
         <SSearch_container>
-          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
+          <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
           <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
           <TopDetail_container detail={detail}>
-            {detail == "" || <ParkingDetail userName={userName} detail={detail} setDetail={setDetail} bookFlashMessage={bookFlashMessage} />}
+            {detail == "" || <ParkingDetail userName={userName} detail={detail} setDetail={setDetail} />}
           </TopDetail_container>
         </SSearch_container>
       </LoadScript>

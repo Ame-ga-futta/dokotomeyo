@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import ReturnForm from "./Returnform";
 import ReturnMessage from "./ReturnMessage";
 import CommentItem from "./CommentItem";
+import FlashMessage from "../../providers/FlashMessageProvider";
 
 const Comments = (props) => {
   const {
     userName,
-    parkingID,
-    bookFlashMessage
+    parkingID
   } = props;
 
   const [comments, setComments] = useState({});
   const [rerendering, setRerendering] = useState(false);
+  const bookFlashMessage = useContext(FlashMessage);
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment_from_parking', { params: { parkingID: parkingID } })
@@ -46,7 +47,7 @@ const Comments = (props) => {
           )
         })}
       </SComment_list>
-      {userName ? <ReturnForm parkingID={parkingID} rerendering={rerendering} setRerendering={setRerendering} bookFlashMessage={bookFlashMessage} /> : <ReturnMessage />}
+      {userName ? <ReturnForm parkingID={parkingID} rerendering={rerendering} setRerendering={setRerendering} /> : <ReturnMessage />}
     </SComments_container>
   );
 };

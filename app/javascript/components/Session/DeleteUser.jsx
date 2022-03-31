@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import FlashMessage from "../providers/FlashMessageProvider";
 
 const DeleteUser = (props) => {
   const {
     userName,
-    setUserName,
-    bookFlashMessage
+    setUserName
   } = props;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessage);
 
   const handleSubmit = () => {
     axios.delete('/dokotomeyo/delete')

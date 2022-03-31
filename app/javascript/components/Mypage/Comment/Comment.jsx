@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import CommentItem from "./CommentItem";
 
-const Comment = (props) => {
-  const {
-    bookFlashMessage
-  } = props;
-
+const Comment = () => {
   const [comments, setComments] = useState({});
   const [rerendering, setRerendering] = useState(false);
   const [errors, setErrors] = useState("");
@@ -31,7 +27,7 @@ const Comment = (props) => {
           const commentData = comments[data]
           return (
             <SComment_item key={i}>
-              <CommentItem commentData={commentData} rerendering={rerendering} setRerendering={setRerendering} bookFlashMessage={bookFlashMessage} />
+              <CommentItem commentData={commentData} rerendering={rerendering} setRerendering={setRerendering} />
             </SComment_item>
           )
         })}

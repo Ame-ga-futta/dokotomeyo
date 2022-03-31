@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Profile from "./Profile/Profile";
 import Favorite from "./Favorite/Favorite";
 import Comment from "./Comment/Comment"
+import FlashMessage from "../providers/FlashMessageProvider";
 
 const Mypage = (props) => {
-  const { userName, bookFlashMessage } = props;
+  const { userName } = props;
   const navigate = useNavigate();
 
   const [changeTab, setChangeTab] = useState("profile");
+  const bookFlashMessage = useContext(FlashMessage);
 
   const displayTab = () => {
     switch (changeTab){
       case "profile":
         return <Profile />
       case "favorite":
-        return <Favorite bookFlashMessage={bookFlashMessage} />
+        return <Favorite />
       case "comment":
-        return <Comment bookFlashMessage={bookFlashMessage} />
+        return <Comment />
     }
   }
 

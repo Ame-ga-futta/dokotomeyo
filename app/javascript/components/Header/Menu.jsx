@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import About from "./About"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import FlashMessage from "../providers/FlashMessageProvider";
 
 const Menu = (props) => {
-  const { userName, setUserName, bookFlashMessage } = props;
+  const { userName, setUserName } = props;
 
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
@@ -20,6 +21,7 @@ const Menu = (props) => {
   };
 
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessage);
 
   const logout = () => {
     setOpenMenu(false);

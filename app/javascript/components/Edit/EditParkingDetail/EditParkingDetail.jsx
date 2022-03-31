@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FormRequirement from "./FormRequirement";
 import EditParkingDetailConfilm from "./EditParkingDetailConfilm";
+import FlashMessage from "../../providers/FlashMessageProvider";
 
 const EditParkingDetail = (props) => {
   const {
     updateParking,
     setUpdateParking,
-    setCenter,
-    bookFlashMessage
+    setCenter
   } = props;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ const EditParkingDetail = (props) => {
   const [updatesFree] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
   const [changeRequirement, setChangeRequirement] = useState(false);
+  const bookFlashMessage = useContext(FlashMessage);
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: id } })

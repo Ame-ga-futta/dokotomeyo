@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import FavoriteItem from "./FavoriteItem";
 
-const Favorite = (props) => {
-  const {
-    bookFlashMessage
-  } = props;
-
+const Favorite = () => {
   const [favorites, setFavorites] = useState({});
   const [rerendering, setRerendering] = useState(false);
   const [errors, setErrors] = useState("");
@@ -31,7 +27,7 @@ const Favorite = (props) => {
           const favoriteData = favorites[data]
           return (
             <SFavorite_item key={i}>
-              <FavoriteItem favoriteData={favoriteData} rerendering={rerendering} setRerendering={setRerendering} bookFlashMessage={bookFlashMessage} />
+              <FavoriteItem favoriteData={favoriteData} rerendering={rerendering} setRerendering={setRerendering} />
             </SFavorite_item>
           )
         })}

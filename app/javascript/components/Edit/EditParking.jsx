@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import { LoadScript } from "@react-google-maps/api";
 import { useParams } from 'react-router-dom';
@@ -7,12 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import EditParkingMap from "./EditParkingMap";
 import EditParkingDetail from "./EditParkingDetail/EditParkingDetail";
 import AddRequirement from "./AddRequirement/AddRequirement";
+import FlashMessage from "../providers/FlashMessageProvider";
 
-const EditParking = (props) => {
-  const {
-    bookFlashMessage
-  } = props;
-
+const EditParking = () => {
   const { id } = useParams();
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
@@ -33,6 +30,7 @@ const EditParking = (props) => {
     lng: 139.76707115336345
   });
   const [selectTab, setSelectTab] = useState(false);
+  const bookFlashMessage = useContext(FlashMessage);
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: id } })
@@ -64,8 +62,8 @@ const EditParking = (props) => {
             </SEdit_Detail_selector_edit>
           </SEdit_Detail_selector>
           {selectTab
-            ? <EditParkingDetail updateParking={updateParking} setUpdateParking={setUpdateParking} setCenter={setCenter} bookFlashMessage={bookFlashMessage} />
-            : <AddRequirement parkingID={id} parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} bookFlashMessage={bookFlashMessage} />
+            ? <EditParkingDetail updateParking={updateParking} setUpdateParking={setUpdateParking} setCenter={setCenter} />
+            : <AddRequirement parkingID={id} parkingData={parkingData} requirementsWeekdayData={requirementsWeekdayData} requirementsHolidayData={requirementsHolidayData} />
           }
         </SEdit_Detail_Edit>
       </SEdit_Detail_container>
