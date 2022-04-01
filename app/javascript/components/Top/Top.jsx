@@ -7,11 +7,7 @@ import TopLeft from "./TopLeft/TopLeft";
 import TopRight from "./TopRight/TopRight";
 import ParkingDetail from "./ParkingDetail/ParkingDetail";
 
-const Top = (props) => {
-  const {
-    userName
-  } = props;
-
+const Top = () => {
   const { id } = useParams();
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
@@ -44,7 +40,7 @@ const Top = (props) => {
           <TopLeft narrowDown={narrowDown} setNarrowDown={setNarrowDown} mapCenter={mapCenter} setMapCenter={setMapCenter} parkings={parkings} setParkings={setParkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
           <TopRight mapCenter={mapCenter} parkings={parkings} Highlight={Highlight} />
           <TopDetail_container detail={detail}>
-            {detail == "" || <ParkingDetail userName={userName} detail={detail} setDetail={setDetail} />}
+            {detail == "" || <ParkingDetail detail={detail} setDetail={setDetail} />}
           </TopDetail_container>
         </SSearch_container>
       </LoadScript>

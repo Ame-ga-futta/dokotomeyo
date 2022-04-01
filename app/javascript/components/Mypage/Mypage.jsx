@@ -5,13 +5,14 @@ import Profile from "./Profile/Profile";
 import Favorite from "./Favorite/Favorite";
 import Comment from "./Comment/Comment"
 import FlashMessage from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const Mypage = (props) => {
-  const { userName } = props;
+const Mypage = () => {
   const navigate = useNavigate();
 
   const [changeTab, setChangeTab] = useState("profile");
   const bookFlashMessage = useContext(FlashMessage);
+  const {userName} = useContext(SessionContext);
 
   const displayTab = () => {
     switch (changeTab){

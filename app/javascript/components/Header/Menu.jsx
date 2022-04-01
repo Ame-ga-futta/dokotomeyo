@@ -5,10 +5,9 @@ import About from "./About"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import FlashMessage from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const Menu = (props) => {
-  const { userName, setUserName } = props;
-
+const Menu = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
     setOpenMenu(!openMenu);
@@ -22,6 +21,7 @@ const Menu = (props) => {
 
   const navigate = useNavigate();
   const bookFlashMessage = useContext(FlashMessage);
+  const {userName, setUserName} = useContext(SessionContext);
 
   const logout = () => {
     setOpenMenu(false);

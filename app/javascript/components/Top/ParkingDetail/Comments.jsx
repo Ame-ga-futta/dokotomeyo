@@ -5,16 +5,17 @@ import ReturnForm from "./Returnform";
 import ReturnMessage from "./ReturnMessage";
 import CommentItem from "./CommentItem";
 import FlashMessage from "../../providers/FlashMessageProvider";
+import SessionContext from "../../providers/SessionProvider";
 
 const Comments = (props) => {
   const {
-    userName,
     parkingID
   } = props;
 
   const [comments, setComments] = useState({});
   const [rerendering, setRerendering] = useState(false);
   const bookFlashMessage = useContext(FlashMessage);
+  const {userName} = useContext(SessionContext);
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment_from_parking', { params: { parkingID: parkingID } })

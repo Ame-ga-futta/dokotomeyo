@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import FlashMessage from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const Signup = (props) => {
-  const { userName, setUserName } = props;
-
+const Signup = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +13,7 @@ const Signup = (props) => {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   const bookFlashMessage = useContext(FlashMessage);
+  const {userName, setUserName} = useContext(SessionContext);
 
   const handleSubmit = (event) => {
     axios.post('/dokotomeyo/signup', { user: { name: name, email: email, password: password, password_confirmation: passwordConfirmation } })

@@ -3,17 +3,14 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import FlashMessage from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const DeleteUser = (props) => {
-  const {
-    userName,
-    setUserName
-  } = props;
-
+const DeleteUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const bookFlashMessage = useContext(FlashMessage);
+  const {userName, setUserName} = useContext(SessionContext);
 
   const handleSubmit = () => {
     axios.delete('/dokotomeyo/delete')
