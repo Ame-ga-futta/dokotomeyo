@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import moment from 'moment'
 import axios from 'axios';
-import FlashMessage from "../../providers/FlashMessageProvider";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const TopSearchForm = (props) => {
   const {
@@ -22,7 +22,7 @@ const TopSearchForm = (props) => {
   const [inputEndTime, setInputEndTime] = useState(
     ("00" + narrowDown.end_date.hours()).slice(-2) + ":" + ("00" + narrowDown.end_date.minute()).slice(-2)
   );
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   useEffect(() => {
     setNarrowDown({

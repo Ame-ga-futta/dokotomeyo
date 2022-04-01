@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
-import FlashMessage from "../../providers/FlashMessageProvider";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const ReturnForm = (props) => {
   const {
@@ -12,7 +12,7 @@ const ReturnForm = (props) => {
 
   const [postComment, setPostComments] = useState("")
   const [errors, setErrors] = useState([]);
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const PostNewComment = (event) => {
     axios.post('/dokotomeyo/post_comment', {

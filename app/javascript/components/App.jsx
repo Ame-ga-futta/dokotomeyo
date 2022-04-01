@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useFlash from '../hooks/useFlash';
 import SessionContext from "./providers/SessionProvider";
-import FlashMessage from "./providers/FlashMessageProvider";
+import FlashMessageContext from "./providers/FlashMessageProvider";
 import Flash from "./Top/Flash";
 import Header from "./Header/Header";
 import Top from "./Top/Top";
@@ -20,7 +20,7 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <SessionContext.Provider value={{userName, setUserName}}>
-        <FlashMessage.Provider value={bookFlashMessage}>
+        <FlashMessageContext.Provider value={bookFlashMessage}>
           {flashMessage && <Flash message={flashMessage}/>}
           <Header />
           <Routes>
@@ -33,7 +33,7 @@ const App = (props) => {
             <Route path="/dokotomeyo/delete" element={<DeleteUser />} />
             <Route path="/dokotomeyo/parking/:id" element={<EditParking />} />
           </Routes>
-        </FlashMessage.Provider>
+        </FlashMessageContext.Provider>
       </SessionContext.Provider>
     </BrowserRouter>
   );

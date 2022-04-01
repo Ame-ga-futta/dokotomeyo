@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import FlashMessage from "../../providers/FlashMessageProvider";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const FavoriteItem = (props) => {
   const {
@@ -12,7 +12,7 @@ const FavoriteItem = (props) => {
   } = props;
 
   const navigate = useNavigate();
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const [parkingData, setParkingData] = useState({});
 

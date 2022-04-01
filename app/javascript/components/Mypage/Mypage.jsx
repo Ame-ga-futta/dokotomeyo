@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import Profile from "./Profile/Profile";
 import Favorite from "./Favorite/Favorite";
 import Comment from "./Comment/Comment"
-import FlashMessage from "../providers/FlashMessageProvider";
+import FlashMessageContext from "../providers/FlashMessageProvider";
 import SessionContext from "../providers/SessionProvider";
 
 const Mypage = () => {
   const navigate = useNavigate();
 
   const [changeTab, setChangeTab] = useState("profile");
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
   const {userName} = useContext(SessionContext);
 
   const displayTab = () => {

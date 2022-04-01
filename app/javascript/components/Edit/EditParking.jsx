@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import EditParkingMap from "./EditParkingMap";
 import EditParkingDetail from "./EditParkingDetail/EditParkingDetail";
 import AddRequirement from "./AddRequirement/AddRequirement";
-import FlashMessage from "../providers/FlashMessageProvider";
+import FlashMessageContext from "../providers/FlashMessageProvider";
 
 const EditParking = () => {
   const { id } = useParams();
@@ -30,7 +30,7 @@ const EditParking = () => {
     lng: 139.76707115336345
   });
   const [selectTab, setSelectTab] = useState(false);
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: id } })

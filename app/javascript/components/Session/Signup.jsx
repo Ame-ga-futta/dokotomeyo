@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import FlashMessage from "../providers/FlashMessageProvider";
+import FlashMessageContext from "../providers/FlashMessageProvider";
 import SessionContext from "../providers/SessionProvider";
 
 const Signup = () => {
@@ -12,7 +12,7 @@ const Signup = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
   const {userName, setUserName} = useContext(SessionContext);
 
   const handleSubmit = (event) => {

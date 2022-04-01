@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import FlashMessage from "../providers/FlashMessageProvider";
+import FlashMessageContext from "../providers/FlashMessageProvider";
 
 const PostConfirm = (props) => {
   const {
@@ -15,7 +15,7 @@ const PostConfirm = (props) => {
   } = props;
 
   const navigate = useNavigate();
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const fix = () => {
     setOpenConfirm(false);

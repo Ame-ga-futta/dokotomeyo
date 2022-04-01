@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const FlashMessage = createContext();
+const FlashMessageContext = createContext();
 
-export default FlashMessage;
+export default FlashMessageContext;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import About from "./About"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import FlashMessage from "../providers/FlashMessageProvider";
+import FlashMessageContext from "../providers/FlashMessageProvider";
 import SessionContext from "../providers/SessionProvider";
 
 const Menu = () => {
@@ -20,7 +20,7 @@ const Menu = () => {
   };
 
   const navigate = useNavigate();
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
   const {userName, setUserName} = useContext(SessionContext);
 
   const logout = () => {

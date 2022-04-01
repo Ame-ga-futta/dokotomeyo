@@ -4,7 +4,7 @@ import axios from 'axios';
 import ReturnForm from "./Returnform";
 import ReturnMessage from "./ReturnMessage";
 import CommentItem from "./CommentItem";
-import FlashMessage from "../../providers/FlashMessageProvider";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 import SessionContext from "../../providers/SessionProvider";
 
 const Comments = (props) => {
@@ -14,7 +14,7 @@ const Comments = (props) => {
 
   const [comments, setComments] = useState({});
   const [rerendering, setRerendering] = useState(false);
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
   const {userName} = useContext(SessionContext);
 
   useEffect(() => {

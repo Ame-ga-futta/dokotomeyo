@@ -7,7 +7,7 @@ import FavoriteIcon from "./FavoriteIcon";
 import ParkingRequirementsWeekday from "./ParkingRequirementsWeekday";
 import ParkingRequirementsHoliday from "./ParkingRequirementsHoliday";
 import Comments from "./Comments";
-import FlashMessage from "../../providers/FlashMessageProvider";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 import SessionContext from "../../providers/SessionProvider";
 
 const ParkingDetail = (props) => {
@@ -23,7 +23,7 @@ const ParkingDetail = (props) => {
     lat: 35.681454048919186,
     lng: 139.76707115336345
   });
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
   const {userName} = useContext(SessionContext);
 
   useEffect(() => {

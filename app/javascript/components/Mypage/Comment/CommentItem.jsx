@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
-import FlashMessage from "../../providers/FlashMessageProvider";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const CommentItem = (props) => {
   const {
@@ -13,7 +13,7 @@ const CommentItem = (props) => {
   } = props;
 
   const navigate = useNavigate();
-  const bookFlashMessage = useContext(FlashMessage);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const [parkingData, setParkingData] = useState({});
 
