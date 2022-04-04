@@ -65,7 +65,6 @@ RSpec.describe Parking, type: :model do
     let!(:new_favorite) { create(:favorite, parking_id: new_parking.id, user_id: new_user.id) }
     let!(:new_comment) { create(:comment, parking_id: new_parking.id, user_id: new_user.id) }
 
-
     context "when Parking is deleted" do
       it "requirement_buys is also deleted" do
         expect { new_parking.destroy }.to change { RequirementBuy.count }.from(1).to(0)

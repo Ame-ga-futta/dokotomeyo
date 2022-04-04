@@ -13,6 +13,7 @@ const Profile = () => {
   const [selectEdit, setSelectEdit] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState("");
 
   const OpenForm = (tab) => {
     if (openEdit) {
@@ -38,12 +39,12 @@ const Profile = () => {
           setEmail(response.data.email)
           break;
         case 400:
-          console.log(response.data.message);
+          setErrors(response.data.message);
           break;
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      setErrors("通信に失敗しました")
     })
   }, [])
 
@@ -51,6 +52,7 @@ const Profile = () => {
     <SProfile_container>
       <SProfile_title>ユーザー情報</SProfile_title>
       <SProfile_table>
+        {errors && <SError>{errors}</SError>}
         <SProfile_text_item>
           <SProfile_label>ユーザーネーム</SProfile_label>
           <SProfile_text>{name}</SProfile_text>
@@ -125,6 +127,11 @@ const SProfile_delete = styled.li`
   margin: 30px 0 0 50%;
   text-align: center;
   cursor: pointer;
+`;
+
+const SError = styled.p`
+  padding: 6px 4px;
+  color: gray;
 `;
 
 export default Profile;

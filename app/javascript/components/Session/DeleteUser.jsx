@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import FlashMessageContext from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const DeleteUser = (props) => {
-  const {
-    userName,
-    setUserName,
-    bookFlashMessage
-  } = props;
-
+const DeleteUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessageContext);
+  const {userName, setUserName} = useContext(SessionContext);
 
   const handleSubmit = () => {
     axios.delete('/dokotomeyo/delete')
@@ -22,7 +20,8 @@ const DeleteUser = (props) => {
       navigate("/dokotomeyo");
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   }
 
@@ -36,12 +35,14 @@ const DeleteUser = (props) => {
             setEmail(response.data.email)
             break;
           case 400:
-            console.log(response.data.message);
+            bookFlashMessage("ユーザー情報が取得できません");
+            navigate("/dokotomeyo");
             break;
         }
       })
       .catch(() => {
-        console.log("通信に失敗しました")
+        bookFlashMessage("ユーザー情報が取得できません");
+        navigate("/dokotomeyo");
       })
     } else {
       bookFlashMessage("ログインしていません");

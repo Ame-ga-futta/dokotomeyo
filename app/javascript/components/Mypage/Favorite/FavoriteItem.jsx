@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const FavoriteItem = (props) => {
   const {
@@ -11,6 +12,7 @@ const FavoriteItem = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const [parkingData, setParkingData] = useState({});
 
@@ -23,11 +25,11 @@ const FavoriteItem = (props) => {
       params: { favoriteID: favoriteData.id }
     })
     .then(() => {
-      console.log("削除しました");
+      bookFlashMessage("削除しました");
       setRerendering(!rerendering);
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("削除に失敗しました");
     })
   };
 
@@ -37,7 +39,8 @@ const FavoriteItem = (props) => {
       setParkingData(response.data.parking);
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   }, [favoriteData])
 

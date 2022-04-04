@@ -6,6 +6,7 @@ import CommentItem from "./CommentItem";
 const Comment = () => {
   const [comments, setComments] = useState({});
   const [rerendering, setRerendering] = useState(false);
+  const [errors, setErrors] = useState("");
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment_from_user')
@@ -13,7 +14,7 @@ const Comment = () => {
       setComments(response.data.comments)
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      setErrors("コメントの取得に失敗しました")
     })
   }, [rerendering])
 
@@ -21,6 +22,7 @@ const Comment = () => {
     <SComment_container>
       <SComment_title>投稿コメント</SComment_title>
       <SComment_table>
+        {errors && <SError>{errors}</SError>}
         {Object.keys(comments).map((data, i) => {
           const commentData = comments[data]
           return (
@@ -55,6 +57,11 @@ const SComment_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SError = styled.p`
+  padding: 6px 4px;
+  color: gray;
 `;
 
 export default Comment;

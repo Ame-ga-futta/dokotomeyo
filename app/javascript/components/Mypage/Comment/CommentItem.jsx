@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const CommentItem = (props) => {
   const {
@@ -12,6 +13,7 @@ const CommentItem = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const [parkingData, setParkingData] = useState({});
 
@@ -24,11 +26,11 @@ const CommentItem = (props) => {
       params: { commentID: commentData.id }
     })
     .then(() => {
-      console.log("削除しました");
+      bookFlashMessage("削除しました");
       setRerendering(!rerendering);
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("削除に失敗しました");
     })
   };
 
@@ -38,7 +40,8 @@ const CommentItem = (props) => {
       setParkingData(response.data.parking);
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   }, [commentData])
 

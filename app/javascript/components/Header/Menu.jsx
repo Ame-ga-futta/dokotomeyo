@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import About from "./About"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import FlashMessageContext from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const Menu = (props) => {
-  const { userName, setUserName, bookFlashMessage } = props;
-
+const Menu = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const hamburger = () => {
     setOpenMenu(!openMenu);
@@ -20,6 +20,8 @@ const Menu = (props) => {
   };
 
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessageContext);
+  const {userName, setUserName} = useContext(SessionContext);
 
   const logout = () => {
     setOpenMenu(false);
@@ -30,7 +32,8 @@ const Menu = (props) => {
       navigate("/dokotomeyo");
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      bookFlashMessage("通信に失敗しました");
+      navigate("/dokotomeyo");
     })
   };
 

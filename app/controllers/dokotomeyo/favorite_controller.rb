@@ -13,7 +13,7 @@ class Dokotomeyo::FavoriteController < ApplicationController
     if @favorite
       render json: { status: 200, favorites: @favorite }
     else
-      render json: { status: 400, message: "お気に入りの取得に失敗しました"}
+      render json: { status: 400, message: "お気に入りの取得に失敗しました" }
     end
   end
 
@@ -22,12 +22,12 @@ class Dokotomeyo::FavoriteController < ApplicationController
     if @favorite
       render json: { status: 200, favorites: @favorite }
     else
-      render json: { status: 400, message: "お気に入りの取得に失敗しました"}
+      render json: { status: 400, message: "お気に入りの取得に失敗しました" }
     end
   end
 
   def get_favorite_match
-    if Favorite.where(user_id: session[:user_id], parking_id: parking_params[:parkingID]).exists?
+    if Favorite.exists?(user_id: session[:user_id], parking_id: parking_params[:parkingID])
       render json: { favorite: true }
     else
       render json: { favorite: false }
@@ -36,7 +36,7 @@ class Dokotomeyo::FavoriteController < ApplicationController
 
   def post_favorite
     @favorite = Favorite.find_or_initialize_by(user_id: session[:user_id], parking_id: parking_params[:parkingID])
-    if Favorite.where(user_id: session[:user_id], parking_id: parking_params[:parkingID]).exists?
+    if Favorite.exists?(user_id: session[:user_id], parking_id: parking_params[:parkingID])
       @favorite.destroy
       render json: { favorite: false }
     else

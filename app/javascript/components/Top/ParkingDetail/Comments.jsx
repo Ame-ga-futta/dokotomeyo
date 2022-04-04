@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import ReturnForm from "./Returnform";
 import ReturnMessage from "./ReturnMessage";
 import CommentItem from "./CommentItem";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
+import SessionContext from "../../providers/SessionProvider";
 
 const Comments = (props) => {
   const {
-    userName,
     parkingID
   } = props;
 
   const [comments, setComments] = useState({});
   const [rerendering, setRerendering] = useState(false);
+  const bookFlashMessage = useContext(FlashMessageContext);
+  const {userName} = useContext(SessionContext);
 
   useEffect(() => {
     axios.get('/dokotomeyo/comment_from_parking', { params: { parkingID: parkingID } })
@@ -23,12 +26,12 @@ const Comments = (props) => {
           setComments(response.data.comments);
           break;
         case 400:
-          console.log(response.data.message);
+          bookFlashMessage(response.data.message);
           break;
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      bookFlashMessage("通信に失敗しました")
     })
   }, [parkingID, rerendering])
 

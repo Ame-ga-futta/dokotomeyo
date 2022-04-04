@@ -1,6 +1,6 @@
 class RequirementBuy < ApplicationRecord
   validates :facility_name, presence: true
-  validates :purchase_price, presence: true, numericality: {only_integer: true, greater_than: 0}
+  validates :purchase_price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :free_time, presence: true
   validates :only_weekdays, inclusion: { in: [true, false] }
   validate :free_time_check, :higher_requirement_check

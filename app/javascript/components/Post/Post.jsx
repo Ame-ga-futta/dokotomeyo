@@ -5,9 +5,7 @@ import PostLeft from "./PostLeft";
 import PostRight from "./PostRight";
 import PostConfirm from "./PostConfirm";
 
-const Post = memo((props) => {
-  const { bookFlashMessage } = props;
-
+const Post = memo(() => {
   const API_KEY = process.env.GOOGLE_MAP_API_KEY;
 
   const [parking, setParking] = useState({
@@ -52,7 +50,6 @@ const Post = memo((props) => {
           openconfirm={openconfirm}
           setOpenConfirm={setOpenConfirm}
           setErrors={setErrors}
-          bookFlashMessage={bookFlashMessage}
         />
       </LoadScript>
     </SPost_container>

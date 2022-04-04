@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Menu from "./Menu"
+import SessionContext from "../providers/SessionProvider";
 
-const Header = (props) => {
-  const { userName, setUserName, bookFlashMessage } = props;
+const Header = () => {
+  const {userName} = useContext(SessionContext);
 
   return (
     <>
@@ -15,7 +16,7 @@ const Header = (props) => {
           </div>
           <div>
             <SHeader_username>{userName}</SHeader_username>
-            <Menu userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
+            <Menu />
           </div>
         </SHeader>
       </SHeaders>

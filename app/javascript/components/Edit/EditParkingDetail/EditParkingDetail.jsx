@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FormRequirement from "./FormRequirement";
-import EditParkingDetailConfilm from "./EditParkingDetailConfilm";
+import EditParkingDetailConfilm from "./Confilm/EditParkingDetailConfilm";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const EditParkingDetail = (props) => {
   const {
@@ -12,6 +13,7 @@ const EditParkingDetail = (props) => {
     setCenter
   } = props;
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState([]);
   const [requirementsWeekdayData, setRequirementsWeekdayData] = useState({});
@@ -29,6 +31,7 @@ const EditParkingDetail = (props) => {
   const [updatesFree] = useState({});
   const [openconfirm, setOpenConfirm] = useState(false);
   const [changeRequirement, setChangeRequirement] = useState(false);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: id } })
@@ -42,7 +45,8 @@ const EditParkingDetail = (props) => {
       })
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("駐車場が見つかりませんでした");
+      navigate("/dokotomeyo");
     })
   }, []);
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useFlash from '../hooks/useFlash';
+import SessionContext from "./providers/SessionProvider";
+import FlashMessageContext from "./providers/FlashMessageProvider";
 import Flash from "./Top/Flash";
 import Header from "./Header/Header";
 import Top from "./Top/Top";
@@ -17,18 +19,22 @@ const App = (props) => {
 
   return (
     <BrowserRouter>
-      {flashMessage && <Flash message={flashMessage}/>}
-      <Header userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage}/>
-      <Routes>
-        <Route path="/dokotomeyo" element={<Top userName={userName} bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/detail/:id" element={<Top userName={userName} bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/mypage" element={<Mypage userName={userName} bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/post" element={<Post bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/login" element={<Login userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/signup" element={<Signup userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/delete" element={<DeleteUser userName={userName} setUserName={setUserName} bookFlashMessage={bookFlashMessage} />} />
-        <Route path="/dokotomeyo/parking/:id" element={<EditParking bookFlashMessage={bookFlashMessage} />} />
-      </Routes>
+      <SessionContext.Provider value={{userName, setUserName}}>
+        <FlashMessageContext.Provider value={bookFlashMessage}>
+          {flashMessage && <Flash message={flashMessage}/>}
+          <Header />
+          <Routes>
+            <Route path="/dokotomeyo" element={<Top />} />
+            <Route path="/dokotomeyo/detail/:id" element={<Top />} />
+            <Route path="/dokotomeyo/mypage" element={<Mypage />} />
+            <Route path="/dokotomeyo/post" element={<Post />} />
+            <Route path="/dokotomeyo/login" element={<Login />} />
+            <Route path="/dokotomeyo/signup" element={<Signup />} />
+            <Route path="/dokotomeyo/delete" element={<DeleteUser />} />
+            <Route path="/dokotomeyo/parking/:id" element={<EditParking />} />
+          </Routes>
+        </FlashMessageContext.Provider>
+      </SessionContext.Provider>
     </BrowserRouter>
   );
 };

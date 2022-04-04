@@ -14,7 +14,9 @@ class Parking < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   def time_lag_check
-    errors[:base] << "営業時間を入力してください" if beginning_of_worktime.blank? || end_of_worktime.blank?
+    if beginning_of_worktime.blank? || end_of_worktime.blank?
+      errors[:base] << "営業時間を入力してください"
+    end
   end
 
   def remove_error_messages
@@ -24,6 +26,83 @@ class Parking < ApplicationRecord
     errors.messages.delete(:requirement_facilities)
     errors.messages.delete(:requirement_frees)
     errors.messages.delete(:requirement_times)
+  end
+
+  def return_requirement(requirement_type, requirement)
+    case requirement_type
+    when "free" then
+      requirement_frees.new(requirement.reject { |k, v| v == "" })
+    when "time" then
+      requirement_times.new(requirement.reject { |k, v| v == "" })
+    when "buy" then
+      requirement_buys.new(requirement.reject { |k, v| v == "" })
+    when "facility" then
+      requirement_facilities.new(requirement.reject { |k, v| v == "" })
+    end
+  end
+
+  def requirement_count
+    requirement_frees.size + requirement_times.size + requirement_buys.size + requirement_facilities.size
+  end
+
+  def return_error_message(edit_params, requirement_count)
+    error_message = []
+    requirement_count = requirement_count
+    delete_count = 0
+
+    error_message.push(errors.full_messages) unless valid?
+
+    edit_params[:requirement_free].each do |key, requirement|
+      requirement_free = requirement_frees.new(requirement[:requirements].reject { |k, v| v == "" })
+      if requirement[:delete]
+        delete_count += 1
+      elsif requirement[:change]
+        requirement[:requirements][:only_weekdays] = !(requirement[:requirements][:only_weekdays])
+      else
+        unless requirement_free.valid?
+          error_message.push(requirement_free.errors.full_messages)
+        end
+      end
+    end
+
+    edit_params[:requirement_time].each do |key, requirement|
+      requirement_time = requirement_times.new(requirement[:requirements].reject { |k, v| v == "" })
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_time.valid?
+          error_message.push(requirement_time.errors.full_messages)
+        end
+      end
+    end
+
+    edit_params[:requirement_buy].each do |key, requirement|
+      requirement_buy = requirement_buys.new(requirement[:requirements].reject { |k, v| v == "" })
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_buy.valid?
+          error_message.push(requirement_buy.errors.full_messages)
+        end
+      end
+    end
+
+    edit_params[:requirement_facility].each do |key, requirement|
+      requirement_facility = requirement_facilities.new(requirement[:requirements].reject { |k, v| v == "" })
+      if requirement[:delete]
+        delete_count += 1
+      else
+        unless requirement_facility.valid?
+          error_message.push(requirement_facility.errors.full_messages)
+        end
+      end
+    end
+
+    if requirement_count <= delete_count
+      error_message.push("無料の条件は一つ以上必要です")
+    end
+
+    error_message
   end
 
   scope :search_in_bounds, -> (south_end, north_end, west_end, east_end) do

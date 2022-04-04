@@ -57,17 +57,17 @@ const PostLeft = (props) => {
       <SPost_form_container>
         <SPost_form_box>
           <form onSubmit={Confilm}>
-            <SPost_form_ul>
-              <li>
+            <SPost_form_table>
+              <SPost_form_item>
                 <SText_label>住所</SText_label>
                 <SText_address>{parking.address}</SText_address>
-              </li>
-              <li>
+              </SPost_form_item>
+              <SPost_form_item>
                 <SPost_container_notice>
                   画面右の地図をクリックするか、地図上部の検索ボックスで<br />場所を入力すると、住所が入力されます。
                 </SPost_container_notice>
-              </li>
-              <li>
+              </SPost_form_item>
+              <SPost_form_item>
                 <SText_label>駐車場名</SText_label>
                 <SText_field
                   type="text"
@@ -75,8 +75,8 @@ const PostLeft = (props) => {
                   value={parking.name}
                   onChange={event => setParking({...parking, name: event.target.value})}
                 />
-              </li>
-              <li>
+              </SPost_form_item>
+              <SPost_form_item>
                 <SText_label>営業時間</SText_label>
                 <STime_field_container>
                   <STime_field
@@ -93,16 +93,16 @@ const PostLeft = (props) => {
                     onChange={event => setParking({...parking, end_of_worktime: event.target.value})}
                   />
                 </STime_field_container>
-              </li>
-              <li>
+              </SPost_form_item>
+              <SPost_form_item>
                 <SPost_container_notice>
                   営業終了時間が日付を跨ぐ場合は、翌日の時間で入力してください。<br />24時間営業の場合は 0:00 ~ 23:59 で入力してください。
                 </SPost_container_notice>
-              </li>
+              </SPost_form_item>
+              <Requirements type={type} setType={setType} requirement={requirement} setRequirement={setRequirement} />
               <SText_submit>登録</SText_submit>
-            </SPost_form_ul>
+            </SPost_form_table>
           </form>
-          <Requirements type={type} setType={setType} requirement={requirement} setRequirement={setRequirement} />
         </SPost_form_box>
         <SPost_form_text>
           なるべく正確な情報を入力してください。
@@ -157,15 +157,16 @@ const SPost_form_box = styled.div`
   margin-bottom: 15px;
 `;
 
-const SPost_form_ul = styled.ul`
+const SPost_form_table = styled.ul`
   display: flex;
   flex-direction: column;
-  li {
-    margin: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+`;
+
+const SPost_form_item = styled.li`
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const SText_label = styled.label`

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
+import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const ReturnForm = (props) => {
   const {
@@ -11,6 +12,7 @@ const ReturnForm = (props) => {
 
   const [postComment, setPostComments] = useState("")
   const [errors, setErrors] = useState([]);
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const PostNewComment = (event) => {
     axios.post('/dokotomeyo/post_comment', {
@@ -22,7 +24,7 @@ const ReturnForm = (props) => {
     .then((response) => {
       switch (response.data.status) {
         case 200:
-          console.log(response.data.message);
+          bookFlashMessage(response.data.message);
           setRerendering(!rerendering)
           break;
         case 400:
@@ -31,7 +33,7 @@ const ReturnForm = (props) => {
       }
     })
     .catch(() => {
-      console.log("通信に失敗");
+      bookFlashMessage("通信に失敗しました");
     })
     event.preventDefault();
   }

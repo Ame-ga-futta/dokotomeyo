@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { GoogleMap, Marker } from "@react-google-maps/api";
@@ -7,11 +7,13 @@ import FavoriteIcon from "./FavoriteIcon";
 import ParkingRequirementsWeekday from "./ParkingRequirementsWeekday";
 import ParkingRequirementsHoliday from "./ParkingRequirementsHoliday";
 import Comments from "./Comments";
+import FlashMessageContext from "../../providers/FlashMessageProvider";
+import SessionContext from "../../providers/SessionProvider";
 
 const ParkingDetail = (props) => {
   const {
-    userName,
-    detail
+    detail,
+    setDetail
   } = props;
 
   const [parkingData, setParkingData] = useState({});
@@ -21,6 +23,8 @@ const ParkingDetail = (props) => {
     lat: 35.681454048919186,
     lng: 139.76707115336345
   });
+  const bookFlashMessage = useContext(FlashMessageContext);
+  const {userName} = useContext(SessionContext);
 
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: detail } })
@@ -34,7 +38,8 @@ const ParkingDetail = (props) => {
       })
     })
     .catch(() => {
-      console.log("通信に失敗");
+      setDetail("")
+      bookFlashMessage("通信に失敗しました");
     })
   }, [detail]);
 
@@ -75,7 +80,7 @@ const ParkingDetail = (props) => {
             <Link to={`/dokotomeyo/parking/${parkingData.id}`}>条件の編集・追加</Link>
           </STop_ParkingDetail_edit>
         </STop_ParkingDetail_list_item_edit>
-        <Comments userName={userName} parkingID={parkingData.id} />
+        <Comments parkingID={parkingData.id} />
       </STop_ParkingDetail>
     </STop_ParkingDetail_container>
   )

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import FlashMessageContext from "../providers/FlashMessageProvider";
+import SessionContext from "../providers/SessionProvider";
 
-const Login = (props) => {
-  const { userName, setUserName, bookFlashMessage } = props;
-
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessageContext);
+  const {userName, setUserName} = useContext(SessionContext);
 
   const handleSubmit = (event) => {
     axios.post('/dokotomeyo/login', { user: { email: email, password: password } })
@@ -32,7 +34,7 @@ const Login = (props) => {
       }
     })
     .catch(() => {
-      console.log("通信に失敗しました");
+      setErrors(["通信に失敗しました"]);
     })
     event.preventDefault();
   };

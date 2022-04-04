@@ -9,7 +9,6 @@ const TopLeft = (props) => {
     setNarrowDown,
     mapCenter,
     setMapCenter,
-    bookFlashMessage,
     parkings,
     setParkings,
     setHighlight,
@@ -19,7 +18,7 @@ const TopLeft = (props) => {
 
   return (
     <STop_left>
-      <TopSearchForm narrowDown={narrowDown} setNarrowDown={setNarrowDown} setMapCenter={setMapCenter} bookFlashMessage={bookFlashMessage} setParkings={setParkings} setDetail={setDetail} />
+      <TopSearchForm narrowDown={narrowDown} setNarrowDown={setNarrowDown} setMapCenter={setMapCenter} setParkings={setParkings} setDetail={setDetail} />
       <TopSearchResults mapCenter={mapCenter} parkings={parkings} setHighlight={setHighlight} detail={detail} setDetail={setDetail} />
     </STop_left>
   );

@@ -6,6 +6,7 @@ import FavoriteItem from "./FavoriteItem";
 const Favorite = () => {
   const [favorites, setFavorites] = useState({});
   const [rerendering, setRerendering] = useState(false);
+  const [errors, setErrors] = useState("");
 
   useEffect(() => {
     axios.get('/dokotomeyo/favorite_from_user')
@@ -13,7 +14,7 @@ const Favorite = () => {
       setFavorites(response.data.favorites)
     })
     .catch(() => {
-      console.log("通信に失敗しました")
+      setErrors("お気に入りの取得に失敗しました")
     })
   }, [rerendering])
 
@@ -21,6 +22,7 @@ const Favorite = () => {
     <SFavorite_container>
       <SFavorite_title>お気に入り</SFavorite_title>
       <SFavorite_table>
+        {errors && <SError>{errors}</SError>}
         {Object.keys(favorites).map((data, i) => {
           const favoriteData = favorites[data]
           return (
@@ -55,6 +57,11 @@ const SFavorite_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SError = styled.p`
+  padding: 6px 4px;
+  color: gray;
 `;
 
 export default Favorite;
