@@ -38,15 +38,13 @@ const Requirements = (props) => {
 
   return (
     <SPostRequirements_wrapper>
-      <form>
-        <SPostRequirements_form>
-          <SText_label>無料の条件</SText_label>
-          <SPostRequirements_checkboxes>
-            <RequirementForm type={type} setType={setType} />
-          </SPostRequirements_checkboxes>
-        </SPostRequirements_form>
-        {DisplayForm()}
-      </form>
+      <SPostRequirements_form>
+        <SText_label>無料の条件</SText_label>
+        <SPostRequirements_checkboxes>
+          <RequirementForm type={type} setType={setType} />
+        </SPostRequirements_checkboxes>
+      </SPostRequirements_form>
+      {DisplayForm()}
     </SPostRequirements_wrapper>
   );
 };
