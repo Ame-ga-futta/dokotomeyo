@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import FormRequirement from "./FormRequirement";
-import EditParkingDetailConfilm from "./EditParkingDetailConfilm";
+import EditParkingDetailConfilm from "./Confilm/EditParkingDetailConfilm";
 import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const EditParkingDetail = (props) => {
