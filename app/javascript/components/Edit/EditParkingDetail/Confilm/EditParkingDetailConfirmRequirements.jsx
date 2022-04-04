@@ -1,9 +1,5 @@
 import React from "react";
 import styled from 'styled-components';
-import ReturnFree from "../ReturnRequirements/ReturnFree";
-import ReturnBuy from "../ReturnRequirements/ReturnBuy";
-import ReturnFacility from "../ReturnRequirements/ReturnFacility";
-import ReturnTime from "../ReturnRequirements/ReturnTime";
 import ExistRequirements from "./ExistRequirements";
 import UpdateRequirementsWeekday from "./UpdateRequirementsWeekday";
 import UpdateRequirementsHoliday from "./UpdateRequirementsHoliday";
@@ -77,10 +73,6 @@ const ConfirmParking_column_item = styled.li`
 
 const ConfirmParking_sub_title = styled.p`
   width: 10%;
-`;
-
-const ConfirmParking_sub_table = styled.ul`
-  width: 85%;
 `;
 
 export default EditParkingDetailConfirmRequirements;
