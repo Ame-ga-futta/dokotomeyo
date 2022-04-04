@@ -1,5 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
+import ReturnFree from "./ReturnRequirements/ReturnFree";
+import ReturnBuy from "./ReturnRequirements/ReturnBuy";
+import ReturnFacility from "./ReturnRequirements/ReturnFacility";
+import ReturnTime from "./ReturnRequirements/ReturnTime";
 
 const EditParkingDetailConfirmRequirements = (props) => {
   const {
@@ -7,53 +11,6 @@ const EditParkingDetailConfirmRequirements = (props) => {
     existRequirementsHolidayData,
     updatesData
   } = props;
-
-  const returnFree = (requirement, i, delete_requirement) => {
-    return (
-      <ConfirmParking_sub_item key={i}>
-        <ConfirmParking_sub_item_text delete_requirement={delete_requirement}>
-          終日無料
-        </ConfirmParking_sub_item_text>
-      </ConfirmParking_sub_item>
-    );
-  };
-
-  const returnBuy = (requirement, i, delete_requirement) => {
-    return (
-      <ConfirmParking_sub_item key={i}>
-        <ConfirmParking_sub_item_text delete_requirement={delete_requirement}>
-          {requirement.facility_name}での購入金額が
-          {requirement.purchase_price}円以上で
-          {Number(requirement.free_time.split(':')[0])}時間
-          {Number(requirement.free_time.split(':')[1])}分無料
-        </ConfirmParking_sub_item_text>
-      </ConfirmParking_sub_item>
-    );
-  };
-
-  const returnFacility = (requirement, i, delete_requirement) => {
-    return (
-      <ConfirmParking_sub_item key={i}>
-        <ConfirmParking_sub_item_text delete_requirement={delete_requirement}>
-          {requirement.facility_name}の利用で
-          {Number(requirement.free_time.split(':')[0])}時間
-          {Number(requirement.free_time.split(':')[1])}分無料
-        </ConfirmParking_sub_item_text>
-      </ConfirmParking_sub_item>
-    );
-  };
-
-  const returnTime = (requirement, i, delete_requirement) => {
-    return (
-      <ConfirmParking_sub_item key={i}>
-        <ConfirmParking_sub_item_text delete_requirement={delete_requirement}>
-          入庫後
-          {Number(requirement.free_time.split(':')[0])}時間
-          {Number(requirement.free_time.split(':')[1])}分無料
-        </ConfirmParking_sub_item_text>
-      </ConfirmParking_sub_item>
-    );
-  };
 
   return (
     <ul>
@@ -65,16 +22,16 @@ const EditParkingDetailConfirmRequirements = (props) => {
               <ConfirmParking_sub_title>平日</ConfirmParking_sub_title>
               <ConfirmParking_sub_table>
                 {existRequirementsWeekdayData.requirement_frees && existRequirementsWeekdayData.requirement_frees.map((requirement, i) => {
-                  return returnFree(requirement, i)
+                  return <ReturnFree key={i} />
                 })}
                 {existRequirementsWeekdayData.requirement_buys && existRequirementsWeekdayData.requirement_buys.map((requirement, i) => {
-                  return returnBuy(requirement, i)
+                  return <ReturnBuy key={i} requirement={requirement} />
                 })}
                 {existRequirementsWeekdayData.requirement_facilities && existRequirementsWeekdayData.requirement_facilities.map((requirement, i) => {
-                  return returnFacility(requirement, i)
+                  return <ReturnFacility key={i} requirement={requirement} />
                 })}
                 {existRequirementsWeekdayData.requirement_times && existRequirementsWeekdayData.requirement_times.map((requirement, i) => {
-                  return returnTime(requirement, i)
+                  return <ReturnTime key={i} requirement={requirement} />
                 })}
               </ConfirmParking_sub_table>
             </ConfirmParking_column_item>
@@ -82,16 +39,16 @@ const EditParkingDetailConfirmRequirements = (props) => {
               <ConfirmParking_sub_title>全日</ConfirmParking_sub_title>
               <ConfirmParking_sub_table>
                 {existRequirementsHolidayData.requirement_frees && existRequirementsHolidayData.requirement_frees.map((requirement, i) => {
-                  return returnFree(requirement, i)
+                  return <ReturnFree key={i} />
                 })}
                 {existRequirementsHolidayData.requirement_buys && existRequirementsHolidayData.requirement_buys.map((requirement, i) => {
-                  return returnBuy(requirement, i)
+                  return <ReturnBuy key={i} requirement={requirement} />
                 })}
                 {existRequirementsHolidayData.requirement_facilities && existRequirementsHolidayData.requirement_facilities.map((requirement, i) => {
-                  return returnFacility(requirement, i)
+                  return <ReturnFacility key={i} requirement={requirement} />
                 })}
                 {existRequirementsHolidayData.requirement_times && existRequirementsHolidayData.requirement_times.map((requirement, i) => {
-                  return returnTime(requirement, i)
+                  return <ReturnTime key={i} requirement={requirement} />
                 })}
               </ConfirmParking_sub_table>
             </ConfirmParking_column_item>
@@ -108,27 +65,27 @@ const EditParkingDetailConfirmRequirements = (props) => {
                   const change_requirement = updatesData.requirement_free[data].change
                   const display = requirement.only_weekdays
                   if (delete_requirement) {
-                    return requirement.only_weekdays && returnFree(requirement, i, delete_requirement)
+                    return requirement.only_weekdays && <ReturnFree key={i} delete_requirement={delete_requirement} />
                   } else if (change_requirement) {
-                    return returnFree(requirement, i, display)
+                    return <ReturnFree key={i} delete_requirement={display} />
                   } else {
-                    return requirement.only_weekdays && returnFree(requirement, i)
+                    return requirement.only_weekdays && <ReturnFree key={i} />
                   }
                 })}
                 {updatesData.requirement_buy && Object.keys(updatesData.requirement_buy).map((data, i) => {
                   const requirement = updatesData.requirement_buy[data].requirements
                   const delete_requirement = updatesData.requirement_buy[data].delete
-                  return requirement.only_weekdays && returnBuy(requirement, i, delete_requirement)
+                  return requirement.only_weekdays && <ReturnBuy key={i} requirement={requirement} delete_requirement={delete_requirement} />
                 })}
                 {updatesData.requirement_facility && Object.keys(updatesData.requirement_facility).map((data, i) => {
                   const requirement = updatesData.requirement_facility[data].requirements
                   const delete_requirement = updatesData.requirement_facility[data].delete
-                  return requirement.only_weekdays && returnFacility(requirement, i, delete_requirement)
+                  return requirement.only_weekdays && <ReturnFacility key={i} requirement={requirement} delete_requirement={delete_requirement} />
                 })}
                 {updatesData.requirement_time && Object.keys(updatesData.requirement_time).map((data, i) => {
                   const requirement = updatesData.requirement_time[data].requirements
                   const delete_requirement = updatesData.requirement_time[data].delete
-                  return requirement.only_weekdays && returnTime(requirement, i, delete_requirement)
+                  return requirement.only_weekdays && <ReturnTime key={i} requirement={requirement} delete_requirement={delete_requirement} />
                 })}
               </ConfirmParking_sub_table>
             </ConfirmParking_column_item>
@@ -141,27 +98,27 @@ const EditParkingDetailConfirmRequirements = (props) => {
                   const change_requirement = updatesData.requirement_free[data].change
                   const display = !requirement.only_weekdays
                   if (delete_requirement) {
-                    return requirement.only_weekdays || returnFree(requirement, i, delete_requirement)
+                    return requirement.only_weekdays || <ReturnFree key={i} delete_requirement={delete_requirement} />
                   } else if (change_requirement) {
-                    return returnFree(requirement, i, display)
+                    return <ReturnFree key={i} delete_requirement={display} />
                   } else {
-                    return requirement.only_weekdays || returnFree(requirement, i)
+                    return requirement.only_weekdays || <ReturnFree key={i} />
                   }
                 })}
                 {updatesData.requirement_buy && Object.keys(updatesData.requirement_buy).map((data, i) => {
                   const requirement = updatesData.requirement_buy[data].requirements
                   const delete_requirement = updatesData.requirement_buy[data].delete
-                  return requirement.only_weekdays || returnBuy(requirement, i, delete_requirement)
+                  return requirement.only_weekdays || <ReturnBuy key={i} requirement={requirement} delete_requirement={delete_requirement} />
                 })}
                 {updatesData.requirement_facility && Object.keys(updatesData.requirement_facility).map((data, i) => {
                   const requirement = updatesData.requirement_facility[data].requirements
                   const delete_requirement = updatesData.requirement_facility[data].delete
-                  return requirement.only_weekdays || returnFacility(requirement, i, delete_requirement)
+                  return requirement.only_weekdays || <ReturnFacility key={i} requirement={requirement} delete_requirement={delete_requirement} />
                 })}
                 {updatesData.requirement_time && Object.keys(updatesData.requirement_time).map((data, i) => {
                   const requirement = updatesData.requirement_time[data].requirements
                   const delete_requirement = updatesData.requirement_time[data].delete
-                  return requirement.only_weekdays || returnTime(requirement, i, delete_requirement)
+                  return requirement.only_weekdays || <ReturnTime key={i} requirement={requirement} delete_requirement={delete_requirement} />
                 })}
               </ConfirmParking_sub_table>
             </ConfirmParking_column_item>
