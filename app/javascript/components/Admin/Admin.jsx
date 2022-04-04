@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import User from "./User/User";
+import Parking from "./Parking/Parking";
+import RequirementFree from "./Requirement_free/RequirementFree";
+import RequirementBuy from "./Requirement_buy/RequirementBuy";
+import RequirementFacility from "./Requirement_facility/RequirementFacility";
+import RequirementTime from "./Requirement_time/RequirementTime";
+import Comment from "./Comment/Comment";
+import Favorite from "./Favorite/Favorite";
 
 const Admin = () => {
   const [changeTab, setChangeTab] = useState("User")
@@ -7,21 +15,21 @@ const Admin = () => {
   const displayTab = () => {
     switch (changeTab){
       case "User":
-        return <p>User</p>
+        return <User />
       case "Parking":
-        return <p>Parking</p>
+        return <Parking />
       case "Requirement_free":
-        return <p>Requirement_free</p>
+        return <RequirementFree />
       case "Requirement_buy":
-        return <p>Requirement_buy</p>
+        return <RequirementBuy />
       case "Requirement_facility":
-        return <p>Requirement_facility</p>
+        return <RequirementFacility />
       case "Requirement_time":
-        return <p>Requirement_time</p>
+        return <RequirementTime />
       case "Comment":
-        return <p>Comment</p>
+        return <Comment />
       case "Favorite":
-        return <p>Favorite</p>
+        return <Favorite />
     }
   }
 
