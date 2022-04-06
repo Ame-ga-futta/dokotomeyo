@@ -30,7 +30,12 @@ const RequirementFacilitySelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_requirementFacility')
+    axios.get('/dokotomeyo/admin_requirementFacility', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setFacilities(response.data.status)
     })

@@ -30,4 +30,10 @@ class Dokotomeyo::AdminController < ApplicationController
   def get_favorites
     render json: { status: 200 }
   end
+
+  private
+
+  def get_params
+    params.permit(:select, :input)
+  end
 end

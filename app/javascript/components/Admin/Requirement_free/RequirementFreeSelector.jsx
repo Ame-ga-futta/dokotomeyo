@@ -30,7 +30,12 @@ const RequirementFreeSelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_requirementFree')
+    axios.get('/dokotomeyo/admin_requirementFree', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setFrees(response.data.status)
     })

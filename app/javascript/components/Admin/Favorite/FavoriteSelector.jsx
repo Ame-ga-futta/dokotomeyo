@@ -32,7 +32,12 @@ const FavoriteSelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_favorite')
+    axios.get('/dokotomeyo/admin_favorite', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setFavorites(response.data.status)
     })

@@ -32,7 +32,12 @@ const UserSelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_user')
+    axios.get('/dokotomeyo/admin_user', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setUsers(response.data.status)
     })

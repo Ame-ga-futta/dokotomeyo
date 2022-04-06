@@ -32,7 +32,12 @@ const CommentSelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_comment')
+    axios.get('/dokotomeyo/admin_comment', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setComments(response.data.status)
     })

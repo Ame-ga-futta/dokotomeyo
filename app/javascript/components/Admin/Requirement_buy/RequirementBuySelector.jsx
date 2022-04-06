@@ -30,7 +30,12 @@ const RequirementBuySelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_requirementBuy')
+    axios.get('/dokotomeyo/admin_requirementBuy', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setBuys(response.data.status)
     })

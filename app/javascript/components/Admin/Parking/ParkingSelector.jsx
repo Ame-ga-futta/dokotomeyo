@@ -32,7 +32,12 @@ const ParkingSelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_parking')
+    axios.get('/dokotomeyo/admin_parking', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setParkings(response.data.status)
     })

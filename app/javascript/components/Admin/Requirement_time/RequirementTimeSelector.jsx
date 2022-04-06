@@ -30,7 +30,12 @@ const RequirementTimeSelector = (props) => {
   };
 
   const PostInput = (event) => {
-    axios.get('/dokotomeyo/admin_requirementTime')
+    axios.get('/dokotomeyo/admin_requirementTime', {
+      params: {
+        select: select,
+        input: input
+      }
+    })
     .then((response) => {
       setTimes(response.data.status)
     })
