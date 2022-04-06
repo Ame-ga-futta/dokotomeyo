@@ -1,24 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import FlashMessageContext from "../../providers/FlashMessageProvider";
+import UserSelector from "./UserSelector";
 
 const User = () => {
-  const bookFlashMessage = useContext(FlashMessageContext);
-
-  useEffect(() => {
-    axios.get('/dokotomeyo/admin_user')
-    .then((response) => {
-      console.log(response.data.status)
-    })
-    .catch(() => {
-      bookFlashMessage("データの取得に失敗しました");
-    })
-  }, []);
+  const [users, setUsers] = useState({});
 
   return (
     <SUser_container>
       <p>User</p>
+      <UserSelector setUsers={setUsers} />
     </SUser_container>
   );
 };

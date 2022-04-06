@@ -1,24 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import FlashMessageContext from "../../providers/FlashMessageProvider";
+import CommentSelector from "./CommentSelector";
 
 const Comment = () => {
-  const bookFlashMessage = useContext(FlashMessageContext);
-
-  useEffect(() => {
-    axios.get('/dokotomeyo/admin_comment')
-    .then((response) => {
-      console.log(response.data.status)
-    })
-    .catch(() => {
-      bookFlashMessage("データの取得に失敗しました");
-    })
-  }, []);
+  const [comments, setComments] = useState({});
 
   return (
     <SComment_container>
       <p>Comment</p>
+      <CommentSelector setComments={setComments} />
     </SComment_container>
   );
 };

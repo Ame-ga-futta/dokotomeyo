@@ -1,24 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import FlashMessageContext from "../../providers/FlashMessageProvider";
+import RequirementFacilitySelector from "./RequirementFacilitySelector";
 
 const RequirementFacility = () => {
-  const bookFlashMessage = useContext(FlashMessageContext);
-
-  useEffect(() => {
-    axios.get('/dokotomeyo/admin_requirementFacility')
-    .then((response) => {
-      console.log(response.data.status)
-    })
-    .catch(() => {
-      bookFlashMessage("データの取得に失敗しました");
-    })
-  }, []);
+  const [facilities, setFacilities] = useState({});
 
   return (
     <SRequirementFacility_container>
       <p>Requirement_facility</p>
+      <RequirementFacilitySelector setFacilities={setFacilities} />
     </SRequirementFacility_container>
   );
 };

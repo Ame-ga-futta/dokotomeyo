@@ -1,24 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import FlashMessageContext from "../../providers/FlashMessageProvider";
+import ParkingSelector from "./ParkingSelector";
 
 const Parking = () => {
-  const bookFlashMessage = useContext(FlashMessageContext);
-
-  useEffect(() => {
-    axios.get('/dokotomeyo/admin_parking')
-    .then((response) => {
-      console.log(response.data.status)
-    })
-    .catch(() => {
-      bookFlashMessage("データの取得に失敗しました");
-    })
-  }, []);
+  const [parkings, setParkings] = useState({});
 
   return (
     <SParking_container>
       <p>Parking</p>
+      <ParkingSelector setParkings={setParkings} />
     </SParking_container>
   );
 };

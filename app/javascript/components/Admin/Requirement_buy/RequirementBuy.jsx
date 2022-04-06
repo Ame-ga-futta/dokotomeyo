@@ -1,24 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import FlashMessageContext from "../../providers/FlashMessageProvider";
+import RequirementBuySelector from "./RequirementBuySelector";
 
 const RequirementBuy = () => {
-  const bookFlashMessage = useContext(FlashMessageContext);
-
-  useEffect(() => {
-    axios.get('/dokotomeyo/admin_requirementBuy')
-    .then((response) => {
-      console.log(response.data.status)
-    })
-    .catch(() => {
-      bookFlashMessage("データの取得に失敗しました");
-    })
-  }, []);
+  const [buys, setBuys] = useState({});
 
   return (
     <SRequirementBuy_container>
       <p>Requirement_buy</p>
+      <RequirementBuySelector setBuys={setBuys} />
     </SRequirementBuy_container>
   );
 };

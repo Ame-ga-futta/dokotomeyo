@@ -1,24 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
-import FlashMessageContext from "../../providers/FlashMessageProvider";
+import RequirementTimeSelector from "./RequirementTimeSelector";
 
 const RequirementTime = () => {
-  const bookFlashMessage = useContext(FlashMessageContext);
-
-  useEffect(() => {
-    axios.get('/dokotomeyo/admin_requirementTime')
-    .then((response) => {
-      console.log(response.data.status)
-    })
-    .catch(() => {
-      bookFlashMessage("データの取得に失敗しました");
-    })
-  }, []);
+  const [times, setTimes] = useState({});
 
   return (
     <SRequirementTime_container>
       <p>Requirement_time</p>
+      <RequirementTimeSelector setTimes={setTimes} />
     </SRequirementTime_container>
   );
 };
