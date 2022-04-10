@@ -1,7 +1,7 @@
 class Dokotomeyo::AdminController < ApplicationController
   def get_users
     @users = users_assmble_chain
-    if @users
+    unless @users.empty?
       render json: { status: 200, users: @users }
     else
       render json: { status: 400 }
@@ -10,7 +10,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_parkings
     @parkings = parkings_assmble_chain
-    if @parkings
+    unless @parkings.empty?
       render json: { status: 200, parkings: @parkings }
     else
       render json: { status: 400 }
@@ -19,7 +19,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_frees
     @requirements = requirement_frees_assmble_chain
-    if @requirements
+    unless @requirements.empty?
       render json: { status: 200, requirements: @requirements }
     else
       render json: { status: 400 }
@@ -28,7 +28,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_buys
     @requirements = requirement_buys_assmble_chain
-    if @requirements
+    unless @requirements.empty?
       render json: { status: 200, requirements: @requirements }
     else
       render json: { status: 400 }
@@ -37,7 +37,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_facilities
     @requirements = requirement_facilities_assmble_chain
-    if @requirements
+    unless @requirements.empty?
       render json: { status: 200, requirements: @requirements }
     else
       render json: { status: 400 }
@@ -46,7 +46,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_times
     @requirements = requirement_times_assmble_chain
-    if @requirements
+    unless @requirements.empty?
       render json: { status: 200, requirements: @requirements }
     else
       render json: { status: 400 }
@@ -55,7 +55,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_comments
     @comments = comments_assmble_chain
-    if @comments
+    unless @comments.empty?
       render json: { status: 200, comments: @comments }
     else
       render json: { status: 400 }
@@ -64,7 +64,7 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_favorites
     @favorites = favorites_assmble_chain
-    if @favorites
+    unless @favorites.empty?
       render json: { status: 200, favorites: @favorites }
     else
       render json: { status: 400 }
@@ -80,7 +80,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def users_assmble_chain
     case get_params[:select]
     when "1" then
-      User.find_by(id: get_params[:input])
+      User.where(id: get_params[:input])
     when "2" then
       User.where('name LIKE ?', "%#{get_params[:input]}%")
     when "3" then
@@ -93,7 +93,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def parkings_assmble_chain
     case get_params[:select]
     when "1" then
-      Parking.find_by(id: get_params[:input])
+      Parking.where(id: get_params[:input])
     when "2" then
       Parking.where('name LIKE ?', "%#{get_params[:input]}%")
     when "3" then
@@ -106,7 +106,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def requirement_frees_assmble_chain
     case get_params[:select]
     when "1" then
-      RequirementFree.find_by(id: get_params[:input])
+      RequirementFree.where(id: get_params[:input])
     when "2" then
       RequirementFree.where(parking_id: get_params[:input])
     when "3" then
@@ -117,7 +117,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def requirement_buys_assmble_chain
     case get_params[:select]
     when "1" then
-      RequirementBuy.find_by(id: get_params[:input])
+      RequirementBuy.where(id: get_params[:input])
     when "2" then
       RequirementBuy.where(parking_id: get_params[:input])
     when "3" then
@@ -128,7 +128,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def requirement_facilities_assmble_chain
     case get_params[:select]
     when "1" then
-      RequirementFacility.find_by(id: get_params[:input])
+      RequirementFacility.where(id: get_params[:input])
     when "2" then
       RequirementFacility.where(parking_id: get_params[:input])
     when "3" then
@@ -139,7 +139,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def requirement_times_assmble_chain
     case get_params[:select]
     when "1" then
-      RequirementTime.find_by(id: get_params[:input])
+      RequirementTime.where(id: get_params[:input])
     when "2" then
       RequirementTime.where(parking_id: get_params[:input])
     when "3" then
@@ -150,7 +150,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def comments_assmble_chain
     case get_params[:select]
     when "1" then
-      Comment.find_by(id: get_params[:input])
+      Comment.where(id: get_params[:input])
     when "2" then
       Comment.where(parking_id: get_params[:input])
     when "3" then
@@ -163,7 +163,7 @@ class Dokotomeyo::AdminController < ApplicationController
   def favorites_assmble_chain
     case get_params[:select]
     when "1" then
-      Favorite.find_by(id: get_params[:input])
+      Favorite.where(id: get_params[:input])
     when "2" then
       Favorite.where(parking_id: get_params[:input])
     when "3" then

@@ -75,7 +75,8 @@ RSpec.describe "admin", type: :request do
             input: 1
           }
 
-          expect(JSON.parse(response.body)["favorites"]).to match(favorites_1.attributes)
+          expect(JSON.parse(response.body)["favorites"]).to include(favorites_1.attributes)
+          expect(JSON.parse(response.body)["favorites"]).not_to include(favorites_2.attributes, favorites_3.attributes, favorites_4.attributes)
         end
 
         it "filtering parking_id" do

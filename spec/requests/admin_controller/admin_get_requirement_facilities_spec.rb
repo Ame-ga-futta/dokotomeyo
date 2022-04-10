@@ -79,7 +79,8 @@ RSpec.describe "admin", type: :request do
             input: 1
           }
 
-          expect(JSON.parse(response.body)["requirements"]).to match(requirement_1.attributes)
+          expect(JSON.parse(response.body)["requirements"]).to include(requirement_1.attributes)
+          expect(JSON.parse(response.body)["requirements"]).not_to include(requirement_2.attributes, requirement_3.attributes, requirement_4.attributes, requirement_5.attributes)
         end
 
         it "filtering parking_id" do
