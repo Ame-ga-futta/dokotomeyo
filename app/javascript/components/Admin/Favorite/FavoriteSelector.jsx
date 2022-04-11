@@ -39,7 +39,7 @@ const FavoriteSelector = (props) => {
       }
     })
     .then((response) => {
-      setFavorites(response.data.status)
+      setFavorites(response.data.favorites)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

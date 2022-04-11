@@ -37,7 +37,7 @@ const RequirementFacilitySelector = (props) => {
       }
     })
     .then((response) => {
-      setFacilities(response.data.status)
+      setFacilities(response.data.requirements)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

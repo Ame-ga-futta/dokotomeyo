@@ -37,7 +37,7 @@ const RequirementFreeSelector = (props) => {
       }
     })
     .then((response) => {
-      setFrees(response.data.status)
+      setFrees(response.data.requirements)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import RequirementFreeSelector from "./RequirementFreeSelector";
+import RequirementFreeItem from "./RequirementFreeItem";
 
 const RequirementFree = () => {
   const [frees, setFrees] = useState({});
@@ -9,6 +10,10 @@ const RequirementFree = () => {
     <SRequirementFree_container>
       <p>Requirement_free</p>
       <RequirementFreeSelector setFrees={setFrees} />
+      {frees && Object.keys(frees).map((data, i) => {
+        const requirementFreeData = frees[data]
+        return <RequirementFreeItem key={i} requirementFreeData={requirementFreeData} />
+      })}
     </SRequirementFree_container>
   );
 };

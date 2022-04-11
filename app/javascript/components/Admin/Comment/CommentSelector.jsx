@@ -39,7 +39,7 @@ const CommentSelector = (props) => {
       }
     })
     .then((response) => {
-      setComments(response.data.status)
+      setComments(response.data.comments)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

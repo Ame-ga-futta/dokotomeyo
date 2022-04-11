@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import UserSelector from "./UserSelector";
+import UserItem from "./UserItem";
 
 const User = () => {
   const [users, setUsers] = useState({});
@@ -9,6 +10,10 @@ const User = () => {
     <SUser_container>
       <p>User</p>
       <UserSelector setUsers={setUsers} />
+      {users && Object.keys(users).map((data, i) => {
+        const userData = users[data]
+        return <UserItem key={i} userData={userData} />
+      })}
     </SUser_container>
   );
 };

@@ -37,7 +37,7 @@ const RequirementBuySelector = (props) => {
       }
     })
     .then((response) => {
-      setBuys(response.data.status)
+      setBuys(response.data.requirements)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

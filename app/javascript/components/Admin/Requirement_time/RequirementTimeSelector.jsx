@@ -37,7 +37,7 @@ const RequirementTimeSelector = (props) => {
       }
     })
     .then((response) => {
-      setTimes(response.data.status)
+      setTimes(response.data.requirements)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

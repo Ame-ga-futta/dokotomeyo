@@ -39,7 +39,7 @@ const ParkingSelector = (props) => {
       }
     })
     .then((response) => {
-      setParkings(response.data.status)
+      setParkings(response.data.parkings)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");

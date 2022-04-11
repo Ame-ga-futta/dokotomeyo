@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import CommentSelector from "./CommentSelector";
+import CommentItem from "./CommentItem";
 
 const Comment = () => {
   const [comments, setComments] = useState({});
@@ -9,6 +10,10 @@ const Comment = () => {
     <SComment_container>
       <p>Comment</p>
       <CommentSelector setComments={setComments} />
+      {comments && Object.keys(comments).map((data, i) => {
+        const commentData = comments[data]
+        return <CommentItem key={i} commentData={commentData} />
+      })}
     </SComment_container>
   );
 };

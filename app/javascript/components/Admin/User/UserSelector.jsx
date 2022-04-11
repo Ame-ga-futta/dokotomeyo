@@ -39,7 +39,7 @@ const UserSelector = (props) => {
       }
     })
     .then((response) => {
-      setUsers(response.data.status)
+      setUsers(response.data.users)
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
