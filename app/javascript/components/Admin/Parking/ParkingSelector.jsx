@@ -61,6 +61,7 @@ const ParkingSelector = (props) => {
           <SParking_selector_list><p onClick={() => selectHandle(4)}>フリーワード検索</p></SParking_selector_list>
         </SParking_selector_table>
       </SParking_selector>
+      <SParking_dummy></SParking_dummy>
       <SParking_input>
         <form onSubmit={PostInput}>
           <SText_field
@@ -79,14 +80,22 @@ const SParkingSelector_container = styled.div`
   display: flex;
   flex-direction: row;
   margin: 4px 8px;
+  position: relative;
 `;
 
 const SParking_selector = styled.div`
+  position: absolute;
+  z-index : 99998;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
   border: solid 1px gray;
   border-radius: 5px;
+  width: 30%;
+  background-color: white;
+`;
+
+const SParking_dummy = styled.div`
   width: 30%;
 `;
 

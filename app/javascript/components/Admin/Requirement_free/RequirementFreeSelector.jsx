@@ -58,6 +58,7 @@ const RequirementFreeSelector = (props) => {
           <SRequirementFree_selector_list><p onClick={() => selectHandle(3)}>フリーワード検索</p></SRequirementFree_selector_list>
         </SRequirementFree_selector_table>
       </SRequirementFree_selector>
+      <SRequirementFree_dummy></SRequirementFree_dummy>
       <SRequirementFree_input>
         <form onSubmit={PostInput}>
           <SText_field
@@ -76,14 +77,22 @@ const SRequirementFreeSelector_container = styled.div`
   display: flex;
   flex-direction: row;
   margin: 4px 8px;
+  position: relative;
 `;
 
 const SRequirementFree_selector = styled.div`
+  position: absolute;
+  z-index : 99998;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
   border: solid 1px gray;
   border-radius: 5px;
+  width: 30%;
+  background-color: white;
+`;
+
+const SRequirementFree_dummy = styled.div`
   width: 30%;
 `;
 

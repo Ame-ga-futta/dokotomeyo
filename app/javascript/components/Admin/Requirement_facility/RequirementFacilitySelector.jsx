@@ -58,6 +58,7 @@ const RequirementFacilitySelector = (props) => {
           <SRequirementFacility_selector_list><p onClick={() => selectHandle(3)}>フリーワード検索</p></SRequirementFacility_selector_list>
         </SRequirementFacility_selector_table>
       </SRequirementFacility_selector>
+      <SRequirementFacility_dummy></SRequirementFacility_dummy>
       <SRequirementFacility_input>
         <form onSubmit={PostInput}>
           <SText_field
@@ -76,14 +77,22 @@ const SRequirementFacilitySelector_container = styled.div`
   display: flex;
   flex-direction: row;
   margin: 4px 8px;
+  position: relative;
 `;
 
 const SRequirementFacility_selector = styled.div`
+  position: absolute;
+  z-index : 99998;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
   border: solid 1px gray;
   border-radius: 5px;
+  width: 30%;
+  background-color: white;
+`;
+
+const SRequirementFacility_dummy = styled.div`
   width: 30%;
 `;
 

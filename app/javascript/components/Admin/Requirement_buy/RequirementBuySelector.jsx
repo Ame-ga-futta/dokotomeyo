@@ -58,6 +58,7 @@ const RequirementBuySelector = (props) => {
           <SRequirementBuy_selector_list><p onClick={() => selectHandle(3)}>フリーワード検索</p></SRequirementBuy_selector_list>
         </SRequirementBuy_selector_table>
       </SRequirementBuy_selector>
+      <SRequirementBuy_dummy></SRequirementBuy_dummy>
       <SRequirementBuy_input>
         <form onSubmit={PostInput}>
           <SText_field
@@ -76,14 +77,22 @@ const SRequirementBuySelector_container = styled.div`
   display: flex;
   flex-direction: row;
   margin: 4px 8px;
+  position: relative;
 `;
 
 const SRequirementBuy_selector = styled.div`
+  position: absolute;
+  z-index : 99998;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
   border: solid 1px gray;
   border-radius: 5px;
+  width: 30%;
+  background-color: white;
+`;
+
+const SRequirementBuy_dummy = styled.div`
   width: 30%;
 `;
 

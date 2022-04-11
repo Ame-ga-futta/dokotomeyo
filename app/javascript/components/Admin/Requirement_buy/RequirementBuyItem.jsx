@@ -28,18 +28,18 @@ const RequirementBuyItem = (props) => {
   return (
     <SRequirementBuyItem_container>
       <SRequirementBuyItem_contents>
-        <p>{parkingData.name}</p>
-        <p>{requirementBuyData.facility_name}</p>
-        <p>{requirementBuyData.purchase_price}</p>
-        <p>{requirementBuyData.free_time}</p>
-        <p>{requirementBuyData.only_weekdays ? "平日のみ" : "全日"}終日無料</p>
+        <SRequirementBuyItem_name>{parkingData.name}</SRequirementBuyItem_name>
+        <SRequirementBuyItem_text>
+          {requirementBuyData.facility_name}での購入金額が
+          {requirementBuyData.purchase_price}円以上で
+          {Number(requirementBuyData.free_time.split(':')[0])}時間
+          {Number(requirementBuyData.free_time.split(':')[1])}分無料
+        </SRequirementBuyItem_text>
+        <SRequirementBuyItem_text>{requirementBuyData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementBuyItem_text>
       </SRequirementBuyItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
-      <SUserItem_edit>
+      <SRequirementBuyItem_edit>
         <p>削除</p>
-      </SUserItem_edit>
+      </SRequirementBuyItem_edit>
     </SRequirementBuyItem_container>
   );
 };
@@ -48,6 +48,7 @@ const SRequirementBuyItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SRequirementBuyItem_contents = styled.div`
@@ -63,6 +64,15 @@ const SRequirementBuyItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementBuyItem_name = styled.p`
+  font-size: 18px;
+  margin-bottom: 4px;
+`;
+
+const SRequirementBuyItem_text = styled.p`
+  font-size: 14px;
 `;
 
 export default RequirementBuyItem;

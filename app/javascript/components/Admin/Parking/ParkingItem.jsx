@@ -14,19 +14,14 @@ const ParkingItem = (props) => {
   return (
     <SParkingItem_container>
       <SParkingItem_contents>
-        <p>{parkingData.name}</p>
-        <p>{parkingData.beginning_of_worktime}</p>
-        <p>{parkingData.end_of_worktime}</p>
-        <p>{parkingData.address}</p>
-        <p>{parkingData.latitude}</p>
-        <p>{parkingData.longitude}</p>
+        <SParkingItem_name>{parkingData.name}</SParkingItem_name>
+        <SParkingItem_text>{parkingData.beginning_of_worktime} 〜 {parkingData.end_of_worktime}</SParkingItem_text>
+        <SParkingItem_text>{parkingData.address}</SParkingItem_text>
+        <SParkingItem_text>{parkingData.latitude}, {parkingData.longitude}</SParkingItem_text>
       </SParkingItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
-      <SUserItem_edit>
+      <SParkingItem_edit>
         <p>削除</p>
-      </SUserItem_edit>
+      </SParkingItem_edit>
     </SParkingItem_container>
   );
 };
@@ -35,6 +30,7 @@ const SParkingItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SParkingItem_contents = styled.div`
@@ -50,6 +46,16 @@ const SParkingItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SParkingItem_name = styled.p`
+  font-size: 18px;
+  margin-bottom: 4px;
+`;
+
+const SParkingItem_text = styled.p`
+  font-size: 14px;
+  margin-bottom: 2px;
 `;
 
 export default ParkingItem;

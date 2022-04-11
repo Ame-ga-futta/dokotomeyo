@@ -38,15 +38,12 @@ const FavoriteItem = (props) => {
   return (
     <SFavoriteItem_container>
       <SFavoriteItem_contents>
-        <p>{parkingData.name}</p>
-        <p>{userData}</p>
+        <SFavoriteItem_name>{parkingData.name}</SFavoriteItem_name>
+        <SFavoriteItem_name>{userData}</SFavoriteItem_name>
       </SFavoriteItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
-      <SUserItem_edit>
+      <SFavoriteItem_edit>
         <p>削除</p>
-      </SUserItem_edit>
+      </SFavoriteItem_edit>
     </SFavoriteItem_container>
   );
 };
@@ -55,11 +52,13 @@ const SFavoriteItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SFavoriteItem_contents = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   width: 80%;
 `;
 
@@ -70,6 +69,11 @@ const SFavoriteItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SFavoriteItem_name = styled.p`
+  font-size: 18px;
+  margin-bottom: 2px 20px 2px 0;
 `;
 
 export default FavoriteItem;

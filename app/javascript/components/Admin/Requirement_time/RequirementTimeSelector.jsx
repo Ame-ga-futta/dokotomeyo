@@ -58,6 +58,7 @@ const RequirementTimeSelector = (props) => {
           <SRequirementTime_selector_list><p onClick={() => selectHandle(3)}>フリーワード検索</p></SRequirementTime_selector_list>
         </SRequirementTime_selector_table>
       </SRequirementTime_selector>
+      <SRequirementTime_dummy></SRequirementTime_dummy>
       <SRequirementTime_input>
         <form onSubmit={PostInput}>
           <SText_field
@@ -76,14 +77,22 @@ const SRequirementTimeSelector_container = styled.div`
   display: flex;
   flex-direction: row;
   margin: 4px 8px;
+  position: relative;
 `;
 
 const SRequirementTime_selector = styled.div`
+  position: absolute;
+  z-index : 99998;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
   border: solid 1px gray;
   border-radius: 5px;
+  width: 30%;
+  background-color: white;
+`;
+
+const SRequirementTime_dummy = styled.div`
   width: 30%;
 `;
 

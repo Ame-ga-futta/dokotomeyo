@@ -14,12 +14,9 @@ const UserItem = (props) => {
   return (
     <SUserItem_container>
       <SUserItem_contents>
-        <p>{userData.name}</p>
-        <p>{userData.email}</p>
+        <SUserItem_name>{userData.name}</SUserItem_name>
+        <SUserItem_email>{userData.email}</SUserItem_email>
       </SUserItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
       <SUserItem_edit>
         <p>削除</p>
       </SUserItem_edit>
@@ -31,6 +28,7 @@ const SUserItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SUserItem_contents = styled.div`
@@ -46,6 +44,15 @@ const SUserItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SUserItem_name = styled.p`
+  font-size: 18px;
+  margin-bottom: 4px;
+`;
+
+const SUserItem_email = styled.p`
+  font-size: 14px;
 `;
 
 export default UserItem;

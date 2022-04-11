@@ -28,17 +28,17 @@ const RequirementFacilityItem = (props) => {
   return (
     <SRequirementFacilityItem_container>
       <SRequirementFacilityItem_contents>
-        <p>{parkingData.name}</p>
-        <p>{requirementFacilityData.facility_name}</p>
-        <p>{requirementFacilityData.free_time}</p>
-        <p>{requirementFacilityData.only_weekdays ? "平日のみ" : "全日"}終日無料</p>
+        <SRequirementFacilityItem_name>{parkingData.name}</SRequirementFacilityItem_name>
+        <SRequirementFacilityItem_text>
+          {requirementFacilityData.facility_name}の利用で
+          {Number(requirementFacilityData.free_time.split(':')[0])}時間
+          {Number(requirementFacilityData.free_time.split(':')[1])}分無料
+        </SRequirementFacilityItem_text>
+        <SRequirementFacilityItem_text>{requirementFacilityData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementFacilityItem_text>
       </SRequirementFacilityItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
-      <SUserItem_edit>
+      <SRequirementFacilityItem_edit>
         <p>削除</p>
-      </SUserItem_edit>
+      </SRequirementFacilityItem_edit>
     </SRequirementFacilityItem_container>
   );
 };
@@ -47,6 +47,7 @@ const SRequirementFacilityItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SRequirementFacilityItem_contents = styled.div`
@@ -62,6 +63,15 @@ const SRequirementFacilityItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementFacilityItem_name = styled.p`
+  font-size: 18px;
+  margin-bottom: 4px;
+`;
+
+const SRequirementFacilityItem_text = styled.p`
+  font-size: 14px;
 `;
 
 export default RequirementFacilityItem;

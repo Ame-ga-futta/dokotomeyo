@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
+import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
 import FlashMessageContext from "../../providers/FlashMessageProvider";
 
@@ -38,16 +39,14 @@ const CommentItem = (props) => {
   return (
     <SCommentItem_container>
       <SCommentItem_contents>
-        <p>{parkingData.name}</p>
-        <p>{userData}</p>
-        <p>{commentData.comment}</p>
+        <SCommentItem_name>{parkingData.name}</SCommentItem_name>
+        <SCommentItem_name>{userData}</SCommentItem_name>
+        <SCommentItem_comment>{commentData.comment}</SCommentItem_comment>
+        <SCommentItem_updated_at>{moment(commentData.updated_at).format('YYYY-MM-DD HH:mm')}</SCommentItem_updated_at>
       </SCommentItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
-      <SUserItem_edit>
+      <SCommentItem_edit>
         <p>削除</p>
-      </SUserItem_edit>
+      </SCommentItem_edit>
     </SCommentItem_container>
   );
 };
@@ -56,6 +55,7 @@ const SCommentItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SCommentItem_contents = styled.div`
@@ -71,6 +71,20 @@ const SCommentItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SCommentItem_name = styled.p`
+  margin-bottom: 6px;
+  font-size: 14px;
+`;
+
+const SCommentItem_comment = styled.p`
+  margin-bottom: 6px;
+  font-size: 18px;
+`;
+
+const SCommentItem_updated_at = styled.p`
+  font-size: 14px;
 `;
 
 export default CommentItem;

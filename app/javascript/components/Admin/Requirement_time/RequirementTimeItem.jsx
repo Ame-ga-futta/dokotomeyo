@@ -28,16 +28,15 @@ const RequirementTimeItem = (props) => {
   return (
     <SRequirementTimeItem_container>
       <SRequirementTimeItem_contents>
-        <p>{parkingData.name}</p>
-        <p>{requirementTimeData.free_time}</p>
-        <p>{requirementTimeData.only_weekdays ? "平日のみ" : "全日"}終日無料</p>
+        <SRequirementTimeItem_name>{parkingData.name}</SRequirementTimeItem_name>
+        <SRequirementTimeItem_text>
+          入庫後{Number(requirementTimeData.free_time.split(':')[0])}時間{Number(requirementTimeData.free_time.split(':')[1])}分無料
+        </SRequirementTimeItem_text>
+        <SRequirementTimeItem_text>{requirementTimeData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementTimeItem_text>
       </SRequirementTimeItem_contents>
-      <SUserItem_edit>
-        <p>編集</p>
-      </SUserItem_edit>
-      <SUserItem_edit>
+      <SRequirementTimeItem_edit>
         <p>削除</p>
-      </SUserItem_edit>
+      </SRequirementTimeItem_edit>
     </SRequirementTimeItem_container>
   );
 };
@@ -46,6 +45,7 @@ const SRequirementTimeItem_container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const SRequirementTimeItem_contents = styled.div`
@@ -61,6 +61,15 @@ const SRequirementTimeItem_edit = styled.div`
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementTimeItem_name = styled.p`
+  font-size: 18px;
+  margin-bottom: 4px;
+`;
+
+const SRequirementTimeItem_text = styled.p`
+  font-size: 14px;
 `;
 
 export default RequirementTimeItem;

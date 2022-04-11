@@ -8,18 +8,39 @@ const RequirementTime = () => {
 
   return (
     <SRequirementTime_container>
-      <p>Requirement_time</p>
+      <SRequirementTime_title>Requirement_time</SRequirementTime_title>
       <RequirementTimeSelector setTimes={setTimes} />
-      {times && Object.keys(times).map((data, i) => {
-        const requirementTimeData = times[data]
-        return <RequirementTimeItem key={i} requirementTimeData={requirementTimeData} />
-      })}
+      <SRequirementTime_table>
+        {times && Object.keys(times).map((data, i) => {
+          const requirementTimeData = times[data]
+          return <SRequirementTime_item key={i}><RequirementTimeItem requirementTimeData={requirementTimeData} /></SRequirementTime_item>
+        })}
+      </SRequirementTime_table>
     </SRequirementTime_container>
   );
 };
 
 const SRequirementTime_container = styled.div`
   height: 100%;
+`;
+
+const SRequirementTime_title = styled.h1`
+  height: 50px;
+  padding: 15px 20px;
+  font-weight: bold;
+  background-color: #eeeeee;
+`;
+
+const SRequirementTime_table = styled.ul`
+  height: calc(100% - 100px);
+  padding: 0 20px;
+  overflow-y: scroll;
+`;
+
+const SRequirementTime_item = styled.li`
+  padding: 3px 0;
+  margin: 11px 0;
+  border-bottom: solid 1px gray;
 `;
 
 export default RequirementTime;
