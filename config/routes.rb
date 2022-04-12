@@ -51,5 +51,13 @@ Rails.application.routes.draw do
     get    :admin_requirementTime,      to: 'admin#get_requirement_times'
     get    :admin_comment,              to: 'admin#get_comments'
     get    :admin_favorite,             to: 'admin#get_favorites'
+    delete :admin_user,                 to: 'admin#delete_user'
+    delete :admin_parking,              to: 'admin#delete_parking'
+    delete :admin_requirementFree,      to: 'admin#delete_requirement_free'
+    delete :admin_requirementBuy,       to: 'admin#delete_requirement_buy'
+    delete :admin_requirementFacility,  to: 'admin#delete_requirement_facility'
+    delete :admin_requirementTime,      to: 'admin#delete_requirement_time'
+    delete :admin_comment,              to: 'admin#delete_comment'
+    delete :admin_favorite,             to: 'admin#delete_favorite'
   end
 end

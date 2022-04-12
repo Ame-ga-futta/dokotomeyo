@@ -16,7 +16,15 @@ const RequirementBuyItem = (props) => {
   const [openEdit, setOpenEdit] = useState(false);
 
   const DeleteItem = () => {
-
+    axios.delete('/dokotomeyo/admin_requirementBuy', {
+      params: { ID: requirementBuyData.id }
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch(() => {
+      bookFlashMessage("削除に失敗しました");
+    })
   }
 
   const SendParking = () => {

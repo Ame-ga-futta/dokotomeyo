@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const UserItem = (props) => {
@@ -9,13 +8,20 @@ const UserItem = (props) => {
     userData
   } = props;
 
-  const navigate = useNavigate();
   const bookFlashMessage = useContext(FlashMessageContext);
 
   const [openEdit, setOpenEdit] = useState(false);
 
   const DeleteItem = () => {
-
+    axios.delete('/dokotomeyo/admin_user', {
+      params: { ID: userData.id }
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch(() => {
+      bookFlashMessage("削除に失敗しました");
+    })
   }
 
   return (

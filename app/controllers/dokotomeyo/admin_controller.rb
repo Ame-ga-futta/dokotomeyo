@@ -8,6 +8,11 @@ class Dokotomeyo::AdminController < ApplicationController
     end
   end
 
+  def delete_user
+    @user = User.find(delete_params[:ID])
+    @user.destroy
+  end
+
   def get_parkings
     @parkings = parkings_assmble_chain
     unless @parkings.empty?
@@ -15,6 +20,11 @@ class Dokotomeyo::AdminController < ApplicationController
     else
       render json: { status: 400 }
     end
+  end
+
+  def delete_parking
+    @parking = Parking.find(delete_params[:ID])
+    @parking.destroy
   end
 
   def get_requirement_frees
@@ -26,6 +36,11 @@ class Dokotomeyo::AdminController < ApplicationController
     end
   end
 
+  def delete_requirement_free
+    @requirement = RequirementFree.find(delete_params[:ID])
+    @requirement.destroy
+  end
+
   def get_requirement_buys
     @requirements = requirement_buys_assmble_chain
     unless @requirements.empty?
@@ -33,6 +48,11 @@ class Dokotomeyo::AdminController < ApplicationController
     else
       render json: { status: 400 }
     end
+  end
+
+  def delete_requirement_buy
+    @requirement = RequirementBuy.find(delete_params[:ID])
+    @requirement.destroy
   end
 
   def get_requirement_facilities
@@ -44,6 +64,11 @@ class Dokotomeyo::AdminController < ApplicationController
     end
   end
 
+  def delete_requirement_facility
+    @requirement = RequirementFacility.find(delete_params[:ID])
+    @requirement.destroy
+  end
+
   def get_requirement_times
     @requirements = requirement_times_assmble_chain
     unless @requirements.empty?
@@ -51,6 +76,11 @@ class Dokotomeyo::AdminController < ApplicationController
     else
       render json: { status: 400 }
     end
+  end
+
+  def delete_requirement_time
+    @requirement = RequirementTime.find(delete_params[:ID])
+    @requirement.destroy
   end
 
   def get_comments
@@ -62,6 +92,11 @@ class Dokotomeyo::AdminController < ApplicationController
     end
   end
 
+  def delete_comment
+    @comment = Comment.find(delete_params[:ID])
+    @comment.destroy
+  end
+
   def get_favorites
     @favorites = favorites_assmble_chain
     unless @favorites.empty?
@@ -71,10 +106,19 @@ class Dokotomeyo::AdminController < ApplicationController
     end
   end
 
+  def delete_favorite
+    @favorite = Favorite.find(delete_params[:ID])
+    @favorite.destroy
+  end
+
   private
 
   def get_params
     params.permit(:select, :input)
+  end
+
+  def delete_params
+    params.permit(:ID)
   end
 
   def users_assmble_chain

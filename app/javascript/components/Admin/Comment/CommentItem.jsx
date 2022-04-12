@@ -18,7 +18,15 @@ const CommentItem = (props) => {
   const [openEdit, setOpenEdit] = useState(false);
 
   const DeleteItem = () => {
-
+    axios.delete('/dokotomeyo/admin_comment', {
+      params: { ID: commentData.id }
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch(() => {
+      bookFlashMessage("削除に失敗しました");
+    })
   }
 
   const SendDetail = () => {

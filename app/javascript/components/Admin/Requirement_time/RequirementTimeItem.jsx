@@ -16,7 +16,15 @@ const RequirementTimeItem = (props) => {
   const [openEdit, setOpenEdit] = useState(false);
 
   const DeleteItem = () => {
-
+    axios.delete('/dokotomeyo/admin_requirementTime', {
+      params: { ID: requirementTimeData.id }
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch(() => {
+      bookFlashMessage("削除に失敗しました");
+    })
   }
 
   const SendParking = () => {

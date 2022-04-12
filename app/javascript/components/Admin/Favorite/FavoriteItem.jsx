@@ -17,7 +17,15 @@ const FavoriteItem = (props) => {
   const [openEdit, setOpenEdit] = useState(false);
 
   const DeleteItem = () => {
-
+    axios.delete('/dokotomeyo/admin_favorite', {
+      params: { ID: favoriteData.id }
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch(() => {
+      bookFlashMessage("削除に失敗しました");
+    })
   }
 
   const SendDetail = () => {

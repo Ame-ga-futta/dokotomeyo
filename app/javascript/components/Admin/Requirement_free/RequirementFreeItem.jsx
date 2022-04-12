@@ -16,7 +16,15 @@ const RequirementFreeItem = (props) => {
   const [openEdit, setOpenEdit] = useState(false);
 
   const DeleteItem = () => {
-
+    axios.delete('/dokotomeyo/admin_requirementFree', {
+      params: { ID: requirementFreeData.id }
+    })
+    .then(() => {
+      window.location.reload();
+    })
+    .catch(() => {
+      bookFlashMessage("削除に失敗しました");
+    })
   }
 
   const SendParking = () => {
