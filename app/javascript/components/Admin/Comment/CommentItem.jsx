@@ -15,6 +15,11 @@ const CommentItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
   const [userData, setUserData] = useState("");
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const DeleteItem = () => {
+
+  }
 
   const SendDetail = () => {
     navigate(`/dokotomeyo/detail/${commentData.parking_id}`)
@@ -41,21 +46,29 @@ const CommentItem = (props) => {
   }, [commentData])
 
   return (
-    <SCommentItem_container>
-      <SCommentItem_contents onClick={SendDetail}>
-        <SCommentItem_name>{parkingData.name}</SCommentItem_name>
-        <SCommentItem_name>{userData}</SCommentItem_name>
-        <SCommentItem_comment>{commentData.comment}</SCommentItem_comment>
-        <SCommentItem_updated_at>{moment(commentData.updated_at).format('YYYY-MM-DD HH:mm')}</SCommentItem_updated_at>
-      </SCommentItem_contents>
-      <SCommentItem_edit>
-        <SCommentItem_edit_text>削除</SCommentItem_edit_text>
-      </SCommentItem_edit>
-    </SCommentItem_container>
+    <>
+      <SCommentItem_list>
+        <SCommentItem_contents onClick={SendDetail}>
+          <SCommentItem_name>{parkingData.name}</SCommentItem_name>
+          <SCommentItem_name>{userData}</SCommentItem_name>
+          <SCommentItem_comment>{commentData.comment}</SCommentItem_comment>
+          <SCommentItem_updated_at>{moment(commentData.updated_at).format('YYYY-MM-DD HH:mm')}</SCommentItem_updated_at>
+        </SCommentItem_contents>
+        <SCommentItem_edit>
+          <SCommentItem_edit_text onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "閉じる" : "削除"}</SCommentItem_edit_text>
+        </SCommentItem_edit>
+      </SCommentItem_list>
+      {openEdit &&
+        <SCommentItem_Delete>
+          <SCommentItem_Delete_text>本当に削除しますか？</SCommentItem_Delete_text>
+          <SCommentItem_Delete_button onClick={DeleteItem}>削除</SCommentItem_Delete_button>
+        </SCommentItem_Delete>
+      }
+    </>
   );
 };
 
-const SCommentItem_container = styled.div`
+const SCommentItem_list = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -96,6 +109,28 @@ const SCommentItem_comment = styled.p`
 
 const SCommentItem_updated_at = styled.p`
   font-size: 14px;
+`;
+
+const SCommentItem_Delete = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0;
+`;
+
+const SCommentItem_Delete_text = styled.p`
+  width: 90%;
+  color: red;
+  text-align: end;
+`;
+
+const SCommentItem_Delete_button = styled.p`
+  width: 10%;
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+  text-align: center;
 `;
 
 export default CommentItem;

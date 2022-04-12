@@ -13,6 +13,11 @@ const RequirementTimeItem = (props) => {
   const bookFlashMessage = useContext(FlashMessageContext);
 
   const [parkingData, setParkingData] = useState({});
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const DeleteItem = () => {
+
+  }
 
   const SendParking = () => {
     navigate(`/dokotomeyo/parking/${requirementTimeData.parking_id}`)
@@ -30,22 +35,30 @@ const RequirementTimeItem = (props) => {
   }, [requirementTimeData])
 
   return (
-    <SRequirementTimeItem_container>
-      <SRequirementTimeItem_contents onClick={SendParking}>
-        <SRequirementTimeItem_name>{parkingData.name}</SRequirementTimeItem_name>
-        <SRequirementTimeItem_text>
-          入庫後{Number(requirementTimeData.free_time.split(':')[0])}時間{Number(requirementTimeData.free_time.split(':')[1])}分無料
-        </SRequirementTimeItem_text>
-        <SRequirementTimeItem_text>{requirementTimeData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementTimeItem_text>
-      </SRequirementTimeItem_contents>
-      <SRequirementTimeItem_edit>
-        <SRequirementTimeItem_edit_text>削除</SRequirementTimeItem_edit_text>
-      </SRequirementTimeItem_edit>
-    </SRequirementTimeItem_container>
+    <>
+      <SRequirementTimeItem_list>
+        <SRequirementTimeItem_contents onClick={SendParking}>
+          <SRequirementTimeItem_name>{parkingData.name}</SRequirementTimeItem_name>
+          <SRequirementTimeItem_text>
+            入庫後{Number(requirementTimeData.free_time.split(':')[0])}時間{Number(requirementTimeData.free_time.split(':')[1])}分無料
+          </SRequirementTimeItem_text>
+          <SRequirementTimeItem_text>{requirementTimeData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementTimeItem_text>
+        </SRequirementTimeItem_contents>
+        <SRequirementTimeItem_edit>
+          <SRequirementTimeItem_edit_text onClick={() => setOpenEdit(!openEdit)}>{openEdit ? "閉じる" : "削除"}</SRequirementTimeItem_edit_text>
+        </SRequirementTimeItem_edit>
+      </SRequirementTimeItem_list>
+      {openEdit &&
+        <SRequirementTimeItem_Delete>
+          <SRequirementTimeItem_Delete_text>本当に削除しますか？</SRequirementTimeItem_Delete_text>
+          <SRequirementTimeItem_Delete_button onClick={DeleteItem}>削除</SRequirementTimeItem_Delete_button>
+        </SRequirementTimeItem_Delete>
+      }
+    </>
   );
 };
 
-const SRequirementTimeItem_container = styled.div`
+const SRequirementTimeItem_list = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -81,6 +94,28 @@ const SRequirementTimeItem_name = styled.p`
 
 const SRequirementTimeItem_text = styled.p`
   font-size: 14px;
+`;
+
+const SRequirementTimeItem_Delete = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0;
+`;
+
+const SRequirementTimeItem_Delete_text = styled.p`
+  width: 90%;
+  color: red;
+  text-align: end;
+`;
+
+const SRequirementTimeItem_Delete_button = styled.p`
+  width: 10%;
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+  text-align: center;
 `;
 
 export default RequirementTimeItem;
