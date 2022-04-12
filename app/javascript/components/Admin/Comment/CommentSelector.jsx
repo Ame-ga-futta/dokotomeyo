@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const CommentSelector = (props) => {
   const {
-    setComments
+    setComments,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -39,7 +40,16 @@ const CommentSelector = (props) => {
       }
     })
     .then((response) => {
-      setComments(response.data.comments)
+      switch (response.data.status) {
+        case 200:
+          setComments(response.data.comments);
+          setMessage(false);
+          break;
+        case 400:
+          setComments({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -85,7 +95,7 @@ const SCommentSelector_container = styled.div`
 
 const SComment_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;

@@ -5,12 +5,14 @@ import RequirementBuyItem from "./RequirementBuyItem";
 
 const RequirementBuy = () => {
   const [buys, setBuys] = useState({});
+  const [message, setMessage] = useState(false);
 
   return (
     <SRequirementBuy_container>
       <SRequirementBuy_title>Requirement_buy</SRequirementBuy_title>
-      <RequirementBuySelector setBuys={setBuys} />
+      <RequirementBuySelector setBuys={setBuys} setMessage={setMessage} />
       <SRequirementBuy_table>
+        {message && <SMessage>RequirementBuyは0件です</SMessage>}
         {buys && Object.keys(buys).map((data, i) => {
           const requirementBuyData = buys[data]
           return <SRequirementBuy_item key={i}><RequirementBuyItem requirementBuyData={requirementBuyData} /></SRequirementBuy_item>
@@ -41,6 +43,10 @@ const SRequirementBuy_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SMessage = styled.p`
+  margin: 4px 10px;
 `;
 
 export default RequirementBuy;

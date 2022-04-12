@@ -5,12 +5,14 @@ import FavoriteItem from "./FavoriteItem";
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState({});
+  const [message, setMessage] = useState(false);
 
   return (
     <SFavorite_container>
       <SFavorite_title>Favorite</SFavorite_title>
-      <FavoriteSelector setFavorites={setFavorites} />
+      <FavoriteSelector setFavorites={setFavorites} setMessage={setMessage} />
       <SFavorite_table>
+        {message && <SMessage>Favoriteは0件です</SMessage>}
         {favorites && Object.keys(favorites).map((data, i) => {
           const favoriteData = favorites[data]
           return <SFavorite_item key={i}><FavoriteItem favoriteData={favoriteData} /></SFavorite_item>
@@ -41,6 +43,10 @@ const SFavorite_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SMessage = styled.p`
+  margin: 4px 10px;
 `;
 
 export default Favorite;

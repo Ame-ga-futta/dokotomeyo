@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const RequirementFreeSelector = (props) => {
   const {
-    setFrees
+    setFrees,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -37,7 +38,16 @@ const RequirementFreeSelector = (props) => {
       }
     })
     .then((response) => {
-      setFrees(response.data.requirements)
+      switch (response.data.status) {
+        case 200:
+          setFrees(response.data.requirements);
+          setMessage(false);
+          break;
+        case 400:
+          setFrees({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -82,7 +92,7 @@ const SRequirementFreeSelector_container = styled.div`
 
 const SRequirementFree_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;

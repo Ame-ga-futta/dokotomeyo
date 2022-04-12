@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const RequirementFacilitySelector = (props) => {
   const {
-    setFacilities
+    setFacilities,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -37,7 +38,16 @@ const RequirementFacilitySelector = (props) => {
       }
     })
     .then((response) => {
-      setFacilities(response.data.requirements)
+      switch (response.data.status) {
+        case 200:
+          setFacilities(response.data.requirements);
+          setMessage(false);
+          break;
+        case 400:
+          setFacilities({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -82,7 +92,7 @@ const SRequirementFacilitySelector_container = styled.div`
 
 const SRequirementFacility_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;

@@ -5,12 +5,14 @@ import RequirementFreeItem from "./RequirementFreeItem";
 
 const RequirementFree = () => {
   const [frees, setFrees] = useState({});
+  const [message, setMessage] = useState(false);
 
   return (
     <SRequirementFree_container>
       <SRequirementFree_title>Requirement_free</SRequirementFree_title>
-      <RequirementFreeSelector setFrees={setFrees} />
+      <RequirementFreeSelector setFrees={setFrees} setMessage={setMessage} />
       <SRequirementFree_table>
+        {message && <SMessage>RequirementFreeは0件です</SMessage>}
         {frees && Object.keys(frees).map((data, i) => {
           const requirementFreeData = frees[data]
           return <SRequirementFree_item key={i}><RequirementFreeItem requirementFreeData={requirementFreeData} /></SRequirementFree_item>
@@ -41,6 +43,10 @@ const SRequirementFree_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SMessage = styled.p`
+  margin: 4px 10px;
 `;
 
 export default RequirementFree;

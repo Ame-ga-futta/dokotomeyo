@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const UserSelector = (props) => {
   const {
-    setUsers
+    setUsers,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -39,7 +40,16 @@ const UserSelector = (props) => {
       }
     })
     .then((response) => {
-      setUsers(response.data.users)
+      switch (response.data.status) {
+        case 200:
+          setUsers(response.data.users);
+          setMessage(false);
+          break;
+        case 400:
+          setUsers({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -85,7 +95,7 @@ const SUserSelector_container = styled.div`
 
 const SUser_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;

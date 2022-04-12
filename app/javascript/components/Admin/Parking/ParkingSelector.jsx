@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const ParkingSelector = (props) => {
   const {
-    setParkings
+    setParkings,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -39,7 +40,16 @@ const ParkingSelector = (props) => {
       }
     })
     .then((response) => {
-      setParkings(response.data.parkings)
+      switch (response.data.status) {
+        case 200:
+          setParkings(response.data.parkings);
+          setMessage(false);
+          break;
+        case 400:
+          setParkings({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -85,7 +95,7 @@ const SParkingSelector_container = styled.div`
 
 const SParking_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;

@@ -5,12 +5,14 @@ import RequirementFacilityItem from "./RequirementFacilityItem";
 
 const RequirementFacility = () => {
   const [facilities, setFacilities] = useState({});
+  const [message, setMessage] = useState(false);
 
   return (
     <SRequirementFacility_container>
       <SRequirementFacility_title>Requirement_facility</SRequirementFacility_title>
-      <RequirementFacilitySelector setFacilities={setFacilities} />
+      <RequirementFacilitySelector setFacilities={setFacilities} setMessage={setMessage} />
       <SRequirementFacility_table>
+        {message && <SMessage>RequirementFacilityは0件です</SMessage>}
         {facilities && Object.keys(facilities).map((data, i) => {
           const requirementFacilityData = facilities[data]
           return <SRequirementFacility_item key={i}><RequirementFacilityItem requirementFacilityData={requirementFacilityData} /></SRequirementFacility_item>
@@ -41,6 +43,10 @@ const SRequirementFacility_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SMessage = styled.p`
+  margin: 4px 10px;
 `;
 
 export default RequirementFacility;

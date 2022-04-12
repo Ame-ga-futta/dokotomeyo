@@ -5,12 +5,14 @@ import ParkingItem from "./ParkingItem";
 
 const Parking = () => {
   const [parkings, setParkings] = useState({});
+  const [message, setMessage] = useState(false);
 
   return (
     <SParking_container>
       <SParking_title>Parking</SParking_title>
-      <ParkingSelector setParkings={setParkings} />
+      <ParkingSelector setParkings={setParkings} setMessage={setMessage} />
       <SParking_table>
+        {message && <SMessage>Parkingは0件です</SMessage>}
         {parkings && Object.keys(parkings).map((data, i) => {
           const parkingData = parkings[data]
           return <SParking_item  key={i}><ParkingItem parkingData={parkingData} /></SParking_item>
@@ -41,6 +43,10 @@ const SParking_item = styled.li`
   padding: 3px 0;
   margin: 11px 0;
   border-bottom: solid 1px gray;
+`;
+
+const SMessage = styled.p`
+  margin: 4px 10px;
 `;
 
 export default Parking;

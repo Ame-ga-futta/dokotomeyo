@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const RequirementTimeSelector = (props) => {
   const {
-    setTimes
+    setTimes,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -37,7 +38,16 @@ const RequirementTimeSelector = (props) => {
       }
     })
     .then((response) => {
-      setTimes(response.data.requirements)
+      switch (response.data.status) {
+        case 200:
+          setTimes(response.data.requirements);
+          setMessage(false);
+          break;
+        case 400:
+          setTimes({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -82,7 +92,7 @@ const SRequirementTimeSelector_container = styled.div`
 
 const SRequirementTime_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;

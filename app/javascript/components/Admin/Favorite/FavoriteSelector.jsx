@@ -5,7 +5,8 @@ import FlashMessageContext from "../../providers/FlashMessageProvider";
 
 const FavoriteSelector = (props) => {
   const {
-    setFavorites
+    setFavorites,
+    setMessage
   } = props;
 
   const [select, setSelect] = useState(1);
@@ -39,7 +40,16 @@ const FavoriteSelector = (props) => {
       }
     })
     .then((response) => {
-      setFavorites(response.data.favorites)
+      switch (response.data.status) {
+        case 200:
+          setFavorites(response.data.favorites);
+          setMessage(false);
+          break;
+        case 400:
+          setFavorites({});
+          setMessage(true);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("データの取得に失敗しました");
@@ -85,7 +95,7 @@ const SFavoriteSelector_container = styled.div`
 
 const SFavorite_selector = styled.div`
   position: absolute;
-  z-index : 99998;
+  z-index : 99992;
   display: flex;
   flex-direction: column;
   padding: 6px 8px;
