@@ -15,6 +15,10 @@ const FavoriteItem = (props) => {
   const [parkingData, setParkingData] = useState({});
   const [userData, setUserData] = useState("");
 
+  const sendDetail = () => {
+    navigate(`/dokotomeyo/detail/${favoriteData.parking_id}`)
+  }
+
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: favoriteData.parking_id } })
     .then((response) => {
@@ -37,12 +41,12 @@ const FavoriteItem = (props) => {
 
   return (
     <SFavoriteItem_container>
-      <SFavoriteItem_contents>
+      <SFavoriteItem_contents onClick={sendDetail}>
         <SFavoriteItem_name>{parkingData.name}</SFavoriteItem_name>
         <SFavoriteItem_name>{userData}</SFavoriteItem_name>
       </SFavoriteItem_contents>
       <SFavoriteItem_edit>
-        <p>削除</p>
+        <SFavoriteItem_edit_text>削除</SFavoriteItem_edit_text>
       </SFavoriteItem_edit>
     </SFavoriteItem_container>
   );
@@ -59,16 +63,23 @@ const SFavoriteItem_contents = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SFavoriteItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SFavoriteItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SFavoriteItem_name = styled.p`

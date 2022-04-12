@@ -14,6 +14,10 @@ const RequirementTimeItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
+  const sendParking = () => {
+    navigate(`/dokotomeyo/parking/${requirementTimeData.parking_id}`)
+  }
+
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: requirementTimeData.parking_id } })
     .then((response) => {
@@ -27,7 +31,7 @@ const RequirementTimeItem = (props) => {
 
   return (
     <SRequirementTimeItem_container>
-      <SRequirementTimeItem_contents>
+      <SRequirementTimeItem_contents onClick={sendParking}>
         <SRequirementTimeItem_name>{parkingData.name}</SRequirementTimeItem_name>
         <SRequirementTimeItem_text>
           入庫後{Number(requirementTimeData.free_time.split(':')[0])}時間{Number(requirementTimeData.free_time.split(':')[1])}分無料
@@ -35,7 +39,7 @@ const RequirementTimeItem = (props) => {
         <SRequirementTimeItem_text>{requirementTimeData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementTimeItem_text>
       </SRequirementTimeItem_contents>
       <SRequirementTimeItem_edit>
-        <p>削除</p>
+        <SRequirementTimeItem_edit_text>削除</SRequirementTimeItem_edit_text>
       </SRequirementTimeItem_edit>
     </SRequirementTimeItem_container>
   );
@@ -51,16 +55,23 @@ const SRequirementTimeItem_container = styled.div`
 const SRequirementTimeItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SRequirementTimeItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementTimeItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SRequirementTimeItem_name = styled.p`

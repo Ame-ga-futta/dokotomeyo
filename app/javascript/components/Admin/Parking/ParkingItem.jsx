@@ -11,16 +11,20 @@ const ParkingItem = (props) => {
   const navigate = useNavigate();
   const bookFlashMessage = useContext(FlashMessageContext);
 
+  const sendParking = () => {
+    navigate(`/dokotomeyo/parking/${parkingData.id}`)
+  }
+
   return (
     <SParkingItem_container>
-      <SParkingItem_contents>
+      <SParkingItem_contents onClick={sendParking}>
         <SParkingItem_name>{parkingData.name}</SParkingItem_name>
         <SParkingItem_text>{parkingData.beginning_of_worktime} 〜 {parkingData.end_of_worktime}</SParkingItem_text>
         <SParkingItem_text>{parkingData.address}</SParkingItem_text>
         <SParkingItem_text>{parkingData.latitude}, {parkingData.longitude}</SParkingItem_text>
       </SParkingItem_contents>
       <SParkingItem_edit>
-        <p>削除</p>
+        <SParkingItem_edit_text>削除</SParkingItem_edit_text>
       </SParkingItem_edit>
     </SParkingItem_container>
   );
@@ -36,16 +40,23 @@ const SParkingItem_container = styled.div`
 const SParkingItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SParkingItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SParkingItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SParkingItem_name = styled.p`

@@ -14,6 +14,10 @@ const RequirementFacilityItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
+  const sendParking = () => {
+    navigate(`/dokotomeyo/parking/${requirementFacilityData.parking_id}`)
+  }
+
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: requirementFacilityData.parking_id } })
     .then((response) => {
@@ -27,7 +31,7 @@ const RequirementFacilityItem = (props) => {
 
   return (
     <SRequirementFacilityItem_container>
-      <SRequirementFacilityItem_contents>
+      <SRequirementFacilityItem_contents onClick={sendParking}>
         <SRequirementFacilityItem_name>{parkingData.name}</SRequirementFacilityItem_name>
         <SRequirementFacilityItem_text>
           {requirementFacilityData.facility_name}の利用で
@@ -37,7 +41,7 @@ const RequirementFacilityItem = (props) => {
         <SRequirementFacilityItem_text>{requirementFacilityData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementFacilityItem_text>
       </SRequirementFacilityItem_contents>
       <SRequirementFacilityItem_edit>
-        <p>削除</p>
+        <SRequirementFacilityItem_edit_text>削除</SRequirementFacilityItem_edit_text>
       </SRequirementFacilityItem_edit>
     </SRequirementFacilityItem_container>
   );
@@ -53,16 +57,23 @@ const SRequirementFacilityItem_container = styled.div`
 const SRequirementFacilityItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SRequirementFacilityItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementFacilityItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SRequirementFacilityItem_name = styled.p`

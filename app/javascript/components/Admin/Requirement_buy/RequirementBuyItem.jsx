@@ -14,6 +14,10 @@ const RequirementBuyItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
+  const sendParking = () => {
+    navigate(`/dokotomeyo/parking/${requirementBuyData.parking_id}`)
+  }
+
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: requirementBuyData.parking_id } })
     .then((response) => {
@@ -27,7 +31,7 @@ const RequirementBuyItem = (props) => {
 
   return (
     <SRequirementBuyItem_container>
-      <SRequirementBuyItem_contents>
+      <SRequirementBuyItem_contents onClick={sendParking}>
         <SRequirementBuyItem_name>{parkingData.name}</SRequirementBuyItem_name>
         <SRequirementBuyItem_text>
           {requirementBuyData.facility_name}での購入金額が
@@ -38,7 +42,7 @@ const RequirementBuyItem = (props) => {
         <SRequirementBuyItem_text>{requirementBuyData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementBuyItem_text>
       </SRequirementBuyItem_contents>
       <SRequirementBuyItem_edit>
-        <p>削除</p>
+        <SRequirementBuyItem_edit_text>削除</SRequirementBuyItem_edit_text>
       </SRequirementBuyItem_edit>
     </SRequirementBuyItem_container>
   );
@@ -54,16 +58,23 @@ const SRequirementBuyItem_container = styled.div`
 const SRequirementBuyItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SRequirementBuyItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementBuyItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SRequirementBuyItem_name = styled.p`

@@ -18,7 +18,7 @@ const UserItem = (props) => {
         <SUserItem_email>{userData.email}</SUserItem_email>
       </SUserItem_contents>
       <SUserItem_edit>
-        <p>削除</p>
+        <SUserItem_edit_text>削除</SUserItem_edit_text>
       </SUserItem_edit>
     </SUserItem_container>
   );
@@ -34,16 +34,23 @@ const SUserItem_container = styled.div`
 const SUserItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SUserItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SUserItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SUserItem_name = styled.p`

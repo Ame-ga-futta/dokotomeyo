@@ -16,6 +16,10 @@ const CommentItem = (props) => {
   const [parkingData, setParkingData] = useState({});
   const [userData, setUserData] = useState("");
 
+  const sendDetail = () => {
+    navigate(`/dokotomeyo/detail/${commentData.parking_id}`)
+  }
+
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: commentData.parking_id } })
     .then((response) => {
@@ -38,14 +42,14 @@ const CommentItem = (props) => {
 
   return (
     <SCommentItem_container>
-      <SCommentItem_contents>
+      <SCommentItem_contents onClick={sendDetail}>
         <SCommentItem_name>{parkingData.name}</SCommentItem_name>
         <SCommentItem_name>{userData}</SCommentItem_name>
         <SCommentItem_comment>{commentData.comment}</SCommentItem_comment>
         <SCommentItem_updated_at>{moment(commentData.updated_at).format('YYYY-MM-DD HH:mm')}</SCommentItem_updated_at>
       </SCommentItem_contents>
       <SCommentItem_edit>
-        <p>削除</p>
+        <SCommentItem_edit_text>削除</SCommentItem_edit_text>
       </SCommentItem_edit>
     </SCommentItem_container>
   );
@@ -61,16 +65,23 @@ const SCommentItem_container = styled.div`
 const SCommentItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SCommentItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SCommentItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SCommentItem_name = styled.p`

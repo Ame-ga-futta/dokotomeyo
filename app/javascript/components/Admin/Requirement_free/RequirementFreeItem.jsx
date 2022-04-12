@@ -14,6 +14,10 @@ const RequirementFreeItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
+  const sendParking = () => {
+    navigate(`/dokotomeyo/parking/${requirementFreeData.parking_id}`)
+  }
+
   useEffect(() => {
     axios.get('/dokotomeyo/details', { params: { parkingID: requirementFreeData.parking_id } })
     .then((response) => {
@@ -27,12 +31,12 @@ const RequirementFreeItem = (props) => {
 
   return (
     <SRequirementFreeItem_container>
-      <SRequirementFreeItem_contents>
+      <SRequirementFreeItem_contents onClick={sendParking}>
         <SRequirementFreeItem_name>{parkingData.name}</SRequirementFreeItem_name>
         <SRequirementFreeItem_text>{requirementFreeData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementFreeItem_text>
       </SRequirementFreeItem_contents>
       <SRequirementFreeItem_edit>
-        <p>削除</p>
+        <SRequirementFreeItem_edit_text>削除</SRequirementFreeItem_edit_text>
       </SRequirementFreeItem_edit>
     </SRequirementFreeItem_container>
   );
@@ -48,16 +52,23 @@ const SRequirementFreeItem_container = styled.div`
 const SRequirementFreeItem_contents = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
 `;
 
 const SRequirementFreeItem_edit = styled.div`
   display: flex;
   flex-direction: row;
-  width: 5%;
+  width: 10%;
   font-size: 14px;
   color: gray;
   cursor: pointer;
+`;
+
+const SRequirementFreeItem_edit_text = styled.p`
+  margin: auto;
 `;
 
 const SRequirementFreeItem_name = styled.p`
