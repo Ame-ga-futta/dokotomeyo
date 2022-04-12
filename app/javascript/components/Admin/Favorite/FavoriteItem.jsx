@@ -15,7 +15,7 @@ const FavoriteItem = (props) => {
   const [parkingData, setParkingData] = useState({});
   const [userData, setUserData] = useState("");
 
-  const sendDetail = () => {
+  const SendDetail = () => {
     navigate(`/dokotomeyo/detail/${favoriteData.parking_id}`)
   }
 
@@ -41,7 +41,7 @@ const FavoriteItem = (props) => {
 
   return (
     <SFavoriteItem_container>
-      <SFavoriteItem_contents onClick={sendDetail}>
+      <SFavoriteItem_contents onClick={SendDetail}>
         <SFavoriteItem_name>{parkingData.name}</SFavoriteItem_name>
         <SFavoriteItem_name>{userData}</SFavoriteItem_name>
       </SFavoriteItem_contents>

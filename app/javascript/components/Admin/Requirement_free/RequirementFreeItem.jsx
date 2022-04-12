@@ -14,7 +14,7 @@ const RequirementFreeItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
-  const sendParking = () => {
+  const SendParking = () => {
     navigate(`/dokotomeyo/parking/${requirementFreeData.parking_id}`)
   }
 
@@ -31,7 +31,7 @@ const RequirementFreeItem = (props) => {
 
   return (
     <SRequirementFreeItem_container>
-      <SRequirementFreeItem_contents onClick={sendParking}>
+      <SRequirementFreeItem_contents onClick={SendParking}>
         <SRequirementFreeItem_name>{parkingData.name}</SRequirementFreeItem_name>
         <SRequirementFreeItem_text>{requirementFreeData.only_weekdays ? "平日のみ" : "全日"} 終日無料</SRequirementFreeItem_text>
       </SRequirementFreeItem_contents>

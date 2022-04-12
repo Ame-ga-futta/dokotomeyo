@@ -11,13 +11,13 @@ const ParkingItem = (props) => {
   const navigate = useNavigate();
   const bookFlashMessage = useContext(FlashMessageContext);
 
-  const sendParking = () => {
+  const SendParking = () => {
     navigate(`/dokotomeyo/parking/${parkingData.id}`)
   }
 
   return (
     <SParkingItem_container>
-      <SParkingItem_contents onClick={sendParking}>
+      <SParkingItem_contents onClick={SendParking}>
         <SParkingItem_name>{parkingData.name}</SParkingItem_name>
         <SParkingItem_text>{parkingData.beginning_of_worktime} 〜 {parkingData.end_of_worktime}</SParkingItem_text>
         <SParkingItem_text>{parkingData.address}</SParkingItem_text>

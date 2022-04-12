@@ -14,7 +14,7 @@ const RequirementBuyItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
-  const sendParking = () => {
+  const SendParking = () => {
     navigate(`/dokotomeyo/parking/${requirementBuyData.parking_id}`)
   }
 
@@ -31,7 +31,7 @@ const RequirementBuyItem = (props) => {
 
   return (
     <SRequirementBuyItem_container>
-      <SRequirementBuyItem_contents onClick={sendParking}>
+      <SRequirementBuyItem_contents onClick={SendParking}>
         <SRequirementBuyItem_name>{parkingData.name}</SRequirementBuyItem_name>
         <SRequirementBuyItem_text>
           {requirementBuyData.facility_name}での購入金額が

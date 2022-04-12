@@ -14,7 +14,7 @@ const RequirementTimeItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
-  const sendParking = () => {
+  const SendParking = () => {
     navigate(`/dokotomeyo/parking/${requirementTimeData.parking_id}`)
   }
 
@@ -31,7 +31,7 @@ const RequirementTimeItem = (props) => {
 
   return (
     <SRequirementTimeItem_container>
-      <SRequirementTimeItem_contents onClick={sendParking}>
+      <SRequirementTimeItem_contents onClick={SendParking}>
         <SRequirementTimeItem_name>{parkingData.name}</SRequirementTimeItem_name>
         <SRequirementTimeItem_text>
           入庫後{Number(requirementTimeData.free_time.split(':')[0])}時間{Number(requirementTimeData.free_time.split(':')[1])}分無料

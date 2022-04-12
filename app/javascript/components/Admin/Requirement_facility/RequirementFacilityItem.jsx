@@ -14,7 +14,7 @@ const RequirementFacilityItem = (props) => {
 
   const [parkingData, setParkingData] = useState({});
 
-  const sendParking = () => {
+  const SendParking = () => {
     navigate(`/dokotomeyo/parking/${requirementFacilityData.parking_id}`)
   }
 
@@ -31,7 +31,7 @@ const RequirementFacilityItem = (props) => {
 
   return (
     <SRequirementFacilityItem_container>
-      <SRequirementFacilityItem_contents onClick={sendParking}>
+      <SRequirementFacilityItem_contents onClick={SendParking}>
         <SRequirementFacilityItem_name>{parkingData.name}</SRequirementFacilityItem_name>
         <SRequirementFacilityItem_text>
           {requirementFacilityData.facility_name}の利用で

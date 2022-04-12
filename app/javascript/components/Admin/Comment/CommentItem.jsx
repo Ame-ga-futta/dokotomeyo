@@ -16,7 +16,7 @@ const CommentItem = (props) => {
   const [parkingData, setParkingData] = useState({});
   const [userData, setUserData] = useState("");
 
-  const sendDetail = () => {
+  const SendDetail = () => {
     navigate(`/dokotomeyo/detail/${commentData.parking_id}`)
   }
 
@@ -42,7 +42,7 @@ const CommentItem = (props) => {
 
   return (
     <SCommentItem_container>
-      <SCommentItem_contents onClick={sendDetail}>
+      <SCommentItem_contents onClick={SendDetail}>
         <SCommentItem_name>{parkingData.name}</SCommentItem_name>
         <SCommentItem_name>{userData}</SCommentItem_name>
         <SCommentItem_comment>{commentData.comment}</SCommentItem_comment>
