@@ -111,6 +111,11 @@ class Dokotomeyo::AdminController < ApplicationController
     @favorite.destroy
   end
 
+  def get_permission
+    @edit_params = EditParam.all
+    render json: { status: 200, edit_params: @edit_params }
+  end
+
   private
 
   def get_params
@@ -118,6 +123,10 @@ class Dokotomeyo::AdminController < ApplicationController
   end
 
   def delete_params
+    params.permit(:ID)
+  end
+
+  def parmission_params
     params.permit(:ID)
   end
 
