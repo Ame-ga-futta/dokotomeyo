@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     post   :add_confirm,                to: 'parkings#add_confirm'
     post   :add_create,                 to: 'parkings#add_create'
     post   :edit_confirm,               to: 'parkings#edit_confirm'
+    post   :edit_hold,                  to: 'parkings#edit_hold'
     post   :edit_create,                to: 'parkings#edit_create'
     post   :search,                     to: 'parkings#search'
     get    :details,                    to: 'parkings#details'

@@ -60,6 +60,15 @@ class Dokotomeyo::ParkingsController < ApplicationController
     end
   end
 
+  def edit_hold
+    @update_parking = EditParam.new(params: edit_params.to_json)
+    if @update_parking.save
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: "投稿に失敗しました"}
+    end
+  end
+
   def edit_create
     @exist_parking = Parking.find(edit_params[:parking][:id])
     @update_parking = Parking.new(edit_params[:parking])
