@@ -60,6 +60,5 @@ Rails.application.routes.draw do
     delete :admin_requirementTime,      to: 'admin#delete_requirement_time'
     delete :admin_comment,              to: 'admin#delete_comment'
     delete :admin_favorite,             to: 'admin#delete_favorite'
-    get    :admin_permission,           to: 'admin#get_permission'
   end
 end

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import EditParam from "./EditParam/EditParam";
 import User from "./User/User";
 import Parking from "./Parking/Parking";
 import RequirementFree from "./Requirement_free/RequirementFree";
@@ -11,12 +10,10 @@ import Comment from "./Comment/Comment";
 import Favorite from "./Favorite/Favorite";
 
 const Admin = () => {
-  const [changeTab, setChangeTab] = useState("EditParam")
+  const [changeTab, setChangeTab] = useState("User")
 
   const displayTab = () => {
     switch (changeTab){
-      case "EditParam":
-        return <EditParam />
       case "User":
         return <User />
       case "Parking":
@@ -39,8 +36,6 @@ const Admin = () => {
   return (
     <SAdmin_wrapper>
       <SAdmin_sidebar>
-        <SAdmin_sidebar_title>Permission</SAdmin_sidebar_title>
-        <SAdmin_sidebar_tab onClick={() => setChangeTab("EditParam")}>EditParam</SAdmin_sidebar_tab>
         <SAdmin_sidebar_title>Model</SAdmin_sidebar_title>
         <SAdmin_sidebar_tab onClick={() => setChangeTab("User")}>User</SAdmin_sidebar_tab>
         <SAdmin_sidebar_tab onClick={() => setChangeTab("Parking")}>Parking</SAdmin_sidebar_tab>
