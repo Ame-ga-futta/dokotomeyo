@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
       render json: { status: 401, message: "すでにログインしています" }
     end
   end
+
+  def authenticate_admin
+    if @current_user.nil? || @current_user.admin == false
+      render json: { status: 401, message: "ログインしていません" }
+    end
+  end
 end

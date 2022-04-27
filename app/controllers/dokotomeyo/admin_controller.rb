@@ -1,4 +1,6 @@
 class Dokotomeyo::AdminController < ApplicationController
+  before_action :authenticate_admin
+
   def get_users
     @users = users_assmble_chain
     unless @users.empty?

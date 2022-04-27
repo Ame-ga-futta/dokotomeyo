@@ -2,7 +2,14 @@ RSpec.describe "admin", type: :request do
   describe "GET" do
     context "get_parkings" do
       context "responce" do
+        let!(:admin_user) { create(:user, id: 999, admin: true, email: "admin@gmail.com") }
         let!(:existing_parking) { create(:parking) }
+
+        before do
+          post dokotomeyo_login_path, params: {
+            user: { email: admin_user.email, password: "password" },
+          }
+        end
 
         it "get_parkings responce is 200 with exist data" do
           get dokotomeyo_admin_parking_path, params: {
@@ -22,6 +29,7 @@ RSpec.describe "admin", type: :request do
       end
 
       context "filtering" do
+        let!(:admin_user) { create(:user, id: 999, admin: true, email: "admin@gmail.com") }
         let!(:parking_1) do
           create(
             :parking,
@@ -61,6 +69,12 @@ RSpec.describe "admin", type: :request do
             created_at: "2022-01-01T12:00:00.000+09:00",
             updated_at: "2022-01-01T12:00:00.000+09:00",
           )
+        end
+
+        before do
+          post dokotomeyo_login_path, params: {
+            user: { email: admin_user.email, password: "password" },
+          }
         end
 
         it "filtering id" do
