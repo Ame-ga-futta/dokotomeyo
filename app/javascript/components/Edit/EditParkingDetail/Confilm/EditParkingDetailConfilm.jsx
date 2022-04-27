@@ -38,7 +38,7 @@ const EditParkingDetailConfilm = (props) => {
   };
 
   const register = () => {
-    axios.post('/dokotomeyo/edit_hold', {
+    axios.post('/dokotomeyo/edit_create', {
       edit_parking_detail: updatesData
     })
     .then((response) => {
