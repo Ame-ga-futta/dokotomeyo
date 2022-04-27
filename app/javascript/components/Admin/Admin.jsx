@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import FlashMessageContext from "../providers/FlashMessageProvider";
 import User from "./User/User";
 import Parking from "./Parking/Parking";
 import RequirementFree from "./Requirement_free/RequirementFree";
@@ -10,7 +13,9 @@ import Comment from "./Comment/Comment";
 import Favorite from "./Favorite/Favorite";
 
 const Admin = () => {
-  const [changeTab, setChangeTab] = useState("User")
+  const [changeTab, setChangeTab] = useState("User");
+  const navigate = useNavigate();
+  const bookFlashMessage = useContext(FlashMessageContext);
 
   const displayTab = () => {
     switch (changeTab){
@@ -32,6 +37,24 @@ const Admin = () => {
         return <Favorite />
     }
   }
+
+  useEffect(() => {
+    axios.get('/dokotomeyo/authenticate')
+    .then((response) => {
+      switch (response.data.status){
+        case 200:
+          break;
+        case 401:
+          bookFlashMessage(response.data.message);
+          navigate("/dokotomeyo");
+          break;
+      }
+    })
+    .catch(() => {
+      bookFlashMessage("ユーザー認証に失敗しました");
+      navigate("/dokotomeyo");
+    })
+  }, [])
 
   return (
     <SAdmin_wrapper>

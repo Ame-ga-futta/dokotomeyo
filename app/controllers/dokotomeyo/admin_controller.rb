@@ -1,6 +1,10 @@
 class Dokotomeyo::AdminController < ApplicationController
   before_action :authenticate_admin
 
+  def authenticate
+    render json: { status: 200 }
+  end
+
   def get_users
     @users = users_assmble_chain
     unless @users.empty?

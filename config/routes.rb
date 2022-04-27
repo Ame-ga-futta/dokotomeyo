@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     post   :search,                     to: 'parkings#search'
     get    :details,                    to: 'parkings#details'
 
+    get    :authenticate,               to: 'admin#authenticate'
     get    :admin_user,                 to: 'admin#get_users'
     get    :admin_parking,              to: 'admin#get_parkings'
     get    :admin_requirementFree,      to: 'admin#get_requirement_frees'
