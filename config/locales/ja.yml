@@ -9,6 +9,7 @@ ja:
       requirement_time: "無料の条件: 入庫後一定時間無料"
       comment: "コメント"
       favorite: "お気に入り"
+      inquiry: "お問い合わせ"
     attributes:
       user:
         name: ユーザーネーム
@@ -47,6 +48,10 @@ ja:
       favorite:
         parking_id: "駐車場ID"
         user_id: "ユーザーID"
+      inquiry:
+        name: "投稿者名"
+        address: "メールアドレス"
+        message: "投稿内容"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
