@@ -19,8 +19,16 @@ const RequirementFacilityItem = (props) => {
     axios.delete('/dokotomeyo/admin_requirementFacility', {
       params: { ID: requirementFacilityData.id }
     })
-    .then(() => {
-      window.location.reload();
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          window.location.reload();
+          break;
+        case 400:
+          bookFlashMessage(response.data.message);
+          setOpenEdit(false);
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("削除に失敗しました");

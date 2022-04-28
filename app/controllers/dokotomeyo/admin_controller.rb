@@ -44,7 +44,11 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def delete_requirement_free
     @requirement = RequirementFree.find(delete_params[:ID])
-    @requirement.destroy
+    if @requirement.destroy
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: @requirement.errors.full_messages }
+    end
   end
 
   def get_requirement_buys
@@ -58,7 +62,11 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def delete_requirement_buy
     @requirement = RequirementBuy.find(delete_params[:ID])
-    @requirement.destroy
+    if @requirement.destroy
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: @requirement.errors.full_messages }
+    end
   end
 
   def get_requirement_facilities
@@ -72,7 +80,11 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def delete_requirement_facility
     @requirement = RequirementFacility.find(delete_params[:ID])
-    @requirement.destroy
+    if @requirement.destroy
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: @requirement.errors.full_messages }
+    end
   end
 
   def get_requirement_times
@@ -86,7 +98,11 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def delete_requirement_time
     @requirement = RequirementTime.find(delete_params[:ID])
-    @requirement.destroy
+    if @requirement.destroy
+      render json: { status: 200 }
+    else
+      render json: { status: 400, message: @requirement.errors.full_messages }
+    end
   end
 
   def get_comments

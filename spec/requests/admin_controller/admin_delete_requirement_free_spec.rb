@@ -3,7 +3,7 @@ RSpec.describe "admin", type: :request do
     context "delete_requirement_free" do
       let!(:admin_user) { create(:user, id: 999, admin: true, email: "admin@gmail.com") }
       let!(:existing_parking) { create(:parking) }
-      let!(:existing_requirement_free) { create(:requirement_free, parking_id: existing_parking.id) }
+      let!(:existing_requirement_1) { create(:requirement_free, parking_id: existing_parking.id) }
 
       before do
         post dokotomeyo_login_path, params: {
@@ -11,12 +11,26 @@ RSpec.describe "admin", type: :request do
         }
       end
 
-      it "RequirementFree is deleted" do
-        delete dokotomeyo_admin_requirementFree_path, params: {
-          ID: existing_requirement_free.id,
-        }
+      context "when there are 2 or more Requirements" do
+        let!(:existing_requirement_2) { create(:requirement_buy, parking_id: existing_parking.id, only_weekdays: true) }
 
-        expect(RequirementFree.count).to eq 0
+        it "RequirementFree is deleted" do
+          delete dokotomeyo_admin_requirementFree_path, params: {
+            ID: existing_requirement_1.id,
+          }
+
+          expect(RequirementFree.count).to eq 0
+        end
+      end
+
+      context "when there is 1 Requirements" do
+        it "RequirementFree is not deleted" do
+          delete dokotomeyo_admin_requirementFree_path, params: {
+            ID: existing_requirement_1.id,
+          }
+
+          expect(RequirementFree.count).to eq 1
+        end
       end
     end
   end
