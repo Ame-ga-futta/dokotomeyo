@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get    "/parking/:id",              to: "top#top"
     get    "/detail/:id",               to: "top#top"
     get    :admin,                      to: "top#top"
+    get    :post_inquiry,               to: "top#top"
 
     post   :signup,                     to: 'sessions#signup'
     post   :login,                      to: 'sessions#login'

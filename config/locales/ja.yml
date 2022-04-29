@@ -49,7 +49,7 @@ ja:
         parking_id: "駐車場ID"
         user_id: "ユーザーID"
       inquiry:
-        name: "投稿者名"
+        name: "お問い合わせ名"
         address: "メールアドレス"
         message: "投稿内容"
     errors:

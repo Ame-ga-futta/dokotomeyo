@@ -17,15 +17,15 @@ const InquiryDetail = (props) => {
       <InquiryDetail_table>
         <InquiryDetail_item>
           <InquiryDetail_item_header>お問い合わせ名</InquiryDetail_item_header>
-          <p>{detail.name}</p>
+          <InquiryDetail_item_text>{detail.name}</InquiryDetail_item_text>
         </InquiryDetail_item>
         <InquiryDetail_item>
           <InquiryDetail_item_header>返信用メールアドレス</InquiryDetail_item_header>
-          <p>{detail.address}</p>
+          <InquiryDetail_item_text>{detail.address}</InquiryDetail_item_text>
         </InquiryDetail_item>
         <InquiryDetail_item>
           <InquiryDetail_item_header>お問い合わせ内容</InquiryDetail_item_header>
-          <p>{detail.message}</p>
+          <InquiryDetail_item_text>{detail.message}</InquiryDetail_item_text>
         </InquiryDetail_item>
       </InquiryDetail_table>
     </InquiryDetail_container>
@@ -64,6 +64,10 @@ const InquiryDetail_item = styled.li`
 
 const InquiryDetail_item_header = styled.p`
   width: 20%;
+`;
+
+const InquiryDetail_item_text = styled.p`
+  width: 80%;
 `;
 
 export default InquiryDetail;
