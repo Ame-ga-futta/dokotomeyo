@@ -11,6 +11,7 @@ import RequirementFacility from "./Requirement_facility/RequirementFacility";
 import RequirementTime from "./Requirement_time/RequirementTime";
 import Comment from "./Comment/Comment";
 import Favorite from "./Favorite/Favorite";
+import Inquiry from "./Inquiry/Inquiry";
 
 const Admin = () => {
   const [changeTab, setChangeTab] = useState("User");
@@ -35,6 +36,8 @@ const Admin = () => {
         return <Comment />
       case "Favorite":
         return <Favorite />
+      case "Inquiry":
+        return <Inquiry />
     }
   }
 
@@ -68,6 +71,7 @@ const Admin = () => {
         <SAdmin_sidebar_tab onClick={() => setChangeTab("Requirement_time")}>Requirement_time</SAdmin_sidebar_tab>
         <SAdmin_sidebar_tab onClick={() => setChangeTab("Comment")}>Comment</SAdmin_sidebar_tab>
         <SAdmin_sidebar_tab onClick={() => setChangeTab("Favorite")}>Favorite</SAdmin_sidebar_tab>
+        <SAdmin_sidebar_tab onClick={() => setChangeTab("Inquiry")}>Inquiry</SAdmin_sidebar_tab>
       </SAdmin_sidebar>
       <SAdmin_container>
         {displayTab()}
