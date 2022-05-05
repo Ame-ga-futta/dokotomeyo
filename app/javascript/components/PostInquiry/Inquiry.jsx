@@ -33,7 +33,6 @@ const PostInquiry = () => {
 
   return (
     <SInquiry_wrapper>
-      <p>Inquiry</p>
       <SInquiry_title_container>
         <SForm_title>お問い合わせ</SForm_title>
         <SError_container>

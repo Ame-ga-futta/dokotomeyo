@@ -52,6 +52,7 @@ const Menu = () => {
           <li onClick={hamburger}><Link to="/dokotomeyo/mypage">マイページ</Link></li>
           <li onClick={logout}><p>ログアウト</p></li>
           <li onClick={about}><p>dokotomeyoとは</p></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/post_inquiry">お問い合わせ</Link></li>
         </ul>
         :
         <ul>
@@ -59,6 +60,7 @@ const Menu = () => {
           <li onClick={hamburger}><Link to="/dokotomeyo/signup">新規登録</Link></li>
           <li onClick={hamburger}><Link to="/dokotomeyo/login">ログイン</Link></li>
           <li onClick={about}><p>dokotomeyoとは</p></li>
+          <li onClick={hamburger}><Link to="/dokotomeyo/post_inquiry">お問い合わせ</Link></li>
         </ul>
         }
       </SGlobalMenuSp>
