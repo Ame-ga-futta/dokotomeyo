@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import FlashMessageContext from "../providers/FlashMessageProvider";
 import SessionContext from "../providers/SessionProvider";
 
@@ -77,6 +77,9 @@ const Login = () => {
           <SText_submit>ログイン</SText_submit>
         </SForm_container>
       </form>
+      <SForm_link>
+        <Link to="/dokotomeyo/issue">パスワードを忘れた場合</Link>
+      </SForm_link>
     </SForm_wrapper>
   );
 };
@@ -141,6 +144,12 @@ const SText_submit = styled.button`
   margin-left: auto;
   padding: 11px 20px;
   text-align: center;
+`;
+
+const SForm_link = styled.div`
+  text-align: center;
+  color: gray;
+  margin: 5px 0;
 `;
 
 export default Login;

@@ -12,6 +12,7 @@ import Login from "./Session/Login";
 import Signup from "./Session/Signup";
 import PostInquiry from "./PostInquiry/Inquiry";
 import DeleteUser from "./Session/DeleteUser";
+import Issue from "./Session/Issue";
 import EditParking from "./Edit/EditParking";
 import Admin from "./Admin/Admin";
 
@@ -34,6 +35,7 @@ const App = (props) => {
             <Route path="/dokotomeyo/signup" element={<Signup />} />
             <Route path="/dokotomeyo/post_inquiry" element={<PostInquiry />} />
             <Route path="/dokotomeyo/delete" element={<DeleteUser />} />
+            <Route path="/dokotomeyo/issue" element={<Issue />} />
             <Route path="/dokotomeyo/parking/:id" element={<EditParking />} />
             <Route path="/dokotomeyo/admin" element={<Admin />} />
           </Routes>
