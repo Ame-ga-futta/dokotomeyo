@@ -16,6 +16,7 @@ class Dokotomeyo::SessionsController < ApplicationController
     @user = User.new(signup_params)
     if @user.save
       session[:user_id] = @user.id
+      InquiryMailer.send_signup(@user.id).deliver
       render json: { status: 200, message: "登録完了しました", name: @user.name }
     else
       render json: { status: 400, message: @user.errors.full_messages }
@@ -39,6 +40,7 @@ class Dokotomeyo::SessionsController < ApplicationController
 
   def delete
     @user = User.find(session[:user_id])
+    InquiryMailer.send_delete(@user.id).deliver
     @user.destroy
     session[:user_id] = nil
     render json: { status: 200, message: "退会しました" }

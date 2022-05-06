@@ -1,21 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
+import axios from 'axios';
 
 const InquiryReply = (props) => {
   const {
-    reply
+    reply,
+    inquiryID
   } = props;
 
-  useEffect(() => {
-    console.log("テンプレ文の取得")
-  }, [reply])
+  const [message, setMessage] = useState("");
 
   const ReplyInquiry = () => {
-    console.log(reply)
+    axios.post('/dokotomeyo/admin_reply_inquiry', {
+      reply_data: {
+        reply: reply,
+        inquiryID: inquiryID
+      }
+    })
+    .then((response) => {
+      if (response.data.status == 200) {
+        window.location.reload();
+      } else {
+        setMessage("返信に失敗しました")
+      }
+    })
+    .catch(() => {
+      setMessage("通信に失敗しました")
+    })
   }
 
   return (
     <SInquiryReply_container>
+      {message && <SMessage>{message}</SMessage>}
       <SInquiryReply_header>下記の内容で返信しますか?</SInquiryReply_header>
       <p>{reply}</p>
       <SText_submit onClick={() => ReplyInquiry()}>返信</SText_submit>
@@ -25,6 +41,11 @@ const InquiryReply = (props) => {
 
 const SInquiryReply_container = styled.div`
   margin: 10px 5% 10px 20%;
+`;
+
+const SMessage = styled.p`
+  margin: 4px 10px;
+  color: red;
 `;
 
 const SInquiryReply_header = styled.p`

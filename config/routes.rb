@@ -64,5 +64,6 @@ Rails.application.routes.draw do
     delete :admin_requirementTime,      to: 'admin#delete_requirement_time'
     delete :admin_comment,              to: 'admin#delete_comment'
     delete :admin_favorite,             to: 'admin#delete_favorite'
+    post   :admin_reply_inquiry,        to: 'admin#reply_inquiry'
   end
 end

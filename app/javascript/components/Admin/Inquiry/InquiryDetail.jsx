@@ -40,7 +40,7 @@ const InquiryDetail = (props) => {
           onChange={event => setReply(event.target.value)}
         />
         <SText_submit onClick={() => setConfirm(!confirm)} confirm={confirm}>{confirm ? "キャンセル" : "返信"}</SText_submit>
-        {confirm && <InquiryReply reply={reply}/> }
+        {confirm && <InquiryReply reply={reply} inquiryID={detail.id}/> }
       </InquiryDetail_reply>
     </InquiryDetail_container>
   );
