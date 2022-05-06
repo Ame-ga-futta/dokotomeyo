@@ -15,6 +15,15 @@ class InquiryMailer < ApplicationMailer
     )
   end
 
+  def send_password(user_id, new_password)
+    @user = User.find(user_id)
+    @new_password = new_password
+    mail(
+      to: @user.email,
+      subject: "dokotomeyo パスワードの再発行"
+    )
+  end
+
   def send_reply(reply_data)
     @inquiry = Inquiry.find(reply_data["inquiryID"])
     @repry = reply_data["reply"]

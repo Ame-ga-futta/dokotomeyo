@@ -46,6 +46,18 @@ class Dokotomeyo::SessionsController < ApplicationController
     render json: { status: 200, message: "退会しました" }
   end
 
+  def issue_password
+    @user = User.find_by(email: issue_params[:email])
+    if @user
+      @new_password = SecureRandom.alphanumeric(10)
+      @user.update(password: @new_password, password_confirmation: @new_password)
+      InquiryMailer.send_password(@user.id, @new_password).deliver
+      render json: { status: 200 }
+    else
+      render json: { status: 400 }
+    end
+  end
+
   private
 
   def signup_params
@@ -54,5 +66,9 @@ class Dokotomeyo::SessionsController < ApplicationController
 
   def login_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def issue_params
+    params.permit(:email)
   end
 end

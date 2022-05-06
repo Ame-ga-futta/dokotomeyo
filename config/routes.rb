@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post   :login,                      to: 'sessions#login'
     delete :logout,                     to: 'sessions#logout'
     delete :delete,                     to: 'sessions#delete'
+    get    :issue_password,             to: 'sessions#issue_password'
 
     get    :profile,                    to: 'users#get_profile'
     get    :username,                   to: 'users#get_username'

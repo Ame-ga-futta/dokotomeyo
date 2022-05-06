@@ -4,10 +4,28 @@ import axios from 'axios';
 
 const Issue = () => {
   const [errors, setErrors] = useState([]);
+  const [message, setMessage] = useState([]);
   const [email, setEmail] = useState("");
 
   const handleSubmit = (event) => {
-
+    axios.get('/dokotomeyo/issue_password', { params: { email: email } })
+    .then((response) => {
+      switch (response.data.status) {
+        case 200:
+          setErrors([]);
+          setMessage("登録したメールアドレスに再発行パスワードを送信しました");
+          setEmail("");
+          break;
+        case 400:
+          setErrors("メールアドレスが不正です");
+          setMessage([]);
+          break;
+      }
+    })
+    .catch(() => {
+      setErrors("通信に失敗しました");
+      setMessage([]);
+    })
     event.preventDefault();
   }
 
@@ -17,6 +35,7 @@ const Issue = () => {
         <SForm_title>パスワードを忘れた場合</SForm_title>
         <SError_container>
           {errors && <SError>{errors}</SError>}
+          {message && <SMessage>{message}</SMessage>}
         </SError_container>
       </SForm_title_container>
       <form onSubmit={handleSubmit}>
@@ -54,10 +73,14 @@ const SForm_title = styled.h1`
 
 const SError_container = styled.ul`
   font-size: 20px;
-  color: red;
 `;
 
 const SError = styled.p`
+  padding: 4px;
+  color: red;
+`;
+
+const SMessage = styled.p`
   padding: 4px;
 `;
 
