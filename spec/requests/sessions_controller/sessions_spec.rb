@@ -1,4 +1,28 @@
 RSpec.describe "sessions", type: :request do
+  describe "GET" do
+    context "issue_password" do
+      context "responce" do
+        let!(:existing_user) { create(:user) }
+
+        it "issue_password responce is 200 with exist data" do
+          get dokotomeyo_issue_password_path, params: {
+            email: existing_user.email
+          }
+
+          expect(JSON.parse(response.body)["status"]).to eq 200
+        end
+
+        it "issue_password responce is 400 with not exist data" do
+          get dokotomeyo_issue_password_path, params: {
+            email: "aaa@gmail.com"
+          }
+
+          expect(JSON.parse(response.body)["status"]).to eq 400
+        end
+      end
+    end
+  end
+
   describe "POST" do
     let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
 

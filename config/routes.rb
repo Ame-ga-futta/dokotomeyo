@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get    :signup,                     to: "top#top"
     get    :login,                      to: "top#top"
     get    :delete,                     to: "top#top"
+    get    :issue,                      to: "top#top"
     get    "/parking/:id",              to: "top#top"
     get    "/detail/:id",               to: "top#top"
     get    :admin,                      to: "top#top"
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     post   :login,                      to: 'sessions#login'
     delete :logout,                     to: 'sessions#logout'
     delete :delete,                     to: 'sessions#delete'
+    get    :issue_password,             to: 'sessions#issue_password'
 
     get    :profile,                    to: 'users#get_profile'
     get    :username,                   to: 'users#get_username'
@@ -64,5 +66,6 @@ Rails.application.routes.draw do
     delete :admin_requirementTime,      to: 'admin#delete_requirement_time'
     delete :admin_comment,              to: 'admin#delete_comment'
     delete :admin_favorite,             to: 'admin#delete_favorite'
+    post   :admin_reply_inquiry,        to: 'admin#reply_inquiry'
   end
 end

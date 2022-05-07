@@ -133,6 +133,11 @@ class Dokotomeyo::AdminController < ApplicationController
     @favorite.destroy
   end
 
+  def reply_inquiry
+    InquiryMailer.send_reply(reply_params).deliver
+    render json: { status: 200 }
+  end
+
   private
 
   def get_params
@@ -141,6 +146,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def delete_params
     params.permit(:ID)
+  end
+
+  def reply_params
+    params.require(:reply_data).permit(:reply, :inquiryID)
   end
 
   def users_assmble_chain

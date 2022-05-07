@@ -1,61 +1,46 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
-import FlashMessageContext from "../providers/FlashMessageProvider";
-import SessionContext from "../providers/SessionProvider";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Issue = () => {
   const [errors, setErrors] = useState([]);
-  const navigate = useNavigate();
-  const bookFlashMessage = useContext(FlashMessageContext);
-  const {userName, setUserName} = useContext(SessionContext);
+  const [message, setMessage] = useState([]);
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (event) => {
-    axios.post('/dokotomeyo/login', { user: { email: email, password: password } })
+    axios.get('/dokotomeyo/issue_password', { params: { email: email } })
     .then((response) => {
-      switch (response.data.status){
+      switch (response.data.status) {
         case 200:
-          setUserName(response.data.name);
-          bookFlashMessage(response.data.message);
-          navigate("/dokotomeyo");
+          setErrors([]);
+          setMessage("登録したメールアドレスに再発行パスワードを送信しました");
+          setEmail("");
           break;
         case 400:
-          setErrors(response.data.message);
-          setEmail("");
-          setPassword("");
-          break;
-        case 401:
-          bookFlashMessage(response.data.message);
-          navigate("/dokotomeyo");
+          setErrors("メールアドレスが不正です");
+          setMessage([]);
           break;
       }
     })
     .catch(() => {
-      setErrors(["通信に失敗しました"]);
+      setErrors("通信に失敗しました");
+      setMessage([]);
     })
     event.preventDefault();
-  };
-
-  useEffect(() => {
-    if (userName) {
-      bookFlashMessage("すでにログインしています");
-      navigate("/dokotomeyo");
-    }
-  }, []);
+  }
 
   return (
     <SForm_wrapper>
       <SForm_title_container>
-        <SForm_title>ログイン</SForm_title>
+        <SForm_title>パスワードを忘れた場合</SForm_title>
         <SError_container>
           {errors && <SError>{errors}</SError>}
+          {message && <SMessage>{message}</SMessage>}
         </SError_container>
       </SForm_title_container>
       <form onSubmit={handleSubmit}>
         <SForm_container>
+          <SForm_container_header>登録したメールアドレスにパスワードを送信します</SForm_container_header>
           <li>
             <SText_label>メールアドレス</SText_label>
             <SText_field
@@ -65,21 +50,9 @@ const Login = () => {
               onChange={event => setEmail(event.target.value)}
             />
           </li>
-          <li>
-            <SText_label>パスワード</SText_label>
-            <SText_field
-              type="password"
-              name="password"
-              value={password}
-              onChange={event => setPassword(event.target.value)}
-            />
-          </li>
-          <SText_submit>ログイン</SText_submit>
+          <SText_submit>送信</SText_submit>
         </SForm_container>
       </form>
-      <SForm_link>
-        <Link to="/dokotomeyo/issue">パスワードを忘れた場合</Link>
-      </SForm_link>
     </SForm_wrapper>
   );
 };
@@ -100,10 +73,14 @@ const SForm_title = styled.h1`
 
 const SError_container = styled.ul`
   font-size: 20px;
-  color: red;
 `;
 
 const SError = styled.p`
+  padding: 4px;
+  color: red;
+`;
+
+const SMessage = styled.p`
   padding: 4px;
 `;
 
@@ -121,6 +98,10 @@ const SForm_container = styled.ul`
     justify-content: space-between;
     align-items: center;
   }
+`;
+
+const SForm_container_header = styled.p`
+  margin: 10px;
 `;
 
 const SText_label = styled.label`
@@ -146,10 +127,4 @@ const SText_submit = styled.button`
   text-align: center;
 `;
 
-const SForm_link = styled.div`
-  text-align: center;
-  color: gray;
-  margin: 5px 0;
-`;
-
-export default Login;
+export default Issue;
