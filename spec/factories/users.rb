@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     name              { "user" }
-    email             { "user@gmail.com" }
+    email             { ENV['DOKOTOMEYO_GMAIL'] }
     password          { "password" }
   end
 end
