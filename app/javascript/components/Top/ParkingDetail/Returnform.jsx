@@ -24,6 +24,7 @@ const ReturnForm = (props) => {
     .then((response) => {
       switch (response.data.status) {
         case 200:
+          setPostComments("")
           bookFlashMessage(response.data.message);
           setRerendering(!rerendering)
           break;
