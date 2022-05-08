@@ -16,7 +16,7 @@ RSpec.describe "admin", type: :request do
             reply_data: {
               reply: "reply text",
               inquiryID: inquiry.id,
-            }
+            },
           }
 
           expect(JSON.parse(response.body)["status"]).to eq 200

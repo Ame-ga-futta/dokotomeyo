@@ -16,7 +16,7 @@ RSpec.describe "admin", type: :request do
         it "get_favorites responce is 200 with exist data" do
           get dokotomeyo_admin_favorite_path, params: {
             select: 1,
-            input: existing_favorite.id
+            input: existing_favorite.id,
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -24,7 +24,7 @@ RSpec.describe "admin", type: :request do
         it "get_favorites responce is 400 with not exist data" do
           get dokotomeyo_admin_favorite_path, params: {
             select: 1,
-            input: 9
+            input: 9,
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -86,7 +86,7 @@ RSpec.describe "admin", type: :request do
         it "filtering id" do
           get dokotomeyo_admin_favorite_path, params: {
             select: 1,
-            input: 1
+            input: 1,
           }
 
           expect(JSON.parse(response.body)["favorites"]).to include(favorites_1.attributes)
@@ -96,7 +96,7 @@ RSpec.describe "admin", type: :request do
         it "filtering parking_id" do
           get dokotomeyo_admin_favorite_path, params: {
             select: 2,
-            input: 1
+            input: 1,
           }
 
           expect(JSON.parse(response.body)["favorites"]).to include(favorites_1.attributes, favorites_2.attributes)
@@ -106,7 +106,7 @@ RSpec.describe "admin", type: :request do
         it "filtering user_id" do
           get dokotomeyo_admin_favorite_path, params: {
             select: 3,
-            input: 1
+            input: 1,
           }
 
           expect(JSON.parse(response.body)["favorites"]).to include(favorites_1.attributes, favorites_3.attributes)
@@ -116,7 +116,7 @@ RSpec.describe "admin", type: :request do
         it "filtering free word" do
           get dokotomeyo_admin_favorite_path, params: {
             select: 4,
-            input: "1"
+            input: "1",
           }
 
           expect(JSON.parse(response.body)["favorites"]).to include(favorites_1.attributes, favorites_2.attributes, favorites_3.attributes)
