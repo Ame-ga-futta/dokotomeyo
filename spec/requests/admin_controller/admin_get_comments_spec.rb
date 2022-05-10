@@ -16,7 +16,7 @@ RSpec.describe "admin", type: :request do
         it "get_comments responce is 200 with exist data" do
           get dokotomeyo_admin_comment_path, params: {
             select: 1,
-            input: existing_comment.id
+            input: existing_comment.id,
           }
           expect(JSON.parse(response.body)["status"]).to eq 200
         end
@@ -24,7 +24,7 @@ RSpec.describe "admin", type: :request do
         it "get_comments responce is 400 with not exist data" do
           get dokotomeyo_admin_comment_path, params: {
             select: 1,
-            input: 9
+            input: 9,
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
         end
@@ -101,17 +101,19 @@ RSpec.describe "admin", type: :request do
         it "filtering id" do
           get dokotomeyo_admin_comment_path, params: {
             select: 1,
-            input: 1
+            input: 1,
           }
 
           expect(JSON.parse(response.body)["comments"]).to include(comment_1.attributes)
-          expect(JSON.parse(response.body)["comments"]).not_to include(comment_2.attributes, comment_3.attributes, comment_4.attributes, comment_5.attributes)
+          expect(JSON.parse(response.body)["comments"]).not_to include(
+            comment_2.attributes, comment_3.attributes, comment_4.attributes, comment_5.attributes
+          )
         end
 
         it "filtering parking_id" do
           get dokotomeyo_admin_comment_path, params: {
             select: 2,
-            input: 1
+            input: 1,
           }
 
           expect(JSON.parse(response.body)["comments"]).to include(comment_1.attributes, comment_2.attributes)
@@ -121,7 +123,7 @@ RSpec.describe "admin", type: :request do
         it "filtering user_id" do
           get dokotomeyo_admin_comment_path, params: {
             select: 3,
-            input: 1
+            input: 1,
           }
 
           expect(JSON.parse(response.body)["comments"]).to include(comment_1.attributes, comment_3.attributes)
@@ -131,10 +133,12 @@ RSpec.describe "admin", type: :request do
         it "filtering free word" do
           get dokotomeyo_admin_comment_path, params: {
             select: 4,
-            input: "1"
+            input: "1",
           }
 
-          expect(JSON.parse(response.body)["comments"]).to include(comment_1.attributes, comment_2.attributes, comment_3.attributes, comment_5.attributes)
+          expect(JSON.parse(response.body)["comments"]).to include(
+            comment_1.attributes, comment_2.attributes, comment_3.attributes, comment_5.attributes
+          )
           expect(JSON.parse(response.body)["comments"]).not_to include(comment_4.attributes)
         end
       end

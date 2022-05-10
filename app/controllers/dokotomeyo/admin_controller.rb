@@ -7,10 +7,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_users
     @users = users_assmble_chain
-    unless @users.empty?
-      render json: { status: 200, users: @users }
-    else
+    if @users.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, users: @users }
     end
   end
 
@@ -21,10 +21,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_parkings
     @parkings = parkings_assmble_chain
-    unless @parkings.empty?
-      render json: { status: 200, parkings: @parkings }
-    else
+    if @parkings.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, parkings: @parkings }
     end
   end
 
@@ -35,10 +35,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_frees
     @requirements = requirement_frees_assmble_chain
-    unless @requirements.empty?
-      render json: { status: 200, requirements: @requirements }
-    else
+    if @requirements.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, requirements: @requirements }
     end
   end
 
@@ -53,10 +53,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_buys
     @requirements = requirement_buys_assmble_chain
-    unless @requirements.empty?
-      render json: { status: 200, requirements: @requirements }
-    else
+    if @requirements.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, requirements: @requirements }
     end
   end
 
@@ -71,10 +71,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_facilities
     @requirements = requirement_facilities_assmble_chain
-    unless @requirements.empty?
-      render json: { status: 200, requirements: @requirements }
-    else
+    if @requirements.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, requirements: @requirements }
     end
   end
 
@@ -89,10 +89,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_requirement_times
     @requirements = requirement_times_assmble_chain
-    unless @requirements.empty?
-      render json: { status: 200, requirements: @requirements }
-    else
+    if @requirements.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, requirements: @requirements }
     end
   end
 
@@ -107,10 +107,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_comments
     @comments = comments_assmble_chain
-    unless @comments.empty?
-      render json: { status: 200, comments: @comments }
-    else
+    if @comments.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, comments: @comments }
     end
   end
 
@@ -121,10 +121,10 @@ class Dokotomeyo::AdminController < ApplicationController
 
   def get_favorites
     @favorites = favorites_assmble_chain
-    unless @favorites.empty?
-      render json: { status: 200, favorites: @favorites }
-    else
+    if @favorites.empty?
       render json: { status: 400 }
+    else
+      render json: { status: 200, favorites: @favorites }
     end
   end
 
@@ -207,7 +207,10 @@ class Dokotomeyo::AdminController < ApplicationController
     when "2" then
       RequirementFacility.where(parking_id: get_params[:input])
     when "3" then
-      RequirementFacility.joins(:parking).where('parkings.name LIKE ? OR parkings.address LIKE ?', "%#{get_params[:input]}%", "%#{get_params[:input]}%")
+      RequirementFacility.joins(:parking).where(
+        'parkings.name LIKE ? OR parkings.address LIKE ?',
+        "%#{get_params[:input]}%", "%#{get_params[:input]}%"
+      )
     end
   end
 
@@ -231,7 +234,10 @@ class Dokotomeyo::AdminController < ApplicationController
     when "3" then
       Comment.where(user_id: get_params[:input])
     when "4" then
-      Comment.joins(:user, :parking).where('comment LIKE ? OR parkings.name LIKE ? OR parkings.address LIKE ? OR users.name LIKE ?', "%#{get_params[:input]}%", "%#{get_params[:input]}%", "%#{get_params[:input]}%", "%#{get_params[:input]}%")
+      Comment.joins(:user, :parking).where(
+        'comment LIKE ? OR parkings.name LIKE ? OR parkings.address LIKE ? OR users.name LIKE ?',
+        "%#{get_params[:input]}%", "%#{get_params[:input]}%", "%#{get_params[:input]}%", "%#{get_params[:input]}%"
+      )
     end
   end
 
@@ -244,7 +250,10 @@ class Dokotomeyo::AdminController < ApplicationController
     when "3" then
       Favorite.where(user_id: get_params[:input])
     when "4" then
-      Favorite.joins(:user, :parking).where('parkings.name LIKE ? OR parkings.address LIKE ? OR users.name LIKE ?', "%#{get_params[:input]}%", "%#{get_params[:input]}%", "%#{get_params[:input]}%")
+      Favorite.joins(:user, :parking).where(
+        'parkings.name LIKE ? OR parkings.address LIKE ? OR users.name LIKE ?',
+        "%#{get_params[:input]}%", "%#{get_params[:input]}%", "%#{get_params[:input]}%"
+      )
     end
   end
 end

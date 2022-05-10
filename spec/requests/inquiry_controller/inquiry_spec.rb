@@ -23,7 +23,7 @@ RSpec.describe "Inquiries", type: :request do
     context "post_inquiry" do
       it "post_inquiry responce is 200" do
         post dokotomeyo_inquiry_path, params: {
-          post_inquiry: { address: "test@gmail.com", message: "test", name: "test" }
+          post_inquiry: { address: "test@gmail.com", message: "test", name: "test" },
         }
 
         expect(JSON.parse(response.body)["status"]).to eq 200
@@ -31,7 +31,7 @@ RSpec.describe "Inquiries", type: :request do
 
       it "post_inquiry responce is 400 when does not pass validation" do
         post dokotomeyo_inquiry_path, params: {
-          post_inquiry: { address: "", message: "", name: ""}
+          post_inquiry: { address: "", message: "", name: "" },
         }
 
         expect(JSON.parse(response.body)["status"]).to eq 400
