@@ -11,7 +11,7 @@ import FlashMessageContext from "../providers/FlashMessageProvider";
 
 const EditParking = () => {
   const { id } = useParams();
-  const API_KEY = process.env.GOOGLE_MAP_API_KEY;
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
   const navigate = useNavigate();
   const [parkingData, setParkingData] = useState({});

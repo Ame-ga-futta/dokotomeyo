@@ -9,7 +9,7 @@ import ParkingDetail from "./ParkingDetail/ParkingDetail";
 
 const Top = () => {
   const { id } = useParams();
-  const API_KEY = process.env.GOOGLE_MAP_API_KEY;
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
   const [mapCenter, setMapCenter] = useState({
     lat: 35.681454048919186,
