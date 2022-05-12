@@ -1,24 +1,63 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## dokotomeyo
+https://dokotomeyo.herokuapp.com/dokotomeyo
 
-Things you may want to cover:
+## 概要
+dokotomeyoは、無料で停められる駐車場を投稿、検索できるサービスです。
+目的地、時間、条件から、付近の駐車場をサジェストします。
+投稿された駐車場の情報は、誰でも追加・編集ができます。
+会員登録すると、駐車場のお気に入り登録、駐車場へのコメント投稿が可能になります。
 
-* Ruby version
+## 開発の背景
+車の維持費は高い！なるべくコストを抑えようと思った時に、無料で停められる場所を探すのがめんどくさいと思ったことから、開発に取り組みました。
 
-* System dependencies
+基本的にフロントエンドはReactのSPAになっていて、Railsはデータのやり取りのみを担当しています。
+googlemapAPIを利用した検索機能や駐車場情報の管理、データベースの絞り込みに力を入れました。
 
-* Configuration
+データは自分の住んでいる多摩地域に偏っているので、検索の際は下記から検索するとわかりやすいかと思います。
+・多摩センター駅
+・立川駅
 
-* Database creation
+## 使い方
+*検索機能*
+TOPページで完結するようになっています。左上の検索ボックスに必要な情報を入力すると、候補のリストと駐車場の位置が表示されます。
+候補を選択すると、その駐車場の詳細情報が表示されます。
+https://dokotomeyo.herokuapp.com/dokotomeyo
 
-* Database initialization
+*投稿機能*
+ヘッダー上のハンバーガーメニューから、駐車場情報投稿のページに遷移できます。
+地図から場所を選択して、必要な情報を入力します。問題がなければ、駐車場の情報がDBに保存されます。
+https://dokotomeyo.herokuapp.com/dokotomeyo/post
 
-* How to run the test suite
+*編集機能*
+TOPページの駐車場の詳細情報、もしくは投稿後のリダイレクトで駐車場情報の編集画面に遷移できます。
+追加と編集のタブに分かれており、誰でも編集ができます。
+https://dokotomeyo.herokuapp.com/dokotomeyo/parking/1
 
-* Services (job queues, cache servers, search engines, etc.)
+*会員機能*
+ログイン状態でない場合、ヘッダー上のハンバーガーメニューから、新規登録・ログインのページに遷移できます。
+ログイン状態の場合、ヘッダー上のハンバーガーメニューから、マイページへの遷移とログアウトができます。
+https://dokotomeyo.herokuapp.com/dokotomeyo/signup
 
-* Deployment instructions
+マイページでは、ユーザー情報の編集や退会、お気に入り駐車場の管理、投稿したコメントの管理ができます。
+https://dokotomeyo.herokuapp.com/dokotomeyo/mypage
 
-* ...
+*管理者機能*
+ログインしているユーザーが管理者の場合、管理者画面を開くことができます。
+管理者画面では全てのモデルの情報を取得、削除ができます。
+
+## モデル設計
+|テーブル|概要|
+| ------------------ | ------------------ |
+| parkings  | 駐車場情報  |
+| requirement_frees  | 無料の条件についての情報 終日無料 |
+| requirement_buys  | 無料の条件についての情報 買い物金額一定以上で無料 |
+| requirement_facilities  | 無料の条件についての情報 施設利用で無料 |
+| requirement_times  | 無料の条件についての情報 入庫後一定時間無料 |
+| users  | ユーザー情報  |
+| comments  | ユーザーの投稿コメント情報  |
+| favorites  | ユーザーのお気に入り情報  |
+| inquiries  | お問い合わせ情報 |
+
+
