@@ -51,10 +51,14 @@ class Dokotomeyo::SessionsController < ApplicationController
 
   def delete
     @user = User.find(session[:user_id])
-    InquiryMailer.send_delete(@user.id).deliver
-    @user.destroy
-    session[:user_id] = nil
-    render json: { status: 200, message: "退会しました" }
+    if @user.id == GUEST_USER_ID || @user.id == ADMIN_USER_ID
+      render json: { status: 400, message: "このアカウントの情報を編集することは許可されていません" }
+    else
+      InquiryMailer.send_delete(@user.id).deliver
+      @user.destroy
+      session[:user_id] = nil
+      render json: { status: 200, message: "退会しました" }
+    end
   end
 
   def issue_password

@@ -24,8 +24,9 @@ RSpec.describe "sessions", type: :request do
   end
 
   describe "POST" do
-    let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
+    let!(:admin_user) { create(:user, id: 1, name: "admin_user", email: "admin_user@gmail.com") }
     let!(:guest_user) { create(:user, id: 2, name: "guest_user", email: "guest_user@gmail.com") }
+    let!(:existing_user) { create(:user, id: 3, name: "existing_user", email: "existing_user@gmail.com") }
 
     describe "current_user is nil" do
       context "signup" do
@@ -134,6 +135,36 @@ RSpec.describe "sessions", type: :request do
           delete dokotomeyo_delete_path
           expect(JSON.parse(response.body)["status"]).to eq 200
           expect(session[:user_id]).to be nil
+        end
+      end
+    end
+
+    describe "current_user is admin" do
+      before do
+        post dokotomeyo_login_path, params: {
+          user: { email: guest_user.email, password: "password" },
+        }
+      end
+
+      context "delete" do
+        it "delete response is 400" do
+          delete dokotomeyo_delete_path
+          expect(JSON.parse(response.body)["status"]).to eq 400
+        end
+      end
+    end
+
+    describe "current_user is guest" do
+      before do
+        post dokotomeyo_login_path, params: {
+          user: { email: admin_user.email, password: "password" },
+        }
+      end
+
+      context "delete" do
+        it "delete response is 400" do
+          delete dokotomeyo_delete_path
+          expect(JSON.parse(response.body)["status"]).to eq 400
         end
       end
     end

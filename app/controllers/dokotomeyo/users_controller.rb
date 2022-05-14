@@ -29,7 +29,9 @@ class Dokotomeyo::UsersController < ApplicationController
 
   def update_name
     @user = User.find_by_id(session[:user_id])
-    if @user.update(update_name_params)
+    if @user.id == GUEST_USER_ID || @user.id == ADMIN_USER_ID
+      render json: { status: 400, message: "このアカウントの情報を編集することは許可されていません" }
+    elsif @user.update(update_name_params)
       render json: { status: 200, message: "変更しました" }
     else
       render json: { status: 400, message: @user.errors.full_messages }
@@ -38,7 +40,9 @@ class Dokotomeyo::UsersController < ApplicationController
 
   def update_email
     @user = User.find_by_id(session[:user_id])
-    if @user.update(update_email_params)
+    if @user.id == GUEST_USER_ID || @user.id == ADMIN_USER_ID
+      render json: { status: 400, message: "このアカウントの情報を編集することは許可されていません" }
+    elsif @user.update(update_email_params)
       render json: { status: 200, message: "変更しました" }
     else
       render json: { status: 400, message: @user.errors.full_messages }
@@ -47,7 +51,9 @@ class Dokotomeyo::UsersController < ApplicationController
 
   def update_password
     @user = User.find_by_id(session[:user_id])
-    if @user.authenticate(update_password_params[:currentPassword])
+    if @user.id == GUEST_USER_ID || @user.id == ADMIN_USER_ID
+      render json: { status: 400, message: "このアカウントの情報を編集することは許可されていません" }
+    elsif @user.authenticate(update_password_params[:currentPassword])
       if @user.update(password: update_password_params[:password], password_confirmation: update_password_params[:password_confirmation])
         render json: { status: 200, message: "変更しました" }
       else
