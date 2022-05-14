@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  GUEST_USER_ID = 2
+
   skip_before_action :verify_authenticity_token
 
   before_action :current_user

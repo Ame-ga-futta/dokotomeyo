@@ -25,6 +25,7 @@ RSpec.describe "sessions", type: :request do
 
   describe "POST" do
     let!(:existing_user) { create(:user, name: "existing_user", email: "existing_user@gmail.com") }
+    let!(:guest_user) { create(:user, id: 2, name: "guest_user", email: "guest_user@gmail.com") }
 
     describe "current_user is nil" do
       context "signup" do
@@ -60,6 +61,14 @@ RSpec.describe "sessions", type: :request do
           }
           expect(JSON.parse(response.body)["status"]).to eq 400
           expect(session[:user_id]).to be nil
+        end
+      end
+
+      context "guest_login" do
+        it "guest_login response is 200" do
+          post dokotomeyo_guest_login_path
+          expect(JSON.parse(response.body)["status"]).to eq 200
+          expect(session[:user_id]).not_to be nil
         end
       end
 
@@ -101,6 +110,13 @@ RSpec.describe "sessions", type: :request do
           post dokotomeyo_login_path, params: {
             user: { email: existing_user.email, password: "password" },
           }
+          expect(JSON.parse(response.body)["status"]).to eq 401
+        end
+      end
+
+      context "guest_login" do
+        it "guest_login response is 401" do
+          post dokotomeyo_guest_login_path
           expect(JSON.parse(response.body)["status"]).to eq 401
         end
       end

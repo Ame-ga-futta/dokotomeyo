@@ -8,6 +8,7 @@ class Dokotomeyo::SessionsController < ApplicationController
   before_action :forbid_login_user, {
     only: [
       :login,
+      :guest_login,
       :signup,
     ],
   }
@@ -30,6 +31,16 @@ class Dokotomeyo::SessionsController < ApplicationController
       render json: { status: 200, message: "ログインしました", name: @user.name }
     else
       render json: { status: 400, message: "メールアドレス もしくはパスワードが不正です" }
+    end
+  end
+
+  def guest_login
+    @user = User.find(GUEST_USER_ID)
+    if @user
+      session[:user_id] = @user.id
+      render json: { status: 200, message: "ログインしました", name: @user.name }
+    else
+      render json: { status: 400, message: "ログインに失敗しました" }
     end
   end
 
