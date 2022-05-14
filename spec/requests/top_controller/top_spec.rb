@@ -42,6 +42,27 @@ RSpec.describe "top", type: :request do
       end
     end
 
+    context "dokotomeyo_guest_login_path" do
+      it "guest_login response is 200" do
+        get dokotomeyo_guest_login_path
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "dokotomeyo_delete_path" do
+      it "delete response is 200" do
+        get dokotomeyo_delete_path
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "dokotomeyo_issue_path" do
+      it "issue response is 200" do
+        get dokotomeyo_issue_path
+        expect(response).to have_http_status(200)
+      end
+    end
+
     context "dokotomeyo/parking/:id path" do
       it "parking response is 200" do
         get "/dokotomeyo/parking/1"
@@ -52,6 +73,20 @@ RSpec.describe "top", type: :request do
     context "dokotomeyo/detail/:id path" do
       it "detail response is 200" do
         get "/dokotomeyo/detail/1"
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "dokotomeyo_admin_path" do
+      it "admin response is 200" do
+        get dokotomeyo_admin_path
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "dokotomeyo_post_inquiry_path" do
+      it "post_inquiry response is 200" do
+        get dokotomeyo_post_inquiry_path
         expect(response).to have_http_status(200)
       end
     end
