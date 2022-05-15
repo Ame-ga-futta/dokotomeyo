@@ -8,6 +8,7 @@ class Dokotomeyo::SessionsController < ApplicationController
   before_action :forbid_login_user, {
     only: [
       :login,
+      :guest_login,
       :signup,
     ],
   }
@@ -33,6 +34,16 @@ class Dokotomeyo::SessionsController < ApplicationController
     end
   end
 
+  def guest_login
+    @user = User.find(GUEST_USER_ID)
+    if @user
+      session[:user_id] = @user.id
+      render json: { status: 200, message: "ログインしました", name: @user.name }
+    else
+      render json: { status: 400, message: "ログインに失敗しました" }
+    end
+  end
+
   def logout
     session[:user_id] = nil
     render json: { status: 200, message: "ログアウトしました" }
@@ -40,10 +51,14 @@ class Dokotomeyo::SessionsController < ApplicationController
 
   def delete
     @user = User.find(session[:user_id])
-    InquiryMailer.send_delete(@user.id).deliver
-    @user.destroy
-    session[:user_id] = nil
-    render json: { status: 200, message: "退会しました" }
+    if @user.id == GUEST_USER_ID || @user.id == ADMIN_USER_ID
+      render json: { status: 400, message: "このアカウントの情報を編集することは許可されていません" }
+    else
+      InquiryMailer.send_delete(@user.id).deliver
+      @user.destroy
+      session[:user_id] = nil
+      render json: { status: 200, message: "退会しました" }
+    end
   end
 
   def issue_password

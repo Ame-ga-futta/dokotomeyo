@@ -15,9 +15,15 @@ const DeleteUser = () => {
   const handleSubmit = () => {
     axios.delete('/dokotomeyo/delete')
     .then((response) => {
-      setUserName();
       bookFlashMessage(response.data.message);
-      navigate("/dokotomeyo");
+      switch (response.data.status) {
+        case 200:
+          setUserName();
+          navigate("/dokotomeyo");
+          break;
+        case 400:
+          break;
+      }
     })
     .catch(() => {
       bookFlashMessage("通信に失敗しました");

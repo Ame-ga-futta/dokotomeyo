@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get    :post,                       to: "top#top"
     get    :signup,                     to: "top#top"
     get    :login,                      to: "top#top"
+    get    :guest_login,                to: "top#top"
     get    :delete,                     to: "top#top"
     get    :issue,                      to: "top#top"
     get    "/parking/:id",              to: "top#top"
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
 
     post   :signup,                     to: 'sessions#signup'
     post   :login,                      to: 'sessions#login'
+    post   :guest_login,                to: 'sessions#guest_login'
     delete :logout,                     to: 'sessions#logout'
     delete :delete,                     to: 'sessions#delete'
     get    :issue_password,             to: 'sessions#issue_password'

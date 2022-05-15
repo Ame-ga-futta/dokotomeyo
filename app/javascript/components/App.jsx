@@ -9,6 +9,7 @@ import Top from "./Top/Top";
 import Mypage from "./Mypage/Mypage";
 import Post from "./Post/Post";
 import Login from "./Session/Login";
+import GuestLogin from "./Session/GuestLogin";
 import Signup from "./Session/Signup";
 import PostInquiry from "./PostInquiry/Inquiry";
 import DeleteUser from "./Session/DeleteUser";
@@ -32,6 +33,7 @@ const App = (props) => {
             <Route path="/dokotomeyo/mypage" element={<Mypage />} />
             <Route path="/dokotomeyo/post" element={<Post />} />
             <Route path="/dokotomeyo/login" element={<Login />} />
+            <Route path="/dokotomeyo/guest_login" element={<GuestLogin />} />
             <Route path="/dokotomeyo/signup" element={<Signup />} />
             <Route path="/dokotomeyo/post_inquiry" element={<PostInquiry />} />
             <Route path="/dokotomeyo/delete" element={<DeleteUser />} />
