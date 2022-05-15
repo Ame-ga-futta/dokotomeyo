@@ -24,16 +24,19 @@ googlemapAPIを利用した検索機能や駐車場情報の管理、データ�
 TOPページで完結するようになっています。左上の検索ボックスに必要な情報を入力すると、候補のリストと駐車場の位置が表示されます。  
 候補を選択すると、その駐車場の詳細情報が表示されます。  
 https://dokotomeyo.herokuapp.com/dokotomeyo
+<img width="1440" alt="スクリーンショット 2022-05-15 18 58 55" src="https://user-images.githubusercontent.com/83625503/168467284-818eb823-e521-4836-b7d3-a3d49baef0bb.png">
 
 *投稿機能*<br>
 ヘッダー上のハンバーガーメニューから、駐車場情報投稿のページに遷移できます。  
 地図から場所を選択して、必要な情報を入力します。問題がなければ、駐車場の情報がDBに保存されます。  
 https://dokotomeyo.herokuapp.com/dokotomeyo/post
+<img width="1440" alt="スクリーンショット 2022-05-15 18 59 36" src="https://user-images.githubusercontent.com/83625503/168467306-452ecc9a-84de-452a-a434-ee172398a58c.png">
 
 *編集機能*<br>
 TOPページの駐車場の詳細情報、もしくは投稿後のリダイレクトで駐車場情報の編集画面に遷移できます。  
 追加と編集のタブに分かれており、誰でも編集ができます。  
 https://dokotomeyo.herokuapp.com/dokotomeyo/parking/1
+<img width="1440" alt="スクリーンショット 2022-05-15 19 00 29" src="https://user-images.githubusercontent.com/83625503/168467330-743db6c9-24fe-4951-85ef-336bddd5f45f.png">
 
 *会員機能*<br>
 ログイン状態でない場合、ヘッダー上のハンバーガーメニューから、新規登録・ログインのページに遷移できます。  
@@ -51,6 +54,9 @@ https://dokotomeyo.herokuapp.com/dokotomeyo/guest_login
 管理者画面では全てのモデルの情報を取得、削除ができます。  
 
 ## モデル設計
+*ER図*<br>
+![erd](https://user-images.githubusercontent.com/83625503/168465073-21dde468-d406-46de-9f3d-13abb9873a94.jpg)
+
 |テーブル|概要|
 | ------------------ | ------------------ |
 | parkings  | 駐車場情報  |
