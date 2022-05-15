@@ -43,6 +43,9 @@ https://dokotomeyo.herokuapp.com/dokotomeyo/signup
 マイページでは、ユーザー情報の編集や退会、お気に入り駐車場の管理、投稿したコメントの管理ができます。  
 https://dokotomeyo.herokuapp.com/dokotomeyo/mypage
 
+お試し用のゲストログイン機能もあります。投稿データは10分毎にリセットされます。
+https://dokotomeyo.herokuapp.com/dokotomeyo/guest_login
+
 *管理者機能*<br>
 ログインしているユーザーが管理者の場合、管理者画面を開くことができます。  
 管理者画面では全てのモデルの情報を取得、削除ができます。  
