@@ -9,6 +9,9 @@ dokotomeyoは、無料で停められる駐車場を投稿、検索できるサ�
 投稿された駐車場の情報は、誰でも追加・編集ができます。  
 会員登録すると、駐車場のお気に入り登録、駐車場へのコメント投稿が可能になります。  
 
+お試し用のゲストログイン機能もあります。投稿データは10分毎にリセットされます。
+https://dokotomeyo.herokuapp.com/dokotomeyo/guest_login
+
 ## 開発の背景
 車の維持費は高い！なるべくコストを抑えようと思った時に、無料で停められる場所を探すのがめんどくさいと思ったことから、開発に取り組みました。  
 
@@ -45,9 +48,6 @@ https://dokotomeyo.herokuapp.com/dokotomeyo/signup
 
 マイページでは、ユーザー情報の編集や退会、お気に入り駐車場の管理、投稿したコメントの管理ができます。  
 https://dokotomeyo.herokuapp.com/dokotomeyo/mypage
-
-お試し用のゲストログイン機能もあります。投稿データは10分毎にリセットされます。
-https://dokotomeyo.herokuapp.com/dokotomeyo/guest_login
 
 *管理者機能*<br>
 ログインしているユーザーが管理者の場合、管理者画面を開くことができます。  
