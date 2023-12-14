@@ -1,7 +1,7 @@
 # README
 
 ## dokotomeyo
-https://dokotomeyo.herokuapp.com/dokotomeyo
+~~https://dokotomeyo.herokuapp.com/dokotomeyo~~
 
 ## 概要
 dokotomeyoは、無料で停められる駐車場を投稿、検索できるサービスです。  
