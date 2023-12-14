@@ -1,7 +1,8 @@
 # README
 
 ## dokotomeyo
-https://dokotomeyo.herokuapp.com/dokotomeyo
+~~https://dokotomeyo.herokuapp.com/dokotomeyo~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo
 
 ## 概要
 dokotomeyoは、無料で停められる駐車場を投稿、検索できるサービスです。  
@@ -10,7 +11,8 @@ dokotomeyoは、無料で停められる駐車場を投稿、検索できるサ�
 会員登録すると、駐車場のお気に入り登録、駐車場へのコメント投稿が可能になります。  
 
 お試し用のゲストログイン機能もあります。投稿データは10分毎にリセットされます。
-https://dokotomeyo.herokuapp.com/dokotomeyo/guest_login
+~~https://dokotomeyo.herokuapp.com/dokotomeyo/guest_login~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo/guest_login
 
 ## 開発の背景
 車の維持費は高い！なるべくコストを抑えようと思った時に、無料で停められる場所を探すのがめんどくさいと思ったことから、開発に取り組みました。  
@@ -26,28 +28,33 @@ googlemapAPIを利用した検索機能や駐車場情報の管理、データ�
 *検索機能*<br>
 TOPページで完結するようになっています。左上の検索ボックスに必要な情報を入力すると、候補のリストと駐車場の位置が表示されます。  
 候補を選択すると、その駐車場の詳細情報が表示されます。  
-https://dokotomeyo.herokuapp.com/dokotomeyo
+~~https://dokotomeyo.herokuapp.com/dokotomeyo~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo
 <img width="1440" alt="スクリーンショット 2022-05-15 18 58 55" src="https://user-images.githubusercontent.com/83625503/168467284-818eb823-e521-4836-b7d3-a3d49baef0bb.png">
 
 *投稿機能*<br>
 ヘッダー上のハンバーガーメニューから、駐車場情報投稿のページに遷移できます。  
 地図から場所を選択して、必要な情報を入力します。問題がなければ、駐車場の情報がDBに保存されます。  
-https://dokotomeyo.herokuapp.com/dokotomeyo/post
+~~https://dokotomeyo.herokuapp.com/dokotomeyo/post~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo/post
 <img width="1440" alt="スクリーンショット 2022-05-15 18 59 36" src="https://user-images.githubusercontent.com/83625503/168467306-452ecc9a-84de-452a-a434-ee172398a58c.png">
 
 *編集機能*<br>
 TOPページの駐車場の詳細情報、もしくは投稿後のリダイレクトで駐車場情報の編集画面に遷移できます。  
 追加と編集のタブに分かれており、誰でも編集ができます。  
-https://dokotomeyo.herokuapp.com/dokotomeyo/parking/1
+~~https://dokotomeyo.herokuapp.com/dokotomeyo/parking/1~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo/parking/1
 <img width="1440" alt="スクリーンショット 2022-05-15 19 00 29" src="https://user-images.githubusercontent.com/83625503/168467330-743db6c9-24fe-4951-85ef-336bddd5f45f.png">
 
 *会員機能*<br>
 ログイン状態でない場合、ヘッダー上のハンバーガーメニューから、新規登録・ログインのページに遷移できます。  
 ログイン状態の場合、ヘッダー上のハンバーガーメニューから、マイページへの遷移とログアウトができます。  
-https://dokotomeyo.herokuapp.com/dokotomeyo/signup
+~~https://dokotomeyo.herokuapp.com/dokotomeyo/signup~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo/signup
 
 マイページでは、ユーザー情報の編集や退会、お気に入り駐車場の管理、投稿したコメントの管理ができます。  
-https://dokotomeyo.herokuapp.com/dokotomeyo/mypage
+~~https://dokotomeyo.herokuapp.com/dokotomeyo/mypage~~
+https://dokotomeyo-e6bd88745a11.herokuapp.com/dokotomeyo/mypage
 
 *管理者機能*<br>
 ログインしているユーザーが管理者の場合、管理者画面を開くことができます。  
